@@ -2,1538 +2,1100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>ADAMINNER</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-    font-family:Arial,Helvetica,sans-serif;
-    color:#fff;
-    background:#05050b;
-}
-
-body{
-    overflow-x:hidden;
-}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;min-height:100%;font-family:Arial;color:#fff;background:#05050b}
+body{overflow-x:hidden}
 
 body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-3;
-    background:
-        radial-gradient(circle at 50% -10%,rgba(138,43,226,.30),transparent 35%),
-        radial-gradient(circle at 100% 40%,rgba(0,210,255,.15),transparent 30%),
-        radial-gradient(circle at 0% 80%,rgba(255,0,153,.10),transparent 30%),
-        #05050b;
+content:"";position:fixed;inset:0;z-index:-3;
+background:
+radial-gradient(circle at 50% -10%,rgba(138,43,226,.30),transparent 35%),
+radial-gradient(circle at 100% 40%,rgba(0,210,255,.15),transparent 30%),
+radial-gradient(circle at 0% 80%,rgba(255,0,153,.10),transparent 30%),#05050b
 }
 
 body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-2;
-    opacity:.15;
-    background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-    background-size:35px 35px;
+content:"";position:fixed;inset:0;z-index:-2;opacity:.15;
+background-image:
+linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+background-size:35px 35px
 }
 
-/* AUTH */
-
 #authScreen{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px
 }
 
 .auth-box{
-    width:100%;
-    max-width:420px;
-    padding:28px 22px;
-    border-radius:28px;
-    background:linear-gradient(145deg,rgba(22,18,42,.97),rgba(8,9,19,.97));
-    border:1px solid rgba(156,91,255,.25);
-    box-shadow:0 25px 70px rgba(0,0,0,.6);
+width:100%;max-width:420px;padding:28px 22px;border-radius:28px;
+background:linear-gradient(145deg,rgba(22,18,42,.97),rgba(8,9,19,.97));
+border:1px solid rgba(156,91,255,.25);
+box-shadow:0 25px 70px rgba(0,0,0,.6)
 }
 
 .auth-logo{
-    width:60px;
-    height:60px;
-    margin:0 auto 15px;
-    display:grid;
-    place-items:center;
-    border-radius:18px;
-    font-size:28px;
-    font-weight:900;
-    background:linear-gradient(135deg,#9b5cff,#5c2cff 50%,#00d9ff);
+width:60px;height:60px;margin:0 auto 15px;display:grid;place-items:center;
+border-radius:18px;font-size:28px;font-weight:900;
+background:linear-gradient(135deg,#9b5cff,#5c2cff 50%,#00d9ff)
 }
 
-.auth-box h1{
-    text-align:center;
-    margin:0;
-    font-size:24px;
+.auth-box h1{text-align:center;margin:0;font-size:24px}
+.auth-sub{text-align:center;color:#777791;font-size:12px;margin:8px 0 25px}
+
+.input{
+width:100%;padding:15px;margin-bottom:11px;border-radius:14px;
+border:1px solid rgba(255,255,255,.1);outline:none;
+background:rgba(255,255,255,.05);color:#fff;font-size:14px
 }
 
-.auth-sub{
-    text-align:center;
-    color:#777791;
-    font-size:12px;
-    margin:8px 0 25px;
+.main-btn{
+width:100%;padding:15px;border:0;border-radius:16px;color:#fff;
+font-size:14px;font-weight:800;
+background:linear-gradient(90deg,#723cff,#a64cff,#00c8ff);cursor:pointer
 }
 
-.auth-input,
-.withdraw-input{
-    width:100%;
-    padding:15px;
-    margin-bottom:11px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.1);
-    outline:none;
-    background:rgba(255,255,255,.05);
-    color:white;
-    font-size:14px;
+.secondary-btn{
+width:100%;padding:14px;margin-top:11px;border:1px solid rgba(255,255,255,.1);
+border-radius:16px;color:#fff;background:rgba(255,255,255,.06);cursor:pointer
 }
 
-.auth-input:focus,
-.withdraw-input:focus{
-    border-color:#8b5cff;
+.link{
+text-align:center;margin-top:13px;color:#00e5ff;font-size:12px;cursor:pointer
 }
 
-.auth-btn,
-.confirm-btn{
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:16px;
-    color:white;
-    font-size:14px;
-    font-weight:800;
-    background:linear-gradient(90deg,#723cff,#a64cff,#00c8ff);
-    cursor:pointer;
-}
-
-.google-btn{
-    width:100%;
-    padding:14px;
-    margin-top:11px;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:16px;
-    color:white;
-    background:rgba(255,255,255,.06);
-    cursor:pointer;
-}
-
-.auth-switch{
-    text-align:center;
-    margin-top:18px;
-    color:#777791;
-    font-size:12px;
-}
-
-.auth-switch span{
-    color:#00e5ff;
-    cursor:pointer;
-    font-weight:bold;
+.forgot{
+text-align:right;margin:-3px 3px 15px;color:#00e5ff;font-size:12px;cursor:pointer
 }
 
 .auth-error{
-    color:#ff5577;
-    font-size:12px;
-    text-align:center;
-    margin-top:12px;
+color:#ff5577;font-size:12px;text-align:center;margin-top:12px
 }
 
-/* APP */
-
-.app{
-    width:100%;
-    max-width:520px;
-    margin:auto;
-    padding:20px 15px 40px;
-}
-
-.header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:11px;
-}
+.app{width:100%;max-width:520px;margin:auto;padding:20px 15px 40px}
+.header{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px}
 
 .logo{
-    width:44px;
-    height:44px;
-    border-radius:14px;
-    display:grid;
-    place-items:center;
-    font-size:20px;
-    font-weight:900;
-    background:linear-gradient(135deg,#9b5cff,#5c2cff 50%,#00d9ff);
-    box-shadow:0 0 25px rgba(125,70,255,.45);
+width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+font-size:20px;font-weight:900;
+background:linear-gradient(135deg,#9b5cff,#5c2cff 50%,#00d9ff);
+box-shadow:0 0 25px rgba(125,70,255,.45)
 }
 
-.brand h1{
-    margin:0;
-    font-size:19px;
-    letter-spacing:1px;
-}
-
-.brand small{
-    display:block;
-    margin-top:3px;
-    color:#777791;
-    font-size:9px;
-    letter-spacing:2px;
-}
+.brand h1{margin:0;font-size:19px;letter-spacing:1px}
+.brand small{display:block;margin-top:3px;color:#777791;font-size:9px;letter-spacing:2px}
 
 .profile{
-    width:42px;
-    height:42px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.12);
-    cursor:pointer;
+width:42px;height:42px;display:grid;place-items:center;border-radius:50%;
+background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);cursor:pointer
 }
 
-.page{
-    display:none;
+.page{display:none}
+.page.active{display:block}
+
+.welcome{margin-top:25px;color:#777791;font-size:13px}
+.username{color:#fff;font-weight:bold}
+
+.card{
+margin-top:10px;padding:22px;border-radius:28px;
+background:linear-gradient(145deg,rgba(22,18,42,.96),rgba(8,9,19,.96));
+border:1px solid rgba(156,91,255,.22);
+box-shadow:0 25px 70px rgba(0,0,0,.5)
 }
 
-.page.active{
-    display:block;
-}
+.balance-label{text-align:center;color:#777791;font-size:11px;letter-spacing:1.5px}
+.balance{text-align:center;margin-top:6px;font-size:40px;font-weight:900;
+background:linear-gradient(90deg,#fff,#bfa5ff,#fff);
+-webkit-background-clip:text;color:transparent}
+.coin{color:#9d6cff;font-size:14px;margin-left:5px}
+.earning{text-align:center;margin-top:6px;color:#00e5ff;font-size:12px}
 
-.welcome{
-    margin-top:25px;
-    color:#777791;
-    font-size:13px;
-}
-
-.username{
-    color:#fff;
-    font-weight:bold;
-}
-
-.balance-card,
-.withdraw-card{
-    margin-top:10px;
-    padding:22px;
-    border-radius:28px;
-    background:linear-gradient(145deg,rgba(22,18,42,.96),rgba(8,9,19,.96));
-    border:1px solid rgba(156,91,255,.22);
-    box-shadow:0 25px 70px rgba(0,0,0,.5);
-}
-
-.balance-label{
-    color:#777791;
-    font-size:11px;
-    letter-spacing:1.5px;
-    text-align:center;
-}
-
-.balance{
-    text-align:center;
-    margin-top:6px;
-    font-size:40px;
-    font-weight:900;
-    background:linear-gradient(90deg,#fff,#bfa5ff,#fff);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.coin{
-    color:#9d6cff;
-    font-size:14px;
-    margin-left:5px;
-}
-
-.earning{
-    text-align:center;
-    margin-top:6px;
-    color:#00e5ff;
-    font-size:12px;
-}
-
-.mining-area{
-    display:flex;
-    justify-content:center;
-    margin:28px 0 18px;
-}
+.mining-area{display:flex;justify-content:center;margin:28px 0 18px}
 
 .mining-button{
-    position:relative;
-    width:178px;
-    height:178px;
-    border-radius:50%;
-    border:2px solid rgba(160,93,255,.8);
-    cursor:pointer;
-    color:white;
-    background:radial-gradient(circle at 35% 30%,#c6a5ff 0%,#7c3cff 20%,#34156b 48%,#0b0816 75%);
-    box-shadow:0 0 20px rgba(145,70,255,.5),0 0 60px rgba(91,43,255,.25);
+width:178px;height:178px;border-radius:50%;border:2px solid rgba(160,93,255,.8);
+cursor:pointer;color:#fff;
+background:radial-gradient(circle at 35% 30%,#c6a5ff 0%,#7c3cff 20%,#34156b 48%,#0b0816 75%);
+box-shadow:0 0 20px rgba(145,70,255,.5),0 0 60px rgba(91,43,255,.25)
 }
 
-.mining-button.active{
-    animation:glow 1.5s infinite;
-}
+.mining-button.active{animation:glow 1.5s infinite}
+@keyframes glow{50%{box-shadow:0 0 40px rgba(0,229,255,.7),0 0 80px rgba(91,43,255,.35)}}
 
-@keyframes glow{
-    50%{
-        box-shadow:0 0 40px rgba(0,229,255,.7),0 0 80px rgba(91,43,255,.35);
-    }
-}
+.mine-icon{font-size:42px}
+.mine-title{margin-top:8px;font-size:16px;font-weight:900;letter-spacing:2px}
+.mine-small{margin-top:5px;color:#00e5ff;font-size:10px}
 
-.mine-icon{
-    font-size:42px;
-}
+.status{text-align:center;color:#777791;font-size:12px}
+.dot{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:#ff3dbd}
 
-.mine-title{
-    margin-top:8px;
-    font-size:16px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.mine-small{
-    margin-top:5px;
-    color:#00e5ff;
-    font-size:10px;
-}
-
-.status{
-    text-align:center;
-    color:#777791;
-    font-size:12px;
-}
-
-.dot{
-    display:inline-block;
-    width:7px;
-    height:7px;
-    margin-right:5px;
-    border-radius:50%;
-    background:#ff3dbd;
-}
+.session{margin-top:15px;padding:13px;border-radius:15px;background:rgba(255,255,255,.04);text-align:center}
+.session-title{color:#777791;font-size:10px}
+.timer{margin-top:5px;font-size:18px;font-weight:bold;color:#00e5ff}
 
 .hashrate{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-top:18px;
-    padding:17px;
-    border-radius:17px;
-    background:linear-gradient(90deg,rgba(121,61,255,.13),rgba(0,211,255,.08));
-    border:1px solid rgba(124,82,255,.18);
+display:flex;align-items:center;justify-content:space-between;margin-top:18px;
+padding:17px;border-radius:17px;
+background:linear-gradient(90deg,rgba(121,61,255,.13),rgba(0,211,255,.08));
+border:1px solid rgba(124,82,255,.18)
 }
 
-.hash-left{
-    color:#85859b;
-    font-size:12px;
-}
+.hash-left{color:#85859b;font-size:12px}
+.hash-right{color:#00e5ff;font-weight:900}
+.boost{color:#ffb347;font-size:10px;margin-top:4px;text-align:right}
 
-.hash-right{
-    color:#00e5ff;
-    font-weight:900;
-}
-
-.boost{
-    color:#ffb347;
-    font-size:10px;
-    margin-top:4px;
-    text-align:right;
-}
-
-.actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:11px;
-    margin-top:12px;
-}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
 
 .action{
-    min-height:78px;
-    border-radius:17px;
-    border:1px solid rgba(255,255,255,.08);
-    background:linear-gradient(145deg,rgba(30,25,50,.9),rgba(12,13,23,.9));
-    color:#fff;
-    cursor:pointer;
+min-height:78px;border-radius:17px;border:1px solid rgba(255,255,255,.08);
+background:linear-gradient(145deg,rgba(30,25,50,.9),rgba(12,13,23,.9));
+color:#fff;cursor:pointer
 }
 
-.action-icon{
-    display:block;
-    margin-bottom:7px;
-    font-size:23px;
-}
-
-.ad{
-    color:#ffd166;
-}
-
-.offer{
-    color:#00e5ff;
-}
+.action-icon{display:block;margin-bottom:7px;font-size:23px}
+.ad{color:#ffd166}.offer{color:#00e5ff}
 
 .daily{
-    margin-top:18px;
-    padding:20px;
-    border-radius:22px;
-    background:linear-gradient(145deg,rgba(19,18,35,.95),rgba(8,9,17,.95));
-    border:1px solid rgba(255,255,255,.07);
+margin-top:18px;padding:20px;border-radius:22px;
+background:linear-gradient(145deg,rgba(19,18,35,.95),rgba(8,9,17,.95));
+border:1px solid rgba(255,255,255,.07)
 }
 
-.daily h2{
-    margin:0;
-    font-size:20px;
-}
+.daily h2{margin:0;font-size:20px}
+.daily p{margin:7px 0 18px;color:#777791;font-size:12px}
 
-.daily p{
-    margin:7px 0 18px;
-    color:#777791;
-    font-size:12px;
-}
-
-.days{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:5px;
-}
-
-.day{
-    text-align:center;
-    color:#66667a;
-    font-size:9px;
-}
-
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.day{text-align:center;color:#66667a;font-size:9px}
 .day-circle{
-    width:36px;
-    height:36px;
-    margin:0 auto 6px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    background:#181824;
-    border:1px solid #29293a;
+width:36px;height:36px;margin:0 auto 6px;display:grid;place-items:center;
+border-radius:50%;background:#181824;border:1px solid #29293a
 }
-
-.day.active .day-circle{
-    background:linear-gradient(135deg,#ffb347,#ff6b00);
-}
+.day.active .day-circle{background:linear-gradient(135deg,#ffb347,#ff6b00)}
 
 .claim{
-    width:100%;
-    margin-top:20px;
-    padding:16px;
-    border:0;
-    border-radius:30px;
-    color:#fff;
-    font-weight:800;
-    background:linear-gradient(90deg,#723cff,#a64cff,#00c8ff);
+width:100%;margin-top:20px;padding:16px;border:0;border-radius:30px;
+color:#fff;font-weight:800;background:linear-gradient(90deg,#723cff,#a64cff,#00c8ff)
 }
 
-.logout{
-    width:100%;
-    margin-top:12px;
-    padding:12px;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-    color:#ff5577;
-    background:rgba(255,255,255,.03);
-}
-
-.back-btn{
-    width:100%;
-    margin-top:12px;
-    padding:13px;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:15px;
-    color:white;
-    background:rgba(255,255,255,.05);
-}
-
-.withdraw-title{
-    text-align:center;
-    font-size:24px;
-    margin-bottom:7px;
-}
-
-.withdraw-sub{
-    text-align:center;
-    color:#777791;
-    font-size:12px;
-    margin-bottom:25px;
-}
+.withdraw-title{text-align:center;font-size:24px;margin:0 0 7px}
+.withdraw-sub{text-align:center;color:#777791;font-size:12px;margin-bottom:25px}
 
 .withdraw-balance{
-    padding:16px;
-    margin-bottom:18px;
-    text-align:center;
-    border-radius:16px;
-    background:rgba(124,82,255,.1);
+padding:16px;margin-bottom:18px;text-align:center;border-radius:16px;
+background:rgba(124,82,255,.1)
 }
 
-.withdraw-balance small{
-    display:block;
-    color:#777791;
-    margin-bottom:5px;
-}
-
-.withdraw-balance strong{
-    font-size:24px;
-    color:#00e5ff;
-}
+.withdraw-balance small{display:block;color:#777791;margin-bottom:5px}
+.withdraw-balance strong{font-size:24px;color:#00e5ff}
 
 .method{
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:15px;
-    border:1px solid rgba(0,229,255,.25);
-    background:rgba(0,229,255,.05);
+padding:15px;margin-bottom:15px;border-radius:15px;
+border:1px solid rgba(0,229,255,.25);background:rgba(0,229,255,.05)
 }
 
-.method strong{
-    color:#00e5ff;
+.method strong{color:#00e5ff}
+.note{color:#777791;font-size:10px;line-height:1.5;margin:12px 0 18px}
+
+.message{text-align:center;font-size:12px;margin-top:14px}
+
+.back-btn,.logout{
+width:100%;margin-top:12px;padding:13px;border:1px solid rgba(255,255,255,.1);
+border-radius:15px;color:#fff;background:rgba(255,255,255,.05)
 }
 
-.note{
-    color:#777791;
-    font-size:10px;
-    line-height:1.5;
-    margin:12px 0 18px;
-}
-
-.withdraw-message{
-    text-align:center;
-    font-size:12px;
-    margin-top:14px;
-}
-
-.footer{
-    text-align:center;
-    margin-top:25px;
-    color:#424255;
-    font-size:9px;
-}
+.logout{color:#ff5577}
+.footer{text-align:center;margin-top:25px;color:#424255;font-size:9px}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN / SIGN UP -->
 
 <div id="authScreen">
 
-    <div class="auth-box">
+<div class="auth-box">
 
-        <div class="auth-logo">A</div>
+<div class="auth-logo">A</div>
 
-        <h1 id="authTitle">Welcome to ADAMINNER</h1>
+<h1 id="authTitle">Welcome to ADAMINNER</h1>
 
-        <div class="auth-sub">
-            Login to access your mining dashboard
-        </div>
+<div class="auth-sub">
+Login to access your mining dashboard
+</div>
 
-        <input
-            id="authEmail"
-            class="auth-input"
-            type="email"
-            placeholder="Email"
-        >
+<input id="authEmail" class="input" type="email" placeholder="Email">
 
-        <input
-            id="authPassword"
-            class="auth-input"
-            type="password"
-            placeholder="Password"
-        >
+<input id="authPassword" class="input" type="password" placeholder="Password">
 
-        <button
-            class="auth-btn"
-            onclick="emailAuth()"
-            id="authButton"
-        >
-            LOGIN
-        </button>
+<!-- FORGOT PASSWORD -->
+<div class="forgot" onclick="forgotPassword()">
+Wrong password? Forgot Password
+</div>
 
-        <button
-            class="google-btn"
-            onclick="googleLogin()"
-        >
-            🔵 Continue with Google
-        </button>
+<button class="main-btn" onclick="emailAuth()" id="authButton">
+LOGIN
+</button>
 
-        <div class="auth-switch" id="authSwitch">
-            Don't have an account?
-            <span onclick="toggleAuth()">Sign Up</span>
-        </div>
+<button class="secondary-btn" onclick="googleLogin()">
+🔵 Continue with Google
+</button>
 
-        <div id="authError" class="auth-error"></div>
+<div class="link" id="authSwitch" onclick="toggleAuth()">
+Don't have an account? Sign Up
+</div>
 
-    </div>
+<div id="authError" class="auth-error"></div>
+
+</div>
+</div>
+
+
+<!-- MAIN APP -->
+
+<div class="app" id="mainApp" style="display:none">
+
+<div class="header">
+
+<div class="brand">
+<div class="logo">A</div>
+<div>
+<h1>ADAMINNER</h1>
+<small>VIRTUAL REWARD NETWORK</small>
+</div>
+</div>
+
+<div class="profile" onclick="logout()">👤</div>
 
 </div>
 
 
-<!-- APP -->
+<!-- MINING -->
 
-<div
-    class="app"
-    id="mainApp"
-    style="display:none;"
->
+<div id="miningPage" class="page active">
 
-    <div class="header">
+<div class="welcome">
+Welcome back,
+<span id="username" class="username">Miner</span>
+</div>
 
-        <div class="brand">
+<div class="card">
 
-            <div class="logo">A</div>
+<div class="balance-label">TOTAL BALANCE</div>
 
-            <div>
-                <h1>ADAMINNER</h1>
-                <small>VIRTUAL REWARD NETWORK</small>
-            </div>
+<div class="balance">
+<span id="balance">0.00000</span>
+<span class="coin">SOL</span>
+</div>
 
-        </div>
+<div class="earning">
+Normal: 2.85 GH/s • Ad Boost: 5.70 GH/s
+</div>
 
-        <div
-            class="profile"
-            onclick="logout()"
-        >
-            👤
-        </div>
+<div class="mining-area">
 
-    </div>
+<button class="mining-button" id="miningButton" onclick="startMining()">
 
+<div class="mine-icon">⛏️</div>
 
-    <!-- PAGE 1 -->
+<div class="mine-title">MINING</div>
 
-    <div
-        id="miningPage"
-        class="page active"
-    >
+<div class="mine-small" id="mineText">START</div>
 
-        <div class="welcome">
-            Welcome back,
-            <span id="username" class="username">
-                Miner
-            </span>
-        </div>
+</button>
 
+</div>
 
-        <div class="balance-card">
+<div class="status">
+<span class="dot" id="dot"></span>
+<span id="status">Mining inactive</span>
+</div>
 
-            <div class="balance-label">
-                TOTAL BALANCE
-            </div>
+<div class="session">
 
-            <div class="balance">
-                <span id="balance">0.00000</span>
-                <span class="coin">SOL</span>
-            </div>
+<div class="session-title">MINING SESSION</div>
 
-            <div class="earning">
-                Mining reward: +0.001 SOL / session
-            </div>
+<div class="timer" id="timer">
+06:00:00
+</div>
 
+</div>
 
-            <div class="mining-area">
+<div class="hashrate">
 
-                <button
-                    class="mining-button"
-                    id="miningButton"
-                    onclick="startMining()"
-                >
+<div class="hash-left">
+⚡ CURRENT HASHRATE
+</div>
 
-                    <div class="mine-icon">⛏️</div>
+<div>
 
-                    <div class="mine-title">
-                        MINING
-                    </div>
+<div class="hash-right" id="hashrate">
+2.85 GH/s
+</div>
 
-                    <div
-                        class="mine-small"
-                        id="mineText"
-                    >
-                        START
-                    </div>
+<div class="boost" id="boostText">
+Normal speed
+</div>
 
-                </button>
+</div>
+</div>
 
-            </div>
+<div class="actions">
 
+<button class="action" onclick="watchAd()">
 
-            <div class="status">
+<span class="action-icon ad">▶</span>
+WATCH AD
+<br>
+<span class="ad">BOOST MINING</span>
 
-                <span
-                    class="dot"
-                    id="dot"
-                ></span>
+</button>
 
-                <span id="status">
-                    Mining inactive
-                </span>
+<button class="action" onclick="showWithdraw()">
 
-            </div>
+<span class="action-icon offer">💰</span>
+WITHDRAW
+<br>
+<span class="offer">TRC20 USDT</span>
 
+</button>
 
-            <div class="hashrate">
+</div>
 
-                <div class="hash-left">
-                    ⚡ CURRENT HASHRATE
-                </div>
+<div class="daily">
 
-                <div>
+<h2>Daily Rewards</h2>
 
-                    <div
-                        class="hash-right"
-                        id="hashrate"
-                    >
-                        2.85 GH/s
-                    </div>
+<p>Check in every day to increase your reward.</p>
 
-                    <div
-                        class="boost"
-                        id="boostText"
-                    >
-                        Base hashrate
-                    </div>
+<div class="days">
 
-                </div>
+<div class="day active"><div class="day-circle">◎</div>Day 1</div>
+<div class="day"><div class="day-circle">◎</div>Day 2</div>
+<div class="day"><div class="day-circle">◎</div>Day 3</div>
+<div class="day"><div class="day-circle">◎</div>Day 4</div>
+<div class="day"><div class="day-circle">◎</div>Day 5</div>
+<div class="day"><div class="day-circle">◎</div>Day 6</div>
+<div class="day"><div class="day-circle">🎁</div>Day 7</div>
 
-            </div>
+</div>
 
+<button class="claim" onclick="claimReward()">
+CLAIM DAILY REWARD
+</button>
 
-            <div class="actions">
+</div>
 
-                <button
-                    class="action"
-                    onclick="watchAd()"
-                >
+<button class="logout" onclick="logout()">
+LOGOUT
+</button>
 
-                    <span class="action-icon ad">
-                        ▶
-                    </span>
+</div>
+</div>
 
-                    WATCH AD
 
-                    <br>
+<!-- WITHDRAW -->
 
-                    <span class="ad">
-                        +BOOST
-                    </span>
+<div id="withdrawPage" class="page">
 
-                </button>
+<div class="card">
 
+<h2 class="withdraw-title">Withdraw</h2>
 
-                <button
-                    class="action"
-                    onclick="showWithdraw()"
-                >
+<div class="withdraw-sub">
+Minimum withdrawal: 0.02
+</div>
 
-                    <span class="action-icon offer">
-                        💰
-                    </span>
+<div class="withdraw-balance">
 
-                    WITHDRAW
+<small>Available Balance</small>
 
-                    <br>
+<strong>
+<span id="withdrawBalance">0.00000</span> SOL
+</strong>
 
-                    <span class="offer">
-                        TRC20 USDT
-                    </span>
+</div>
 
-                </button>
+<div class="method">
+<strong>🟢 USDT — TRC20</strong>
+<br>
+<small>Tron Network</small>
+</div>
 
-            </div>
+<input id="walletAddress" class="input" type="text" placeholder="TRC20 wallet address">
 
+<input id="withdrawAmount" class="input" type="number" step="0.00001" placeholder="Amount — minimum 0.02">
 
-            <div class="daily">
+<div class="note">
+Minimum withdrawal is <b>0.02</b>.<br>
+Your request will be saved as <b>Pending</b>.
+</div>
 
-                <h2>Daily Rewards</h2>
+<button class="main-btn" onclick="confirmWithdrawal()">
+CONFIRM WITHDRAWAL
+</button>
 
-                <p>
-                    Check in every day to increase your reward.
-                </p>
+<div id="withdrawMessage" class="message"></div>
 
-                <div class="days">
+<button class="back-btn" onclick="showMining()">
+← BACK TO MINING
+</button>
 
-                    <div class="day active">
-                        <div class="day-circle">◎</div>
-                        Day 1
-                    </div>
+</div>
+</div>
 
-                    <div class="day">
-                        <div class="day-circle">◎</div>
-                        Day 2
-                    </div>
-
-                    <div class="day">
-                        <div class="day-circle">◎</div>
-                        Day 3
-                    </div>
-
-                    <div class="day">
-                        <div class="day-circle">◎</div>
-                        Day 4
-                    </div>
-
-                    <div class="day">
-                        <div class="day-circle">◎</div>
-                        Day 5
-                    </div>
-
-                    <div class="day">
-                        <div class="day-circle">◎</div>
-                        Day 6
-                    </div>
-
-                    <div class="day">
-                        <div class="day-circle">🎁</div>
-                        Day 7
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="claim"
-                    onclick="claimReward()"
-                >
-                    CLAIM DAILY REWARD
-                </button>
-
-            </div>
-
-
-            <button
-                class="logout"
-                onclick="logout()"
-            >
-                LOGOUT
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- PAGE 2 : WITHDRAW -->
-
-    <div
-        id="withdrawPage"
-        class="page"
-    >
-
-        <div class="withdraw-card">
-
-            <h2 class="withdraw-title">
-                Withdraw
-            </h2>
-
-            <div class="withdraw-sub">
-                Request your reward withdrawal
-            </div>
-
-
-            <div class="withdraw-balance">
-
-                <small>
-                    Available Balance
-                </small>
-
-                <strong>
-                    <span id="withdrawBalance">
-                        0.00000
-                    </span>
-                    SOL
-                </strong>
-
-            </div>
-
-
-            <div class="method">
-
-                <strong>
-                    🟢 USDT — TRC20
-                </strong>
-
-                <br>
-
-                <small>
-                    Tron Network
-                </small>
-
-            </div>
-
-
-            <label>
-                Wallet Address
-            </label>
-
-            <input
-                id="walletAddress"
-                class="withdraw-input"
-                type="text"
-                placeholder="Enter TRC20 wallet address"
-            >
-
-
-            <label>
-                Withdrawal Amount
-            </label>
-
-            <input
-                id="withdrawAmount"
-                class="withdraw-input"
-                type="number"
-                step="0.00001"
-                placeholder="Enter amount"
-            >
-
-
-            <div class="note">
-
-                ⚠️ Make sure your TRC20 address is correct.
-                You will receive the payment manually after
-                your withdrawal request is reviewed.
-
-            </div>
-
-
-            <button
-                class="confirm-btn"
-                onclick="confirmWithdrawal()"
-            >
-                CONFIRM WITHDRAWAL
-            </button>
-
-
-            <div
-                id="withdrawMessage"
-                class="withdraw-message"
-            ></div>
-
-
-            <button
-                class="back-btn"
-                onclick="showMining()"
-            >
-                ← BACK TO MINING
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="footer">
-        ADAMINNER • Virtual Reward Network
-    </div>
+<div class="footer">
+ADAMINNER • Virtual Reward Network
+</div>
 
 </div>
 
 
 <script type="module">
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
-    getAuth,
-    onAuthStateChanged,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+getAuth,
+onAuthStateChanged,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+GoogleAuthProvider,
+signInWithPopup,
+sendPasswordResetEmail,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+getFirestore,
+doc,
+getDoc,
+setDoc,
+collection,
+addDoc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* FIREBASE */
+const firebaseConfig={
 
-const firebaseConfig = {
+apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
+authDomain:"adaminning-app.firebaseapp.com",
+projectId:"adaminning-app",
+storageBucket:"adaminning-app.firebasestorage.app",
+messagingSenderId:"147581693986",
+appId:"1:147581693986:web:7887fdda627af87af9da7b",
+measurementId:"G-SS5Z4WPCT1"
 
-    apiKey: "AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
+};
 
-    authDomain: "adaminning-app.firebaseapp.com",
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const provider=new GoogleAuthProvider();
 
-    projectId: "adaminning-app",
+const NORMAL_HASHRATE=2.85;
+const BOOST_HASHRATE=5.70;
 
-    storageBucket: "adaminning-app.firebasestorage.app",
+const SESSION_TIME=6*60*60;
 
-    messagingSenderId: "147581693986",
+const NORMAL_MAX=0.001;
+const BOOST_MAX=0.0038;
 
-    appId: "1:147581693986:web:7887fdda627af87af9da7b",
+const MIN_WITHDRAW=0.02;
 
-    measurementId: "G-SS5Z4WPCT1"
+let balance=0;
+let mining=false;
+let miningStart=0;
+let miningEarned=0;
+let adBoost=false;
+let timerInterval=null;
+
+let signUpMode=false;
+
+
+window.toggleAuth=function(){
+
+signUpMode=!signUpMode;
+
+document.getElementById("authTitle").textContent=
+signUpMode?"Create Account":"Welcome to ADAMINNER";
+
+document.getElementById("authButton").textContent=
+signUpMode?"SIGN UP":"LOGIN";
+
+document.getElementById("authSwitch").textContent=
+signUpMode
+?"Already have an account? Login"
+:"Don't have an account? Sign Up";
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+window.emailAuth=async function(){
 
-const auth = getAuth(app);
+const email=document.getElementById("authEmail").value.trim();
+const password=document.getElementById("authPassword").value;
+const error=document.getElementById("authError");
 
-const db = getFirestore(app);
+error.textContent="";
+error.style.color="#ff5577";
 
-const provider = new GoogleAuthProvider();
+if(!email||!password){
+
+error.textContent="Enter email and password.";
+return;
+
+}
+
+try{
+
+if(signUpMode){
+
+await createUserWithEmailAndPassword(auth,email,password);
+
+}else{
+
+await signInWithEmailAndPassword(auth,email,password);
+
+}
+
+}catch(e){
+
+error.textContent=firebaseError(e.code);
+
+}
+
+};
+
+
+/* FORGOT PASSWORD */
+
+window.forgotPassword=async function(){
+
+const email=document.getElementById("authEmail").value.trim();
+const error=document.getElementById("authError");
+
+if(!email){
+
+error.style.color="#ff5577";
+error.textContent="Enter your email first.";
+return;
+
+}
+
+try{
+
+await sendPasswordResetEmail(auth,email);
+
+error.style.color="#00e5ff";
+
+error.textContent=
+"Password reset email sent. Check your Gmail.";
+
+}catch(e){
+
+error.style.color="#ff5577";
+
+error.textContent=firebaseError(e.code);
+
+}
+
+};
+
+
+/* GOOGLE LOGIN */
+
+window.googleLogin=async function(){
+
+try{
+
+await signInWithPopup(auth,provider);
+
+}catch(e){
+
+document.getElementById("authError").textContent=
+firebaseError(e.code);
+
+}
+
+};
 
 
 /* AUTH */
 
-let signUpMode = false;
+onAuthStateChanged(auth,async user=>{
+
+if(user){
+
+document.getElementById("authScreen").style.display="none";
+document.getElementById("mainApp").style.display="block";
+
+document.getElementById("username").textContent=
+user.displayName||
+user.email?.split("@")[0]||
+"Miner";
+
+await loadUserData();
+
+}else{
+
+document.getElementById("authScreen").style.display="flex";
+document.getElementById("mainApp").style.display="none";
+
+stopMiningTimer();
+
+}
+
+});
 
 
-window.toggleAuth = function(){
+async function loadUserData(){
 
-    signUpMode = !signUpMode;
+const user=auth.currentUser;
+if(!user)return;
 
-    document.getElementById("authTitle").textContent =
-        signUpMode
-        ? "Create Account"
-        : "Welcome to ADAMINNER";
+const ref=doc(db,"users",user.uid);
+const snap=await getDoc(ref);
 
-    document.getElementById("authButton").textContent =
-        signUpMode
-        ? "SIGN UP"
-        : "LOGIN";
+if(snap.exists()){
 
-    document.getElementById("authSwitch").innerHTML =
-        signUpMode
-        ? 'Already have an account? <span onclick="toggleAuth()">Login</span>'
-        : 'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
+const data=snap.data();
 
-};
+balance=Number(data.balance||0);
+miningEarned=Number(data.miningEarned||0);
+miningStart=Number(data.miningStart||0);
+adBoost=Boolean(data.adBoost);
 
+if(data.mining===true){
 
-window.emailAuth = async function(){
+const elapsed=
+Math.floor(Date.now()/1000)-miningStart;
 
-    const email =
-        document.getElementById("authEmail").value.trim();
+if(elapsed<SESSION_TIME){
 
-    const password =
-        document.getElementById("authPassword").value;
+mining=true;
+startMiningUI();
+startTimer();
 
-    const error =
-        document.getElementById("authError");
+}else{
 
+mining=false;
+adBoost=false;
+await saveUserData();
 
-    if(!email || !password){
+}
 
-        error.textContent =
-            "Please enter email and password.";
+}
 
-        return;
+}else{
 
-    }
+await setDoc(ref,{
+email:user.email||"",
+balance:0,
+mining:false,
+miningStart:0,
+miningEarned:0,
+adBoost:false,
+createdAt:serverTimestamp()
+});
 
+}
 
-    try{
-
-        if(signUpMode){
-
-            await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-        }else{
-
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-        }
-
-    }catch(e){
-
-        error.textContent =
-            firebaseError(e.code);
-
-    }
-
-};
-
-
-window.googleLogin = async function(){
-
-    try{
-
-        await signInWithPopup(
-            auth,
-            provider
-        );
-
-    }catch(e){
-
-        document.getElementById("authError")
-            .textContent =
-            firebaseError(e.code);
-
-    }
-
-};
-
-
-/* AUTH STATE */
-
-onAuthStateChanged(
-    auth,
-    (user) => {
-
-        if(user){
-
-            document.getElementById("authScreen")
-                .style.display = "none";
-
-            document.getElementById("mainApp")
-                .style.display = "block";
-
-
-            document.getElementById("username")
-                .textContent =
-                user.displayName ||
-                user.email?.split("@")[0] ||
-                "Miner";
-
-        }else{
-
-            document.getElementById("authScreen")
-                .style.display = "flex";
-
-            document.getElementById("mainApp")
-                .style.display = "none";
-
-        }
-
-    }
-);
-
-
-/* LOGOUT */
-
-window.logout = async function(){
-
-    await signOut(auth);
-
-};
-
-
-/* TELEGRAM */
-
-const tg =
-    window.Telegram?.WebApp;
-
-if(tg){
-
-    tg.ready();
-    tg.expand();
+updateBalance();
 
 }
 
 
-/* BALANCE / MINING */
+async function saveUserData(){
 
-let balance = 0;
+const user=auth.currentUser;
+if(!user)return;
 
-let mining = false;
+await setDoc(
+doc(db,"users",user.uid),
+{
+email:user.email||"",
+balance:balance,
+mining:mining,
+miningStart:miningStart,
+miningEarned:miningEarned,
+adBoost:adBoost
+},
+{merge:true}
+);
 
-let miningTimer = null;
-
-let baseHashrate = 2.85;
-
-let currentHashrate = 2.85;
-
-
-/* MINING */
-
-window.startMining = function(){
-
-    if(mining){
-        return;
-    }
-
-
-    mining = true;
+}
 
 
-    document.getElementById("status")
-        .textContent =
-        "Mining active";
+window.startMining=async function(){
+
+if(mining)return;
+
+mining=true;
+
+miningStart=Math.floor(Date.now()/1000);
+
+miningEarned=0;
+
+adBoost=false;
+
+await saveUserData();
+
+startMiningUI();
+startTimer();
+
+};
 
 
-    document.getElementById("mineText")
-        .textContent =
-        "ACTIVE";
+function startMiningUI(){
+
+document.getElementById("status").textContent="Mining active";
+document.getElementById("mineText").textContent="ACTIVE";
+
+document.getElementById("miningButton").classList.add("active");
+
+document.getElementById("dot").style.background="#00e5ff";
+
+updateHashrate();
+
+}
 
 
-    document.getElementById("miningButton")
-        .classList
-        .add("active");
+function updateHashrate(){
+
+const rate=adBoost?BOOST_HASHRATE:NORMAL_HASHRATE;
+
+document.getElementById("hashrate").textContent=
+rate.toFixed(2)+" GH/s";
+
+document.getElementById("boostText").textContent=
+adBoost?"🔥 AD BOOST ACTIVE":"Normal mining speed";
+
+}
 
 
-    document.getElementById("dot")
-        .style.background =
-        "#00e5ff";
+function startTimer(){
+
+stopMiningTimer();
+
+timerInterval=setInterval(updateMining,1000);
+
+updateMining();
+
+}
 
 
-    if(tg?.HapticFeedback){
+async function updateMining(){
 
-        tg.HapticFeedback
-            .impactOccurred("medium");
+if(!mining)return;
 
-    }
+const now=Math.floor(Date.now()/1000);
+const elapsed=now-miningStart;
+
+if(elapsed>=SESSION_TIME){
+
+await finishMining();
+return;
+
+}
+
+const maxReward=adBoost?BOOST_MAX:NORMAL_MAX;
+
+const progress=elapsed/SESSION_TIME;
+
+const targetEarned=
+Math.min(maxReward,maxReward*progress);
+
+const difference=targetEarned-miningEarned;
+
+if(difference>0){
+
+balance+=difference;
+miningEarned=targetEarned;
+
+}
+
+const remaining=SESSION_TIME-elapsed;
+
+const hours=Math.floor(remaining/3600);
+const minutes=Math.floor((remaining%3600)/60);
+const seconds=remaining%60;
+
+document.getElementById("timer").textContent=
+String(hours).padStart(2,"0")+":"+
+String(minutes).padStart(2,"0")+":"+
+String(seconds).padStart(2,"0");
+
+updateBalance();
+
+await saveUserData();
+
+}
 
 
-    miningTimer =
-        setInterval(() => {
+async function finishMining(){
 
-            const reward =
-                0.000001 *
-                (currentHashrate / baseHashrate);
+mining=false;
+
+stopMiningTimer();
+
+adBoost=false;
+
+await saveUserData();
+
+document.getElementById("status").textContent=
+"Mining stopped — start again";
+
+document.getElementById("mineText").textContent="START";
+
+document.getElementById("miningButton").classList.remove("active");
+
+document.getElementById("dot").style.background="#ff3dbd";
+
+document.getElementById("timer").textContent="06:00:00";
+
+updateHashrate();
+
+alert(
+"⛏️ Mining session completed!\n\n"+
+"Come back and press START MINING again."
+);
+
+}
 
 
-            balance += reward;
+function stopMiningTimer(){
+
+if(timerInterval){
+
+clearInterval(timerInterval);
+timerInterval=null;
+
+}
+
+}
 
 
-            updateBalance();
+/* DEMO AD BUTTON */
 
-        },1000);
+window.watchAd=function(){
+
+if(!mining){
+
+alert("Start mining first.");
+return;
+
+}
+
+adBoost=true;
+
+updateHashrate();
+
+saveUserData();
+
+alert(
+"📺 Ad completed!\n\n"+
+"Mining speed increased to 5.70 GH/s!"
+);
 
 };
 
 
 function updateBalance(){
 
-    document.getElementById("balance")
-        .textContent =
-        balance.toFixed(5);
+document.getElementById("balance").textContent=
+balance.toFixed(5);
 
-    document.getElementById("withdrawBalance")
-        .textContent =
-        balance.toFixed(5);
+document.getElementById("withdrawBalance").textContent=
+balance.toFixed(5);
 
 }
 
 
-/* AD BOOST */
+window.claimReward=function(){
 
-window.watchAd = function(){
+const key="claim_"+new Date().toISOString().slice(0,10);
 
-    alert(
-        "📺 Demo ad completed!\n\n" +
-        "Mining boost activated for 10 minutes."
-    );
+if(localStorage.getItem(key)){
 
+alert("Today's reward already claimed.");
+return;
 
-    currentHashrate = 5.70;
+}
 
+balance+=0.001;
 
-    document.getElementById("hashrate")
-        .textContent =
-        "5.70 GH/s";
+localStorage.setItem(key,"1");
 
+saveUserData();
 
-    document.getElementById("boostText")
-        .textContent =
-        "🔥 AD BOOST ACTIVE";
+updateBalance();
 
-
-    setTimeout(() => {
-
-        currentHashrate =
-            baseHashrate;
-
-
-        document.getElementById("hashrate")
-            .textContent =
-            "2.85 GH/s";
-
-
-        document.getElementById("boostText")
-            .textContent =
-            "Base hashrate";
-
-    },600000);
+alert("🎉 Daily reward claimed!\n\n+0.001 SOL");
 
 };
 
 
-/* DAILY REWARD */
+window.showWithdraw=function(){
 
-window.claimReward = function(){
+document.getElementById("miningPage").classList.remove("active");
+document.getElementById("withdrawPage").classList.add("active");
 
-    const today =
-        new Date()
-        .toISOString()
-        .slice(0,10);
-
-    const lastClaim =
-        localStorage.getItem(
-            "adaminner_last_claim"
-        );
-
-
-    if(lastClaim === today){
-
-        alert(
-            "You already claimed today's reward."
-        );
-
-        return;
-
-    }
-
-
-    balance += 0.001;
-
-    updateBalance();
-
-
-    localStorage.setItem(
-        "adaminner_last_claim",
-        today
-    );
-
-
-    alert(
-        "🎉 Daily reward claimed!\n\n+0.001 SOL"
-    );
+updateBalance();
 
 };
 
 
-/* PAGE NAVIGATION */
+window.showMining=function(){
 
-window.showWithdraw = function(){
-
-    document.getElementById("miningPage")
-        .classList
-        .remove("active");
-
-    document.getElementById("withdrawPage")
-        .classList
-        .add("active");
-
-    updateBalance();
+document.getElementById("withdrawPage").classList.remove("active");
+document.getElementById("miningPage").classList.add("active");
 
 };
 
 
-window.showMining = function(){
+window.confirmWithdrawal=async function(){
 
-    document.getElementById("withdrawPage")
-        .classList
-        .remove("active");
+const user=auth.currentUser;
 
-    document.getElementById("miningPage")
-        .classList
-        .add("active");
+if(!user){
+
+alert("Please login first.");
+return;
+
+}
+
+const wallet=document.getElementById("walletAddress").value.trim();
+
+const amount=Number(
+document.getElementById("withdrawAmount").value
+);
+
+const message=document.getElementById("withdrawMessage");
+
+message.style.color="#ff5577";
+
+if(!wallet){
+
+message.textContent="Enter your TRC20 wallet address.";
+return;
+
+}
+
+if(!wallet.startsWith("T")||wallet.length<30){
+
+message.textContent="Enter a valid TRC20 address.";
+return;
+
+}
+
+if(!amount||amount<MIN_WITHDRAW){
+
+message.textContent="Minimum withdrawal is 0.02.";
+return;
+
+}
+
+if(amount>balance){
+
+message.textContent="Insufficient balance.";
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"withdrawals"),
+{
+uid:user.uid,
+email:user.email||"",
+walletAddress:wallet,
+network:"TRC20",
+currency:"USDT",
+amount:amount,
+status:"Pending",
+createdAt:serverTimestamp()
+}
+);
+
+balance-=amount;
+
+await saveUserData();
+
+updateBalance();
+
+document.getElementById("walletAddress").value="";
+document.getElementById("withdrawAmount").value="";
+
+message.style.color="#00e5ff";
+
+message.textContent=
+"✅ Withdrawal submitted. Status: Pending";
+
+}catch(e){
+
+message.textContent="Could not submit withdrawal.";
+
+}
 
 };
 
 
-/* WITHDRAW */
+window.logout=async function(){
 
-window.confirmWithdrawal = async function(){
-
-    const user = auth.currentUser;
-
-
-    if(!user){
-
-        alert(
-            "Please login first."
-        );
-
-        return;
-
-    }
-
-
-    const wallet =
-        document.getElementById("walletAddress")
-        .value
-        .trim();
-
-    const amount =
-        Number(
-            document.getElementById("withdrawAmount")
-            .value
-        );
-
-
-    const message =
-        document.getElementById("withdrawMessage");
-
-
-    message.style.color =
-        "#ff5577";
-
-
-    if(!wallet){
-
-        message.textContent =
-            "Please enter your TRC20 wallet address.";
-
-        return;
-
-    }
-
-
-    if(!wallet.startsWith("T") || wallet.length < 30){
-
-        message.textContent =
-            "Please enter a valid TRC20 address.";
-
-        return;
-
-    }
-
-
-    if(!amount || amount <= 0){
-
-        message.textContent =
-            "Please enter a valid withdrawal amount.";
-
-        return;
-
-    }
-
-
-    if(amount > balance){
-
-        message.textContent =
-            "Insufficient balance.";
-
-        return;
-
-    }
-
-
-    try{
-
-        message.style.color =
-            "#00e5ff";
-
-        message.textContent =
-            "Submitting withdrawal request...";
-
-
-        await addDoc(
-            collection(db,"withdrawals"),
-            {
-
-                uid: user.uid,
-
-                email: user.email || "",
-
-                walletAddress: wallet,
-
-                network: "TRC20",
-
-                currency: "USDT",
-
-                amount: amount,
-
-                status: "Pending",
-
-                createdAt: serverTimestamp()
-
-            }
-        );
-
-
-        /*
-            Deduct locally after request.
-            Actual payout is NOT automatic.
-        */
-
-        balance -= amount;
-
-        updateBalance();
-
-
-        document.getElementById("walletAddress")
-            .value = "";
-
-        document.getElementById("withdrawAmount")
-            .value = "";
-
-
-        message.textContent =
-            "✅ Withdrawal request submitted successfully.";
-
-    }catch(e){
-
-        console.error(e);
-
-        message.style.color =
-            "#ff5577";
-
-        message.textContent =
-            "Failed to submit request. Please try again.";
-
-    }
+await saveUserData();
+await signOut(auth);
 
 };
 
-
-/* FIREBASE ERRORS */
 
 function firebaseError(code){
 
-    switch(code){
+switch(code){
 
-        case "auth/email-already-in-use":
-            return "This email is already registered.";
+case"auth/email-already-in-use":
+return"This email is already registered.";
 
-        case "auth/invalid-email":
-            return "Invalid email address.";
+case"auth/invalid-email":
+return"Invalid email address.";
 
-        case "auth/weak-password":
-            return "Password must be at least 6 characters.";
+case"auth/weak-password":
+return"Password must be at least 6 characters.";
 
-        case "auth/invalid-credential":
-            return "Wrong email or password.";
+case"auth/invalid-credential":
+return"Wrong email or password.";
 
-        case "auth/popup-closed-by-user":
-            return "Google login was cancelled.";
+case"auth/user-not-found":
+return"No account found with this email.";
 
-        default:
-            return "Authentication failed. Please try again.";
+case"auth/wrong-password":
+return"Wrong password.";
 
-    }
+default:
+return"Something went wrong. Try again.";
+
+}
+
+}
+
+
+const tg=window.Telegram?.WebApp;
+
+if(tg){
+
+tg.ready();
+tg.expand();
 
 }
 
