@@ -291,6 +291,13 @@ body::after{
     color:white;
     background:radial-gradient(circle at 35% 30%,#c6a5ff 0%,#7c3cff 20%,#34156b 48%,#0b0816 75%);
     box-shadow:0 0 20px rgba(145,70,255,.5),0 0 60px rgba(91,43,255,.25);
+    touch-action:manipulation;
+    -webkit-user-select:none;
+    user-select:none;
+}
+
+.mining-button:active{
+    transform:scale(.97);
 }
 
 .mining-button.active{
@@ -557,6 +564,7 @@ body::after{
             class="auth-input"
             type="email"
             placeholder="Email"
+            autocomplete="email"
         >
 
         <input
@@ -564,12 +572,14 @@ body::after{
             class="auth-input"
             type="password"
             placeholder="Password"
+            autocomplete="current-password"
         >
 
         <button
             class="auth-btn"
             onclick="emailAuth()"
             id="authButton"
+            type="button"
         >
             LOGIN
         </button>
@@ -577,6 +587,7 @@ body::after{
         <button
             class="google-btn"
             onclick="googleLogin()"
+            type="button"
         >
             🔵 Continue with Google
         </button>
@@ -660,6 +671,7 @@ body::after{
                 <button
                     class="mining-button"
                     id="miningButton"
+                    type="button"
                     onclick="startMining()"
                 >
 
@@ -727,6 +739,7 @@ body::after{
                 <button
                     class="action"
                     onclick="watchAd()"
+                    type="button"
                 >
 
                     <span class="action-icon ad">
@@ -747,6 +760,7 @@ body::after{
                 <button
                     class="action"
                     onclick="showWithdraw()"
+                    type="button"
                 >
 
                     <span class="action-icon offer">
@@ -817,6 +831,7 @@ body::after{
                 <button
                     class="claim"
                     onclick="claimReward()"
+                    type="button"
                 >
                     CLAIM DAILY REWARD
                 </button>
@@ -827,6 +842,7 @@ body::after{
             <button
                 class="logout"
                 onclick="logout()"
+                type="button"
             >
                 LOGOUT
             </button>
@@ -922,6 +938,7 @@ body::after{
             <button
                 class="confirm-btn"
                 onclick="confirmWithdrawal()"
+                type="button"
             >
                 CONFIRM WITHDRAWAL
             </button>
@@ -936,6 +953,7 @@ body::after{
             <button
                 class="back-btn"
                 onclick="showMining()"
+                type="button"
             >
                 ← BACK TO MINING
             </button>
@@ -1010,7 +1028,6 @@ const provider = new GoogleAuthProvider();
 
 let signUpMode = false;
 
-
 window.toggleAuth = function(){
 
     signUpMode = !signUpMode;
@@ -1029,6 +1046,8 @@ window.toggleAuth = function(){
         signUpMode
         ? 'Already have an account? <span onclick="toggleAuth()">Login</span>'
         : 'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
+
+    document.getElementById("authError").textContent = "";
 
 };
 
@@ -1105,6 +1124,83 @@ window.googleLogin = async function(){
 };
 
 
+/* USER BALANCE STORAGE */
+
+let balance = 0;
+
+let mining = false;
+
+let miningTimer = null;
+
+let baseHashrate = 2.85;
+
+let currentHashrate = 2.85;
+
+let currentUserUID = null;
+
+
+/*
+    Har account ka balance alag save hoga.
+    Logout ke baad balance 0 nahi hoga.
+*/
+
+function balanceKey(uid){
+    return "adaminner_balance_" + uid;
+}
+
+
+function loadUserData(user){
+
+    currentUserUID = user.uid;
+
+    const savedBalance =
+        localStorage.getItem(
+            balanceKey(user.uid)
+        );
+
+    balance =
+        savedBalance !== null
+        ? Number(savedBalance)
+        : 0;
+
+    if(!Number.isFinite(balance)){
+        balance = 0;
+    }
+
+    updateBalance();
+
+}
+
+
+function saveBalance(){
+
+    if(!currentUserUID){
+        return;
+    }
+
+    localStorage.setItem(
+        balanceKey(currentUserUID),
+        String(balance)
+    );
+
+}
+
+
+function updateBalance(){
+
+    document.getElementById("balance")
+        .textContent =
+        balance.toFixed(5);
+
+    document.getElementById("withdrawBalance")
+        .textContent =
+        balance.toFixed(5);
+
+    saveBalance();
+
+}
+
+
 /* AUTH STATE */
 
 onAuthStateChanged(
@@ -1126,6 +1222,15 @@ onAuthStateChanged(
                 user.email?.split("@")[0] ||
                 "Miner";
 
+
+            /*
+                Login ke waqt us account ka
+                purana balance load hoga.
+            */
+
+            loadUserData(user);
+
+
         }else{
 
             document.getElementById("authScreen")
@@ -1133,6 +1238,8 @@ onAuthStateChanged(
 
             document.getElementById("mainApp")
                 .style.display = "none";
+
+            currentUserUID = null;
 
         }
 
@@ -1143,6 +1250,51 @@ onAuthStateChanged(
 /* LOGOUT */
 
 window.logout = async function(){
+
+    /*
+        Logout par balance reset NAHI hoga.
+        Sirf active mining timer stop hoga.
+    */
+
+    if(miningTimer){
+
+        clearInterval(miningTimer);
+
+        miningTimer = null;
+
+    }
+
+    mining = false;
+
+    currentHashrate = baseHashrate;
+
+    const button =
+        document.getElementById("miningButton");
+
+    if(button){
+        button.classList.remove("active");
+    }
+
+    const mineText =
+        document.getElementById("mineText");
+
+    if(mineText){
+        mineText.textContent = "START";
+    }
+
+    const status =
+        document.getElementById("status");
+
+    if(status){
+        status.textContent = "Mining inactive";
+    }
+
+    const dot =
+        document.getElementById("dot");
+
+    if(dot){
+        dot.style.background = "#ff3dbd";
+    }
 
     await signOut(auth);
 
@@ -1162,45 +1314,51 @@ if(tg){
 }
 
 
-/* BALANCE / MINING */
-
-let balance = 0;
-
-let mining = false;
-
-let miningTimer = null;
-
-let baseHashrate = 2.85;
-
-let currentHashrate = 2.85;
-
-
 /* MINING */
 
 window.startMining = function(){
+
+    /*
+        Agar already mining hai to dobara timer
+        create nahi hoga.
+    */
 
     if(mining){
         return;
     }
 
 
-    mining = true;
+    const user = auth.currentUser;
 
+    if(!user){
+
+        document.getElementById("authError")
+            .textContent =
+            "Please login first.";
+
+        return;
+
+    }
+
+
+    /*
+        UI ko FIRST immediately update karte hain.
+        Is se button late response nahi karega.
+    */
+
+    mining = true;
 
     document.getElementById("status")
         .textContent =
         "Mining active";
 
-
     document.getElementById("mineText")
         .textContent =
         "ACTIVE";
 
-
     document.getElementById("miningButton")
         .classList
         .add("active");
-
 
     document.getElementById("dot")
         .style.background =
@@ -1209,39 +1367,67 @@ window.startMining = function(){
 
     if(tg?.HapticFeedback){
 
-        tg.HapticFeedback
-            .impactOccurred("medium");
+        try{
+
+            tg.HapticFeedback
+                .impactOccurred("medium");
+
+        }catch(e){}
 
     }
 
 
+    /*
+        Pehla reward immediately.
+        Is se 1 second ki unnecessary delay nahi hogi.
+    */
+
+    addMiningReward();
+
+
+    /*
+        Purana timer ho to clear.
+    */
+
+    if(miningTimer){
+
+        clearInterval(miningTimer);
+
+    }
+
+
+    /*
+        Us ke baad har second reward.
+    */
+
     miningTimer =
-        setInterval(() => {
-
-            const reward =
-                0.000001 *
-                (currentHashrate / baseHashrate);
-
-
-            balance += reward;
-
-
-            updateBalance();
-
-        },1000);
+        setInterval(
+            addMiningReward,
+            1000
+        );
 
 };
 
 
-function updateBalance(){
+function addMiningReward(){
 
-    document.getElementById("balance")
-        .textContent =
-        balance.toFixed(5);
+    if(!mining){
+        return;
+    }
 
-    document.getElementById("withdrawBalance")
-        .textContent =
-        balance.toFixed(5);
+    if(!auth.currentUser){
+        return;
+    }
+
+
+    const reward =
+        0.000001 *
+        (currentHashrate / baseHashrate);
+
+
+    balance += reward;
+
+    updateBalance();
 
 }
 
@@ -1293,15 +1479,28 @@ window.watchAd = function(){
 
 window.claimReward = function(){
 
+    if(!auth.currentUser){
+
+        alert("Please login first.");
+
+        return;
+
+    }
+
+
     const today =
         new Date()
         .toISOString()
         .slice(0,10);
 
+
+    const claimKey =
+        "adaminner_last_claim_" +
+        auth.currentUser.uid;
+
+
     const lastClaim =
-        localStorage.getItem(
-            "adaminner_last_claim"
-        );
+        localStorage.getItem(claimKey);
 
 
     if(lastClaim === today){
@@ -1321,7 +1520,7 @@ window.claimReward = function(){
 
 
     localStorage.setItem(
-        "adaminner_last_claim",
+        claimKey,
         today
     );
 
@@ -1474,11 +1673,6 @@ window.confirmWithdrawal = async function(){
         );
 
 
-        /*
-            Deduct locally after request.
-            Actual payout is NOT automatic.
-        */
-
         balance -= amount;
 
         updateBalance();
@@ -1530,6 +1724,12 @@ function firebaseError(code){
         case "auth/popup-closed-by-user":
             return "Google login was cancelled.";
 
+        case "auth/popup-blocked":
+            return "Google login popup was blocked.";
+
+        case "auth/network-request-failed":
+            return "Network error. Please check your internet.";
+
         default:
             return "Authentication failed. Please try again.";
 
@@ -1541,7 +1741,3 @@ function firebaseError(code){
 
 </body>
 </html>
-    
-
-
-    
