@@ -261,7 +261,7 @@ WITHDRAW
 <div class="day"><div class="day-circle">◎</div>Day 6</div>
 <div class="day"><div class="day-circle">🎁</div>Day 7</div></div><button class="claim" onclick="claimReward()">
 CLAIM DAILY REWARD
-</button></div><button class="logout" onclick="logout">
+</button></div><button class="logout" onclick="logout()">
 LOGOUT
 </button></div>
 </div><div id="withdrawPage" class="page"><div class="card"><h2 class="withdraw-title">Withdraw</h2><div class="withdraw-sub">
@@ -347,9 +347,19 @@ let miningEarned=0;
 let adBoost=false;
 let timerInterval=null;
 let loggingOut=false;
-
 let signUpMode=false;
 
+
+/* TELEGRAM SESSION */
+
+const APP_SESSION_KEY="adaminning_app_session";
+
+const isNewPageSession=!sessionStorage.getItem(APP_SESSION_KEY);
+
+sessionStorage.setItem(APP_SESSION_KEY,"1");
+
+
+/* AUTH */
 
 window.toggleAuth=function(){
 
@@ -426,14 +436,11 @@ try{
 await sendPasswordResetEmail(auth,email);
 
 error.style.color="#00e5ff";
-
-error.textContent=
-"Password reset email sent. Check your Gmail.";
+error.textContent="Password reset email sent. Check your Gmail.";
 
 }catch(e){
 
 error.style.color="#ff5577";
-
 error.textContent=firebaseError(e.code);
 
 }
@@ -441,7 +448,7 @@ error.textContent=firebaseError(e.code);
 };
 
 
-/* GOOGLE LOGIN */
+/* GOOGLE */
 
 window.googleLogin=async function(){
 
@@ -459,13 +466,35 @@ firebaseError(e.code);
 };
 
 
-/* AUTH */
+/* AUTH STATE */
 
 onAuthStateChanged(auth,async user=>{
 
-if(user){
+/*
+When Telegram Mini App gets a completely new page session,
+automatically logout the Firebase account.
 
-loggingOut=false;
+This does NOT change mining data in Firestore.
+*/
+
+if(isNewPageSession && user){
+
+try{
+
+await signOut(auth);
+
+}catch(e){
+
+console.error("Automatic logout:",e);
+
+}
+
+return;
+
+}
+
+
+if(user){
 
 document.getElementById("authScreen").style.display="none";
 document.getElementById("mainApp").style.display="block";
@@ -486,8 +515,6 @@ stopMiningTimer();
 
 mining=false;
 adBoost=false;
-miningStart=0;
-miningEarned=0;
 
 resetMiningUI();
 
@@ -496,9 +523,12 @@ resetMiningUI();
 });
 
 
+/* USER DATA */
+
 async function loadUserData(){
 
 const user=auth.currentUser;
+
 if(!user)return;
 
 const ref=doc(db,"users",user.uid);
@@ -521,7 +551,9 @@ Math.floor(Date.now()/1000)-miningStart;
 if(elapsed<SESSION_TIME){
 
 mining=true;
+
 startMiningUI();
+
 startTimer();
 
 }else{
@@ -530,7 +562,10 @@ mining=false;
 adBoost=false;
 miningStart=0;
 miningEarned=0;
+
 await saveUserData();
+
+resetMiningUI();
 
 }
 
@@ -538,8 +573,7 @@ await saveUserData();
 
 mining=false;
 adBoost=false;
-miningStart=0;
-miningEarned=0;
+
 resetMiningUI();
 
 }
@@ -547,6 +581,7 @@ resetMiningUI();
 }else{
 
 await setDoc(ref,{
+
 email:user.email||"",
 balance:0,
 mining:false,
@@ -554,12 +589,15 @@ miningStart:0,
 miningEarned:0,
 adBoost:false,
 createdAt:serverTimestamp()
+
 });
 
+balance=0;
 mining=false;
-adBoost=false;
 miningStart=0;
 miningEarned=0;
+adBoost=false;
+
 resetMiningUI();
 
 }
@@ -569,9 +607,12 @@ updateBalance();
 }
 
 
+/* SAVE */
+
 async function saveUserData(){
 
 const user=auth.currentUser;
+
 if(!user)return;
 
 await setDoc(
@@ -589,6 +630,8 @@ adBoost:adBoost
 
 }
 
+
+/* START MINING */
 
 window.startMining=async function(){
 
@@ -613,19 +656,31 @@ miningEarned=0;
 
 adBoost=false;
 
+try{
+
 await saveUserData();
 
-if(!mining)return;
-
 startMiningUI();
+
 startTimer();
+
+}catch(e){
+
+mining=false;
+
+alert("Could not start mining. Please try again.");
+
+}
 
 };
 
 
+/* MINING UI */
+
 function startMiningUI(){
 
 document.getElementById("status").textContent="Mining active";
+
 document.getElementById("mineText").textContent="ACTIVE";
 
 document.getElementById("miningButton").classList.add("active");
@@ -640,6 +695,7 @@ updateHashrate();
 function resetMiningUI(){
 
 document.getElementById("status").textContent="Mining inactive";
+
 document.getElementById("mineText").textContent="START";
 
 document.getElementById("miningButton").classList.remove("active");
@@ -652,6 +708,8 @@ updateHashrate();
 
 }
 
+
+/* HASHRATE */
 
 function updateHashrate(){
 
@@ -666,6 +724,8 @@ adBoost?"🔥 AD BOOST ACTIVE":"Normal mining speed";
 }
 
 
+/* TIMER */
+
 function startTimer(){
 
 stopMiningTimer();
@@ -677,16 +737,32 @@ updateMining();
 }
 
 
+function stopMiningTimer(){
+
+if(timerInterval){
+
+clearInterval(timerInterval);
+timerInterval=null;
+
+}
+
+}
+
+
+/* MINING CALCULATION */
+
 async function updateMining(){
 
-if(!mining||loggingOut)return;
+if(!mining)return;
 
 const now=Math.floor(Date.now()/1000);
+
 const elapsed=now-miningStart;
 
 if(elapsed>=SESSION_TIME){
 
 await finishMining();
+
 return;
 
 }
@@ -703,6 +779,7 @@ const difference=targetEarned-miningEarned;
 if(difference>0){
 
 balance+=difference;
+
 miningEarned=targetEarned;
 
 }
@@ -725,6 +802,8 @@ await saveUserData();
 }
 
 
+/* FINISH 6 HOUR SESSION */
+
 async function finishMining(){
 
 mining=false;
@@ -734,6 +813,7 @@ stopMiningTimer();
 adBoost=false;
 
 miningStart=0;
+
 miningEarned=0;
 
 await saveUserData();
@@ -748,13 +828,14 @@ alert(
 }
 
 
-/* DEMO AD BUTTON */
+/* AD BOOST */
 
 window.watchAd=function(){
 
 if(!mining){
 
 alert("Start mining first.");
+
 return;
 
 }
@@ -773,6 +854,8 @@ alert(
 };
 
 
+/* DAILY REWARD */
+
 window.claimReward=function(){
 
 const key="claim_"+new Date().toISOString().slice(0,10);
@@ -780,6 +863,7 @@ const key="claim_"+new Date().toISOString().slice(0,10);
 if(localStorage.getItem(key)){
 
 alert("Today's reward already claimed.");
+
 return;
 
 }
@@ -797,9 +881,25 @@ alert("🎉 Daily reward claimed!\n\n+0.001 SOL");
 };
 
 
+/* BALANCE */
+
+function updateBalance(){
+
+document.getElementById("balance").textContent=
+balance.toFixed(5);
+
+document.getElementById("withdrawBalance").textContent=
+balance.toFixed(5);
+
+}
+
+
+/* WITHDRAW PAGE */
+
 window.showWithdraw=function(){
 
 document.getElementById("miningPage").classList.remove("active");
+
 document.getElementById("withdrawPage").classList.add("active");
 
 updateBalance();
@@ -810,10 +910,13 @@ updateBalance();
 window.showMining=function(){
 
 document.getElementById("withdrawPage").classList.remove("active");
+
 document.getElementById("miningPage").classList.add("active");
 
 };
 
+
+/* WITHDRAW */
 
 window.confirmWithdrawal=async function(){
 
@@ -822,44 +925,55 @@ const user=auth.currentUser;
 if(!user){
 
 alert("Please login first.");
+
 return;
 
 }
 
-const wallet=document.getElementById("walletAddress").value.trim();
+const wallet=
+document.getElementById("walletAddress").value.trim();
 
 const amount=Number(
 document.getElementById("withdrawAmount").value
 );
 
-const message=document.getElementById("withdrawMessage");
+const message=
+document.getElementById("withdrawMessage");
 
 message.style.color="#ff5577";
 
 if(!wallet){
 
-message.textContent="Enter your TRC20 wallet address.";
+message.textContent=
+"Enter your TRC20 wallet address.";
+
 return;
 
 }
 
 if(!wallet.startsWith("T")||wallet.length<30){
 
-message.textContent="Enter a valid TRC20 address.";
+message.textContent=
+"Enter a valid TRC20 address.";
+
 return;
 
 }
 
 if(!amount||amount<MIN_WITHDRAW){
 
-message.textContent="Minimum withdrawal is 0.02.";
+message.textContent=
+"Minimum withdrawal is 0.02.";
+
 return;
 
 }
 
 if(amount>balance){
 
-message.textContent="Insufficient balance.";
+message.textContent=
+"Insufficient balance.";
+
 return;
 
 }
@@ -896,7 +1010,8 @@ message.textContent=
 
 }catch(e){
 
-message.textContent="Could not submit withdrawal.";
+message.textContent=
+"Could not submit withdrawal.";
 
 }
 
@@ -911,39 +1026,13 @@ if(loggingOut)return;
 
 loggingOut=true;
 
-mining=false;
-adBoost=false;
-miningStart=0;
-miningEarned=0;
+/*
+IMPORTANT:
+Logout does NOT stop mining.
+The current mining state remains in Firestore.
+*/
 
 stopMiningTimer();
-
-const user=auth.currentUser;
-
-if(user){
-
-try{
-
-await setDoc(
-doc(db,"users",user.uid),
-{
-mining:false,
-miningStart:0,
-miningEarned:0,
-adBoost:false
-},
-{merge:true}
-);
-
-}catch(e){
-
-console.error("Logout save error:",e);
-
-}
-
-}
-
-resetMiningUI();
 
 try{
 
@@ -959,6 +1048,8 @@ loggingOut=false;
 
 };
 
+
+/* FIREBASE ERRORS */
 
 function firebaseError(code){
 
@@ -990,11 +1081,14 @@ return"Something went wrong. Try again.";
 }
 
 
+/* TELEGRAM */
+
 const tg=window.Telegram?.WebApp;
 
 if(tg){
 
 tg.ready();
+
 tg.expand();
 
 }
