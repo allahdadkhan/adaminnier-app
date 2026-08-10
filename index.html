@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>ADAMINNER</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#ffffff;
+    background:#05050b;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-3;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(138,43,226,.30),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 100% 40%,
+            rgba(0,210,255,.15),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 0% 80%,
+            rgba(255,0,153,.10),
+            transparent 30%
+        ),
+        #05050b;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    opacity:.15;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.04) 1px,
+            transparent 1px
+        );
+
+    background-size:35px 35px;
+}
+
+.app{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:20px 15px 40px;
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+
+    border-radius:14px;
+
+    display:grid;
+    place-items:center;
+
+    font-size:20px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9b5cff,
+            #5c2cff 50%,
+            #00d9ff
+        );
+
+    box-shadow:
+        0 0 25px rgba(125,70,255,.45);
+}
+
+.brand h1{
+    margin:0;
+    font-size:19px;
+    letter-spacing:1px;
+}
+
+.brand small{
+    display:block;
+    margin-top:3px;
+
+    color:#777791;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.profile{
+    width:42px;
+    height:42px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        inset 0 0 15px rgba(255,255,255,.03);
+}
+
+.welcome{
+    margin-top:25px;
+
+    color:#777791;
+    font-size:13px;
+}
+
+.username{
+    color:#ffffff;
+    font-weight:bold;
+}
+
+.balance-card{
+    position:relative;
+    overflow:hidden;
+
+    margin-top:10px;
+    padding:22px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22,18,42,.96),
+            rgba(8,9,19,.96)
+        );
+
+    border:1px solid rgba(156,91,255,.22);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.5),
+        inset 0 1px rgba(255,255,255,.05);
+}
+
+.balance-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    top:-100px;
+    right:-70px;
+
+    border-radius:50%;
+
+    background:#8b5cff;
+
+    filter:blur(80px);
+
+    opacity:.18;
+}
+
+.balance-label{
+    color:#777791;
+
+    font-size:11px;
+    letter-spacing:1.5px;
+
+    text-align:center;
+}
+
+.balance{
+    text-align:center;
+
+    margin-top:6px;
+
+    font-size:40px;
+    font-weight:900;
+
+    letter-spacing:-1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #bfa5ff,
+            #ffffff
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.coin{
+    color:#9d6cff;
+    font-size:14px;
+    margin-left:5px;
+}
+
+.earning{
+    text-align:center;
+
+    margin-top:6px;
+
+    color:#00e5ff;
+
+    font-size:12px;
+}
+
+.mining-area{
+    display:flex;
+    justify-content:center;
+
+    margin:28px 0 18px;
+}
+
+.mining-button{
+
+    position:relative;
+
+    width:178px;
+    height:178px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(160,93,255,.8);
+
+    cursor:pointer;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #c6a5ff 0%,
+            #7c3cff 20%,
+            #34156b 48%,
+            #0b0816 75%
+        );
+
+    box-shadow:
+
+        0 0 20px rgba(145,70,255,.5),
+
+        0 0 60px rgba(91,43,255,.25),
+
+        inset 0 0 35px rgba(255,255,255,.12);
+
+    transition:.2s;
+}
+
+.mining-button::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:9px;
+
+    border-radius:50%;
+
+    border:1px dashed rgba(255,255,255,.25);
+
+    animation:rotate 10s linear infinite;
+}
+
+.mining-button::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-12px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(0,229,255,.15);
+
+    animation:pulse 2.5s ease-in-out infinite;
+}
+
+.mining-button:active{
+    transform:scale(.94);
+}
+
+.mine-icon{
+    position:relative;
+    z-index:2;
+
+    font-size:42px;
+}
+
+.mine-title{
+    position:relative;
+    z-index:2;
+
+    margin-top:8px;
+
+    font-size:16px;
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.mine-small{
+    position:relative;
+    z-index:2;
+
+    margin-top:5px;
+
+    color:#00e5ff;
+
+    font-size:10px;
+}
+
+@keyframes rotate{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes pulse{
+
+    50%{
+        transform:scale(1.08);
+        opacity:.4;
+    }
+
+}
+
+.status{
+    text-align:center;
+
+    color:#777791;
+
+    font-size:12px;
+}
+
+.dot{
+    display:inline-block;
+
+    width:7px;
+    height:7px;
+
+    margin-right:5px;
+
+    border-radius:50%;
+
+    background:#ff3dbd;
+
+    box-shadow:
+        0 0 10px #ff3dbd;
+}
+
+.hashrate{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-top:18px;
+
+    padding:17px;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(121,61,255,.13),
+            rgba(0,211,255,.08)
+        );
+
+    border:1px solid rgba(124,82,255,.18);
+}
+
+.hash-left{
+    color:#85859b;
+    font-size:12px;
+}
+
+.hash-right{
+    color:#00e5ff;
+    font-weight:900;
+}
+
+.actions{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:11px;
+
+    margin-top:12px;
+}
+
+.action{
+
+    min-height:78px;
+
+    border-radius:17px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,25,50,.9),
+            rgba(12,13,23,.9)
+        );
+
+    color:#ffffff;
+
+    font-size:12px;
+
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.04);
+
+    transition:.2s;
+}
+
+.action:active{
+    transform:scale(.96);
+}
+
+.action-icon{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    font-size:23px;
+}
+
+.ad{
+    color:#ffd166;
+}
+
+.offer{
+    color:#00e5ff;
+}
+
+.daily{
+
+    margin-top:18px;
+
+    padding:20px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(19,18,35,.95),
+            rgba(8,9,17,.95)
+        );
+
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.daily h2{
+    margin:0;
+
+    font-size:20px;
+}
+
+.daily p{
+    margin:7px 0 18px;
+
+    color:#777791;
+
+    font-size:12px;
+}
+
+.days{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:5px;
+}
+
+.day{
+
+    text-align:center;
+
+    color:#66667a;
+
+    font-size:9px;
+}
+
+.day-circle{
+
+    width:36px;
+    height:36px;
+
+    margin:0 auto 6px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:50%;
+
+    background:#181824;
+
+    border:1px solid #29293a;
+
+    font-size:15px;
+}
+
+.day.active{
+    color:#ffffff;
+}
+
+.day.active .day-circle{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffb347,
+            #ff6b00
+        );
+
+    border:0;
+
+    box-shadow:
+        0 0 18px rgba(255,130,20,.3);
+}
+
+.claim{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border:0;
+
+    border-radius:30px;
+
+    color:#ffffff;
+
+    font-size:15px;
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            90deg,
+            #723cff,
+            #a64cff,
+            #00c8ff
+        );
+
+    box-shadow:
+        0 12px 35px rgba(112,60,255,.25);
+
+    cursor:pointer;
+}
+
+.claim:active{
+    transform:scale(.97);
+}
+
+.footer{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#424255;
+
+    font-size:9px;
+
+    letter-spacing:.5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="header">
+
+        <div class="brand">
+
+            <div class="logo">
+                A
+            </div>
+
+            <div>
+                <h1>ADAMINNER</h1>
+                <small>VIRTUAL REWARD NETWORK</small>
+            </div>
+
+        </div>
+
+        <div class="profile">
+            👤
+        </div>
+
+    </div>
+
+
+    <div class="welcome">
+        Welcome back,
+        <span class="username" id="username">Miner</span>
+    </div>
+
+
+    <div class="balance-card">
+
+        <div class="balance-label">
+            TOTAL BALANCE
+        </div>
+
+        <!-- EXTRA ZERO ADDED -->
+        <div class="balance">
+            <span id="balance">0.00000</span>
+            <span class="coin">SOL</span>
+        </div>
+
+        <div class="earning">
+            +0.001 SOL / mining session
+        </div>
+
+
+        <div class="mining-area">
+
+            <button
+                class="mining-button"
+                onclick="startMining()"
+            >
+
+                <div class="mine-icon">
+                    ⛏️
+                </div>
+
+                <div class="mine-title">
+                    MINING
+                </div>
+
+                <div
+                    class="mine-small"
+                    id="mineText"
+                >
+                    START
+                </div>
+
+            </button>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="dot" id="dot"></span>
+
+            <span id="status">
+                Mining inactive
+            </span>
+
+        </div>
+
+
+        <div class="hashrate">
+
+            <div class="hash-left">
+                ⚡ CURRENT HASHRATE
+            </div>
+
+            <div class="hash-right">
+                2.85 GH/s
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="action"
+                onclick="watchAd()"
+            >
+
+                <span class="action-icon ad">
+                    ▶
+                </span>
+
+                WATCH AD
+
+                <br>
+
+                <span class="ad">
+                    +0.001 SOL
+                </span>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="showOffers()"
+            >
+
+                <span class="action-icon offer">
+                    🎁
+                </span>
+
+                SHOW OFFERS
+
+                <br>
+
+                <span class="offer">
+                    Earn More
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div class="daily">
+
+            <h2>
+                Daily Rewards
+            </h2>
+
+            <p>
+                Check in every day to increase your reward.
+            </p>
+
+
+            <div class="days">
+
+                <div class="day active">
+                    <div class="day-circle">◎</div>
+                    Day 1
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">◎</div>
+                    Day 2
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">◎</div>
+                    Day 3
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">◎</div>
+                    Day 4
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">◎</div>
+                    Day 5
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">◎</div>
+                    Day 6
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">🎁</div>
+                    Day 7
+                </div>
+
+            </div>
+
+
+            <button
+                class="claim"
+                onclick="claimReward()"
+            >
+                CLAIM DAILY REWARD
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        ADAMINNER • Virtual Rewards Platform
+    </div>
+
+</div>
+
+
+<script>
+
+const tg = window.Telegram.WebApp;
+
+tg.ready();
+tg.expand();
+
+
+const user = tg.initDataUnsafe?.user;
+
+if(user){
+
+    document.getElementById("username").textContent =
+        user.username
+        ? "@" + user.username
+        : user.first_name || "Miner";
+
+}
+
+
+let balance = 0;
+let mining = false;
+
+
+function startMining(){
+
+    if(mining){
+        return;
+    }
+
+    mining = true;
+
+    document.getElementById("status").textContent =
+        "Mining active";
+
+    document.getElementById("mineText").textContent =
+        "ACTIVE";
+
+    document.getElementById("dot").style.background =
+        "#00e5ff";
+
+    document.getElementById("dot").style.boxShadow =
+        "0 0 12px #00e5ff";
+
+    if(tg.HapticFeedback){
+
+        tg.HapticFeedback.impactOccurred("medium");
+
+    }
+
+}
+
+
+function watchAd(){
+
+    alert(
+        "📺 WATCH AD\n\n" +
+        "Ad integration will be connected here.\n\n" +
+        "Reward: +0.001 SOL"
+    );
+
+}
+
+
+function showOffers(){
+
+    alert(
+        "🎁 OFFERS\n\n" +
+        "Offer wall will be connected here."
+    );
+
+}
+
+
+function claimReward(){
+
+    balance += 0.001;
+
+    document.getElementById("balance").textContent =
+        balance.toFixed(5);
+
+    alert(
+        "🎉 Daily reward claimed!\n\n" +
+        "+0.001 SOL"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
