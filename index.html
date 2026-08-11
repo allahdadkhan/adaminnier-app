@@ -48,6 +48,64 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;opacity:.15;background-
 .method{padding:15px;margin-bottom:15px;border-radius:15px;border:1px solid rgba(0,229,255,.25);background:rgba(0,229,255,.05)}.method strong{color:#00e5ff}.note{color:#777791;font-size:10px;line-height:1.5;margin:12px 0 18px}.withdraw-message{text-align:center;font-size:12px;margin-top:14px}.footer{text-align:center;margin-top:25px;color:#424255;font-size:9px}
 .session-box{margin-top:12px;padding:12px;border-radius:15px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.12);text-align:center;color:#777791;font-size:11px}
 .session-box strong{display:block;color:#00e5ff;font-size:14px;margin-top:4px}
+
+.profile-card{
+margin-top:10px;padding:24px;border-radius:28px;
+background:linear-gradient(145deg,rgba(22,18,42,.98),rgba(8,9,19,.98));
+border:1px solid rgba(0,229,255,.16);
+box-shadow:0 25px 70px rgba(0,0,0,.55);
+}
+.profile-hero{
+text-align:center;padding:10px 0 22px;
+}
+.profile-avatar{
+width:78px;height:78px;margin:0 auto 14px;border-radius:24px;
+display:grid;place-items:center;font-size:32px;font-weight:900;
+background:linear-gradient(135deg,#8b5cff,#00d9ff,#ff3dbd);
+box-shadow:0 0 35px rgba(0,217,255,.25);
+}
+.profile-hero h2{margin:0;font-size:22px}
+.profile-hero p{margin:7px 0 0;color:#777791;font-size:12px;word-break:break-all}
+.profile-stat{
+display:flex;justify-content:space-between;align-items:center;
+padding:16px;margin-top:10px;border-radius:17px;
+background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);
+}
+.profile-stat span{color:#777791;font-size:11px}.profile-stat strong{color:#00e5ff;font-size:13px}
+.profile-back{
+width:100%;margin-top:16px;padding:14px;border:0;border-radius:16px;
+color:#fff;font-weight:800;background:linear-gradient(90deg,#723cff,#a64cff,#00c8ff);
+}
+.mining-button{
+width:190px;height:190px;
+border:4px solid #b26cff;
+background:
+radial-gradient(circle at 34% 22%,#ffffff 0%,#d8c0ff 7%,#a45cff 18%,#6424e8 35%,#24105a 62%,#07040f 82%);
+box-shadow:
+0 13px 0 #241047,
+0 20px 35px rgba(0,0,0,.8),
+0 0 30px rgba(164,92,255,.75),
+0 0 75px rgba(111,55,255,.22),
+inset 0 8px 18px rgba(255,255,255,.35),
+inset 0 -18px 28px rgba(0,0,0,.65);
+}
+.mining-button.active{
+border-color:#00f0ff;
+background:
+radial-gradient(circle at 34% 22%,#ffffff 0%,#bfffff 7%,#36e9ff 18%,#087be8 36%,#073b75 62%,#020b16 82%);
+box-shadow:
+0 13px 0 #063d57,
+0 22px 38px rgba(0,0,0,.8),
+0 0 32px rgba(0,229,255,.95),
+0 0 90px rgba(0,180,255,.35),
+inset 0 8px 18px rgba(255,255,255,.4),
+inset 0 -18px 28px rgba(0,0,0,.65);
+}
+.boost-active{
+color:#00f0ff!important;
+text-shadow:0 0 10px rgba(0,229,255,.45);
+}
+
 </style>
 </head>
 <body>
@@ -69,7 +127,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;opacity:.15;background-
 <div class="app" id="mainApp" style="display:none;">
 <div class="header">
 <div class="brand"><div class="logo">A</div><div><h1>ADAMINNER</h1><small>VIRTUAL REWARD NETWORK</small></div></div>
-<div class="profile" onclick="logout()">👤</div>
+<div class="profile" onclick="showProfile()" title="Profile">👤</div>
 </div>
 
 <div id="miningPage" class="page active">
@@ -114,6 +172,22 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;opacity:.15;background-
 </div>
 </div>
 
+
+<div id="profilePage" class="page">
+<div class="profile-card">
+<div class="profile-hero">
+<div class="profile-avatar" id="profileAvatar">A</div>
+<h2 id="profileName">Miner</h2>
+<p id="profileEmail">—</p>
+</div>
+<div class="profile-stat"><span>ACCOUNT</span><strong>Verified Login</strong></div>
+<div class="profile-stat"><span>BALANCE</span><strong><span id="profileBalance">0.00000</span> SOL</strong></div>
+<div class="profile-stat"><span>MINING SESSION</span><strong>6 Hours</strong></div>
+<button class="profile-back" onclick="showMining()" type="button">← BACK TO MINING</button>
+<button class="logout" onclick="logout()" type="button">LOGOUT</button>
+</div>
+</div>
+
 <div id="withdrawPage" class="page">
 <div class="withdraw-card">
 <h2 class="withdraw-title">Withdraw</h2>
@@ -123,7 +197,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;opacity:.15;background-
 <label>Wallet Address</label>
 <input id="walletAddress" class="withdraw-input" type="text" placeholder="Enter TRC20 wallet address">
 <label>Withdrawal Amount</label>
-<input id="withdrawAmount" class="withdraw-input" type="number" step="0.00001" placeholder="Enter amount">
+<input id="withdrawAmount" class="withdraw-input" type="number" min="0.02" step="0.00001" placeholder="Minimum 0.02 SOL">
 <div class="note">⚠️ Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.</div>
 <button class="confirm-btn" onclick="confirmWithdrawal()" type="button">CONFIRM WITHDRAWAL</button>
 <div id="withdrawMessage" class="withdraw-message"></div>
@@ -197,6 +271,9 @@ function balanceKey(uid){return "adaminner_balance_"+uid}
 function miningStartKey(uid){return "adaminner_mining_start_"+uid}
 function miningLastKey(uid){return "adaminner_mining_last_"+uid}
 function miningActiveKey(uid){return "adaminner_mining_active_"+uid}
+function boostKey(uid){return "adaminner_boost_start_"+uid}
+const BOOST_TIME=10*60*1000;
+const BOOST_HASHRATE=5.70;
 
 function saveMiningState(){
 if(!currentUserUID)return;
@@ -256,37 +333,74 @@ lastRewardTime=null;
 setMiningUI(false,message);
 }
 
+function getSavedBoostStart(){
+if(!currentUserUID)return 0;
+const t=Number(localStorage.getItem(boostKey(currentUserUID)));
+if(!t||Date.now()-t>=BOOST_TIME){
+localStorage.removeItem(boostKey(currentUserUID));
+return 0;
+}
+return t;
+}
+
+function updateBoostUI(){
+const boostStart=getSavedBoostStart();
+if(boostStart){
+currentHashrate=BOOST_HASHRATE;
+document.getElementById("hashrate").textContent="5.70 GH/s";
+document.getElementById("boostText").textContent="🔥 AD BOOST ACTIVE";
+document.getElementById("boostText").classList.add("boost-active");
+}else{
+currentHashrate=baseHashrate;
+document.getElementById("hashrate").textContent="2.85 GH/s";
+document.getElementById("boostText").textContent="Base hashrate";
+document.getElementById("boostText").classList.remove("boost-active");
+}
+}
+
+function rewardForInterval(from,to){
+if(to<=from)return 0;
+const boostStart=getSavedBoostStart();
+let normalMs=to-from;
+let boostedMs=0;
+if(boostStart){
+const boostEnd=boostStart+BOOST_TIME;
+const overlapStart=Math.max(from,boostStart);
+const overlapEnd=Math.min(to,boostEnd);
+if(overlapEnd>overlapStart)boostedMs=overlapEnd-overlapStart;
+}
+normalMs-=boostedMs;
+return (normalMs/1000)*REWARD_PER_SECOND+
+(boostedMs/1000)*REWARD_PER_SECOND*(BOOST_HASHRATE/baseHashrate);
+}
+
 function applyElapsedMining(){
 if(!currentUserUID)return;
 const active=localStorage.getItem(miningActiveKey(currentUserUID));
 const savedStart=Number(localStorage.getItem(miningStartKey(currentUserUID)));
 let savedLast=Number(localStorage.getItem(miningLastKey(currentUserUID)));
-
 if(active!=="1" || !savedStart)return;
 
 const now=Date.now();
 if(!savedLast)savedLast=savedStart;
 
-const elapsedFromStart=now-savedStart;
-if(elapsedFromStart>=SESSION_TIME){
-const endTime=savedStart+SESSION_TIME;
-const rewardUntil=Math.max(savedLast, savedStart);
-const seconds=Math.max(0,Math.floor((endTime-rewardUntil)/1000));
-balance+=seconds*REWARD_PER_SECOND*(currentHashrate/baseHashrate);
+const sessionEnd=savedStart+SESSION_TIME;
+const rewardEnd=Math.min(now,sessionEnd);
+
+if(rewardEnd>savedLast){
+balance+=rewardForInterval(savedLast,rewardEnd);
 updateBalance();
+}
+if(now>=sessionEnd){
 stopMining("6-hour session ended",true);
 return;
 }
 
-const seconds=Math.max(0,Math.floor((now-savedLast)/1000));
-if(seconds>0){
-balance+=seconds*REWARD_PER_SECOND*(currentHashrate/baseHashrate);
-updateBalance();
-}
 mining=true;
 miningStartTime=savedStart;
 lastRewardTime=now;
 localStorage.setItem(miningLastKey(currentUserUID),String(now));
+updateBoostUI();
 setMiningUI(true,"Mining active");
 startMiningTimer();
 }
@@ -297,6 +411,7 @@ const saved=localStorage.getItem(balanceKey(user.uid));
 balance=saved!==null?Number(saved):0;
 if(!Number.isFinite(balance))balance=0;
 updateBalance();
+updateBoostUI();
 applyElapsedMining();
 }
 
@@ -323,14 +438,15 @@ stopMining("6-hour session ended",true);
 return;
 }
 if(lastRewardTime){
-const seconds=Math.floor((now-lastRewardTime)/1000);
-if(seconds>0){
-balance+=seconds*REWARD_PER_SECOND*(currentHashrate/baseHashrate);
-lastRewardTime+=seconds*1000;
+const rewardUntil=Math.min(now,miningStartTime+SESSION_TIME);
+if(rewardUntil>lastRewardTime){
+balance+=rewardForInterval(lastRewardTime,rewardUntil);
+lastRewardTime=rewardUntil;
 updateBalance();
 localStorage.setItem(miningLastKey(currentUserUID),String(lastRewardTime));
 }
 }
+updateBoostUI();
 updateSessionUI();
 },1000);
 
@@ -403,15 +519,11 @@ if(currentUserUID)saveMiningState();
 }
 
 window.watchAd=function(){
-alert("📺 Demo ad completed!\n\nMining boost activated for 10 minutes.");
-currentHashrate=5.70;
-document.getElementById("hashrate").textContent="5.70 GH/s";
-document.getElementById("boostText").textContent="🔥 AD BOOST ACTIVE";
-setTimeout(()=>{
-currentHashrate=baseHashrate;
-document.getElementById("hashrate").textContent="2.85 GH/s";
-document.getElementById("boostText").textContent="Base hashrate";
-},600000);
+if(!auth.currentUser){alert("Please login first.");return}
+const start=Date.now();
+localStorage.setItem(boostKey(auth.currentUser.uid),String(start));
+updateBoostUI();
+alert("📺 Demo ad completed!\n\n🔥 5.70 GH/s boost activated for 10 minutes.");
 };
 
 window.claimReward=function(){
@@ -426,15 +538,32 @@ localStorage.setItem(key,today);
 alert("🎉 Daily reward claimed!\n\n+0.001 SOL");
 };
 
+window.showProfile=function(){
+const user=auth.currentUser;
+if(!user){return}
+document.getElementById("miningPage").classList.remove("active");
+document.getElementById("withdrawPage").classList.remove("active");
+document.getElementById("profilePage").classList.add("active");
+
+const name=user.displayName||user.email?.split("@")[0]||"Miner";
+document.getElementById("profileName").textContent=name;
+document.getElementById("profileEmail").textContent=user.email||"No email";
+document.getElementById("profileAvatar").textContent=(name.charAt(0)||"A").toUpperCase();
+document.getElementById("profileBalance").textContent=balance.toFixed(5);
+};
+
 window.showWithdraw=function(){
 document.getElementById("miningPage").classList.remove("active");
+document.getElementById("profilePage").classList.remove("active");
 document.getElementById("withdrawPage").classList.add("active");
 updateBalance();
 };
 
 window.showMining=function(){
 document.getElementById("withdrawPage").classList.remove("active");
+document.getElementById("profilePage").classList.remove("active");
 document.getElementById("miningPage").classList.add("active");
+updateBalance();
 };
 
 window.confirmWithdrawal=async function(){
@@ -446,7 +575,7 @@ const message=document.getElementById("withdrawMessage");
 message.style.color="#ff5577";
 if(!wallet){message.textContent="Please enter your TRC20 wallet address.";return}
 if(!wallet.startsWith("T")||wallet.length<30){message.textContent="Please enter a valid TRC20 address.";return}
-if(!amount||amount<=0){message.textContent="Please enter a valid withdrawal amount.";return}
+if(!amount||amount<0.02){message.textContent="Minimum withdrawal is 0.02 SOL.";return}
 if(amount>balance){message.textContent="Insufficient balance.";return}
 try{
 message.style.color="#00e5ff";
