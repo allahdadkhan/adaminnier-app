@@ -94,26 +94,19 @@ body::before{content:"";position:fixed;inset:0;z-index:-10;background:radial-gra
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import{getFirestore,collection,addDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 const firebaseConfig={apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",authDomain:"adaminning-app.firebaseapp.com",projectId:"adaminning-app",storageBucket:"adaminning-app.firebasestorage.app",messagingSenderId:"147581693986",appId:"1:147581693986:web:7887fdda627af87af9da7b",measurementId:"G-SS5Z4WPCT1"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),provider=new GoogleAuthProvider();
 let signUpMode=false,balance=0,mining=false,miningTimer=null,sessionInterval=null,miningStartTime=null,lastRewardTime=null,baseHashrate=2.85,currentHashrate=2.85,currentUserUID=null;
 const SESSION_TIME=6*60*60*1000,REWARD_PER_SECOND=.000001,BOOST_TIME=10*60*1000;
-
 const key=(p,u)=>"rndminer_"+p+"_"+u;
-
 function boostEnd(){return currentUserUID?Number(localStorage.getItem(key("boost_end",currentUserUID)))||0:0}
 function boostActive(t=Date.now()){return boostEnd()>t}
 function reward(a,b){if(b<=a)return 0;let e=boostEnd(),r=0;if(e>a){let x=Math.min(b,e);r+=(x-a)/1000*REWARD_PER_SECOND*(5.7/baseHashrate);if(b>e)r+=(b-e)/1000*REWARD_PER_SECOND}else r+=(b-a)/1000*REWARD_PER_SECOND;return r}
 function updateBoostUI(){if(!currentUserUID)return;let e=boostEnd(),n=Date.now();if(e>n){currentHashrate=5.7;document.getElementById("hashrate").textContent="5.70 GH/s";document.getElementById("boostText").textContent="🔥 AD BOOST ACTIVE • "+fmt(e-n)}else{currentHashrate=baseHashrate;document.getElementById("hashrate").textContent="2.85 GH/s";document.getElementById("boostText").textContent="Base hashrate";localStorage.removeItem(key("boost_end",currentUserUID))}}
 function fmt(ms){let t=Math.max(0,Math.floor(ms/1000)),m=Math.floor(t/60),s=t%60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
-
 window.toggleAuth=()=>{signUpMode=!signUpMode;document.getElementById("authTitle").textContent=signUpMode?"Create RND Miner Account":"Welcome to RND Miner";document.getElementById("authButton").textContent=signUpMode?"SIGN UP":"LOGIN";document.getElementById("authSwitch").innerHTML=signUpMode?'Already have an account? <span onclick="toggleAuth()">Login</span>':'Don\\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';document.getElementById("authError").textContent=""};
-
 window.emailAuth=async()=>{let e=document.getElementById("authEmail").value.trim(),p=document.getElementById("authPassword").value,er=document.getElementById("authError");if(!e||!p){er.textContent="Please enter email and password.";return}try{if(signUpMode)await createUserWithEmailAndPassword(auth,e,p);else await signInWithEmailAndPassword(auth,e,p)}catch(x){er.textContent=firebaseError(x.code)}};
-
 window.googleLogin=async()=>{try{await signInWithPopup(auth,provider)}catch(e){document.getElementById("authError").textContent=firebaseError(e.code)}};
-
 function updateBalance(){document.getElementById("balance").textContent=balance.toFixed(5);document.getElementById("withdrawBalance").textContent=balance.toFixed(5);if(currentUserUID)localStorage.setItem(key("balance",currentUserUID),String(balance))}
 function updateSessionUI(){let el=document.getElementById("sessionTime");if(!el)return;if(!mining||!miningStartTime){el.textContent="Not active";return}let r=Math.max(0,SESSION_TIME-(Date.now()-miningStartTime)),t=Math.floor(r/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;el.textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
 function setUI(a,msg){let b=document.getElementById("miningButton");b.classList.toggle("active",a);document.getElementById("status").textContent=msg||"Mining inactive";document.getElementById("mineText").textContent=a?"MINING ACTIVE":"START MINING";document.getElementById("dot").style.background=a?"#00e5ff":"#ff3dbd";updateSessionUI();updateBoostUI()}
@@ -122,110 +115,16 @@ function stopMining(msg="Mining inactive",clear=true){mining=false;clearInterval
 function startTimer(){clearInterval(miningTimer);clearInterval(sessionInterval);miningTimer=setInterval(()=>{if(!mining||!currentUserUID)return;let n=Date.now(),end=miningStartTime+SESSION_TIME;if(n>=end){stopMining("6-hour session ended",true);return}if(lastRewardTime&&n>lastRewardTime){let to=Math.min(n,end);balance+=reward(lastRewardTime,to);lastRewardTime=to;updateBalance();localStorage.setItem(key("mining_last",currentUserUID),lastRewardTime)}updateSessionUI();updateBoostUI()},1000);sessionInterval=setInterval(()=>{updateSessionUI();updateBoostUI()},1000)}
 function restore(){if(!currentUserUID)return;let a=localStorage.getItem(key("mining_active",currentUserUID)),s=Number(localStorage.getItem(key("mining_start",currentUserUID))),l=Number(localStorage.getItem(key("mining_last",currentUserUID)))||s;if(a!=="1"||!s)return;let n=Date.now(),end=s+SESSION_TIME;if(n>=end){stopMining("6-hour session ended",true);return}if(n>l){balance+=reward(l,Math.min(n,end));updateBalance()}mining=true;miningStartTime=s;lastRewardTime=n;setUI(true,"Mining active");startTimer()}
 function loadUser(u){currentUserUID=u.uid;balance=Number(localStorage.getItem(key("balance",u.uid)))||0;updateBalance();restore();updateBoostUI()}
-
 onAuthStateChanged(auth,u=>{if(u){authScreen.style.display="none";mainApp.style.display="block";let n=u.displayName||u.email?.split("@")[0]||"Miner";username.textContent=n;profileUsername.textContent=n;profileEmail.textContent=u.email||"Not available";loadUser(u)}else{authScreen.style.display="flex";mainApp.style.display="none";currentUserUID=null}});
-
 window.logout=async()=>{if(mining){lastRewardTime=Date.now();saveMining()}clearInterval(miningTimer);clearInterval(sessionInterval);mining=false;await signOut(auth)};
-
 window.startMining=()=>{let u=auth.currentUser;if(!u){alert("Please login first.");return}if(mining)return;currentUserUID=u.uid;mining=true;miningStartTime=lastRewardTime=Date.now();saveMining();setUI(true,"Mining active");startTimer()};
-
 window.watchAd=async()=>{let u=auth.currentUser;if(!u){alert("Please login first.");return}let b=document.getElementById("watchAdButton"),s=document.getElementById("adStatus");if(typeof window.show_11549239!=="function"){s.textContent="Advertisement is not ready yet.";return}b.disabled=true;s.textContent="📺 Loading advertisement...";try{await window.show_11549239();currentUserUID=u.uid;let n=Date.now(),old=boostEnd(),end=(old>n?old:n)+BOOST_TIME;localStorage.setItem(key("boost_end",u.uid),end);updateBoostUI();s.textContent="✅ Ad completed! 10-minute boost activated."}catch(e){s.textContent="Ad was not completed."}finally{b.disabled=false}};
-
 window.claimReward=()=>{let u=auth.currentUser;if(!u){alert("Please login first.");return}let k=key("last_claim",u.uid),today=new Date().toISOString().slice(0,10);if(localStorage.getItem(k)===today){alert("You already claimed today's reward.");return}balance+=.001;updateBalance();localStorage.setItem(k,today);alert("🎉 Daily reward claimed!\n\n+0.001 RND")};
-
 function hide(){miningPage.classList.remove("active");withdrawPage.classList.remove("active");profilePage.classList.remove("active")}
-window.showMining=()=>{hide();miningPage.classList.add("active");updateBalance();updateBoostUI()};
-window.showWithdraw=()=>{hide();withdrawPage.classList.add("active");updateBalance()};
-window.showProfile=()=>{let u=auth.currentUser;if(!u)return;profileUsername.textContent=u.displayName||u.email?.split("@")[0]||"Miner";profileEmail.textContent=u.email||"Not available";hide();profilePage.classList.add("active")};
-
-/* =========================
-   ONLY WITHDRAWAL SYSTEM
-   ========================= */
-
-window.confirmWithdrawal=async()=>{
-let u=auth.currentUser;
-
-if(!u){
-alert("Please login first.");
-return;
-}
-
-let w=walletAddress.value.trim();
-let a=Number(withdrawAmount.value);
-let m=withdrawMessage;
-let b=document.querySelector(".confirm-btn");
-
-m.style.color="#ff5577";
-
-if(!w){
-m.textContent="Please enter your TRC20 wallet address.";
-return;
-}
-
-if(!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(w)){
-m.textContent="Please enter a valid TRC20 address.";
-return;
-}
-
-if(!Number.isFinite(a)||a<.02){
-m.textContent="Minimum withdrawal is 0.02 RND.";
-return;
-}
-
-if(a>balance){
-m.textContent="Insufficient balance.";
-return;
-}
-
-b.disabled=true;
-m.style.color="#ffb347";
-m.textContent="Submitting withdrawal request...";
-
-try{
-
-await addDoc(collection(db,"withdrawals"),{
-uid:u.uid,
-email:u.email||"",
-walletAddress:w,
-network:"TRC20",
-currency:"USDT",
-amount:a,
-balanceUnit:"RND",
-status:"Pending",
-createdAt:serverTimestamp()
-});
-
-/* Balance is deducted only after Firebase successfully creates the request. */
-balance-=a;
-updateBalance();
-
-walletAddress.value="";
-withdrawAmount.value="";
-
-m.style.color="#00e676";
-m.textContent="✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";
-
-}catch(e){
-
-console.error("Withdrawal error:",e);
-
-m.style.color="#ff5577";
-m.textContent="Failed to submit withdrawal request. Please try again.";
-
-}finally{
-
-b.disabled=false;
-
-}
-};
-
+window.showMining=()=>{hide();miningPage.classList.add("active");updateBalance();updateBoostUI()};window.showWithdraw=()=>{hide();withdrawPage.classList.add("active");updateBalance()};window.showProfile=()=>{let u=auth.currentUser;if(!u)return;profileUsername.textContent=u.displayName||u.email?.split("@")[0]||"Miner";profileEmail.textContent=u.email||"Not available";hide();profilePage.classList.add("active")};
+window.confirmWithdrawal=async()=>{let u=auth.currentUser;if(!u){alert("Please login first.");return}let w=walletAddress.value.trim(),a=Number(withdrawAmount.value),m=withdrawMessage;m.style.color="#ff5577";if(!w){m.textContent="Please enter your TRC20 wallet address.";return}if(!w.startsWith("T")||w.length<30){m.textContent="Please enter a valid TRC20 address.";return}if(!a||a<.02){m.textContent="Minimum withdrawal is 0.02 RND.";return}if(a>balance){m.textContent="Insufficient balance.";return}let b=document.querySelector(".confirm-btn");b.disabled=true;m.textContent="Submitting withdrawal request...";try{await addDoc(collection(db,"withdrawals"),{uid:u.uid,email:u.email||"",walletAddress:w,network:"TRC20",currency:"USDT",amount:a,balanceUnit:"RND",status:"Pending",createdAt:serverTimestamp()});m.textContent="✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";walletAddress.value="";withdrawAmount.value=""}catch(e){m.textContent="Failed to submit withdrawal request. Please try again."}finally{b.disabled=false}};
 function firebaseError(c){return({"auth/email-already-in-use":"This email is already registered.","auth/invalid-email":"Invalid email address.","auth/weak-password":"Password must be at least 6 characters.","auth/invalid-credential":"Wrong email or password.","auth/popup-closed-by-user":"Google login was cancelled.","auth/popup-blocked":"Google login popup was blocked.","auth/network-request-failed":"Network error. Please check your internet."}[c]||"Authentication failed. Please try again.")}
-
-const tg=window.Telegram?.WebApp;
-if(tg){
-tg.ready();
-tg.expand()
-}
+const tg=window.Telegram?.WebApp;if(tg){tg.ready();tg.expand()}
 </script>
 </body>
 </html>
