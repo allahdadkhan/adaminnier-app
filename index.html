@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -34,19 +35,10 @@ body::before{content:"";position:fixed;inset:0;z-index:-10;background:radial-gra
 </head>
 <body>
 
-<div class="bg-coin c1">R</div>
-<div class="bg-coin c2">R</div>
-<div class="bg-coin c3">R</div>
-<div class="bg-coin c4">R</div>
-<div class="bg-coin c5">R</div>
-<div class="bg-coin c6">R</div>
-<div class="bg-coin c7">R</div>
-<div class="bg-coin c8">R</div>
+<div class="bg-coin c1">R</div><div class="bg-coin c2">R</div><div class="bg-coin c3">R</div><div class="bg-coin c4">R</div><div class="bg-coin c5">R</div><div class="bg-coin c6">R</div><div class="bg-coin c7">R</div><div class="bg-coin c8">R</div>
 
-<div id="authScreen">
-<div class="auth-box">
-<div class="auth-logo">R</div>
-<h1 id="authTitle">Welcome to RND Miner</h1>
+<div id="authScreen"><div class="auth-box">
+<div class="auth-logo">R</div><h1 id="authTitle">Welcome to RND Miner</h1>
 <div class="auth-sub">Render Mining • Login to access your mining dashboard</div>
 <input id="authEmail" class="auth-input" type="email" placeholder="Email" autocomplete="email">
 <input id="authPassword" class="auth-input" type="password" placeholder="Password" autocomplete="current-password">
@@ -54,1039 +46,434 @@ body::before{content:"";position:fixed;inset:0;z-index:-10;background:radial-gra
 <button class="google-btn" onclick="googleLogin()" type="button">🔵 Continue with Google</button>
 <div class="auth-switch" id="authSwitch">Don't have an account? <span onclick="toggleAuth()">Sign Up</span></div>
 <div id="authError" class="auth-error"></div>
-</div>
-</div>
+</div></div>
 
 <div class="app" id="mainApp" style="display:none">
-
-<div class="header">
-<div class="brand">
-<div class="logo">R</div>
-<div>
-<h1>RND Miner</h1>
-<small>RENDER MINING</small>
-</div>
-</div>
-<div class="profile" onclick="showProfile()">👤</div>
-</div>
+<div class="header"><div class="brand"><div class="logo">R</div><div><h1>RND Miner</h1><small>RENDER MINING</small></div></div><div class="profile" onclick="showProfile()">👤</div></div>
 
 <div id="miningPage" class="page active">
 <div class="welcome">Welcome back, <span id="username" class="username">Miner</span></div>
-
 <div class="balance-card">
-<div class="balance-label">TOTAL BALANCE</div>
-<div class="balance"><span id="balance">0.00000</span> <span class="coin">RND</span></div>
+<div class="balance-label">TOTAL BALANCE</div><div class="balance"><span id="balance">0.00000</span> <span class="coin">RND</span></div>
 <div class="earning">Mining reward: +0.001 RND / session</div>
-
-<div class="mining-area">
-<button id="miningButton" class="mining-button" type="button" onclick="startMining()">
-<div class="mine-icon">⛏️</div>
-<div class="mine-title">MINING</div>
-<div id="mineText" class="mine-small">START MINING</div>
-</button>
-</div>
-
-<div class="status">
-<span id="dot" class="dot"></span>
-<span id="status">Mining inactive</span>
-</div>
-
-<div class="session-box">
-6-HOUR MINING SESSION
-<strong id="sessionTime">Not active</strong>
-</div>
-
-<div class="hashrate">
-<div class="hash-left">⚡ CURRENT HASHRATE</div>
-<div>
-<div id="hashrate" class="hash-right">2.85 GH/s</div>
-<div id="boostText" class="boost">Base hashrate</div>
-</div>
-</div>
-
-<div class="actions">
-<button id="watchAdButton" class="action ad-button" onclick="watchAd()" type="button">
-<span class="action-icon ad">▶️</span>
-WATCH AD<br>
-<span class="ad">🔥 +10 MIN BOOST</span>
-</button>
-
-<button class="action withdraw-button" onclick="showWithdraw()" type="button">
-<span class="action-icon offer">💰</span>
-WITHDRAW<br>
-<span class="offer">TRC20 USDT</span>
-</button>
-</div>
-
-<div id="adStatus" class="ad-status">
-Watch an ad to activate your mining boost
-</div>
-
-<div class="daily">
-<h2>Daily Rewards</h2>
-<p>Check in every day to increase your reward.</p>
-
-<div class="days">
-<div class="day active"><div class="day-circle">◎</div>Day 1</div>
-<div class="day"><div class="day-circle">◎</div>Day 2</div>
-<div class="day"><div class="day-circle">◎</div>Day 3</div>
-<div class="day"><div class="day-circle">◎</div>Day 4</div>
-<div class="day"><div class="day-circle">◎</div>Day 5</div>
-<div class="day"><div class="day-circle">◎</div>Day 6</div>
-<div class="day"><div class="day-circle">🎁</div>Day 7</div>
-</div>
-
-<button class="claim" onclick="claimReward()" type="button">
-CLAIM DAILY REWARD
-</button>
-</div>
-
+<div class="mining-area"><button id="miningButton" class="mining-button" type="button" onclick="startMining()"><div class="mine-icon">⛏️</div><div class="mine-title">MINING</div><div id="mineText" class="mine-small">START MINING</div></button></div>
+<div class="status"><span id="dot" class="dot"></span><span id="status">Mining inactive</span></div>
+<div class="session-box">6-HOUR MINING SESSION<strong id="sessionTime">Not active</strong></div>
+<div class="hashrate"><div class="hash-left">⚡ CURRENT HASHRATE</div><div><div id="hashrate" class="hash-right">2.85 GH/s</div><div id="boostText" class="boost">Base hashrate</div></div></div>
+<div class="actions"><button id="watchAdButton" class="action ad-button" onclick="watchAd()" type="button"><span class="action-icon ad">▶️</span>WATCH AD<br><span class="ad">🔥 +10 MIN BOOST</span></button><button class="action withdraw-button" onclick="showWithdraw()" type="button"><span class="action-icon offer">💰</span>WITHDRAW<br><span class="offer">TRC20 USDT</span></button></div>
+<div id="adStatus" class="ad-status">Watch an ad to activate your mining boost</div>
+<div class="daily"><h2>Daily Rewards</h2><p>Check in every day to increase your reward.</p><div class="days">
+<div class="day active"><div class="day-circle">◎</div>Day 1</div><div class="day"><div class="day-circle">◎</div>Day 2</div><div class="day"><div class="day-circle">◎</div>Day 3</div><div class="day"><div class="day-circle">◎</div>Day 4</div><div class="day"><div class="day-circle">◎</div>Day 5</div><div class="day"><div class="day-circle">◎</div>Day 6</div><div class="day"><div class="day-circle">🎁</div>Day 7</div>
+</div><button class="claim" onclick="claimReward()" type="button">CLAIM DAILY REWARD</button></div>
 <button class="logout" onclick="logout()" type="button">LOGOUT</button>
-</div>
-</div>
+</div></div>
 
-<!-- WITHDRAW PAGE -->
-<div id="withdrawPage" class="page">
-<div class="withdraw-card">
-
-<h2 class="withdraw-title">Withdraw</h2>
-
-<div class="withdraw-sub">
-Minimum withdrawal: 0.02 RND
-</div>
-
-<div class="withdraw-balance">
-<small>Available Balance</small>
-<strong><span id="withdrawBalance">0.00000</span> RND</strong>
-</div>
-
-<div class="method">
-<strong>🟢 USDT — TRC20</strong>
-<br>
-<small>Tron Network</small>
-</div>
-
+<div id="withdrawPage" class="page"><div class="withdraw-card">
+<h2 class="withdraw-title">Withdraw</h2><div class="withdraw-sub">Minimum withdrawal: 0.02 RND</div>
+<div class="withdraw-balance"><small>Available Balance</small><strong><span id="withdrawBalance">0.00000</span> RND</strong></div>
+<div class="method"><strong>🟢 USDT — TRC20</strong><br><small>Tron Network</small></div>
 <label>Wallet Address</label>
-<input
-id="walletAddress"
-class="withdraw-input"
-type="text"
-placeholder="Enter TRC20 wallet address"
-autocomplete="off"
->
-
+<input id="walletAddress" class="withdraw-input" type="text" placeholder="Enter TRC20 wallet address" autocomplete="off">
 <label>Withdrawal Amount</label>
-<input
-id="withdrawAmount"
-class="withdraw-input"
-type="number"
-step="0.00001"
-min="0.02"
-placeholder="Minimum 0.02 RND"
->
-
-<div class="note">
-⚠️ Minimum withdrawal amount is 0.02 RND.
-<br>
-Make sure your TRC20 address is correct.
-You will receive the payment manually after your withdrawal request is reviewed.
-</div>
-
-<button
-id="confirmWithdrawalButton"
-class="confirm-btn"
-onclick="confirmWithdrawal()"
-type="button"
->
-CONFIRM WITHDRAWAL
-</button>
-
+<input id="withdrawAmount" class="withdraw-input" type="number" step="0.00001" min="0.02" placeholder="Minimum 0.02 RND">
+<div class="note">⚠️ Minimum withdrawal amount is 0.02 RND.<br>Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.</div>
+<button id="confirmWithdrawButton" class="confirm-btn" onclick="confirmWithdrawal()" type="button">CONFIRM WITHDRAWAL</button>
 <div id="withdrawMessage" class="withdraw-message"></div>
+<button class="back-btn" onclick="showMining()" type="button">← BACK TO MINING</button>
+</div></div>
 
-<button class="back-btn" onclick="showMining()" type="button">
-← BACK TO MINING
-</button>
-
-</div>
-</div>
-
-<!-- PROFILE -->
-<div id="profilePage" class="page">
-<div class="profile-card">
-
-<div class="profile-avatar">👤</div>
-<h2>My Profile</h2>
-
-<div class="profile-row">
-<small>USERNAME</small>
-<strong id="profileUsername">Miner</strong>
-</div>
-
-<div class="profile-row">
-<small>EMAIL</small>
-<strong id="profileEmail">Not available</strong>
-</div>
-
-<div class="profile-status">
-🟢 RND Miner account is active
-</div>
-
-<button class="back-btn" onclick="showMining()" type="button">
-← BACK TO MINING
-</button>
-
-<button class="logout" onclick="logout()" type="button">
-LOGOUT
-</button>
-
-</div>
-</div>
-
-<div class="footer">
-RND Miner • Render Mining
-</div>
-
+<div id="profilePage" class="page"><div class="profile-card">
+<div class="profile-avatar">👤</div><h2>My Profile</h2>
+<div class="profile-row"><small>USERNAME</small><strong id="profileUsername">Miner</strong></div>
+<div class="profile-row"><small>EMAIL</small><strong id="profileEmail">Not available</strong></div>
+<div class="profile-status">🟢 RND Miner account is active</div>
+<button class="back-btn" onclick="showMining()" type="button">← BACK TO MINING</button><button class="logout" onclick="logout()" type="button">LOGOUT</button>
+</div></div>
+<div class="footer">RND Miner • Render Mining</div>
 </div>
 
 <script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import{getFirestore,collection,addDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-import {
-initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+const firebaseConfig={apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",authDomain:"adaminning-app.firebaseapp.com",projectId:"adaminning-app",storageBucket:"adaminning-app.firebasestorage.app",messagingSenderId:"147581693986",appId:"1:147581693986:web:7887fdda627af87af9da7b",measurementId:"G-SS5Z4WPCT1"};
 
-import {
-getAuth,
-onAuthStateChanged,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-GoogleAuthProvider,
-signInWithPopup,
-signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),provider=new GoogleAuthProvider();
 
-import {
-getFirestore,
-collection,
-addDoc,
-serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+let signUpMode=false,balance=0,mining=false,miningTimer=null,sessionInterval=null,miningStartTime=null,lastRewardTime=null,baseHashrate=2.85,currentHashrate=2.85,currentUserUID=null;
 
-const firebaseConfig = {
-apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
-authDomain:"adaminning-app.firebaseapp.com",
-projectId:"adaminning-app",
-storageBucket:"adaminning-app.firebasestorage.app",
-messagingSenderId:"147581693986",
-appId:"1:147581693986:web:7887fdda627af87af9da7b",
-measurementId:"G-SS5Z4WPCT1"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
-
-let signUpMode=false;
-let balance=0;
-let mining=false;
-let miningTimer=null;
-let sessionInterval=null;
-let miningStartTime=null;
-let lastRewardTime=null;
-let baseHashrate=2.85;
-let currentHashrate=2.85;
-let currentUserUID=null;
-
-const SESSION_TIME=6*60*60*1000;
-const REWARD_PER_SECOND=.000001;
-const BOOST_TIME=10*60*1000;
-
+const SESSION_TIME=6*60*60*1000,REWARD_PER_SECOND=.000001,BOOST_TIME=10*60*1000;
 const key=(p,u)=>"rndminer_"+p+"_"+u;
 
-function boostEnd(){
-return currentUserUID
-? Number(localStorage.getItem(key("boost_end",currentUserUID)))||0
-:0;
-}
-
-function boostActive(t=Date.now()){
-return boostEnd()>t;
-}
-
-function reward(a,b){
-if(b<=a)return 0;
-
-let e=boostEnd();
-let r=0;
-
-if(e>a){
-let x=Math.min(b,e);
-r+=(x-a)/1000*REWARD_PER_SECOND*(5.7/baseHashrate);
-
-if(b>e)
-r+=(b-e)/1000*REWARD_PER_SECOND;
-
-}else{
-r+=(b-a)/1000*REWARD_PER_SECOND;
-}
-
-return r;
-}
+function boostEnd(){return currentUserUID?Number(localStorage.getItem(key("boost_end",currentUserUID)))||0:0}
+function boostActive(t=Date.now()){return boostEnd()>t}
+function reward(a,b){if(b<=a)return 0;let e=boostEnd(),r=0;if(e>a){let x=Math.min(b,e);r+=(x-a)/1000*REWARD_PER_SECOND*(5.7/baseHashrate);if(b>e)r+=(b-e)/1000*REWARD_PER_SECOND}else r+=(b-a)/1000*REWARD_PER_SECOND;return r}
 
 function updateBoostUI(){
-
 if(!currentUserUID)return;
-
-let e=boostEnd();
-let n=Date.now();
-
+let e=boostEnd(),n=Date.now();
 if(e>n){
-
 currentHashrate=5.7;
-
 document.getElementById("hashrate").textContent="5.70 GH/s";
-
-document.getElementById("boostText").textContent=
-"🔥 AD BOOST ACTIVE • "+fmt(e-n);
-
+document.getElementById("boostText").textContent="🔥 AD BOOST ACTIVE • "+fmt(e-n)
 }else{
-
 currentHashrate=baseHashrate;
-
 document.getElementById("hashrate").textContent="2.85 GH/s";
-
 document.getElementById("boostText").textContent="Base hashrate";
-
-localStorage.removeItem(key("boost_end",currentUserUID));
+localStorage.removeItem(key("boost_end",currentUserUID))
 }
-
 }
 
 function fmt(ms){
-
-let t=Math.max(0,Math.floor(ms/1000));
-let m=Math.floor(t/60);
-let s=t%60;
-
-return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+let t=Math.max(0,Math.floor(ms/1000)),m=Math.floor(t/60),s=t%60;
+return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")
 }
 
 window.toggleAuth=()=>{
-
 signUpMode=!signUpMode;
-
-document.getElementById("authTitle").textContent=
-signUpMode
-?"Create RND Miner Account"
-:"Welcome to RND Miner";
-
-document.getElementById("authButton").textContent=
-signUpMode?"SIGN UP":"LOGIN";
-
-document.getElementById("authSwitch").innerHTML=
-signUpMode
-?'Already have an account? <span onclick="toggleAuth()">Login</span>'
-:'Don\\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
-
-document.getElementById("authError").textContent="";
+document.getElementById("authTitle").textContent=signUpMode?"Create RND Miner Account":"Welcome to RND Miner";
+document.getElementById("authButton").textContent=signUpMode?"SIGN UP":"LOGIN";
+document.getElementById("authSwitch").innerHTML=signUpMode?'Already have an account? <span onclick="toggleAuth()">Login</span>':'Don\\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
+document.getElementById("authError").textContent=""
 };
 
 window.emailAuth=async()=>{
-
-let e=document.getElementById("authEmail").value.trim();
-let p=document.getElementById("authPassword").value;
-let er=document.getElementById("authError");
-
-if(!e||!p){
-er.textContent="Please enter email and password.";
-return;
-}
-
+let e=document.getElementById("authEmail").value.trim(),p=document.getElementById("authPassword").value,er=document.getElementById("authError");
+if(!e||!p){er.textContent="Please enter email and password.";return}
 try{
-
-if(signUpMode)
-await createUserWithEmailAndPassword(auth,e,p);
-else
-await signInWithEmailAndPassword(auth,e,p);
-
-}catch(x){
-
-er.textContent=firebaseError(x.code);
-
-}
-
+if(signUpMode)await createUserWithEmailAndPassword(auth,e,p);
+else await signInWithEmailAndPassword(auth,e,p)
+}catch(x){er.textContent=firebaseError(x.code)}
 };
 
 window.googleLogin=async()=>{
-
-try{
-
-await signInWithPopup(auth,provider);
-
-}catch(e){
-
-document.getElementById("authError").textContent=
-firebaseError(e.code);
-
-}
-
+try{await signInWithPopup(auth,provider)}
+catch(e){document.getElementById("authError").textContent=firebaseError(e.code)}
 };
 
 function updateBalance(){
-
-document.getElementById("balance").textContent=
-balance.toFixed(5);
-
-document.getElementById("withdrawBalance").textContent=
-balance.toFixed(5);
-
-if(currentUserUID){
-
-localStorage.setItem(
-key("balance",currentUserUID),
-String(balance)
-);
-
-}
-
+document.getElementById("balance").textContent=balance.toFixed(5);
+document.getElementById("withdrawBalance").textContent=balance.toFixed(5);
+if(currentUserUID)localStorage.setItem(key("balance",currentUserUID),String(balance))
 }
 
 function updateSessionUI(){
-
 let el=document.getElementById("sessionTime");
-
 if(!el)return;
-
-if(!mining||!miningStartTime){
-
-el.textContent="Not active";
-return;
-
-}
-
-let r=Math.max(
-0,
-SESSION_TIME-(Date.now()-miningStartTime)
-);
-
-let t=Math.floor(r/1000);
-let h=Math.floor(t/3600);
-let m=Math.floor(t%3600/60);
-let s=t%60;
-
-el.textContent=
-String(h).padStart(2,"0")+":"+
-String(m).padStart(2,"0")+":"+
-String(s).padStart(2,"0");
-
+if(!mining||!miningStartTime){el.textContent="Not active";return}
+let r=Math.max(0,SESSION_TIME-(Date.now()-miningStartTime)),t=Math.floor(r/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;
+el.textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")
 }
 
 function setUI(a,msg){
-
 let b=document.getElementById("miningButton");
-
 b.classList.toggle("active",a);
-
-document.getElementById("status").textContent=
-msg||"Mining inactive";
-
-document.getElementById("mineText").textContent=
-a?"MINING ACTIVE":"START MINING";
-
-document.getElementById("dot").style.background=
-a?"#00e5ff":"#ff3dbd";
-
+document.getElementById("status").textContent=msg||"Mining inactive";
+document.getElementById("mineText").textContent=a?"MINING ACTIVE":"START MINING";
+document.getElementById("dot").style.background=a?"#00e5ff":"#ff3dbd";
 updateSessionUI();
-updateBoostUI();
-
+updateBoostUI()
 }
 
 function saveMining(){
-
 if(!currentUserUID)return;
-
 if(mining){
-
-localStorage.setItem(
-key("mining_start",currentUserUID),
-miningStartTime
-);
-
-localStorage.setItem(
-key("mining_last",currentUserUID),
-lastRewardTime
-);
-
-localStorage.setItem(
-key("mining_active",currentUserUID),
-"1"
-);
-
+localStorage.setItem(key("mining_start",currentUserUID),miningStartTime);
+localStorage.setItem(key("mining_last",currentUserUID),lastRewardTime);
+localStorage.setItem(key("mining_active",currentUserUID),"1")
 }else{
-
-[
-"mining_start",
-"mining_last",
-"mining_active"
-].forEach(p=>
-localStorage.removeItem(
-key(p,currentUserUID)
-));
-
+["mining_start","mining_last","mining_active"].forEach(p=>localStorage.removeItem(key(p,currentUserUID)))
 }
-
 }
 
 function stopMining(msg="Mining inactive",clear=true){
-
 mining=false;
-
 clearInterval(miningTimer);
 clearInterval(sessionInterval);
-
-miningTimer=null;
-sessionInterval=null;
-
-if(clear&&currentUserUID){
-
-[
-"mining_start",
-"mining_last",
-"mining_active"
-].forEach(p=>
-localStorage.removeItem(
-key(p,currentUserUID)
-));
-
-}
-
-miningStartTime=null;
-lastRewardTime=null;
-
-setUI(false,msg);
-
+miningTimer=sessionInterval=null;
+if(clear&&currentUserUID)["mining_start","mining_last","mining_active"].forEach(p=>localStorage.removeItem(key(p,currentUserUID)));
+miningStartTime=lastRewardTime=null;
+setUI(false,msg)
 }
 
 function startTimer(){
-
 clearInterval(miningTimer);
 clearInterval(sessionInterval);
-
 miningTimer=setInterval(()=>{
-
 if(!mining||!currentUserUID)return;
-
-let n=Date.now();
-let end=miningStartTime+SESSION_TIME;
-
-if(n>=end){
-
-stopMining("6-hour session ended",true);
-return;
-
-}
-
+let n=Date.now(),end=miningStartTime+SESSION_TIME;
+if(n>=end){stopMining("6-hour session ended",true);return}
 if(lastRewardTime&&n>lastRewardTime){
-
 let to=Math.min(n,end);
-
 balance+=reward(lastRewardTime,to);
-
 lastRewardTime=to;
-
 updateBalance();
-
-localStorage.setItem(
-key("mining_last",currentUserUID),
-lastRewardTime
-);
-
+localStorage.setItem(key("mining_last",currentUserUID),lastRewardTime)
 }
-
 updateSessionUI();
-updateBoostUI();
-
+updateBoostUI()
 },1000);
-
 sessionInterval=setInterval(()=>{
-
 updateSessionUI();
-updateBoostUI();
-
-},1000);
-
+updateBoostUI()
+},1000)
 }
 
 function restore(){
-
 if(!currentUserUID)return;
-
-let a=localStorage.getItem(
-key("mining_active",currentUserUID)
-);
-
-let s=Number(
-localStorage.getItem(
-key("mining_start",currentUserUID)
-)
-);
-
-let l=Number(
-localStorage.getItem(
-key("mining_last",currentUserUID)
-)
-)||s;
-
+let a=localStorage.getItem(key("mining_active",currentUserUID)),s=Number(localStorage.getItem(key("mining_start",currentUserUID))),l=Number(localStorage.getItem(key("mining_last",currentUserUID)))||s;
 if(a!=="1"||!s)return;
-
-let n=Date.now();
-let end=s+SESSION_TIME;
-
-if(n>=end){
-
-stopMining("6-hour session ended",true);
-return;
-
-}
-
-if(n>l){
-
-balance+=reward(
-l,
-Math.min(n,end)
-);
-
-updateBalance();
-
-}
-
+let n=Date.now(),end=s+SESSION_TIME;
+if(n>=end){stopMining("6-hour session ended",true);return}
+if(n>l){balance+=reward(l,Math.min(n,end));updateBalance()}
 mining=true;
 miningStartTime=s;
 lastRewardTime=n;
-
 setUI(true,"Mining active");
-startTimer();
-
+startTimer()
 }
 
 function loadUser(u){
-
 currentUserUID=u.uid;
-
-balance=
-Number(
-localStorage.getItem(
-key("balance",u.uid)
-)
-)||0;
-
+balance=Number(localStorage.getItem(key("balance",u.uid)))||0;
 updateBalance();
 restore();
-updateBoostUI();
-
+updateBoostUI()
 }
 
 onAuthStateChanged(auth,u=>{
-
 if(u){
-
 authScreen.style.display="none";
 mainApp.style.display="block";
-
-let n=
-u.displayName||
-u.email?.split("@")[0]||
-"Miner";
-
+let n=u.displayName||u.email?.split("@")[0]||"Miner";
 username.textContent=n;
 profileUsername.textContent=n;
-profileEmail.textContent=
-u.email||"Not available";
-
-loadUser(u);
-
+profileEmail.textContent=u.email||"Not available";
+loadUser(u)
 }else{
-
 authScreen.style.display="flex";
 mainApp.style.display="none";
-
-currentUserUID=null;
-
+currentUserUID=null
 }
-
 });
 
 window.logout=async()=>{
-
-if(mining){
-
-lastRewardTime=Date.now();
-saveMining();
-
-}
-
+if(mining){lastRewardTime=Date.now();saveMining()}
 clearInterval(miningTimer);
 clearInterval(sessionInterval);
-
 mining=false;
-
-await signOut(auth);
-
+await signOut(auth)
 };
 
 window.startMining=()=>{
-
 let u=auth.currentUser;
-
-if(!u){
-
-alert("Please login first.");
-return;
-
-}
-
+if(!u){alert("Please login first.");return}
 if(mining)return;
-
 currentUserUID=u.uid;
-
 mining=true;
-
-miningStartTime=
-lastRewardTime=
-Date.now();
-
+miningStartTime=lastRewardTime=Date.now();
 saveMining();
-
 setUI(true,"Mining active");
-startTimer();
-
+startTimer()
 };
 
 window.watchAd=async()=>{
-
 let u=auth.currentUser;
-
-if(!u){
-
-alert("Please login first.");
-return;
-
-}
-
-let b=document.getElementById("watchAdButton");
-let s=document.getElementById("adStatus");
-
-if(typeof window.show_11549239!=="function"){
-
-s.textContent="Advertisement is not ready yet.";
-return;
-
-}
-
+if(!u){alert("Please login first.");return}
+let b=document.getElementById("watchAdButton"),s=document.getElementById("adStatus");
+if(typeof window.show_11549239!=="function"){s.textContent="Advertisement is not ready yet.";return}
 b.disabled=true;
-
 s.textContent="📺 Loading advertisement...";
-
 try{
-
 await window.show_11549239();
-
 currentUserUID=u.uid;
-
-let n=Date.now();
-let old=boostEnd();
-
-let end=(old>n?old:n)+BOOST_TIME;
-
-localStorage.setItem(
-key("boost_end",u.uid),
-end
-);
-
+let n=Date.now(),old=boostEnd(),end=(old>n?old:n)+BOOST_TIME;
+localStorage.setItem(key("boost_end",u.uid),end);
 updateBoostUI();
-
-s.textContent=
-"✅ Ad completed! 10-minute boost activated.";
-
+s.textContent="✅ Ad completed! 10-minute boost activated."
 }catch(e){
-
-s.textContent="Ad was not completed.";
-
+s.textContent="Ad was not completed."
 }finally{
-
-b.disabled=false;
-
+b.disabled=false
 }
-
 };
 
 window.claimReward=()=>{
-
 let u=auth.currentUser;
-
-if(!u){
-
-alert("Please login first.");
-return;
-
-}
-
-let k=key("last_claim",u.uid);
-
-let today=
-new Date().toISOString().slice(0,10);
-
-if(localStorage.getItem(k)===today){
-
-alert("You already claimed today's reward.");
-return;
-
-}
-
+if(!u){alert("Please login first.");return}
+let k=key("last_claim",u.uid),today=new Date().toISOString().slice(0,10);
+if(localStorage.getItem(k)===today){alert("You already claimed today's reward.");return}
 balance+=.001;
-
 updateBalance();
-
 localStorage.setItem(k,today);
-
-alert(
-"🎉 Daily reward claimed!\n\n+0.001 RND"
-);
-
+alert("🎉 Daily reward claimed!\n\n+0.001 RND")
 };
 
 function hide(){
-
 miningPage.classList.remove("active");
 withdrawPage.classList.remove("active");
-profilePage.classList.remove("active");
-
+profilePage.classList.remove("active")
 }
 
 window.showMining=()=>{
-
 hide();
-
 miningPage.classList.add("active");
-
 updateBalance();
-updateBoostUI();
-
+updateBoostUI()
 };
 
 window.showWithdraw=()=>{
-
 hide();
-
 withdrawPage.classList.add("active");
-
 updateBalance();
-
 document.getElementById("withdrawMessage").textContent="";
-
 };
 
 window.showProfile=()=>{
-
 let u=auth.currentUser;
-
 if(!u)return;
-
-profileUsername.textContent=
-u.displayName||
-u.email?.split("@")[0]||
-"Miner";
-
-profileEmail.textContent=
-u.email||
-"Not available";
-
+profileUsername.textContent=u.displayName||u.email?.split("@")[0]||"Miner";
+profileEmail.textContent=u.email||"Not available";
 hide();
-
-profilePage.classList.add("active");
-
+profilePage.classList.add("active")
 };
 
 
-/*
-========================================================
-FIXED WITHDRAWAL FUNCTION
-========================================================
-*/
+/* =========================
+   WITHDRAWAL FIXED FUNCTION
+   ========================= */
 
 window.confirmWithdrawal=async()=>{
-
 const u=auth.currentUser;
 
 if(!u){
-
 alert("Please login first.");
 return;
-
 }
 
-const walletInput=
-document.getElementById("walletAddress");
-
-const amountInput=
-document.getElementById("withdrawAmount");
-
-const message=
-document.getElementById("withdrawMessage");
-
-const button=
-document.getElementById("confirmWithdrawalButton");
-
-const wallet=
-walletInput.value.trim();
-
-const amount=
-Number(amountInput.value);
+const wallet=document.getElementById("walletAddress").value.trim();
+const amountInput=document.getElementById("withdrawAmount");
+const amount=Number(amountInput.value);
+const message=document.getElementById("withdrawMessage");
+const button=document.getElementById("confirmWithdrawButton");
 
 message.style.color="#ff5577";
 message.textContent="";
 
 if(!wallet){
-
-message.textContent=
-"Please enter your TRC20 wallet address.";
-
+message.textContent="Please enter your TRC20 wallet address.";
 return;
-
 }
 
 if(!wallet.startsWith("T")||wallet.length<30){
-
-message.textContent=
-"Please enter a valid TRC20 address.";
-
+message.textContent="Please enter a valid TRC20 address.";
 return;
-
 }
 
-if(!amount||amount<0.02){
-
-message.textContent=
-"Minimum withdrawal is 0.02 RND.";
-
+if(!amount||isNaN(amount)){
+message.textContent="Please enter withdrawal amount.";
 return;
+}
 
+if(amount<0.02){
+message.textContent="Minimum withdrawal is 0.02 RND.";
+return;
 }
 
 if(amount>balance){
-
-message.textContent=
-"Insufficient balance.";
-
+message.textContent="Insufficient balance.";
 return;
-
 }
 
 button.disabled=true;
 button.textContent="SUBMITTING...";
-
-message.style.color="#777791";
-message.textContent=
-"Submitting withdrawal request...";
+message.style.color="#ffc44d";
+message.textContent="Submitting withdrawal request...";
 
 try{
 
 const withdrawalData={
-
 uid:u.uid,
-
 email:u.email||"",
-
 walletAddress:wallet,
-
 network:"TRC20",
-
 currency:"USDT",
-
-amount:amount,
-
-balanceUnit:"RND",
-
+amount:Number(amount.toFixed(5)),
+balanceBefore:Number(balance.toFixed(5)),
 status:"Pending",
-
 createdAt:serverTimestamp()
-
 };
 
-await addDoc(
-collection(db,"withdrawals"),
-withdrawalData
+const docRef=await addDoc(collection(db,"withdrawals"),withdrawalData);
+
+/*
+IMPORTANT:
+Request is saved in:
+Firestore → withdrawals
+
+The document ID is saved below locally only for reference.
+*/
+
+localStorage.setItem(
+"rndminer_last_withdrawal_"+u.uid,
+docRef.id
 );
 
-message.style.color="#00e676";
+balance=Number((balance-amount).toFixed(5));
+updateBalance();
 
-message.textContent=
-"✅ Withdrawal request submitted successfully. Status: Pending.";
+message.style.color="#35e879";
+message.textContent="✅ Withdrawal submitted successfully! Request is pending review.";
 
-walletInput.value="";
+document.getElementById("walletAddress").value="";
 amountInput.value="";
 
-}catch(error){
+button.textContent="WITHDRAWAL SUBMITTED";
 
-console.error(
-"Withdrawal submission error:",
-error
-);
+setTimeout(()=>{
+button.textContent="CONFIRM WITHDRAWAL";
+button.disabled=false;
+},2500);
+
+}catch(e){
+
+console.error("Withdrawal error:",e);
 
 message.style.color="#ff5577";
 
-message.textContent=
-"❌ Failed to submit withdrawal request. Please try again.";
-
-}finally{
-
-button.disabled=false;
-button.textContent="CONFIRM WITHDRAWAL";
-
+if(e&&e.code==="permission-denied"){
+message.textContent="❌ Firebase permission denied. Firestore Rules need permission for withdrawals.";
+}else if(e&&e.code==="failed-precondition"){
+message.textContent="❌ Firestore is not properly configured.";
+}else if(e&&e.code==="unavailable"){
+message.textContent="❌ Network/Firebase unavailable. Check your internet.";
+}else{
+message.textContent="❌ Failed: "+(e.message||"Unknown Firebase error");
 }
 
+button.textContent="CONFIRM WITHDRAWAL";
+button.disabled=false;
+}
 };
 
-
 function firebaseError(c){
-
 return({
-
-"auth/email-already-in-use":
-"This email is already registered.",
-
-"auth/invalid-email":
-"Invalid email address.",
-
-"auth/weak-password":
-"Password must be at least 6 characters.",
-
-"auth/invalid-credential":
-"Wrong email or password.",
-
-"auth/popup-closed-by-user":
-"Google login was cancelled.",
-
-"auth/popup-blocked":
-"Google login popup was blocked.",
-
-"auth/network-request-failed":
-"Network error. Please check your internet."
-
-}[c]||
-"Authentication failed. Please try again.");
-
+"auth/email-already-in-use":"This email is already registered.",
+"auth/invalid-email":"Invalid email address.",
+"auth/weak-password":"Password must be at least 6 characters.",
+"auth/invalid-credential":"Wrong email or password.",
+"auth/popup-closed-by-user":"Google login was cancelled.",
+"auth/popup-blocked":"Google login popup was blocked.",
+"auth/network-request-failed":"Network error. Please check the internet."
+}[c]||"Authentication failed. Please try again.")
 }
 
 const tg=window.Telegram?.WebApp;
-
 if(tg){
-
 tg.ready();
-tg.expand();
-
+tg.expand()
 }
-
 </script>
 
 </body>
