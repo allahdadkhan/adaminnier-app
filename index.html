@@ -1131,6 +1131,44 @@ min-height:18px;
 }
 
 /* =====================================================
+   WITHDRAWAL STATUS
+===================================================== */
+
+.withdraw-status-box{
+margin-top:16px;
+padding:16px;
+border-radius:17px;
+background:rgba(255,255,255,.035);
+border:1px solid rgba(255,60,60,.18);
+text-align:center;
+}
+
+.withdraw-status-title{
+font-size:10px;
+color:#777791;
+letter-spacing:1px;
+margin-bottom:8px;
+}
+
+.withdraw-status{
+font-size:15px;
+font-weight:900;
+color:#ffc44d;
+}
+
+.withdraw-status.pending{
+color:#ffc44d;
+}
+
+.withdraw-status.approved{
+color:#42ff88;
+}
+
+.withdraw-status.rejected{
+color:#ff5577;
+}
+
+/* =====================================================
    PROFILE
 ===================================================== */
 
@@ -1627,6 +1665,21 @@ id="withdrawMessage"
 class="withdraw-message">
 </div>
 
+<!-- WITHDRAWAL STATUS -->
+<div class="withdraw-status-box">
+
+<div class="withdraw-status-title">
+LATEST WITHDRAWAL STATUS
+</div>
+
+<div
+id="withdrawStatus"
+class="withdraw-status">
+No withdrawal request
+</div>
+
+</div>
+
 <button
 class="back-btn"
 onclick="showMining()"
@@ -1730,7 +1783,10 @@ import {
 getFirestore,
 collection,
 addDoc,
-serverTimestamp
+serverTimestamp,
+query,
+where,
+onSnapshot
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1755,6 +1811,8 @@ const db=getFirestore(app);
 const provider=new GoogleAuthProvider();
 
 let signUpMode=false;
+
+let withdrawalUnsubscribe=null;
 
 
 /* =====================================================
@@ -2344,6 +2402,9 @@ applyElapsedMining();
 
 updateBoostUI();
 
+/* LOAD WITHDRAWAL STATUS */
+listenForWithdrawalStatus(user.uid);
+
 }
 
 
@@ -2368,6 +2429,166 @@ document.getElementById("withdrawBalance").textContent=
 balance.toFixed(5);
 
 saveBalance();
+
+}
+
+
+/* =====================================================
+   WITHDRAWAL STATUS
+===================================================== */
+
+function listenForWithdrawalStatus(uid){
+
+/*
+   Remove old listener if user changes
+*/
+
+if(withdrawalUnsubscribe){
+
+withdrawalUnsubscribe();
+
+withdrawalUnsubscribe=null;
+
+}
+
+const statusElement=
+document.getElementById("withdrawStatus");
+
+if(!statusElement)return;
+
+statusElement.className=
+"withdraw-status";
+
+statusElement.textContent=
+"Loading...";
+
+/*
+   Listen to this user's withdrawal requests.
+
+   Bot can change:
+   Pending -> Approved
+   Pending -> Rejected
+
+   The app updates automatically.
+*/
+
+const withdrawalQuery=
+query(
+collection(db,"withdrawals"),
+where("uid","==",uid)
+);
+
+withdrawalUnsubscribe=
+onSnapshot(
+withdrawalQuery,
+(snapshot)=>{
+
+if(snapshot.empty){
+
+statusElement.className=
+"withdraw-status";
+
+statusElement.textContent=
+"No withdrawal request";
+
+return;
+
+}
+
+/*
+   Find latest request by createdAt.
+   No orderBy is used so Firebase index is not required.
+*/
+
+let latestDoc=null;
+
+snapshot.forEach((doc)=>{
+
+const data=doc.data();
+
+if(!latestDoc){
+
+latestDoc={
+id:doc.id,
+data:data
+};
+
+return;
+
+}
+
+const latestTime=
+latestDoc.data.createdAt?.toMillis
+?latestDoc.data.createdAt.toMillis()
+:0;
+
+const currentTime=
+data.createdAt?.toMillis
+?data.createdAt.toMillis()
+:0;
+
+if(currentTime>=latestTime){
+
+latestDoc={
+id:doc.id,
+data:data
+};
+
+}
+
+});
+
+const data=
+latestDoc.data;
+
+const rawStatus=
+String(data.status||"Pending");
+
+const normalized=
+rawStatus.toLowerCase();
+
+if(normalized==="approved"){
+
+statusElement.className=
+"withdraw-status approved";
+
+statusElement.textContent=
+"✅ Approved";
+
+}else if(normalized==="rejected"){
+
+statusElement.className=
+"withdraw-status rejected";
+
+statusElement.textContent=
+"❌ Rejected";
+
+}else{
+
+statusElement.className=
+"withdraw-status pending";
+
+statusElement.textContent=
+"⏳ Pending";
+
+}
+
+},
+(error)=>{
+
+console.error(
+"Withdrawal status listener error:",
+error
+);
+
+statusElement.className=
+"withdraw-status";
+
+statusElement.textContent=
+"Unable to load status";
+
+}
+);
 
 }
 
@@ -2494,6 +2715,16 @@ document.getElementById("mainApp").style.display=
 
 currentUserUID=null;
 
+/* REMOVE WITHDRAWAL LISTENER */
+
+if(withdrawalUnsubscribe){
+
+withdrawalUnsubscribe();
+
+withdrawalUnsubscribe=null;
+
+}
+
 }
 
 });
@@ -2527,6 +2758,14 @@ if(sessionInterval){
 clearInterval(sessionInterval);
 
 sessionInterval=null;
+
+}
+
+if(withdrawalUnsubscribe){
+
+withdrawalUnsubscribe();
+
+withdrawalUnsubscribe=null;
 
 }
 
@@ -2975,7 +3214,7 @@ createdAt:serverTimestamp()
 message.style.color="#ff5b5b";
 
 message.textContent=
-"✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";
+"✅ Withdrawal submitted successfully. Status: Pending.";
 
 document.getElementById("walletAddress")
 .value="";
@@ -2986,6 +3225,11 @@ document.getElementById("withdrawAmount")
 button.disabled=false;
 
 button.style.opacity="1";
+
+/*
+   Listener will automatically receive the new
+   withdrawal and show Pending.
+*/
 
 }catch(e){
 
