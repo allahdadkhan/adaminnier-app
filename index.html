@@ -1138,6 +1138,12 @@ return;
 }
 
 mining=true;
+miningStartTime=Date.now();
+
+localStorage.setItem(
+  "adaminner_mining_start_"+auth.currentUser.uid,
+  miningStartTime
+);
 
 
 /* UI IMMEDIATELY */
