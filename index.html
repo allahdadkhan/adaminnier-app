@@ -1079,14 +1079,143 @@ onclick="confirmWithdrawal()"
 type="button">
 
 CONFIRM WITHDRAWAL
+window.confirmWithdrawal=async function(){
 
-</button><div
-id="withdrawMessage"
-class="withdraw-message">
-</div><button
-class="back-btn"
-onclick="showMining()"
-type="button">
+const user=auth.currentUser;
+
+if(!user){
+
+alert("Please login first.");
+
+return;
+
+}
+
+const wallet=
+document.getElementById("walletAddress")
+.value.trim();
+
+const amount=
+Number(
+document.getElementById("withdrawAmount")
+.value
+);
+
+const message=
+document.getElementById("withdrawMessage");
+
+message.style.color="#ff5577";
+
+
+if(!wallet){
+
+message.textContent=
+"Please enter your TRC20 wallet address.";
+
+return;
+
+}
+
+
+if(!wallet.startsWith("T")||wallet.length<30){
+
+message.textContent=
+"Please enter a valid TRC20 address.";
+
+return;
+
+}
+
+
+if(!amount||amount<0.02){
+
+message.textContent=
+"Minimum withdrawal is 0.02 SOL.";
+
+return;
+
+}
+
+
+if(amount>balance){
+
+message.textContent=
+"Insufficient balance.";
+
+return;
+
+}
+
+
+const button=
+document.querySelector(".confirm-btn");
+
+button.disabled=true;
+
+button.style.opacity=".65";
+
+message.style.color="#00e5ff";
+
+message.textContent=
+"Submitting withdrawal request...";
+
+
+try{
+
+await addDoc(
+collection(db,"withdrawals"),
+{
+uid:user.uid,
+email:user.email||"",
+walletAddress:wallet,
+network:"TRC20",
+currency:"USDT",
+amount:amount,
+status:"Pending",
+createdAt:serverTimestamp()
+}
+);
+
+
+/* Withdrawal successfully submitted */
+
+message.style.color="#00e5ff";
+
+message.textContent=
+"✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";
+
+
+/* Clear withdrawal form only */
+
+document.getElementById("walletAddress")
+.value="";
+
+document.getElementById("withdrawAmount")
+.value="";
+
+
+button.disabled=false;
+
+button.style.opacity="1";
+
+
+}catch(e){
+
+console.error(e);
+
+message.style.color="#ff5577";
+
+message.textContent=
+"Failed to submit withdrawal request. Please try again.";
+
+button.disabled=false;
+
+button.style.opacity="1";
+
+}
+
+};
+
 
 ← BACK TO MINING
 
