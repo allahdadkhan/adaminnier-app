@@ -3,189 +3,1245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
 <title>RND Miner</title>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="//libtl.com/sdk.js" data-zone="11549239" data-sdk="show_11549239"></script>
+
+<script
+src="//libtl.com/sdk.js"
+data-zone="11549239"
+data-sdk="show_11549239">
+</script>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:#fff;background:#020202}
-body{overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;z-index:-10;background:radial-gradient(circle at 50% 35%,rgba(255,35,35,.10),transparent 28%),radial-gradient(circle at 10% 20%,rgba(255,0,0,.08),transparent 28%),radial-gradient(circle at 90% 75%,rgba(180,0,0,.07),transparent 30%),linear-gradient(145deg,#010101 0%,#090101 35%,#160202 55%,#030303 100%)}
 
-.bg-coin{position:fixed;z-index:-5;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;font-weight:1000;font-family:Arial,Helvetica,sans-serif;color:#fff;background:radial-gradient(circle at 30% 20%,#ffb0b0 0%,#ff5b5b 8%,#e60000 25%,#a00000 48%,#610000 68%,#220000 86%,#090000 100%);border:2px solid #a90000;box-shadow:0 7px 0 #280000,0 12px 20px rgba(0,0,0,.80),0 0 25px rgba(255,0,0,.22),inset 0 4px 7px rgba(255,255,255,.35),inset 0 -8px 12px rgba(0,0,0,.75);text-shadow:0 2px 4px rgba(0,0,0,.8),0 0 8px rgba(255,255,255,.18);opacity:.17;pointer-events:none;animation:floatCoin 8s ease-in-out infinite}
-.bg-coin::after{content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(255,255,255,.15);pointer-events:none}
-.bg-coin.c1{left:7%;top:14%;animation-delay:-1s}
-.bg-coin.c2{left:82%;top:12%;width:48px;height:48px;font-size:22px;animation-delay:-4s}
-.bg-coin.c3{left:14%;top:47%;width:44px;height:44px;font-size:20px;animation-delay:-6s}
-.bg-coin.c4{right:8%;top:42%;width:65px;height:65px;font-size:30px;animation-delay:-2s}
-.bg-coin.c5{left:6%;bottom:12%;width:52px;height:52px;font-size:24px;animation-delay:-5s}
-.bg-coin.c6{right:15%;bottom:10%;width:43px;height:43px;font-size:19px;animation-delay:-7s}
-.bg-coin.c7{left:47%;top:8%;width:38px;height:38px;font-size:17px;opacity:.12;animation-delay:-3s}
-.bg-coin.c8{right:43%;bottom:13%;width:47px;height:47px;font-size:21px;opacity:.12;animation-delay:-6s}
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+margin:0;
+padding:0;
+min-height:100%;
+font-family:Arial,Helvetica,sans-serif;
+color:#fff;
+background:#020202;
+}
+
+body{
+overflow-x:hidden;
+}
+
+/* =====================================================
+   RND FUTURISTIC BACKGROUND
+===================================================== */
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+z-index:-10;
+background:
+radial-gradient(
+circle at 50% 35%,
+rgba(255,35,35,.10),
+transparent 28%
+),
+radial-gradient(
+circle at 10% 20%,
+rgba(255,0,0,.08),
+transparent 28%
+),
+radial-gradient(
+circle at 90% 75%,
+rgba(180,0,0,.07),
+transparent 30%
+),
+linear-gradient(
+145deg,
+#010101 0%,
+#090101 35%,
+#160202 55%,
+#030303 100%
+);
+}
+
+/* =====================================================
+   SMALL 3D FLOATING R COINS
+===================================================== */
+
+.bg-coin{
+position:fixed;
+z-index:-5;
+width:58px;
+height:58px;
+border-radius:50%;
+
+display:grid;
+place-items:center;
+
+font-size:27px;
+font-weight:1000;
+font-family:Arial,Helvetica,sans-serif;
+
+color:#fff;
+
+background:
+radial-gradient(
+circle at 30% 20%,
+#ffb0b0 0%,
+#ff5b5b 8%,
+#e60000 25%,
+#a00000 48%,
+#610000 68%,
+#220000 86%,
+#090000 100%
+);
+
+border:2px solid #a90000;
+
+box-shadow:
+0 7px 0 #280000,
+0 12px 20px rgba(0,0,0,.80),
+0 0 25px rgba(255,0,0,.22),
+inset 0 4px 7px rgba(255,255,255,.35),
+inset 0 -8px 12px rgba(0,0,0,.75);
+
+text-shadow:
+0 2px 4px rgba(0,0,0,.8),
+0 0 8px rgba(255,255,255,.18);
+
+opacity:.17;
+
+pointer-events:none;
+
+animation:
+floatCoin 8s ease-in-out infinite;
+}
+
+.bg-coin::after{
+content:"";
+position:absolute;
+inset:6px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.15);
+pointer-events:none;
+}
+
+.bg-coin.c1{
+left:7%;
+top:14%;
+transform:rotateY(18deg) rotateX(8deg);
+animation-delay:-1s;
+}
+
+.bg-coin.c2{
+left:82%;
+top:12%;
+width:48px;
+height:48px;
+font-size:22px;
+transform:rotateY(-25deg) rotateX(12deg);
+animation-delay:-4s;
+}
+
+.bg-coin.c3{
+left:14%;
+top:47%;
+width:44px;
+height:44px;
+font-size:20px;
+transform:rotateY(25deg);
+animation-delay:-6s;
+}
+
+.bg-coin.c4{
+right:8%;
+top:42%;
+width:65px;
+height:65px;
+font-size:30px;
+transform:rotateY(-20deg);
+animation-delay:-2s;
+}
+
+.bg-coin.c5{
+left:6%;
+bottom:12%;
+width:52px;
+height:52px;
+font-size:24px;
+transform:rotateY(15deg);
+animation-delay:-5s;
+}
+
+.bg-coin.c6{
+right:15%;
+bottom:10%;
+width:43px;
+height:43px;
+font-size:19px;
+transform:rotateY(-30deg);
+animation-delay:-7s;
+}
+
+.bg-coin.c7{
+left:47%;
+top:8%;
+width:38px;
+height:38px;
+font-size:17px;
+opacity:.12;
+animation-delay:-3s;
+}
+
+.bg-coin.c8{
+right:43%;
+bottom:13%;
+width:47px;
+height:47px;
+font-size:21px;
+opacity:.12;
+animation-delay:-6s;
+}
 
 @keyframes floatCoin{
-0%,100%{margin-top:0;transform:translateY(0) rotateY(0deg) rotateX(5deg)}
-25%{margin-top:-10px;transform:translateY(-4px) rotateY(25deg) rotateX(8deg)}
-50%{margin-top:0;transform:translateY(0) rotateY(0deg) rotateX(-5deg)}
-75%{margin-top:10px;transform:translateY(4px) rotateY(-25deg) rotateX(8deg)}
+
+0%,100%{
+margin-top:0;
+transform:translateY(0) rotateY(0deg) rotateX(5deg);
+}
+
+25%{
+margin-top:-10px;
+transform:translateY(-4px) rotateY(25deg) rotateX(8deg);
+}
+
+50%{
+margin-top:0;
+transform:translateY(0) rotateY(0deg) rotateX(-5deg);
+}
+
+75%{
+margin-top:10px;
+transform:translateY(4px) rotateY(-25deg) rotateX(8deg);
+}
+
 }
 
 @media(max-width:600px){
-.bg-coin{width:45px;height:45px;font-size:21px;opacity:.13}
-.bg-coin.c2{width:38px;height:38px;font-size:17px}
-.bg-coin.c3{width:35px;height:35px;font-size:16px}
-.bg-coin.c4{width:50px;height:50px;font-size:23px}
-.bg-coin.c5{width:40px;height:40px;font-size:18px}
-.bg-coin.c6{width:34px;height:34px;font-size:15px}
-.bg-coin.c7{width:30px;height:30px;font-size:13px}
-.bg-coin.c8{width:35px;height:35px;font-size:15px}
+
+.bg-coin{
+width:45px;
+height:45px;
+font-size:21px;
+opacity:.13;
 }
 
-#authScreen::after,.app::after{
-content:"";position:fixed;inset:0;z-index:-2;opacity:.055;
-background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
-background-size:35px 35px;pointer-events:none
+.bg-coin.c2{
+width:38px;
+height:38px;
+font-size:17px;
 }
 
-#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative}
+.bg-coin.c3{
+width:35px;
+height:35px;
+font-size:16px;
+}
 
-.auth-box,.balance-card,.withdraw-card,.profile-card{
-background:linear-gradient(145deg,rgba(35,8,8,.97),rgba(5,5,7,.98));
+.bg-coin.c4{
+width:50px;
+height:50px;
+font-size:23px;
+}
+
+.bg-coin.c5{
+width:40px;
+height:40px;
+font-size:18px;
+}
+
+.bg-coin.c6{
+width:34px;
+height:34px;
+font-size:15px;
+}
+
+.bg-coin.c7{
+width:30px;
+height:30px;
+font-size:13px;
+}
+
+.bg-coin.c8{
+width:35px;
+height:35px;
+font-size:15px;
+}
+
+}
+
+/* futuristic grid */
+
+#authScreen::after,
+.app::after{
+content:"";
+position:fixed;
+inset:0;
+z-index:-2;
+opacity:.055;
+background-image:
+linear-gradient(
+rgba(255,255,255,.08) 1px,
+transparent 1px
+),
+linear-gradient(
+90deg,
+rgba(255,255,255,.08) 1px,
+transparent 1px
+);
+background-size:35px 35px;
+pointer-events:none;
+}
+
+/* =====================================================
+   SIDE ADS
+===================================================== */
+
+.side-ad{
+position:fixed;
+top:50%;
+transform:translateY(-50%);
+width:160px;
+min-height:300px;
+z-index:20;
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.side-ad.left{
+left:8px;
+}
+
+.side-ad.right{
+right:8px;
+}
+
+.side-ad-box{
+width:160px;
+min-height:300px;
+border:1px dashed rgba(255,40,40,.22);
+border-radius:14px;
+background:rgba(255,255,255,.015);
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.side-ad-label{
+font-size:9px;
+color:#39394e;
+letter-spacing:1px;
+}
+
+@media(min-width:900px){
+
+.side-ad{
+display:flex;
+}
+
+.app{
+max-width:540px;
+}
+
+}
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+#authScreen{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+position:relative;
+}
+
+.auth-box{
+position:relative;
+width:100%;
+max-width:420px;
+padding:34px 23px 28px;
+border-radius:30px;
+
+background:
+linear-gradient(
+145deg,
+rgba(35,8,8,.97),
+rgba(5,5,7,.98)
+);
+
 border:1px solid rgba(255,60,60,.30);
-box-shadow:0 30px 90px rgba(0,0,0,.85),0 0 50px rgba(255,0,0,.13),inset 0 1px 0 rgba(255,255,255,.10)
+
+box-shadow:
+0 30px 90px rgba(0,0,0,.85),
+0 0 50px rgba(255,0,0,.13),
+inset 0 1px 0 rgba(255,255,255,.10);
+
+overflow:hidden;
 }
 
-.auth-box{position:relative;width:100%;max-width:420px;padding:34px 23px 28px;border-radius:30px;overflow:hidden}
-.auth-logo,.logo,.profile-avatar{
-display:grid;place-items:center;
-background:radial-gradient(circle at 30% 20%,#ff8888,#ed1717 35%,#a00000 70%,#350000);
-border:1px solid rgba(255,255,255,.25);
-box-shadow:0 8px 0 #390000,0 15px 30px rgba(0,0,0,.6),0 0 30px rgba(255,0,0,.3),inset 0 3px 7px rgba(255,255,255,.3)
+.auth-box::before{
+content:"";
+position:absolute;
+width:220px;
+height:220px;
+right:-100px;
+top:-120px;
+border-radius:50%;
+background:rgba(255,0,0,.16);
+filter:blur(45px);
 }
 
-.auth-logo{width:76px;height:76px;margin:0 auto 18px;border-radius:23px;font-size:34px;font-weight:1000}
-.auth-box h1{text-align:center;margin:0;font-size:25px}
-.auth-sub,.welcome{color:#777791}
-.auth-sub{text-align:center;font-size:12px;margin:9px 0 27px}
+.auth-logo{
+width:76px;
+height:76px;
+margin:0 auto 18px;
+display:grid;
+place-items:center;
+border-radius:23px;
 
-.auth-input,.withdraw-input{
-width:100%;padding:15px;margin-bottom:11px;border-radius:15px;
-border:1px solid rgba(255,255,255,.10);outline:none;
-background:rgba(255,255,255,.04);color:white;font-size:14px
+font-size:34px;
+font-weight:1000;
+
+color:white;
+
+background:
+radial-gradient(
+circle at 30% 20%,
+#ff8585,
+#ed1717 30%,
+#a00000 65%,
+#320000
+);
+
+border:1px solid rgba(255,255,255,.30);
+
+box-shadow:
+0 10px 0 #390000,
+0 18px 40px rgba(0,0,0,.65),
+0 0 38px rgba(255,0,0,.38),
+inset 0 4px 9px rgba(255,255,255,.35);
 }
-.auth-input::placeholder,.withdraw-input::placeholder{color:#66667f}
 
-.auth-btn,.confirm-btn,.claim{
-width:100%;padding:15px;border:0;border-radius:16px;color:white;
-font-size:14px;font-weight:900;
-background:linear-gradient(100deg,#9d0000,#ed1717 48%,#ff5252);
-box-shadow:0 7px 0 #4b0000,0 12px 24px rgba(170,0,0,.30);cursor:pointer
+.auth-box h1{
+text-align:center;
+margin:0;
+font-size:25px;
 }
 
-.google-btn,.back-btn,.logout{
-width:100%;padding:14px;margin-top:13px;border:1px solid rgba(255,255,255,.11);
-border-radius:16px;color:white;background:rgba(255,255,255,.055);cursor:pointer
+.auth-sub{
+text-align:center;
+color:#999090;
+font-size:12px;
+margin:9px 0 27px;
 }
 
-.auth-switch{text-align:center;margin-top:19px;color:#777791;font-size:12px}
-.auth-switch span{color:#ff4d4d;cursor:pointer;font-weight:bold}
-.auth-error{color:#ff5577;font-size:12px;text-align:center;margin-top:12px}
+.auth-input,
+.withdraw-input{
+width:100%;
+padding:15px;
+margin-bottom:11px;
+border-radius:15px;
+border:1px solid rgba(255,255,255,.10);
+outline:none;
 
-.app{width:100%;max-width:520px;margin:auto;padding:20px 15px 40px}
-.header{display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:11px}
-.logo{width:46px;height:46px;border-radius:15px;font-size:20px;font-weight:1000}
-.brand h1{margin:0;font-size:19px}
-.brand small{display:block;margin-top:3px;color:#777791;font-size:9px;letter-spacing:2px}
-.profile{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(255,40,40,.12);border:1px solid rgba(255,70,70,.28);cursor:pointer;font-size:19px}
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.065),
+rgba(255,255,255,.025)
+);
 
-.page{display:none}
-.page.active{display:block}
-.welcome{margin-top:25px;font-size:13px}
-.username{color:#fff;font-weight:bold}
+color:white;
+font-size:14px;
 
-.balance-card,.withdraw-card,.profile-card{margin-top:10px;padding:22px;border-radius:28px}
-.balance-label{text-align:center;color:#777791;font-size:11px;letter-spacing:1.5px}
-.balance{text-align:center;margin-top:6px;font-size:40px;font-weight:1000}
-.coin{color:#ff4b4b;font-size:14px}
-.earning{text-align:center;margin-top:6px;color:#ff4d4d;font-size:12px}
+box-shadow:
+inset 0 2px 8px rgba(0,0,0,.22);
+}
 
-.mining-area{display:flex;justify-content:center;margin:34px 0 22px}
+.auth-input:focus,
+.withdraw-input:focus{
+border-color:#ff3d3d;
+
+box-shadow:
+0 0 0 2px rgba(255,40,40,.10),
+0 0 18px rgba(255,30,30,.18),
+inset 0 2px 8px rgba(0,0,0,.22);
+}
+
+.auth-input::placeholder,
+.withdraw-input::placeholder{
+color:#66667f;
+}
+
+.auth-btn,
+.confirm-btn{
+width:100%;
+padding:15px;
+border:0;
+border-radius:16px;
+color:white;
+font-size:14px;
+font-weight:900;
+
+background:
+linear-gradient(
+100deg,
+#9d0000,
+#ed1717 48%,
+#ff5252
+);
+
+box-shadow:
+0 7px 0 #4b0000,
+0 12px 24px rgba(170,0,0,.30),
+inset 0 2px 5px rgba(255,255,255,.22);
+
+cursor:pointer;
+}
+
+.google-btn{
+width:100%;
+padding:14px;
+margin-top:13px;
+border:1px solid rgba(255,255,255,.11);
+border-radius:16px;
+color:white;
+background:rgba(255,255,255,.055);
+cursor:pointer;
+}
+
+.auth-switch{
+text-align:center;
+margin-top:19px;
+color:#777791;
+font-size:12px;
+}
+
+.auth-switch span{
+color:#ff4d4d;
+cursor:pointer;
+font-weight:bold;
+}
+
+.auth-error{
+color:#ff5577;
+font-size:12px;
+text-align:center;
+margin-top:12px;
+}
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app{
+width:100%;
+max-width:520px;
+margin:auto;
+padding:20px 15px 40px;
+}
+
+.header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:11px;
+}
+
+.logo{
+width:46px;
+height:46px;
+border-radius:15px;
+display:grid;
+place-items:center;
+font-size:20px;
+font-weight:1000;
+
+background:
+radial-gradient(
+circle at 30% 20%,
+#ff8888,
+#ed1717 35%,
+#a00000 70%,
+#350000
+);
+
+border:1px solid rgba(255,255,255,.20);
+
+box-shadow:
+0 6px 0 #3b0000,
+0 10px 22px rgba(0,0,0,.55),
+0 0 25px rgba(255,0,0,.30),
+inset 0 3px 6px rgba(255,255,255,.25);
+}
+
+.brand h1{
+margin:0;
+font-size:19px;
+letter-spacing:1px;
+}
+
+.brand small{
+display:block;
+margin-top:3px;
+color:#777791;
+font-size:9px;
+letter-spacing:2px;
+}
+
+.profile{
+width:44px;
+height:44px;
+display:grid;
+place-items:center;
+border-radius:50%;
+
+background:
+linear-gradient(
+145deg,
+rgba(255,40,40,.20),
+rgba(120,0,0,.07)
+);
+
+border:1px solid rgba(255,70,70,.28);
+cursor:pointer;
+font-size:19px;
+transition:.15s;
+}
+
+.profile:active{
+transform:scale(.92);
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+.welcome{
+margin-top:25px;
+color:#777791;
+font-size:13px;
+}
+
+.username{
+color:#fff;
+font-weight:bold;
+}
+
+.balance-card,
+.withdraw-card,
+.profile-card{
+margin-top:10px;
+padding:22px;
+border-radius:28px;
+
+background:
+linear-gradient(
+145deg,
+rgba(35,8,8,.94),
+rgba(6,8,12,.97)
+);
+
+border:1px solid rgba(255,60,60,.23);
+
+box-shadow:
+0 25px 70px rgba(0,0,0,.62),
+inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.balance-label{
+color:#777791;
+font-size:11px;
+letter-spacing:1.5px;
+text-align:center;
+}
+
+.balance{
+text-align:center;
+margin-top:6px;
+font-size:40px;
+font-weight:1000;
+
+background:
+linear-gradient(
+90deg,
+#fff,
+#ff8b8b,
+#fff,
+#ff3b3b
+);
+
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.coin{
+color:#ff4b4b;
+font-size:14px;
+margin-left:5px;
+}
+
+.earning{
+text-align:center;
+margin-top:6px;
+color:#ff4d4d;
+font-size:12px;
+}
+
+/* =====================================================
+   MINING BUTTON
+===================================================== */
+
+.mining-area{
+display:flex;
+justify-content:center;
+margin:34px 0 22px;
+perspective:1000px;
+}
+
 .mining-button{
-position:relative;width:190px;height:190px;border-radius:50%;border:3px solid #ff3d3d;
-cursor:pointer;color:white;
-background:radial-gradient(circle at 31% 20%,#fff 0%,#ffb5b5 5%,#ff4d4d 14%,#d40000 32%,#760000 56%,#270000 78%,#050000 100%);
-box-shadow:0 15px 0 #420000,0 21px 25px rgba(0,0,0,.85),0 0 25px rgba(255,0,0,.62);
-touch-action:manipulation
+position:relative;
+width:190px;
+height:190px;
+border-radius:50%;
+
+border:3px solid #ff3d3d;
+
+cursor:pointer;
+color:white;
+
+background:
+radial-gradient(
+circle at 31% 20%,
+#ffffff 0%,
+#ffb5b5 5%,
+#ff4d4d 14%,
+#d40000 32%,
+#760000 56%,
+#270000 78%,
+#050000 100%
+);
+
+box-shadow:
+0 15px 0 #420000,
+0 21px 25px rgba(0,0,0,.85),
+0 0 25px rgba(255,0,0,.62),
+0 0 60px rgba(220,0,0,.22),
+inset 0 8px 13px rgba(255,255,255,.35),
+inset 0 -18px 30px rgba(0,0,0,.65);
+
+transition:.12s;
+touch-action:manipulation;
+user-select:none;
 }
 
-.mining-button.active{animation:miningPulse 1.4s infinite}
-@keyframes miningPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.22)}}
-.mine-icon{font-size:45px}
-.mine-title{margin-top:8px;font-size:17px;font-weight:1000;letter-spacing:2px}
-.mine-small{margin-top:6px;color:#ff5b5b;font-size:11px;font-weight:1000}
-.status{text-align:center;color:#777791;font-size:12px}
-.dot{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:#ff3dbd;box-shadow:0 0 8px currentColor}
+.mining-button:active{
+transform:translateY(11px) scale(.965);
+}
+
+.mining-button.active{
+border-color:#ff7474;
+
+background:
+radial-gradient(
+circle at 31% 20%,
+#ffffff 0%,
+#ffd0d0 6%,
+#ff6b6b 15%,
+#e90000 32%,
+#a00000 55%,
+#390000 78%,
+#080000 100%
+);
+
+box-shadow:
+0 15px 0 #570000,
+0 22px 32px rgba(0,0,0,.85),
+0 0 30px rgba(255,30,30,.90),
+0 0 75px rgba(255,0,0,.42),
+inset 0 8px 14px rgba(255,255,255,.35),
+inset 0 -18px 30px rgba(0,0,0,.60);
+
+animation:miningPulse 1.4s infinite;
+}
+
+@keyframes miningPulse{
+0%,100%{filter:brightness(1)}
+50%{filter:brightness(1.22)}
+}
+
+.mine-icon{
+font-size:45px;
+}
+
+.mine-title{
+margin-top:8px;
+font-size:17px;
+font-weight:1000;
+letter-spacing:2px;
+}
+
+.mine-small{
+margin-top:6px;
+color:#ff5b5b;
+font-size:11px;
+font-weight:1000;
+}
+
+.status{
+text-align:center;
+color:#777791;
+font-size:12px;
+}
+
+.dot{
+display:inline-block;
+width:7px;
+height:7px;
+margin-right:5px;
+border-radius:50%;
+background:#ff3dbd;
+box-shadow:0 0 8px currentColor;
+}
 
 .hashrate{
-display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:17px;
-border-radius:17px;background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.18)
-}
-.hash-left{color:#85859b;font-size:12px}
-.hash-right{color:#ff5b5b;font-weight:900}
-.boost{color:#ffb347;font-size:10px;margin-top:4px;text-align:right}
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-top:18px;
+padding:17px;
+border-radius:17px;
 
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
-.action{
-min-height:92px;border-radius:18px;border:1px solid rgba(255,70,70,.28);
-background:linear-gradient(145deg,rgba(55,15,15,.98),rgba(7,8,12,.98));
-color:#fff;cursor:pointer;box-shadow:0 9px 22px rgba(0,0,0,.3);
-font-size:13px;font-weight:900
+background:
+linear-gradient(
+90deg,
+rgba(255,0,0,.13),
+rgba(255,70,70,.08)
+);
+
+border:1px solid rgba(255,70,70,.18);
 }
-.action:disabled{cursor:not-allowed}
-.action-icon{display:block;margin-bottom:7px;font-size:25px}
-.ad{color:#ffc44d}
-.offer{color:#ff6565}
-.ad-status{text-align:center;font-size:10px;color:#777791;margin-top:8px;min-height:14px}
+
+.hash-left{
+color:#85859b;
+font-size:12px;
+}
+
+.hash-right{
+color:#ff5b5b;
+font-weight:900;
+}
+
+.boost{
+color:#ffb347;
+font-size:10px;
+margin-top:4px;
+text-align:right;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:11px;
+margin-top:12px;
+}
+
+.action{
+min-height:92px;
+border-radius:18px;
+
+border:1px solid rgba(255,70,70,.28);
+
+background:
+linear-gradient(
+145deg,
+rgba(55,15,15,.98),
+rgba(7,8,12,.98)
+);
+
+color:#fff;
+cursor:pointer;
+
+box-shadow:
+0 9px 22px rgba(0,0,0,.30),
+0 0 20px rgba(255,0,0,.10),
+inset 0 1px 0 rgba(255,255,255,.08);
+
+transition:.15s;
+font-size:13px;
+font-weight:900;
+}
+
+.action:active{
+transform:translateY(3px);
+}
+
+.action:disabled{
+cursor:not-allowed;
+}
+
+.action.ad-button{
+border-color:rgba(255,190,60,.55);
+
+background:
+linear-gradient(
+145deg,
+rgba(77,48,18,.98),
+rgba(20,12,7,.98)
+);
+
+box-shadow:
+0 9px 22px rgba(0,0,0,.30),
+0 0 28px rgba(255,168,0,.15),
+inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.action.withdraw-button{
+border-color:rgba(255,60,60,.28);
+
+background:
+linear-gradient(
+145deg,
+rgba(60,15,15,.98),
+rgba(7,12,25,.98)
+);
+}
+
+.action-icon{
+display:block;
+margin-bottom:7px;
+font-size:25px;
+}
+
+.ad{
+color:#ffc44d;
+}
+
+.offer{
+color:#ff6565;
+}
+
+.ad-status{
+text-align:center;
+font-size:10px;
+color:#777791;
+margin-top:8px;
+min-height:14px;
+}
+
+/* =====================================================
+   DAILY
+===================================================== */
 
 .daily{
-margin-top:18px;padding:20px;border-radius:22px;
-background:linear-gradient(145deg,rgba(30,8,8,.95),rgba(5,8,17,.96));
-border:1px solid rgba(255,255,255,.07)
+margin-top:18px;
+padding:20px;
+border-radius:22px;
+
+background:
+linear-gradient(
+145deg,
+rgba(30,8,8,.95),
+rgba(5,8,17,.96)
+);
+
+border:1px solid rgba(255,255,255,.07);
 }
-.daily h2{margin:0;font-size:20px}
-.daily p{margin:7px 0 18px;color:#777791;font-size:12px}
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-.day{text-align:center;color:#66667a;font-size:9px}
-.day-circle{width:36px;height:36px;margin:0 auto 6px;display:grid;place-items:center;border-radius:50%;background:#181824;border:1px solid #29293a}
-.day.active .day-circle{background:linear-gradient(135deg,#ff4b4b,#b00000)}
-.claim{margin-top:20px}
 
-.withdraw-title{text-align:center;font-size:24px;margin-bottom:7px}
-.withdraw-sub{text-align:center;color:#777791;font-size:12px;margin-bottom:25px}
-.withdraw-balance{padding:16px;margin-bottom:18px;text-align:center;border-radius:16px;background:rgba(255,0,0,.1)}
-.withdraw-balance small{display:block;color:#777791;margin-bottom:5px}
-.withdraw-balance strong{font-size:24px;color:#ff5b5b}
-.method{padding:15px;margin-bottom:15px;border-radius:15px;border:1px solid rgba(255,60,60,.25);background:rgba(255,0,0,.05)}
-.method strong{color:#ff5b5b}
-.note{color:#777791;font-size:10px;line-height:1.5;margin:12px 0 18px}
-.withdraw-message{text-align:center;font-size:12px;margin-top:14px;min-height:18px}
+.daily h2{
+margin:0;
+font-size:20px;
+}
 
-.profile-card h2{text-align:center;margin:0 0 22px;font-size:24px}
-.profile-avatar{width:75px;height:75px;margin:0 auto 18px;border-radius:50%;font-size:30px}
-.profile-row{padding:16px;margin-bottom:11px;border-radius:16px;background:rgba(255,255,255,.04)}
-.profile-row small{display:block;color:#777791;font-size:10px;margin-bottom:5px}
-.profile-row strong{font-size:14px;word-break:break-word}
-.profile-status{margin-top:15px;padding:14px;border-radius:15px;text-align:center;color:#ff5b5b;background:rgba(255,0,0,.06)}
-.footer{text-align:center;margin-top:25px;color:#424255;font-size:9px}
-.session-box{margin-top:12px;padding:12px;border-radius:15px;background:rgba(255,0,0,.06);text-align:center;color:#777791;font-size:11px}
-.session-box strong{display:block;color:#ff5b5b;font-size:14px}
+.daily p{
+margin:7px 0 18px;
+color:#777791;
+font-size:12px;
+}
+
+.days{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:5px;
+}
+
+.day{
+text-align:center;
+color:#66667a;
+font-size:9px;
+}
+
+.day-circle{
+width:36px;
+height:36px;
+margin:0 auto 6px;
+display:grid;
+place-items:center;
+border-radius:50%;
+background:#181824;
+border:1px solid #29293a;
+}
+
+.day.active .day-circle{
+background:
+linear-gradient(
+135deg,
+#ff4b4b,
+#b00000
+);
+
+box-shadow:0 0 15px rgba(255,0,0,.25);
+}
+
+.claim{
+width:100%;
+margin-top:20px;
+padding:16px;
+border:0;
+border-radius:30px;
+color:#fff;
+font-weight:800;
+
+background:
+linear-gradient(
+90deg,
+#9d0000,
+#ed1717,
+#ff5555
+);
+
+box-shadow:
+0 7px 0 #4b0000,
+0 12px 25px rgba(170,0,0,.25);
+}
+
+.logout{
+width:100%;
+margin-top:12px;
+padding:12px;
+border:1px solid rgba(255,80,120,.15);
+border-radius:14px;
+color:#ff5577;
+background:rgba(255,255,255,.03);
+}
+
+.back-btn{
+width:100%;
+margin-top:12px;
+padding:13px;
+border:1px solid rgba(255,255,255,.1);
+border-radius:15px;
+color:white;
+background:rgba(255,255,255,.05);
+}
+
+/* =====================================================
+   WITHDRAW
+===================================================== */
+
+.withdraw-title{
+text-align:center;
+font-size:24px;
+margin-bottom:7px;
+}
+
+.withdraw-sub{
+text-align:center;
+color:#777791;
+font-size:12px;
+margin-bottom:25px;
+}
+
+.withdraw-balance{
+padding:16px;
+margin-bottom:18px;
+text-align:center;
+border-radius:16px;
+background:rgba(255,0,0,.10);
+border:1px solid rgba(255,60,60,.15);
+}
+
+.withdraw-balance small{
+display:block;
+color:#777791;
+margin-bottom:5px;
+}
+
+.withdraw-balance strong{
+font-size:24px;
+color:#ff5b5b;
+}
+
+.method{
+padding:15px;
+margin-bottom:15px;
+border-radius:15px;
+border:1px solid rgba(255,60,60,.25);
+background:rgba(255,0,0,.05);
+}
+
+.method strong{
+color:#ff5b5b;
+}
+
+.note{
+color:#777791;
+font-size:10px;
+line-height:1.5;
+margin:12px 0 18px;
+}
+
+.withdraw-message{
+text-align:center;
+font-size:12px;
+margin-top:14px;
+min-height:18px;
+}
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-card h2{
+text-align:center;
+margin:0 0 22px;
+font-size:24px;
+}
+
+.profile-avatar{
+width:75px;
+height:75px;
+margin:0 auto 18px;
+display:grid;
+place-items:center;
+border-radius:50%;
+font-size:30px;
+font-weight:900;
+
+background:
+radial-gradient(
+circle at 30% 20%,
+#ff8888,
+#ed1717 35%,
+#a00000 70%,
+#350000
+);
+
+border:1px solid rgba(255,255,255,.20);
+
+box-shadow:
+0 9px 0 #3b0000,
+0 14px 30px rgba(0,0,0,.55),
+0 0 30px rgba(255,0,0,.4);
+}
+
+.profile-row{
+padding:16px;
+margin-bottom:11px;
+border-radius:16px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.profile-row small{
+display:block;
+color:#777791;
+font-size:10px;
+margin-bottom:5px;
+}
+
+.profile-row strong{
+font-size:14px;
+word-break:break-word;
+}
+
+.profile-status{
+margin-top:15px;
+padding:14px;
+border-radius:15px;
+text-align:center;
+color:#ff5b5b;
+background:rgba(255,0,0,.06);
+border:1px solid rgba(255,60,60,.12);
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+color:#424255;
+font-size:9px;
+}
+
+.session-box{
+margin-top:12px;
+padding:12px;
+border-radius:15px;
+background:rgba(255,0,0,.06);
+border:1px solid rgba(255,60,60,.12);
+text-align:center;
+color:#777791;
+font-size:11px;
+}
+
+.session-box strong{
+display:block;
+color:#ff5b5b;
+font-size:14px;
+}
+
+.ad-loading{
+animation:adGlow 1s infinite alternate;
+}
+
+@keyframes adGlow{
+from{
+box-shadow:0 9px 22px rgba(0,0,0,.30);
+}
+to{
+box-shadow:
+0 0 28px rgba(255,180,50,.35),
+0 9px 22px rgba(0,0,0,.30);
+}
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- SMALL BACKGROUND 3D R COINS -->
 <div class="bg-coin c1">R</div>
 <div class="bg-coin c2">R</div>
 <div class="bg-coin c3">R</div>
@@ -195,122 +1251,294 @@ border:1px solid rgba(255,255,255,.07)
 <div class="bg-coin c7">R</div>
 <div class="bg-coin c8">R</div>
 
+<div class="side-ad left">
+<div class="side-ad-box">
+<div class="side-ad-label">ADVERTISEMENT</div>
+</div>
+</div>
+
+<div class="side-ad right">
+<div class="side-ad-box">
+<div class="side-ad-label">ADVERTISEMENT</div>
+</div>
+</div>
+
 <div id="authScreen">
+
 <div class="auth-box">
+
 <div class="auth-logo">R</div>
-<h1 id="authTitle">Welcome to RND Miner</h1>
-<div class="auth-sub">Render Mining • Login to access your mining dashboard</div>
 
-<input id="authEmail" class="auth-input" type="email" placeholder="Email" autocomplete="email">
-<input id="authPassword" class="auth-input" type="password" placeholder="Password" autocomplete="current-password">
+<h1 id="authTitle">
+Welcome to RND Miner
+</h1>
 
-<button class="auth-btn" id="authButton" onclick="emailAuth()" type="button">LOGIN</button>
-<button class="google-btn" onclick="googleLogin()" type="button">🔵 Continue with Google</button>
+<div class="auth-sub">
+Render Mining • Login to access your mining dashboard
+</div>
+
+<input
+id="authEmail"
+class="auth-input"
+type="email"
+placeholder="Email"
+autocomplete="email">
+
+<input
+id="authPassword"
+class="auth-input"
+type="password"
+placeholder="Password"
+autocomplete="current-password">
+
+<button
+class="auth-btn"
+id="authButton"
+onclick="emailAuth()"
+type="button">
+LOGIN
+</button>
+
+<button
+class="google-btn"
+onclick="googleLogin()"
+type="button">
+🔵 Continue with Google
+</button>
 
 <div class="auth-switch" id="authSwitch">
-Don't have an account? <span onclick="toggleAuth()">Sign Up</span>
+Don't have an account?
+<span onclick="toggleAuth()">Sign Up</span>
 </div>
 
 <div id="authError" class="auth-error"></div>
+
 </div>
 </div>
 
-<div class="app" id="mainApp" style="display:none">
+<div class="app" id="mainApp" style="display:none;">
 
 <div class="header">
+
 <div class="brand">
+
 <div class="logo">R</div>
+
 <div>
 <h1>RND Miner</h1>
 <small>RENDER MINING</small>
 </div>
+
 </div>
-<div class="profile" onclick="showProfile()">👤</div>
+
+<div
+class="profile"
+onclick="showProfile()">
+👤
+</div>
+
 </div>
 
 <div id="miningPage" class="page active">
 
 <div class="welcome">
-Welcome back, <span id="username" class="username">Miner</span>
+Welcome back,
+<span id="username" class="username">
+Miner
+</span>
 </div>
 
 <div class="balance-card">
 
-<div class="balance-label">TOTAL BALANCE</div>
+<div class="balance-label">
+TOTAL BALANCE
+</div>
 
 <div class="balance">
 <span id="balance">0.00000</span>
 <span class="coin">RND</span>
 </div>
 
-<div class="earning">Mining reward: +0.001 RND / session</div>
+<div class="earning">
+Mining reward: +0.001 RND / session
+</div>
 
 <div class="mining-area">
-<button id="miningButton" class="mining-button" type="button" onclick="startMining()">
+
+<button
+id="miningButton"
+class="mining-button"
+type="button"
+onclick="startMining()">
+
 <div class="mine-icon">⛏️</div>
-<div class="mine-title">MINING</div>
-<div id="mineText" class="mine-small">START MINING</div>
+
+<div class="mine-title">
+MINING
+</div>
+
+<div id="mineText" class="mine-small">
+START MINING
+</div>
+
 </button>
+
 </div>
 
 <div class="status">
+
 <span id="dot" class="dot"></span>
-<span id="status">Mining inactive</span>
+
+<span id="status">
+Mining inactive
+</span>
+
 </div>
 
 <div class="session-box">
 6-HOUR MINING SESSION
-<strong id="sessionTime">Not active</strong>
+
+<strong id="sessionTime">
+Not active
+</strong>
+
 </div>
 
 <div class="hashrate">
-<div class="hash-left">⚡ CURRENT HASHRATE</div>
-<div>
-<div id="hashrate" class="hash-right">2.85 GH/s</div>
-<div id="boostText" class="boost">Base hashrate</div>
+
+<div class="hash-left">
+⚡ CURRENT HASHRATE
 </div>
+
+<div>
+
+<div id="hashrate" class="hash-right">
+2.85 GH/s
+</div>
+
+<div id="boostText" class="boost">
+Base hashrate
+</div>
+
+</div>
+
 </div>
 
 <div class="actions">
 
-<button id="watchAdButton" class="action ad-button" onclick="watchAd()" type="button">
-<span class="action-icon ad">▶️</span>
-WATCH AD<br>
-<span class="ad">🔥 +10 MIN BOOST</span>
+<button
+id="watchAdButton"
+class="action ad-button"
+onclick="watchAd()"
+type="button">
+
+<span class="action-icon ad">
+▶️
+</span>
+WATCH AD
+
+<br>
+
+<span class="ad">
+🔥 +10 MIN BOOST
+</span>
+
 </button>
 
-<button class="action withdraw-button" onclick="showWithdraw()" type="button">
-<span class="action-icon offer">💰</span>
-WITHDRAW<br>
-<span class="offer">TRC20 USDT</span>
+<button
+class="action withdraw-button"
+onclick="showWithdraw()"
+type="button">
+
+<span class="action-icon offer">
+💰
+</span>
+WITHDRAW
+
+<br>
+
+<span class="offer">
+TRC20 USDT
+</span>
+
 </button>
 
 </div>
 
-<div id="adStatus" class="ad-status">
+<div
+id="adStatus"
+class="ad-status">
 Watch an ad to activate your mining boost
 </div>
 
 <div class="daily">
-<h2>Daily Rewards</h2>
-<p>Check in every day to increase your reward.</p>
+
+<h2>
+Daily Rewards
+</h2>
+
+<p>
+Check in every day to increase your reward.
+</p>
 
 <div class="days">
-<div class="day active"><div class="day-circle">◎</div>Day 1</div>
-<div class="day"><div class="day-circle">◎</div>Day 2</div>
-<div class="day"><div class="day-circle">◎</div>Day 3</div>
-<div class="day"><div class="day-circle">◎</div>Day 4</div>
-<div class="day"><div class="day-circle">◎</div>Day 5</div>
-<div class="day"><div class="day-circle">◎</div>Day 6</div>
-<div class="day"><div class="day-circle">🎁</div>Day 7</div>
+
+<div class="day active">
+<div class="day-circle">◎</div>
+Day 1
 </div>
 
-<button class="claim" onclick="claimReward()" type="button">
+<div class="day">
+<div class="day-circle">◎</div>
+Day 2
+</div>
+
+<div class="day">
+<div class="day-circle">◎</div>
+Day 3
+</div>
+
+<div class="day">
+<div class="day-circle">◎</div>
+Day 4
+</div>
+
+<div class="day">
+<div class="day-circle">◎</div>
+Day 5
+</div>
+
+<div class="day">
+<div class="day-circle">◎</div>
+Day 6
+</div>
+
+<div class="day">
+<div class="day-circle">🎁</div>
+Day 7
+</div>
+
+</div>
+
+<button
+class="claim"
+onclick="claimReward()"
+type="button">
+
 CLAIM DAILY REWARD
+
 </button>
+
 </div>
 
-<button class="logout" onclick="logout()" type="button">LOGOUT</button>
+<button
+class="logout"
+onclick="logout()"
+type="button">
+
+LOGOUT
+
+</button>
 
 </div>
 </div>
@@ -319,36 +1547,56 @@ CLAIM DAILY REWARD
 
 <div class="withdraw-card">
 
-<h2 class="withdraw-title">Withdraw</h2>
+<h2 class="withdraw-title">
+Withdraw
+</h2>
 
 <div class="withdraw-sub">
 Minimum withdrawal: 0.02 RND
 </div>
 
 <div class="withdraw-balance">
-<small>Available Balance</small>
+
+<small>
+Available Balance
+</small>
+
 <strong>
-<span id="withdrawBalance">0.00000</span> RND
+<span id="withdrawBalance">
+0.00000
+</span>
+RND
 </strong>
+
 </div>
 
 <div class="method">
-<strong>🟢 USDT — TRC20</strong>
+
+<strong>
+🟢 USDT — TRC20
+</strong>
+
 <br>
-<small>Tron Network</small>
+
+<small>
+Tron Network
+</small>
+
 </div>
 
-<label>Wallet Address</label>
+<label>
+Wallet Address
+</label>
 
 <input
 id="walletAddress"
 class="withdraw-input"
 type="text"
-placeholder="Enter TRC20 wallet address"
-autocomplete="off"
->
+placeholder="Enter TRC20 wallet address">
 
-<label>Withdrawal Amount</label>
+<label>
+Withdrawal Amount
+</label>
 
 <input
 id="withdrawAmount"
@@ -356,27 +1604,36 @@ class="withdraw-input"
 type="number"
 step="0.00001"
 min="0.02"
-placeholder="Minimum 0.02 RND"
->
+placeholder="Minimum 0.02 RND">
 
 <div class="note">
-⚠️ Minimum withdrawal amount is 0.02 RND.<br>
-Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.
+⚠️ Minimum withdrawal amount is 0.02 RND.
+<br>
+Make sure your TRC20 address is correct.
+You will receive the payment manually after your withdrawal request is reviewed.
 </div>
 
 <button
-id="confirmWithdrawalButton"
 class="confirm-btn"
 onclick="confirmWithdrawal()"
-type="button"
->
+type="button">
+
 CONFIRM WITHDRAWAL
+
 </button>
 
-<div id="withdrawMessage" class="withdraw-message"></div>
+<div
+id="withdrawMessage"
+class="withdraw-message">
+</div>
 
-<button class="back-btn" onclick="showMining()" type="button">
+<button
+class="back-btn"
+onclick="showMining()"
+type="button">
+
 ← BACK TO MINING
+
 </button>
 
 </div>
@@ -386,30 +1643,58 @@ CONFIRM WITHDRAWAL
 
 <div class="profile-card">
 
-<div class="profile-avatar">👤</div>
+<div class="profile-avatar">
+👤
+</div>
 
-<h2>My Profile</h2>
+<h2>
+My Profile
+</h2>
 
 <div class="profile-row">
-<small>USERNAME</small>
-<strong id="profileUsername">Miner</strong>
+
+<small>
+USERNAME
+</small>
+
+<strong id="profileUsername">
+Miner
+</strong>
+
 </div>
 
 <div class="profile-row">
-<small>EMAIL</small>
-<strong id="profileEmail">Not available</strong>
+
+<small>
+EMAIL
+</small>
+
+<strong id="profileEmail">
+Not available
+</strong>
+
 </div>
 
 <div class="profile-status">
 🟢 RND Miner account is active
 </div>
 
-<button class="back-btn" onclick="showMining()" type="button">
+<button
+class="back-btn"
+onclick="showMining()"
+type="button">
+
 ← BACK TO MINING
+
 </button>
 
-<button class="logout" onclick="logout()" type="button">
+<button
+class="logout"
+onclick="logout()"
+type="button">
+
 LOGOUT
+
 </button>
 
 </div>
@@ -423,11 +1708,13 @@ RND Miner • Render Mining
 
 <script type="module">
 
-import{
+import {
 initializeApp
-}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-import{
+import {
 getAuth,
 onAuthStateChanged,
 createUserWithEmailAndPassword,
@@ -435,14 +1722,18 @@ signInWithEmailAndPassword,
 GoogleAuthProvider,
 signInWithPopup,
 signOut
-}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-import{
+import {
 getFirestore,
 collection,
 addDoc,
 serverTimestamp
-}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 const firebaseConfig={
@@ -456,138 +1747,21 @@ measurementId:"G-SS5Z4WPCT1"
 };
 
 const app=initializeApp(firebaseConfig);
+
 const auth=getAuth(app);
+
 const db=getFirestore(app);
+
 const provider=new GoogleAuthProvider();
 
-
-/* SAFE ELEMENT REFERENCES
-   Ye login stuck hone wala issue prevent karte hain.
-*/
-const authScreenEl=document.getElementById("authScreen");
-const mainAppEl=document.getElementById("mainApp");
-const miningPageEl=document.getElementById("miningPage");
-const withdrawPageEl=document.getElementById("withdrawPage");
-const profilePageEl=document.getElementById("profilePage");
-
-const usernameEl=document.getElementById("username");
-const profileUsernameEl=document.getElementById("profileUsername");
-const profileEmailEl=document.getElementById("profileEmail");
-
-const balanceEl=document.getElementById("balance");
-const withdrawBalanceEl=document.getElementById("withdrawBalance");
-
-const walletAddressEl=document.getElementById("walletAddress");
-const withdrawAmountEl=document.getElementById("withdrawAmount");
-const withdrawMessageEl=document.getElementById("withdrawMessage");
-const confirmWithdrawalButtonEl=document.getElementById("confirmWithdrawalButton");
-
-
 let signUpMode=false;
-let balance=0;
-let mining=false;
-let miningTimer=null;
-let sessionInterval=null;
-let miningStartTime=null;
-let lastRewardTime=null;
-let baseHashrate=2.85;
-let currentHashrate=2.85;
-let currentUserUID=null;
 
 
-const SESSION_TIME=6*60*60*1000;
-const REWARD_PER_SECOND=.000001;
-const BOOST_TIME=10*60*1000;
+/* =====================================================
+   AUTH
+===================================================== */
 
-
-const key=(p,u)=>"rndminer_"+p+"_"+u;
-
-
-function boostEnd(){
-return currentUserUID
-?Number(localStorage.getItem(key("boost_end",currentUserUID)))||0
-:0;
-}
-
-
-function boostActive(t=Date.now()){
-return boostEnd()>t;
-}
-
-
-function reward(a,b){
-
-if(b<=a)return 0;
-
-let e=boostEnd();
-let r=0;
-
-if(e>a){
-
-let x=Math.min(b,e);
-
-r+=(x-a)/1000*REWARD_PER_SECOND*(5.7/baseHashrate);
-
-if(b>e){
-r+=(b-e)/1000*REWARD_PER_SECOND;
-}
-
-}else{
-
-r+=(b-a)/1000*REWARD_PER_SECOND;
-
-}
-
-return r;
-}
-
-
-function updateBoostUI(){
-
-if(!currentUserUID)return;
-
-let e=boostEnd();
-let n=Date.now();
-
-if(e>n){
-
-currentHashrate=5.7;
-
-document.getElementById("hashrate").textContent="5.70 GH/s";
-
-document.getElementById("boostText").textContent=
-"🔥 AD BOOST ACTIVE • "+fmt(e-n);
-
-}else{
-
-currentHashrate=baseHashrate;
-
-document.getElementById("hashrate").textContent="2.85 GH/s";
-
-document.getElementById("boostText").textContent="Base hashrate";
-
-localStorage.removeItem(
-key("boost_end",currentUserUID)
-);
-
-}
-
-}
-
-
-function fmt(ms){
-
-let t=Math.max(0,Math.floor(ms/1000));
-let m=Math.floor(t/60);
-let s=t%60;
-
-return String(m).padStart(2,"0")+":"+
-String(s).padStart(2,"0");
-
-}
-
-
-window.toggleAuth=()=>{
+window.toggleAuth=function(){
 
 signUpMode=!signUpMode;
 
@@ -604,24 +1778,28 @@ signUpMode
 document.getElementById("authSwitch").innerHTML=
 signUpMode
 ?'Already have an account? <span onclick="toggleAuth()">Login</span>'
-:'Don\\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
+:'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
 
 document.getElementById("authError").textContent="";
 
 };
 
 
-window.emailAuth=async()=>{
+window.emailAuth=async function(){
 
-let e=document.getElementById("authEmail").value.trim();
+const email=
+document.getElementById("authEmail").value.trim();
 
-let p=document.getElementById("authPassword").value;
+const password=
+document.getElementById("authPassword").value;
 
-let er=document.getElementById("authError");
+const error=
+document.getElementById("authError");
 
-if(!e||!p){
+if(!email||!password){
 
-er.textContent="Please enter email and password.";
+error.textContent=
+"Please enter email and password.";
 
 return;
 
@@ -631,28 +1809,39 @@ try{
 
 if(signUpMode){
 
-await createUserWithEmailAndPassword(auth,e,p);
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
 
 }else{
 
-await signInWithEmailAndPassword(auth,e,p);
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
 }
 
-}catch(x){
+}catch(e){
 
-er.textContent=firebaseError(x.code);
+error.textContent=firebaseError(e.code);
 
 }
 
 };
 
 
-window.googleLogin=async()=>{
+window.googleLogin=async function(){
 
 try{
 
-await signInWithPopup(auth,provider);
+await signInWithPopup(
+auth,
+provider
+);
 
 }catch(e){
 
@@ -664,17 +1853,240 @@ firebaseError(e.code);
 };
 
 
-function updateBalance(){
+/* =====================================================
+   MINING
+===================================================== */
 
-balanceEl.textContent=balance.toFixed(5);
+let balance=0;
+let mining=false;
 
-withdrawBalanceEl.textContent=balance.toFixed(5);
+let miningTimer=null;
+let sessionInterval=null;
 
-if(currentUserUID){
+let miningStartTime=null;
+let lastRewardTime=null;
+
+let baseHashrate=2.85;
+let currentHashrate=2.85;
+
+let currentUserUID=null;
+
+const SESSION_TIME=6*60*60*1000;
+
+const REWARD_PER_SECOND=0.000001;
+
+const BOOST_TIME=10*60*1000;
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+function balanceKey(uid){
+return "rndminer_balance_"+uid;
+}
+
+function miningStartKey(uid){
+return "rndminer_mining_start_"+uid;
+}
+
+function miningLastKey(uid){
+return "rndminer_mining_last_"+uid;
+}
+
+function miningActiveKey(uid){
+return "rndminer_mining_active_"+uid;
+}
+
+function boostEndKey(uid){
+return "rndminer_boost_end_"+uid;
+}
+
+
+/* =====================================================
+   BOOST
+===================================================== */
+
+function getBoostEnd(){
+
+if(!currentUserUID)return 0;
+
+const end=
+Number(
+localStorage.getItem(
+boostEndKey(currentUserUID)
+)
+);
+
+return Number.isFinite(end)?end:0;
+
+}
+
+
+function isBoostActive(time=Date.now()){
+
+return getBoostEnd()>time;
+
+}
+
+
+function getHashrateAt(time){
+
+return isBoostActive(time)
+?5.70
+:baseHashrate;
+
+}
+
+
+function formatBoostTime(ms){
+
+const total=
+Math.max(
+0,
+Math.floor(ms/1000)
+);
+
+const m=Math.floor(total/60);
+
+const s=total%60;
+
+return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+}
+
+
+function updateBoostUI(){
+
+if(!currentUserUID)return;
+
+const now=Date.now();
+
+const end=getBoostEnd();
+
+if(end>now){
+
+currentHashrate=5.70;
+
+document.getElementById("hashrate").textContent=
+"5.70 GH/s";
+
+document.getElementById("boostText").textContent=
+"🔥 AD BOOST ACTIVE • "+
+formatBoostTime(end-now);
+
+}else{
+
+currentHashrate=baseHashrate;
+
+document.getElementById("hashrate").textContent=
+"2.85 GH/s";
+
+document.getElementById("boostText").textContent=
+"Base hashrate";
+
+localStorage.removeItem(
+boostEndKey(currentUserUID)
+);
+
+}
+
+}
+
+
+/* =====================================================
+   REWARD
+===================================================== */
+
+function calculateReward(fromTime,toTime){
+
+if(toTime<=fromTime)return 0;
+
+let reward=0;
+
+const boostEnd=getBoostEnd();
+
+if(boostEnd>fromTime){
+
+const boostedUntil=
+Math.min(toTime,boostEnd);
+
+if(boostedUntil>fromTime){
+
+const seconds=
+(boostedUntil-fromTime)/1000;
+
+reward+=
+seconds*
+REWARD_PER_SECOND*
+(5.70/baseHashrate);
+
+}
+
+if(toTime>boostEnd){
+
+const seconds=
+(toTime-boostEnd)/1000;
+
+reward+=
+seconds*
+REWARD_PER_SECOND;
+
+}
+
+}else{
+
+const seconds=
+(toTime-fromTime)/1000;
+
+reward+=
+seconds*
+REWARD_PER_SECOND;
+
+}
+
+return reward;
+
+}
+
+
+/* =====================================================
+   MINING STATE
+===================================================== */
+
+function saveMiningState(){
+
+if(!currentUserUID)return;
+
+if(mining&&miningStartTime){
 
 localStorage.setItem(
-key("balance",currentUserUID),
-String(balance)
+miningStartKey(currentUserUID),
+String(miningStartTime)
+);
+
+localStorage.setItem(
+miningLastKey(currentUserUID),
+String(lastRewardTime||Date.now())
+);
+
+localStorage.setItem(
+miningActiveKey(currentUserUID),
+"1"
+);
+
+}else{
+
+localStorage.removeItem(
+miningStartKey(currentUserUID)
+);
+
+localStorage.removeItem(
+miningLastKey(currentUserUID)
+);
+
+localStorage.removeItem(
+miningActiveKey(currentUserUID)
 );
 
 }
@@ -684,7 +2096,8 @@ String(balance)
 
 function updateSessionUI(){
 
-let el=document.getElementById("sessionTime");
+const el=
+document.getElementById("sessionTime");
 
 if(!el)return;
 
@@ -696,39 +2109,71 @@ return;
 
 }
 
-let r=Math.max(
+const remaining=
+Math.max(
 0,
 SESSION_TIME-(Date.now()-miningStartTime)
 );
 
-let t=Math.floor(r/1000);
+const total=
+Math.floor(remaining/1000);
 
-let h=Math.floor(t/3600);
-let m=Math.floor(t%3600/60);
-let s=t%60;
+const h=
+Math.floor(total/3600);
+
+const m=
+Math.floor((total%3600)/60);
+
+const s=
+total%60;
 
 el.textContent=
-String(h).padStart(2,"0")+":"+
-String(m).padStart(2,"0")+":"+
-String(s).padStart(2,"0");
+`${String(h).padStart(2,"0")}:`+
+`${String(m).padStart(2,"0")}:`+
+`${String(s).padStart(2,"0")}`;
 
 }
 
 
-function setUI(a,msg){
+function setMiningUI(active,message){
 
-let b=document.getElementById("miningButton");
+const button=
+document.getElementById("miningButton");
 
-b.classList.toggle("active",a);
+const status=
+document.getElementById("status");
 
-document.getElementById("status").textContent=
-msg||"Mining inactive";
+const mineText=
+document.getElementById("mineText");
 
-document.getElementById("mineText").textContent=
-a?"MINING ACTIVE":"START MINING";
+const dot=
+document.getElementById("dot");
 
-document.getElementById("dot").style.background=
-a?"#00e5ff":"#ff3dbd";
+if(active){
+
+button.classList.add("active");
+
+status.textContent=
+message||"Mining active";
+
+mineText.textContent=
+"MINING ACTIVE";
+
+dot.style.background="#00e5ff";
+
+}else{
+
+button.classList.remove("active");
+
+status.textContent=
+message||"Mining inactive";
+
+mineText.textContent=
+"START MINING";
+
+dot.style.background="#ff3dbd";
+
+}
 
 updateSessionUI();
 
@@ -737,228 +2182,315 @@ updateBoostUI();
 }
 
 
-function saveMining(){
-
-if(!currentUserUID)return;
-
-if(mining){
-
-localStorage.setItem(
-key("mining_start",currentUserUID),
-miningStartTime
-);
-
-localStorage.setItem(
-key("mining_last",currentUserUID),
-lastRewardTime
-);
-
-localStorage.setItem(
-key("mining_active",currentUserUID),
-"1"
-);
-
-}else{
-
-["mining_start","mining_last","mining_active"]
-.forEach(p=>
-localStorage.removeItem(
-key(p,currentUserUID)
-));
-
-}
-
-}
-
-
-function stopMining(msg="Mining inactive",clear=true){
+function stopMining(
+message="Mining inactive",
+clearSaved=true
+){
 
 mining=false;
 
+if(miningTimer){
+
 clearInterval(miningTimer);
-clearInterval(sessionInterval);
 
 miningTimer=null;
+
+}
+
+if(sessionInterval){
+
+clearInterval(sessionInterval);
+
 sessionInterval=null;
 
-if(clear&&currentUserUID){
+}
 
-["mining_start","mining_last","mining_active"]
-.forEach(p=>
+if(clearSaved&&currentUserUID){
+
 localStorage.removeItem(
-key(p,currentUserUID)
-));
+miningStartKey(currentUserUID)
+);
+
+localStorage.removeItem(
+miningLastKey(currentUserUID)
+);
+
+localStorage.removeItem(
+miningActiveKey(currentUserUID)
+);
 
 }
 
 miningStartTime=null;
+
 lastRewardTime=null;
 
-setUI(false,msg);
+setMiningUI(false,message);
 
 }
 
 
-function startTimer(){
+/* =====================================================
+   RESTORE MINING
+===================================================== */
 
-clearInterval(miningTimer);
-clearInterval(sessionInterval);
-
-miningTimer=setInterval(()=>{
-
-if(!mining||!currentUserUID)return;
-
-let n=Date.now();
-
-let end=miningStartTime+SESSION_TIME;
-
-if(n>=end){
-
-stopMining("6-hour session ended",true);
-
-return;
-
-}
-
-if(lastRewardTime&&n>lastRewardTime){
-
-let to=Math.min(n,end);
-
-balance+=reward(lastRewardTime,to);
-
-lastRewardTime=to;
-
-updateBalance();
-
-localStorage.setItem(
-key("mining_last",currentUserUID),
-lastRewardTime
-);
-
-}
-
-updateSessionUI();
-
-updateBoostUI();
-
-},1000);
-
-
-sessionInterval=setInterval(()=>{
-
-updateSessionUI();
-
-updateBoostUI();
-
-},1000);
-
-}
-
-
-function restore(){
+function applyElapsedMining(){
 
 if(!currentUserUID)return;
 
-let a=localStorage.getItem(
-key("mining_active",currentUserUID)
-);
-
-let s=Number(
+const active=
 localStorage.getItem(
-key("mining_start",currentUserUID)
-)
+miningActiveKey(currentUserUID)
 );
 
-let l=
+const savedStart=
 Number(
 localStorage.getItem(
-key("mining_last",currentUserUID)
+miningStartKey(currentUserUID)
 )
-)||s;
+);
 
-if(a!=="1"||!s)return;
+let savedLast=
+Number(
+localStorage.getItem(
+miningLastKey(currentUserUID)
+)
+);
 
-let n=Date.now();
+if(active!=="1"||!savedStart)return;
 
-let end=s+SESSION_TIME;
+const now=Date.now();
 
-if(n>=end){
+if(!savedLast)
+savedLast=savedStart;
 
-stopMining("6-hour session ended",true);
+const sessionEnd=
+savedStart+SESSION_TIME;
 
-return;
+const rewardUntil=
+Math.min(now,sessionEnd);
+
+if(rewardUntil>savedLast){
+
+balance+=
+calculateReward(
+savedLast,
+rewardUntil
+);
+
+updateBalance();
 
 }
 
-if(n>l){
+if(now>=sessionEnd){
 
-balance+=reward(l,Math.min(n,end));
+stopMining(
+"6-hour session ended",
+true
+);
 
-updateBalance();
+return;
 
 }
 
 mining=true;
 
-miningStartTime=s;
+miningStartTime=
+savedStart;
 
-lastRewardTime=n;
+lastRewardTime=
+now;
 
-setUI(true,"Mining active");
+localStorage.setItem(
+miningLastKey(currentUserUID),
+String(now)
+);
 
-startTimer();
+setMiningUI(
+true,
+"Mining active"
+);
+
+startMiningTimer();
 
 }
 
 
-function loadUser(u){
+/* =====================================================
+   USER
+===================================================== */
 
-currentUserUID=u.uid;
+function loadUserData(user){
+
+currentUserUID=
+user.uid;
+
+const saved=
+localStorage.getItem(
+balanceKey(user.uid)
+);
 
 balance=
-Number(
-localStorage.getItem(
-key("balance",u.uid)
-)
-)||0;
+saved!==null
+?Number(saved)
+:0;
+
+if(!Number.isFinite(balance))
+balance=0;
 
 updateBalance();
 
-restore();
+applyElapsedMining();
 
 updateBoostUI();
 
 }
 
 
-/* LOGIN / AUTH FIX */
-onAuthStateChanged(auth,u=>{
+function saveBalance(){
 
-if(u){
+if(!currentUserUID)return;
 
-authScreenEl.style.display="none";
+localStorage.setItem(
+balanceKey(currentUserUID),
+String(balance)
+);
 
-mainAppEl.style.display="block";
+}
 
-let n=
-u.displayName||
-u.email?.split("@")[0]||
+
+function updateBalance(){
+
+document.getElementById("balance").textContent=
+balance.toFixed(5);
+
+document.getElementById("withdrawBalance").textContent=
+balance.toFixed(5);
+
+saveBalance();
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function startMiningTimer(){
+
+if(miningTimer)
+clearInterval(miningTimer);
+
+if(sessionInterval)
+clearInterval(sessionInterval);
+
+miningTimer=
+setInterval(()=>{
+
+if(!mining||!currentUserUID)
+return;
+
+const now=Date.now();
+
+if(
+miningStartTime &&
+now-miningStartTime>=SESSION_TIME
+){
+
+stopMining(
+"6-hour session ended",
+true
+);
+
+return;
+
+}
+
+if(lastRewardTime){
+
+const rewardTo=
+Math.min(
+now,
+miningStartTime+SESSION_TIME
+);
+
+if(rewardTo>lastRewardTime){
+
+balance+=
+calculateReward(
+lastRewardTime,
+rewardTo
+);
+
+lastRewardTime=
+rewardTo;
+
+updateBalance();
+
+localStorage.setItem(
+miningLastKey(currentUserUID),
+String(lastRewardTime)
+);
+
+}
+
+}
+
+updateSessionUI();
+
+updateBoostUI();
+
+},1000);
+
+sessionInterval=
+setInterval(()=>{
+
+updateSessionUI();
+
+updateBoostUI();
+
+},1000);
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+document.getElementById("authScreen").style.display=
+"none";
+
+document.getElementById("mainApp").style.display=
+"block";
+
+const name=
+user.displayName||
+user.email?.split("@")[0]||
 "Miner";
 
-usernameEl.textContent=n;
+document.getElementById("username").textContent=
+name;
 
-profileUsernameEl.textContent=n;
+document.getElementById("profileUsername").textContent=
+name;
 
-profileEmailEl.textContent=
-u.email||"Not available";
+document.getElementById("profileEmail").textContent=
+user.email||"Not available";
 
-loadUser(u);
+loadUserData(user);
 
 }else{
 
-authScreenEl.style.display="flex";
+document.getElementById("authScreen").style.display=
+"flex";
 
-mainAppEl.style.display="none";
+document.getElementById("mainApp").style.display=
+"none";
 
 currentUserUID=null;
 
@@ -967,19 +2499,36 @@ currentUserUID=null;
 });
 
 
-window.logout=async()=>{
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-if(mining){
+window.logout=async function(){
 
-lastRewardTime=Date.now();
+if(mining&&currentUserUID){
 
-saveMining();
+lastRewardTime=
+Date.now();
+
+saveMiningState();
 
 }
 
+if(miningTimer){
+
 clearInterval(miningTimer);
 
+miningTimer=null;
+
+}
+
+if(sessionInterval){
+
 clearInterval(sessionInterval);
+
+sessionInterval=null;
+
+}
 
 mining=false;
 
@@ -988,11 +2537,15 @@ await signOut(auth);
 };
 
 
-window.startMining=()=>{
+/* =====================================================
+   START MINING
+===================================================== */
 
-let u=auth.currentUser;
+window.startMining=function(){
 
-if(!u){
+const user=auth.currentUser;
+
+if(!user){
 
 alert("Please login first.");
 
@@ -1002,26 +2555,91 @@ return;
 
 if(mining)return;
 
-currentUserUID=u.uid;
+currentUserUID=
+user.uid;
 
 mining=true;
 
-miningStartTime=lastRewardTime=Date.now();
+miningStartTime=
+Date.now();
 
-saveMining();
+lastRewardTime=
+miningStartTime;
 
-setUI(true,"Mining active");
+localStorage.setItem(
+miningStartKey(user.uid),
+String(miningStartTime)
+);
 
-startTimer();
+localStorage.setItem(
+miningLastKey(user.uid),
+String(lastRewardTime)
+);
+
+localStorage.setItem(
+miningActiveKey(user.uid),
+"1"
+);
+
+setMiningUI(
+true,
+"Mining active"
+);
+
+const tg=
+window.Telegram?.WebApp;
+
+if(tg?.HapticFeedback){
+
+try{
+
+tg.HapticFeedback.impactOccurred("medium");
+
+}catch(e){}
+
+}
+
+addMiningReward();
+
+startMiningTimer();
 
 };
 
 
-window.watchAd=async()=>{
+function addMiningReward(){
 
-let u=auth.currentUser;
+if(!mining||!auth.currentUser)
+return;
 
-if(!u){
+const now=Date.now();
+
+const rate=
+getHashrateAt(now);
+
+balance+=
+REWARD_PER_SECOND*
+(rate/baseHashrate);
+
+lastRewardTime=
+now;
+
+updateBalance();
+
+if(currentUserUID)
+saveMiningState();
+
+}
+
+
+/* =====================================================
+   MONETAG REWARDED AD
+===================================================== */
+
+window.watchAd=async function(){
+
+const user=auth.currentUser;
+
+if(!user){
 
 alert("Please login first.");
 
@@ -1029,62 +2647,117 @@ return;
 
 }
 
-let b=document.getElementById("watchAdButton");
+const button=
+document.getElementById("watchAdButton");
 
-let s=document.getElementById("adStatus");
+const status=
+document.getElementById("adStatus");
 
 if(typeof window.show_11549239!=="function"){
 
-s.textContent="Advertisement is not ready yet.";
+status.style.color="#ff5577";
+
+status.textContent=
+"Advertisement is not ready yet.";
+
+alert(
+"Ad is not ready yet. Please wait a few seconds and try again."
+);
 
 return;
 
 }
 
-b.disabled=true;
+button.disabled=true;
 
-s.textContent="📺 Loading advertisement...";
+button.classList.add("ad-loading");
+
+button.style.opacity="0.65";
+
+status.style.color="#ffc44d";
+
+status.textContent=
+"📺 Loading advertisement...";
 
 try{
 
 await window.show_11549239();
 
-currentUserUID=u.uid;
+currentUserUID=
+user.uid;
 
-let n=Date.now();
+const now=Date.now();
 
-let old=boostEnd();
+const oldEnd=
+getBoostEnd();
 
-let end=(old>n?old:n)+BOOST_TIME;
+const startFrom=
+oldEnd>now
+?oldEnd
+:now;
+
+const newEnd=
+startFrom+BOOST_TIME;
 
 localStorage.setItem(
-key("boost_end",u.uid),
-end
+boostEndKey(user.uid),
+String(newEnd)
 );
 
 updateBoostUI();
 
-s.textContent=
+status.style.color="#ff5b5b";
+
+status.textContent=
 "✅ Ad completed! 10-minute boost activated.";
 
-}catch(e){
+if(window.Telegram?.WebApp?.HapticFeedback){
 
-s.textContent="Ad was not completed.";
+try{
+
+window.Telegram.WebApp.HapticFeedback
+.notificationOccurred("success");
+
+}catch(e){}
+
+}
+
+}catch(error){
+
+console.error(
+"Monetag rewarded ad error:",
+error
+);
+
+status.style.color="#ff5577";
+
+status.textContent=
+"Ad was not completed.";
+
+alert(
+"Ad could not be completed. Please try again."
+);
 
 }finally{
 
-b.disabled=false;
+button.disabled=false;
+
+button.classList.remove("ad-loading");
+
+button.style.opacity="1";
 
 }
 
 };
 
 
-window.claimReward=()=>{
+/* =====================================================
+   DAILY REWARD
+===================================================== */
 
-let u=auth.currentUser;
+window.claimReward=function(){
 
-if(!u){
+if(!auth.currentUser){
 
 alert("Please login first.");
 
@@ -1092,46 +2765,66 @@ return;
 
 }
 
-let k=key("last_claim",u.uid);
-
-let today=
+const today=
 new Date().toISOString().slice(0,10);
 
-if(localStorage.getItem(k)===today){
+const key=
+"rndminer_last_claim_"+
+auth.currentUser.uid;
 
-alert("You already claimed today's reward.");
+const lastClaim=
+localStorage.getItem(key);
+
+if(lastClaim===today){
+
+alert(
+"You already claimed today's reward."
+);
 
 return;
 
 }
 
-balance+=.001;
+balance+=0.001;
 
 updateBalance();
 
-localStorage.setItem(k,today);
+localStorage.setItem(
+key,
+today
+);
 
-alert("🎉 Daily reward claimed!\n\n+0.001 RND");
+alert(
+"🎉 Daily reward claimed!\n\n+0.001 RND"
+);
 
 };
 
 
-function hide(){
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-miningPageEl.classList.remove("active");
+function hideAllPages(){
 
-withdrawPageEl.classList.remove("active");
+document.getElementById("miningPage")
+.classList.remove("active");
 
-profilePageEl.classList.remove("active");
+document.getElementById("withdrawPage")
+.classList.remove("active");
+
+document.getElementById("profilePage")
+.classList.remove("active");
 
 }
 
 
-window.showMining=()=>{
+window.showMining=function(){
 
-hide();
+hideAllPages();
 
-miningPageEl.classList.add("active");
+document.getElementById("miningPage")
+.classList.add("active");
 
 updateBalance();
 
@@ -1140,48 +2833,52 @@ updateBoostUI();
 };
 
 
-window.showWithdraw=()=>{
+window.showWithdraw=function(){
 
-hide();
+hideAllPages();
 
-withdrawPageEl.classList.add("active");
+document.getElementById("withdrawPage")
+.classList.add("active");
 
 updateBalance();
 
-/* Clear old message when opening withdrawal page */
-withdrawMessageEl.textContent="";
-
 };
 
 
-window.showProfile=()=>{
+window.showProfile=function(){
 
-let u=auth.currentUser;
+const user=auth.currentUser;
 
-if(!u)return;
+if(!user)return;
 
-profileUsernameEl.textContent=
-u.displayName||
-u.email?.split("@")[0]||
+const name=
+user.displayName||
+user.email?.split("@")[0]||
 "Miner";
 
-profileEmailEl.textContent=
-u.email||
-"Not available";
+document.getElementById("profileUsername")
+.textContent=name;
 
-hide();
+document.getElementById("profileEmail")
+.textContent=user.email||"Not available";
 
-profilePageEl.classList.add("active");
+hideAllPages();
+
+document.getElementById("profilePage")
+.classList.add("active");
 
 };
 
 
-/* FIXED WITHDRAWAL FUNCTION */
-window.confirmWithdrawal=async()=>{
+/* =====================================================
+   WITHDRAW
+===================================================== */
 
-let u=auth.currentUser;
+window.confirmWithdrawal=async function(){
 
-if(!u){
+const user=auth.currentUser;
+
+if(!user){
 
 alert("Please login first.");
 
@@ -1189,20 +2886,25 @@ return;
 
 }
 
-let w=walletAddressEl.value.trim();
+const wallet=
+document.getElementById("walletAddress")
+.value.trim();
 
-let a=Number(withdrawAmountEl.value);
+const amount=
+Number(
+document.getElementById("withdrawAmount")
+.value
+);
 
-let m=withdrawMessageEl;
+const message=
+document.getElementById("withdrawMessage");
 
-m.style.color="#ff5577";
-
-m.textContent="";
+message.style.color="#ff5577";
 
 
-if(!w){
+if(!wallet){
 
-m.textContent=
+message.textContent=
 "Please enter your TRC20 wallet address.";
 
 return;
@@ -1210,10 +2912,9 @@ return;
 }
 
 
-/* TRC20 address validation */
-if(!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(w)){
+if(!wallet.startsWith("T")||wallet.length<30){
 
-m.textContent=
+message.textContent=
 "Please enter a valid TRC20 address.";
 
 return;
@@ -1221,9 +2922,9 @@ return;
 }
 
 
-if(!a||a<0.02){
+if(!amount||amount<0.02){
 
-m.textContent=
+message.textContent=
 "Minimum withdrawal is 0.02 RND.";
 
 return;
@@ -1231,9 +2932,9 @@ return;
 }
 
 
-if(a>balance){
+if(amount>balance){
 
-m.textContent=
+message.textContent=
 "Insufficient balance.";
 
 return;
@@ -1241,103 +2942,112 @@ return;
 }
 
 
-confirmWithdrawalButtonEl.disabled=true;
+const button=
+document.querySelector(".confirm-btn");
 
-m.style.color="#777791";
+button.disabled=true;
 
-m.textContent=
+button.style.opacity=".65";
+
+message.style.color="#ff5b5b";
+
+message.textContent=
 "Submitting withdrawal request...";
 
 
 try{
 
-/*
-  Withdrawal request Firestore mein save hogi.
-  Collection: withdrawals
-*/
-
 await addDoc(
 collection(db,"withdrawals"),
 {
-uid:u.uid,
-email:u.email||"",
-walletAddress:w,
+uid:user.uid,
+email:user.email||"",
+walletAddress:wallet,
 network:"TRC20",
 currency:"USDT",
-amount:a,
+amount:amount,
 balanceUnit:"RND",
 status:"Pending",
 createdAt:serverTimestamp()
 }
 );
 
+message.style.color="#ff5b5b";
 
-/*
-  Request successfully submit hone ke baad
-  balance se amount minus kar diya jata hai.
-*/
-balance-=a;
+message.textContent=
+"✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";
 
-updateBalance();
+document.getElementById("walletAddress")
+.value="";
 
-walletAddressEl.value="";
+document.getElementById("withdrawAmount")
+.value="";
 
-withdrawAmountEl.value="";
+button.disabled=false;
 
-m.style.color="#00e676";
-
-m.textContent=
-"✅ Withdrawal submitted successfully. Your request is pending review.";
+button.style.opacity="1";
 
 }catch(e){
 
-console.error("Withdrawal error:",e);
+console.error(e);
 
-m.style.color="#ff5577";
+message.style.color="#ff5577";
 
-m.textContent=
+message.textContent=
 "Failed to submit withdrawal request. Please try again.";
 
-}finally{
+button.disabled=false;
 
-confirmWithdrawalButtonEl.disabled=false;
+button.style.opacity="1";
 
 }
 
 };
 
 
-function firebaseError(c){
+/* =====================================================
+   FIREBASE ERRORS
+===================================================== */
 
-return({
+function firebaseError(code){
 
-"auth/email-already-in-use":
-"This email is already registered.",
+switch(code){
 
-"auth/invalid-email":
-"Invalid email address.",
+case "auth/email-already-in-use":
+return "This email is already registered.";
 
-"auth/weak-password":
-"Password must be at least 6 characters.",
+case "auth/invalid-email":
+return "Invalid email address.";
 
-"auth/invalid-credential":
-"Wrong email or password.",
+case "auth/weak-password":
+return "Password must be at least 6 characters.";
 
-"auth/popup-closed-by-user":
-"Google login was cancelled.",
+case "auth/invalid-credential":
+return "Wrong email or password.";
 
-"auth/popup-blocked":
-"Google login popup was blocked.",
+case "auth/popup-closed-by-user":
+return "Google login was cancelled.";
 
-"auth/network-request-failed":
-"Network error. Please check the internet."
+case "auth/popup-blocked":
+return "Google login popup was blocked.";
 
-}[c]||"Authentication failed. Please try again.");
+case "auth/network-request-failed":
+return "Network error. Please check your internet.";
+
+default:
+return "Authentication failed. Please try again.";
+
+}
 
 }
 
 
-const tg=window.Telegram?.WebApp;
+/* =====================================================
+   TELEGRAM
+===================================================== */
+
+const tg=
+window.Telegram?.WebApp;
 
 if(tg){
 
