@@ -37,7 +37,7 @@ body::before{
 content:"";
 position:fixed;
 inset:0;
-z-index:-5;
+z-index:-6;
 background:
 radial-gradient(circle at 50% -10%,rgba(255,20,55,.18),transparent 30%),
 radial-gradient(circle at 100% 35%,rgba(255,0,60,.10),transparent 30%),
@@ -49,7 +49,7 @@ body::after{
 content:"";
 position:fixed;
 inset:0;
-z-index:-4;
+z-index:-5;
 opacity:.10;
 background-image:
 linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
@@ -59,7 +59,7 @@ background-size:35px 35px
 
 
 /* =====================================================
-   3D RENDER BACKGROUND
+   3D MOVING BACKGROUND
 ===================================================== */
 
 .render-bg{
@@ -67,7 +67,8 @@ position:fixed;
 inset:0;
 overflow:hidden;
 pointer-events:none;
-z-index:-2
+z-index:-2;
+perspective:1000px
 }
 
 .render-coin{
@@ -88,8 +89,8 @@ box-shadow:
 0 0 35px rgba(255,0,45,.35),
 inset 7px 5px 10px rgba(255,255,255,.55),
 inset -12px -10px 20px rgba(40,0,8,.8);
-opacity:.18;
-animation:renderFloat 8s ease-in-out infinite;
+opacity:.20;
+animation:renderFloat 9s ease-in-out infinite;
 transform-style:preserve-3d
 }
 
@@ -99,7 +100,8 @@ position:absolute;
 inset:10px;
 border-radius:50%;
 border:2px solid rgba(255,255,255,.45);
-box-shadow:inset 0 0 8px rgba(255,255,255,.35)
+box-shadow:
+inset 0 0 8px rgba(255,255,255,.35)
 }
 
 .render-coin::after{
@@ -117,57 +119,159 @@ text-shadow:
 }
 
 .render-coin:nth-child(1){
-left:4%;
-top:20%;
-animation-delay:0s;
-animation-duration:7s
-}
-
-.render-coin:nth-child(2){
-right:5%;
-top:35%;
-width:75px;
-height:75px;
-animation-delay:2s;
-animation-duration:9s
-}
-
-.render-coin:nth-child(3){
-left:12%;
-bottom:12%;
-width:65px;
-height:65px;
-animation-delay:4s;
+left:3%;
+top:8%;
+width:80px;
+height:80px;
 animation-duration:8s
 }
 
+.render-coin:nth-child(2){
+right:4%;
+top:16%;
+width:120px;
+height:120px;
+animation-duration:11s;
+animation-delay:2s
+}
+
+.render-coin:nth-child(3){
+left:15%;
+top:38%;
+width:65px;
+height:65px;
+animation-duration:7s;
+animation-delay:1s
+}
+
 .render-coin:nth-child(4){
-right:12%;
-bottom:20%;
+right:14%;
+top:45%;
+width:90px;
+height:90px;
+animation-duration:10s;
+animation-delay:3s
+}
+
+.render-coin:nth-child(5){
+left:4%;
+top:63%;
 width:115px;
 height:115px;
-animation-delay:1s;
-animation-duration:10s
+animation-duration:12s;
+animation-delay:4s
+}
+
+.render-coin:nth-child(6){
+right:3%;
+top:72%;
+width:70px;
+height:70px;
+animation-duration:8s;
+animation-delay:1s
+}
+
+.render-coin:nth-child(7){
+left:28%;
+top:78%;
+width:55px;
+height:55px;
+animation-duration:9s;
+animation-delay:5s
+}
+
+.render-coin:nth-child(8){
+right:28%;
+top:7%;
+width:60px;
+height:60px;
+animation-duration:7s;
+animation-delay:2s
+}
+
+.render-coin:nth-child(9){
+left:45%;
+top:28%;
+width:50px;
+height:50px;
+animation-duration:10s;
+animation-delay:4s
+}
+
+.render-coin:nth-child(10){
+right:42%;
+top:58%;
+width:75px;
+height:75px;
+animation-duration:11s;
+animation-delay:1s
+}
+
+.render-coin:nth-child(11){
+left:8%;
+top:88%;
+width:60px;
+height:60px;
+animation-duration:8s;
+animation-delay:3s
+}
+
+.render-coin:nth-child(12){
+right:8%;
+top:90%;
+width:100px;
+height:100px;
+animation-duration:12s;
+animation-delay:6s
 }
 
 @keyframes renderFloat{
-0%,100%{
+
+0%{
 transform:
-translateY(0)
+translate3d(0,0,0)
 rotateY(0deg)
 rotateX(8deg)
 rotateZ(-4deg)
 scale(1)
 }
 
+25%{
+transform:
+translate3d(15px,-25px,25px)
+rotateY(90deg)
+rotateX(14deg)
+rotateZ(2deg)
+scale(1.04)
+}
+
 50%{
 transform:
-translateY(-35px)
+translate3d(-10px,-55px,0)
 rotateY(180deg)
-rotateX(18deg)
-rotateZ(6deg)
+rotateX(20deg)
+rotateZ(7deg)
 scale(1.08)
 }
+
+75%{
+transform:
+translate3d(20px,-25px,-20px)
+rotateY(270deg)
+rotateX(12deg)
+rotateZ(-3deg)
+scale(1.03)
+}
+
+100%{
+transform:
+translate3d(0,0,0)
+rotateY(360deg)
+rotateX(8deg)
+rotateZ(-4deg)
+scale(1)
+}
+
 }
 
 
@@ -916,11 +1020,25 @@ font-size:14px
 
 <body>
 
+<!-- =====================================================
+     MANY MOVING 3D RND LOGOS
+===================================================== -->
+
 <div class="render-bg">
+
 <div class="render-coin"></div>
 <div class="render-coin"></div>
 <div class="render-coin"></div>
 <div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+
 </div>
 
 
@@ -1421,12 +1539,16 @@ let mining=false;
 let miningTimer=null;
 let sessionInterval=null;
 let cloudSaveTimer=null;
+
 let miningStartTime=null;
 let lastRewardTime=null;
+
 let baseHashrate=2.85;
 let currentHashrate=2.85;
+
 let currentUserUID=null;
 let currentUserEmail=null;
+
 let boostEnd=0;
 let dailyClaimDate="";
 
@@ -1436,8 +1558,7 @@ const BOOST_TIME=10*60*1000;
 
 
 /* =====================================================
-   PERSISTENCE
-   USER STAYS LOGGED IN UNTIL LOGOUT
+   FIREBASE PERSISTENCE
 ===================================================== */
 
 await setPersistence(
@@ -1451,7 +1572,13 @@ browserLocalPersistence
 ===================================================== */
 
 function userRef(uid){
-return doc(db,"users",uid);
+
+return doc(
+db,
+"users",
+uid
+);
+
 }
 
 
@@ -1472,6 +1599,43 @@ return n.toFixed(5);
 
 
 /* =====================================================
+   IMPORTANT:
+   UPDATE MINING PROGRESS BEFORE SAVING
+===================================================== */
+
+function updateMiningProgress(){
+
+if(!currentUserUID||!mining||!miningStartTime)
+return;
+
+const now=Date.now();
+
+const sessionEnd=
+miningStartTime+SESSION_TIME;
+
+const rewardUntil=
+Math.min(now,sessionEnd);
+
+if(
+lastRewardTime &&
+rewardUntil>lastRewardTime
+){
+
+balance+=calculateReward(
+lastRewardTime,
+rewardUntil
+);
+
+lastRewardTime=rewardUntil;
+
+updateBalance();
+
+}
+
+}
+
+
+/* =====================================================
    SAVE
 ===================================================== */
 
@@ -1482,24 +1646,43 @@ return;
 
 try{
 
+/*
+IMPORTANT:
+Before saving, calculate all mining
+that happened since lastRewardTime.
+*/
+
+updateMiningProgress();
+
 await setDoc(
 userRef(currentUserUID),
 {
 uid:currentUserUID,
+
 email:currentUserEmail||"",
+
 balance:Number(balance)||0,
+
 miningActive:Boolean(mining),
+
 miningStartTime:
 miningStartTime
 ?Number(miningStartTime)
 :null,
+
 lastRewardTime:
 lastRewardTime
 ?Number(lastRewardTime)
 :null,
+
 boostEnd:Number(boostEnd)||0,
-dailyClaimDate:dailyClaimDate||"",
-updatedAt:serverTimestamp()
+
+dailyClaimDate:
+dailyClaimDate||"",
+
+updatedAt:
+serverTimestamp()
+
 },
 {merge:true}
 );
@@ -1535,7 +1718,9 @@ userRef(user.uid)
 );
 
 if(snap.exists()){
+
 cloudData=snap.data();
+
 }
 
 }catch(error){
@@ -1546,6 +1731,14 @@ error
 );
 
 }
+
+
+/*
+IMPORTANT:
+Never reset a user's balance just because
+the local screen was logged out.
+Cloud Firestore is the source of truth.
+*/
 
 if(cloudData){
 
@@ -1570,10 +1763,15 @@ cloudData.dailyClaimDate||"";
 }else{
 
 balance=0;
+
 mining=false;
+
 miningStartTime=null;
+
 lastRewardTime=null;
+
 boostEnd=0;
+
 dailyClaimDate="";
 
 await saveUserData();
@@ -1581,8 +1779,11 @@ await saveUserData();
 }
 
 updateBalance();
+
 updateProfile(user);
+
 updateBoostUI();
+
 restoreMining();
 
 }
@@ -1594,7 +1795,8 @@ restoreMining();
 
 function updateBalance(){
 
-const value=formatBalance(balance);
+const value=
+formatBalance(balance);
 
 const balanceEl=
 document.getElementById("balance");
@@ -1629,7 +1831,9 @@ document.getElementById("profileUsername")
 .textContent=name;
 
 document.getElementById("profileEmail")
-.textContent=user.email||"Not available";
+.textContent=
+user.email||
+"Not available";
 
 }
 
@@ -1642,27 +1846,32 @@ window.toggleAuth=function(){
 
 signUpMode=!signUpMode;
 
-document.getElementById("authTitle").textContent=
+document.getElementById("authTitle")
+.textContent=
 signUpMode
 ?"Create RND Mining Account"
 :"Welcome to RND Mining";
 
-document.getElementById("authButton").textContent=
+document.getElementById("authButton")
+.textContent=
 signUpMode
 ?"SIGN UP"
 :"LOGIN";
 
-document.getElementById("forgotButton").style.display=
+document.getElementById("forgotButton")
+.style.display=
 signUpMode
 ?"none"
 :"block";
 
-document.getElementById("authSwitch").innerHTML=
+document.getElementById("authSwitch")
+.innerHTML=
 signUpMode
 ?'Already have an account? <span onclick="toggleAuth()">Login</span>'
 :'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
 
-document.getElementById("authError").textContent="";
+document.getElementById("authError")
+.textContent="";
 
 };
 
@@ -1699,6 +1908,7 @@ const button=
 document.getElementById("authButton");
 
 button.disabled=true;
+
 button.style.opacity=".65";
 
 try{
@@ -1731,6 +1941,7 @@ firebaseError(e.code);
 }finally{
 
 button.disabled=false;
+
 button.style.opacity="1";
 
 }
@@ -1956,7 +2167,10 @@ miningStartTime+SESSION_TIME;
 
 if(now>=sessionEnd){
 
-if(lastRewardTime&&lastRewardTime<sessionEnd){
+if(
+lastRewardTime &&
+lastRewardTime<sessionEnd
+){
 
 balance+=
 calculateReward(
@@ -1967,7 +2181,9 @@ sessionEnd
 }
 
 mining=false;
+
 miningStartTime=null;
+
 lastRewardTime=null;
 
 updateBalance();
@@ -1982,6 +2198,14 @@ false,
 return;
 
 }
+
+
+/*
+IMPORTANT:
+If user was logged out for some time,
+calculate the mining reward from the last
+saved reward time until now.
+*/
 
 const rewardUntil=
 Math.min(now,sessionEnd);
@@ -2002,6 +2226,13 @@ lastRewardTime=rewardUntil;
 updateBalance();
 
 }
+
+/*
+Save the newly calculated offline mining
+progress immediately.
+*/
+
+saveUserData();
 
 mining=true;
 
@@ -2060,6 +2291,7 @@ dot.style.background="#ff3dbd";
 }
 
 updateSessionUI();
+
 updateBoostUI();
 
 }
@@ -2076,6 +2308,7 @@ mining=false;
 if(miningTimer){
 
 clearInterval(miningTimer);
+
 miningTimer=null;
 
 }
@@ -2083,11 +2316,15 @@ miningTimer=null;
 if(sessionInterval){
 
 clearInterval(sessionInterval);
+
 sessionInterval=null;
 
 }
 
-setMiningUI(false,message);
+setMiningUI(
+false,
+message
+);
 
 }
 
@@ -2115,7 +2352,8 @@ return;
 const remaining=
 Math.max(
 0,
-SESSION_TIME-(Date.now()-miningStartTime)
+SESSION_TIME-
+(Date.now()-miningStartTime)
 );
 
 const total=
@@ -2150,6 +2388,7 @@ clearInterval(miningTimer);
 if(cloudSaveTimer)
 clearInterval(cloudSaveTimer);
 
+
 miningTimer=
 setInterval(async()=>{
 
@@ -2163,7 +2402,10 @@ miningStartTime+SESSION_TIME;
 
 if(now>=sessionEnd){
 
-if(lastRewardTime<sessionEnd){
+if(
+lastRewardTime &&
+lastRewardTime<sessionEnd
+){
 
 balance+=
 calculateReward(
@@ -2174,7 +2416,9 @@ sessionEnd
 }
 
 mining=false;
+
 lastRewardTime=null;
+
 miningStartTime=null;
 
 updateBalance();
@@ -2189,6 +2433,7 @@ await saveUserData();
 return;
 
 }
+
 
 if(lastRewardTime){
 
@@ -2215,10 +2460,15 @@ updateBalance();
 }
 
 updateSessionUI();
+
 updateBoostUI();
 
 },1000);
 
+
+/*
+Cloud backup every 10 seconds.
+*/
 
 cloudSaveTimer=
 setInterval(async()=>{
@@ -2229,7 +2479,7 @@ await saveUserData();
 
 }
 
-},15000);
+},10000);
 
 }
 
@@ -2254,13 +2504,15 @@ if(mining)
 return;
 
 currentUserUID=user.uid;
+
 currentUserEmail=user.email||"";
 
 mining=true;
 
 miningStartTime=Date.now();
 
-lastRewardTime=miningStartTime;
+lastRewardTime=
+miningStartTime;
 
 setMiningUI(
 true,
@@ -2271,7 +2523,9 @@ startMiningTimer();
 
 await saveUserData();
 
-if(window.Telegram?.WebApp?.HapticFeedback){
+if(
+window.Telegram?.WebApp?.HapticFeedback
+){
 
 try{
 
@@ -2307,7 +2561,9 @@ document.getElementById("adStatus");
 const button=
 document.getElementById("watchAdButton");
 
-if(typeof window.show_11549239!=="function"){
+if(
+typeof window.show_11549239!=="function"
+){
 
 status.textContent=
 "Ad is still loading. Please try again.";
@@ -2317,6 +2573,7 @@ return;
 }
 
 button.disabled=true;
+
 button.style.opacity=".65";
 
 status.textContent=
@@ -2329,7 +2586,10 @@ await window.show_11549239();
 const now=Date.now();
 
 boostEnd=
-Math.max(boostEnd,now)+BOOST_TIME;
+Math.max(
+boostEnd,
+now
+)+BOOST_TIME;
 
 await saveUserData();
 
@@ -2348,6 +2608,7 @@ status.textContent=
 }finally{
 
 button.disabled=false;
+
 button.style.opacity="1";
 
 }
@@ -2426,6 +2687,7 @@ document.getElementById("miningPage")
 .classList.add("active");
 
 updateBalance();
+
 updateBoostUI();
 
 };
@@ -2529,6 +2791,7 @@ const button=
 document.querySelector(".confirm-btn");
 
 button.disabled=true;
+
 button.style.opacity=".65";
 
 message.style.color="#00e5ff";
@@ -2558,8 +2821,11 @@ await saveUserData();
 
 updateBalance();
 
-document.getElementById("walletAddress").value="";
-document.getElementById("withdrawAmount").value="";
+document.getElementById("walletAddress")
+.value="";
+
+document.getElementById("withdrawAmount")
+.value="";
 
 message.textContent=
 "✅ Withdrawal request submitted successfully.";
@@ -2576,6 +2842,7 @@ message.textContent=
 }finally{
 
 button.disabled=false;
+
 button.style.opacity="1";
 
 }
@@ -2593,32 +2860,103 @@ const logoutButtons=
 document.querySelectorAll(".logout");
 
 logoutButtons.forEach(btn=>{
+
 btn.disabled=true;
-btn.textContent="LOGGING OUT...";
+
+btn.textContent="SAVING...";
+
 });
 
 
-/* STOP ALL TIMERS FIRST */
+/*
+=====================================================
+CRITICAL FIX
+
+SAVE USER DATA BEFORE SIGN OUT.
+
+Previously the code signed out first and then
+cleared local variables. This could leave Firestore
+with an old balance/mining timestamp.
+
+Now the latest mining progress is calculated and
+saved BEFORE Firebase signOut().
+=====================================================
+*/
+
+try{
+
+if(currentUserUID){
+
+/*
+Calculate current mining reward first.
+*/
+
+updateMiningProgress();
+
+/*
+Save the latest balance, mining state,
+timestamps and boost.
+*/
+
+await saveUserData();
+
+}
+
+}catch(error){
+
+console.error(
+"Could not save before logout:",
+error
+);
+
+logoutButtons.forEach(btn=>{
+
+btn.disabled=false;
+
+btn.textContent="LOGOUT";
+
+});
+
+alert(
+"Could not save your mining progress. Please try again."
+);
+
+return;
+
+}
+
+
+/*
+STOP TIMERS AFTER DATA IS SAFELY SAVED.
+*/
 
 if(miningTimer){
+
 clearInterval(miningTimer);
+
 miningTimer=null;
+
 }
 
 if(sessionInterval){
+
 clearInterval(sessionInterval);
+
 sessionInterval=null;
+
 }
 
 if(cloudSaveTimer){
+
 clearInterval(cloudSaveTimer);
+
 cloudSaveTimer=null;
+
 }
 
 
-/* SIGN OUT FIRST
-   This prevents auth state from keeping
-   the application open.
+/*
+NOW SIGN OUT.
 */
 
 try{
@@ -2627,63 +2965,109 @@ await signOut(auth);
 
 }catch(error){
 
-console.error("Firebase logout error:",error);
+console.error(
+"Firebase logout error:",
+error
+);
 
 logoutButtons.forEach(btn=>{
+
 btn.disabled=false;
+
 btn.textContent="LOGOUT";
+
 });
 
-alert("Logout failed. Please try again.");
+alert(
+"Logout failed. Please try again."
+);
 
 return;
 
 }
 
 
-/* CLEAR LOCAL APPLICATION STATE */
+/*
+CLEAR ONLY LOCAL MEMORY.
+Cloud Firestore data remains safe.
+*/
 
 balance=0;
+
 mining=false;
+
 miningStartTime=null;
+
 lastRewardTime=null;
+
 boostEnd=0;
+
 dailyClaimDate="";
+
 currentUserUID=null;
+
 currentUserEmail=null;
 
 
-/* CLEAR LOGIN INPUTS */
+/*
+CLEAR LOGIN FORM.
+*/
 
-document.getElementById("authEmail").value="";
-document.getElementById("authPassword").value="";
-document.getElementById("authError").textContent="";
+document.getElementById("authEmail")
+.value="";
+
+document.getElementById("authPassword")
+.value="";
+
+document.getElementById("authError")
+.textContent="";
 
 
-/* RESET AUTH UI */
+/*
+RESET AUTH UI.
+*/
 
 signUpMode=false;
 
-document.getElementById("authTitle").textContent=
+document.getElementById("authTitle")
+.textContent=
 "Welcome to RND Mining";
 
-document.getElementById("authButton").textContent=
+document.getElementById("authButton")
+.textContent=
 "LOGIN";
 
-document.getElementById("forgotButton").style.display=
+document.getElementById("forgotButton")
+.style.display=
 "block";
 
-document.getElementById("authSwitch").innerHTML=
+document.getElementById("authSwitch")
+.innerHTML=
 'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
 
 
-/* FORCE LOGIN SCREEN */
+/*
+SHOW LOGIN SCREEN.
+*/
 
 document.getElementById("mainApp")
 .style.display="none";
 
 document.getElementById("authScreen")
 .style.display="flex";
+
+
+/*
+RESET LOGOUT BUTTON TEXT.
+*/
+
+logoutButtons.forEach(btn=>{
+
+btn.disabled=false;
+
+btn.textContent="LOGOUT";
+
+});
 
 };
 
@@ -2695,8 +3079,6 @@ document.getElementById("authScreen")
 onAuthStateChanged(auth,async(user)=>{
 
 if(user){
-
-/* USER IS LOGGED IN */
 
 document.getElementById("authScreen")
 .style.display="none";
@@ -2710,24 +3092,32 @@ await loadUserData(user);
 
 }else{
 
-/* USER IS LOGGED OUT */
-
 if(miningTimer){
+
 clearInterval(miningTimer);
+
 miningTimer=null;
+
 }
 
 if(cloudSaveTimer){
+
 clearInterval(cloudSaveTimer);
+
 cloudSaveTimer=null;
+
 }
 
 if(sessionInterval){
+
 clearInterval(sessionInterval);
+
 sessionInterval=null;
+
 }
 
 currentUserUID=null;
+
 currentUserEmail=null;
 
 document.getElementById("mainApp")
@@ -2797,6 +3187,7 @@ window.Telegram?.WebApp;
 if(tg){
 
 tg.ready();
+
 tg.expand();
 
 }
