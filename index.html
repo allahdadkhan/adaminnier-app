@@ -34,43 +34,17 @@ body{
 overflow-x:hidden;
 }
 
-/* =====================================================
-   RND FUTURISTIC BACKGROUND
-===================================================== */
-
 body::before{
 content:"";
 position:fixed;
 inset:0;
 z-index:-10;
 background:
-radial-gradient(
-circle at 50% 35%,
-rgba(255,35,35,.10),
-transparent 28%
-),
-radial-gradient(
-circle at 10% 20%,
-rgba(255,0,0,.08),
-transparent 28%
-),
-radial-gradient(
-circle at 90% 75%,
-rgba(180,0,0,.07),
-transparent 30%
-),
-linear-gradient(
-145deg,
-#010101 0%,
-#090101 35%,
-#160202 55%,
-#030303 100%
-);
+radial-gradient(circle at 50% 35%,rgba(255,35,35,.10),transparent 28%),
+radial-gradient(circle at 10% 20%,rgba(255,0,0,.08),transparent 28%),
+radial-gradient(circle at 90% 75%,rgba(180,0,0,.07),transparent 30%),
+linear-gradient(145deg,#010101 0%,#090101 35%,#160202 55%,#030303 100%);
 }
-
-/* =====================================================
-   SMALL 3D FLOATING R COINS
-===================================================== */
 
 .bg-coin{
 position:fixed;
@@ -78,47 +52,27 @@ z-index:-5;
 width:58px;
 height:58px;
 border-radius:50%;
-
 display:grid;
 place-items:center;
-
 font-size:27px;
 font-weight:1000;
 font-family:Arial,Helvetica,sans-serif;
-
 color:#fff;
-
 background:
-radial-gradient(
-circle at 30% 20%,
-#ffb0b0 0%,
-#ff5b5b 8%,
-#e60000 25%,
-#a00000 48%,
-#610000 68%,
-#220000 86%,
-#090000 100%
-);
-
+radial-gradient(circle at 30% 20%,#ffb0b0 0%,#ff5b5b 8%,#e60000 25%,#a00000 48%,#610000 68%,#220000 86%,#090000 100%);
 border:2px solid #a90000;
-
 box-shadow:
 0 7px 0 #280000,
 0 12px 20px rgba(0,0,0,.80),
 0 0 25px rgba(255,0,0,.22),
 inset 0 4px 7px rgba(255,255,255,.35),
 inset 0 -8px 12px rgba(0,0,0,.75);
-
 text-shadow:
 0 2px 4px rgba(0,0,0,.8),
 0 0 8px rgba(255,255,255,.18);
-
 opacity:.17;
-
 pointer-events:none;
-
-animation:
-floatCoin 8s ease-in-out infinite;
+animation:floatCoin 8s ease-in-out infinite;
 }
 
 .bg-coin::after{
@@ -208,27 +162,22 @@ animation-delay:-6s;
 }
 
 @keyframes floatCoin{
-
 0%,100%{
 margin-top:0;
 transform:translateY(0) rotateY(0deg) rotateX(5deg);
 }
-
 25%{
 margin-top:-10px;
 transform:translateY(-4px) rotateY(25deg) rotateX(8deg);
 }
-
 50%{
 margin-top:0;
 transform:translateY(0) rotateY(0deg) rotateX(-5deg);
 }
-
 75%{
 margin-top:10px;
 transform:translateY(4px) rotateY(-25deg) rotateX(8deg);
 }
-
 }
 
 @media(max-width:600px){
@@ -284,8 +233,6 @@ font-size:15px;
 
 }
 
-/* futuristic grid */
-
 #authScreen::after,
 .app::after{
 content:"";
@@ -294,22 +241,11 @@ inset:0;
 z-index:-2;
 opacity:.055;
 background-image:
-linear-gradient(
-rgba(255,255,255,.08) 1px,
-transparent 1px
-),
-linear-gradient(
-90deg,
-rgba(255,255,255,.08) 1px,
-transparent 1px
-);
+linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
 background-size:35px 35px;
 pointer-events:none;
 }
-
-/* =====================================================
-   SIDE ADS
-===================================================== */
 
 .side-ad{
 position:fixed;
@@ -361,10 +297,6 @@ max-width:540px;
 
 }
 
-/* =====================================================
-   AUTH
-===================================================== */
-
 #authScreen{
 min-height:100vh;
 display:flex;
@@ -380,21 +312,13 @@ width:100%;
 max-width:420px;
 padding:34px 23px 28px;
 border-radius:30px;
-
 background:
-linear-gradient(
-145deg,
-rgba(35,8,8,.97),
-rgba(5,5,7,.98)
-);
-
+linear-gradient(145deg,rgba(35,8,8,.97),rgba(5,5,7,.98));
 border:1px solid rgba(255,60,60,.30);
-
 box-shadow:
 0 30px 90px rgba(0,0,0,.85),
 0 0 50px rgba(255,0,0,.13),
 inset 0 1px 0 rgba(255,255,255,.10);
-
 overflow:hidden;
 }
 
@@ -417,23 +341,12 @@ margin:0 auto 18px;
 display:grid;
 place-items:center;
 border-radius:23px;
-
 font-size:34px;
 font-weight:1000;
-
 color:white;
-
 background:
-radial-gradient(
-circle at 30% 20%,
-#ff8585,
-#ed1717 30%,
-#a00000 65%,
-#320000
-);
-
+radial-gradient(circle at 30% 20%,#ff8585,#ed1717 30%,#a00000 65%,#320000);
 border:1px solid rgba(255,255,255,.30);
-
 box-shadow:
 0 10px 0 #390000,
 0 18px 40px rgba(0,0,0,.65),
@@ -462,25 +375,16 @@ margin-bottom:11px;
 border-radius:15px;
 border:1px solid rgba(255,255,255,.10);
 outline:none;
-
 background:
-linear-gradient(
-145deg,
-rgba(255,255,255,.065),
-rgba(255,255,255,.025)
-);
-
+linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
 color:white;
 font-size:14px;
-
-box-shadow:
-inset 0 2px 8px rgba(0,0,0,.22);
+box-shadow:inset 0 2px 8px rgba(0,0,0,.22);
 }
 
 .auth-input:focus,
 .withdraw-input:focus{
 border-color:#ff3d3d;
-
 box-shadow:
 0 0 0 2px rgba(255,40,40,.10),
 0 0 18px rgba(255,30,30,.18),
@@ -501,20 +405,12 @@ border-radius:16px;
 color:white;
 font-size:14px;
 font-weight:900;
-
 background:
-linear-gradient(
-100deg,
-#9d0000,
-#ed1717 48%,
-#ff5252
-);
-
+linear-gradient(100deg,#9d0000,#ed1717 48%,#ff5252);
 box-shadow:
 0 7px 0 #4b0000,
 0 12px 24px rgba(170,0,0,.30),
 inset 0 2px 5px rgba(255,255,255,.22);
-
 cursor:pointer;
 }
 
@@ -549,10 +445,6 @@ text-align:center;
 margin-top:12px;
 }
 
-/* =====================================================
-   APP
-===================================================== */
-
 .app{
 width:100%;
 max-width:520px;
@@ -580,18 +472,9 @@ display:grid;
 place-items:center;
 font-size:20px;
 font-weight:1000;
-
 background:
-radial-gradient(
-circle at 30% 20%,
-#ff8888,
-#ed1717 35%,
-#a00000 70%,
-#350000
-);
-
+radial-gradient(circle at 30% 20%,#ff8888,#ed1717 35%,#a00000 70%,#350000);
 border:1px solid rgba(255,255,255,.20);
-
 box-shadow:
 0 6px 0 #3b0000,
 0 10px 22px rgba(0,0,0,.55),
@@ -619,14 +502,8 @@ height:44px;
 display:grid;
 place-items:center;
 border-radius:50%;
-
 background:
-linear-gradient(
-145deg,
-rgba(255,40,40,.20),
-rgba(120,0,0,.07)
-);
-
+linear-gradient(145deg,rgba(255,40,40,.20),rgba(120,0,0,.07));
 border:1px solid rgba(255,70,70,.28);
 cursor:pointer;
 font-size:19px;
@@ -662,16 +539,9 @@ font-weight:bold;
 margin-top:10px;
 padding:22px;
 border-radius:28px;
-
 background:
-linear-gradient(
-145deg,
-rgba(35,8,8,.94),
-rgba(6,8,12,.97)
-);
-
+linear-gradient(145deg,rgba(35,8,8,.94),rgba(6,8,12,.97));
 border:1px solid rgba(255,60,60,.23);
-
 box-shadow:
 0 25px 70px rgba(0,0,0,.62),
 inset 0 1px 0 rgba(255,255,255,.06);
@@ -689,16 +559,8 @@ text-align:center;
 margin-top:6px;
 font-size:40px;
 font-weight:1000;
-
 background:
-linear-gradient(
-90deg,
-#fff,
-#ff8b8b,
-#fff,
-#ff3b3b
-);
-
+linear-gradient(90deg,#fff,#ff8b8b,#fff,#ff3b3b);
 -webkit-background-clip:text;
 color:transparent;
 }
@@ -716,10 +578,6 @@ color:#ff4d4d;
 font-size:12px;
 }
 
-/* =====================================================
-   MINING BUTTON
-===================================================== */
-
 .mining-area{
 display:flex;
 justify-content:center;
@@ -732,24 +590,11 @@ position:relative;
 width:190px;
 height:190px;
 border-radius:50%;
-
 border:3px solid #ff3d3d;
-
 cursor:pointer;
 color:white;
-
 background:
-radial-gradient(
-circle at 31% 20%,
-#ffffff 0%,
-#ffb5b5 5%,
-#ff4d4d 14%,
-#d40000 32%,
-#760000 56%,
-#270000 78%,
-#050000 100%
-);
-
+radial-gradient(circle at 31% 20%,#ffffff 0%,#ffb5b5 5%,#ff4d4d 14%,#d40000 32%,#760000 56%,#270000 78%,#050000 100%);
 box-shadow:
 0 15px 0 #420000,
 0 21px 25px rgba(0,0,0,.85),
@@ -757,7 +602,6 @@ box-shadow:
 0 0 60px rgba(220,0,0,.22),
 inset 0 8px 13px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.65);
-
 transition:.12s;
 touch-action:manipulation;
 user-select:none;
@@ -769,19 +613,8 @@ transform:translateY(11px) scale(.965);
 
 .mining-button.active{
 border-color:#ff7474;
-
 background:
-radial-gradient(
-circle at 31% 20%,
-#ffffff 0%,
-#ffd0d0 6%,
-#ff6b6b 15%,
-#e90000 32%,
-#a00000 55%,
-#390000 78%,
-#080000 100%
-);
-
+radial-gradient(circle at 31% 20%,#ffffff 0%,#ffd0d0 6%,#ff6b6b 15%,#e90000 32%,#a00000 55%,#390000 78%,#080000 100%);
 box-shadow:
 0 15px 0 #570000,
 0 22px 32px rgba(0,0,0,.85),
@@ -789,7 +622,6 @@ box-shadow:
 0 0 75px rgba(255,0,0,.42),
 inset 0 8px 14px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.60);
-
 animation:miningPulse 1.4s infinite;
 }
 
@@ -839,14 +671,8 @@ justify-content:space-between;
 margin-top:18px;
 padding:17px;
 border-radius:17px;
-
 background:
-linear-gradient(
-90deg,
-rgba(255,0,0,.13),
-rgba(255,70,70,.08)
-);
-
+linear-gradient(90deg,rgba(255,0,0,.13),rgba(255,70,70,.08));
 border:1px solid rgba(255,70,70,.18);
 }
 
@@ -867,10 +693,6 @@ margin-top:4px;
 text-align:right;
 }
 
-/* =====================================================
-   ACTIONS
-===================================================== */
-
 .actions{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -881,24 +703,15 @@ margin-top:12px;
 .action{
 min-height:92px;
 border-radius:18px;
-
 border:1px solid rgba(255,70,70,.28);
-
 background:
-linear-gradient(
-145deg,
-rgba(55,15,15,.98),
-rgba(7,8,12,.98)
-);
-
+linear-gradient(145deg,rgba(55,15,15,.98),rgba(7,8,12,.98));
 color:#fff;
 cursor:pointer;
-
 box-shadow:
 0 9px 22px rgba(0,0,0,.30),
 0 0 20px rgba(255,0,0,.10),
 inset 0 1px 0 rgba(255,255,255,.08);
-
 transition:.15s;
 font-size:13px;
 font-weight:900;
@@ -914,14 +727,8 @@ cursor:not-allowed;
 
 .action.ad-button{
 border-color:rgba(255,190,60,.55);
-
 background:
-linear-gradient(
-145deg,
-rgba(77,48,18,.98),
-rgba(20,12,7,.98)
-);
-
+linear-gradient(145deg,rgba(77,48,18,.98),rgba(20,12,7,.98));
 box-shadow:
 0 9px 22px rgba(0,0,0,.30),
 0 0 28px rgba(255,168,0,.15),
@@ -930,13 +737,8 @@ inset 0 1px 0 rgba(255,255,255,.10);
 
 .action.withdraw-button{
 border-color:rgba(255,60,60,.28);
-
 background:
-linear-gradient(
-145deg,
-rgba(60,15,15,.98),
-rgba(7,12,25,.98)
-);
+linear-gradient(145deg,rgba(60,15,15,.98),rgba(7,12,25,.98));
 }
 
 .action-icon{
@@ -961,22 +763,12 @@ margin-top:8px;
 min-height:14px;
 }
 
-/* =====================================================
-   DAILY
-===================================================== */
-
 .daily{
 margin-top:18px;
 padding:20px;
 border-radius:22px;
-
 background:
-linear-gradient(
-145deg,
-rgba(30,8,8,.95),
-rgba(5,8,17,.96)
-);
-
+linear-gradient(145deg,rgba(30,8,8,.95),rgba(5,8,17,.96));
 border:1px solid rgba(255,255,255,.07);
 }
 
@@ -1016,12 +808,7 @@ border:1px solid #29293a;
 
 .day.active .day-circle{
 background:
-linear-gradient(
-135deg,
-#ff4b4b,
-#b00000
-);
-
+linear-gradient(135deg,#ff4b4b,#b00000);
 box-shadow:0 0 15px rgba(255,0,0,.25);
 }
 
@@ -1033,15 +820,8 @@ border:0;
 border-radius:30px;
 color:#fff;
 font-weight:800;
-
 background:
-linear-gradient(
-90deg,
-#9d0000,
-#ed1717,
-#ff5555
-);
-
+linear-gradient(90deg,#9d0000,#ed1717,#ff5555);
 box-shadow:
 0 7px 0 #4b0000,
 0 12px 25px rgba(170,0,0,.25);
@@ -1066,10 +846,6 @@ border-radius:15px;
 color:white;
 background:rgba(255,255,255,.05);
 }
-
-/* =====================================================
-   WITHDRAW
-===================================================== */
 
 .withdraw-title{
 text-align:center;
@@ -1130,48 +906,6 @@ margin-top:14px;
 min-height:18px;
 }
 
-/* =====================================================
-   WITHDRAWAL STATUS
-===================================================== */
-
-.withdraw-status-box{
-margin-top:16px;
-padding:16px;
-border-radius:17px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,60,60,.18);
-text-align:center;
-}
-
-.withdraw-status-title{
-font-size:10px;
-color:#777791;
-letter-spacing:1px;
-margin-bottom:8px;
-}
-
-.withdraw-status{
-font-size:15px;
-font-weight:900;
-color:#ffc44d;
-}
-
-.withdraw-status.pending{
-color:#ffc44d;
-}
-
-.withdraw-status.approved{
-color:#42ff88;
-}
-
-.withdraw-status.rejected{
-color:#ff5577;
-}
-
-/* =====================================================
-   PROFILE
-===================================================== */
-
 .profile-card h2{
 text-align:center;
 margin:0 0 22px;
@@ -1187,18 +921,9 @@ place-items:center;
 border-radius:50%;
 font-size:30px;
 font-weight:900;
-
 background:
-radial-gradient(
-circle at 30% 20%,
-#ff8888,
-#ed1717 35%,
-#a00000 70%,
-#350000
-);
-
+radial-gradient(circle at 30% 20%,#ff8888,#ed1717 35%,#a00000 70%,#350000);
 border:1px solid rgba(255,255,255,.20);
-
 box-shadow:
 0 9px 0 #3b0000,
 0 14px 30px rgba(0,0,0,.55),
@@ -1279,7 +1004,6 @@ box-shadow:
 
 <body>
 
-<!-- SMALL BACKGROUND 3D R COINS -->
 <div class="bg-coin c1">R</div>
 <div class="bg-coin c2">R</div>
 <div class="bg-coin c3">R</div>
@@ -1665,21 +1389,6 @@ id="withdrawMessage"
 class="withdraw-message">
 </div>
 
-<!-- WITHDRAWAL STATUS -->
-<div class="withdraw-status-box">
-
-<div class="withdraw-status-title">
-LATEST WITHDRAWAL STATUS
-</div>
-
-<div
-id="withdrawStatus"
-class="withdraw-status">
-No withdrawal request
-</div>
-
-</div>
-
 <button
 class="back-btn"
 onclick="showMining()"
@@ -1780,13 +1489,10 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
-getFirestore,
+initializeFirestore,
 collection,
 addDoc,
-serverTimestamp,
-query,
-where,
-onSnapshot
+serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1806,13 +1512,14 @@ const app=initializeApp(firebaseConfig);
 
 const auth=getAuth(app);
 
-const db=getFirestore(app);
+/* FIX: Telegram WebView / Firestore connection */
+const db=initializeFirestore(app,{
+experimentalForceLongPolling:true
+});
 
 const provider=new GoogleAuthProvider();
 
 let signUpMode=false;
-
-let withdrawalUnsubscribe=null;
 
 
 /* =====================================================
@@ -2402,9 +2109,6 @@ applyElapsedMining();
 
 updateBoostUI();
 
-/* LOAD WITHDRAWAL STATUS */
-listenForWithdrawalStatus(user.uid);
-
 }
 
 
@@ -2429,166 +2133,6 @@ document.getElementById("withdrawBalance").textContent=
 balance.toFixed(5);
 
 saveBalance();
-
-}
-
-
-/* =====================================================
-   WITHDRAWAL STATUS
-===================================================== */
-
-function listenForWithdrawalStatus(uid){
-
-/*
-   Remove old listener if user changes
-*/
-
-if(withdrawalUnsubscribe){
-
-withdrawalUnsubscribe();
-
-withdrawalUnsubscribe=null;
-
-}
-
-const statusElement=
-document.getElementById("withdrawStatus");
-
-if(!statusElement)return;
-
-statusElement.className=
-"withdraw-status";
-
-statusElement.textContent=
-"Loading...";
-
-/*
-   Listen to this user's withdrawal requests.
-
-   Bot can change:
-   Pending -> Approved
-   Pending -> Rejected
-
-   The app updates automatically.
-*/
-
-const withdrawalQuery=
-query(
-collection(db,"withdrawals"),
-where("uid","==",uid)
-);
-
-withdrawalUnsubscribe=
-onSnapshot(
-withdrawalQuery,
-(snapshot)=>{
-
-if(snapshot.empty){
-
-statusElement.className=
-"withdraw-status";
-
-statusElement.textContent=
-"No withdrawal request";
-
-return;
-
-}
-
-/*
-   Find latest request by createdAt.
-   No orderBy is used so Firebase index is not required.
-*/
-
-let latestDoc=null;
-
-snapshot.forEach((doc)=>{
-
-const data=doc.data();
-
-if(!latestDoc){
-
-latestDoc={
-id:doc.id,
-data:data
-};
-
-return;
-
-}
-
-const latestTime=
-latestDoc.data.createdAt?.toMillis
-?latestDoc.data.createdAt.toMillis()
-:0;
-
-const currentTime=
-data.createdAt?.toMillis
-?data.createdAt.toMillis()
-:0;
-
-if(currentTime>=latestTime){
-
-latestDoc={
-id:doc.id,
-data:data
-};
-
-}
-
-});
-
-const data=
-latestDoc.data;
-
-const rawStatus=
-String(data.status||"Pending");
-
-const normalized=
-rawStatus.toLowerCase();
-
-if(normalized==="approved"){
-
-statusElement.className=
-"withdraw-status approved";
-
-statusElement.textContent=
-"✅ Approved";
-
-}else if(normalized==="rejected"){
-
-statusElement.className=
-"withdraw-status rejected";
-
-statusElement.textContent=
-"❌ Rejected";
-
-}else{
-
-statusElement.className=
-"withdraw-status pending";
-
-statusElement.textContent=
-"⏳ Pending";
-
-}
-
-},
-(error)=>{
-
-console.error(
-"Withdrawal status listener error:",
-error
-);
-
-statusElement.className=
-"withdraw-status";
-
-statusElement.textContent=
-"Unable to load status";
-
-}
-);
 
 }
 
@@ -2715,16 +2259,6 @@ document.getElementById("mainApp").style.display=
 
 currentUserUID=null;
 
-/* REMOVE WITHDRAWAL LISTENER */
-
-if(withdrawalUnsubscribe){
-
-withdrawalUnsubscribe();
-
-withdrawalUnsubscribe=null;
-
-}
-
 }
 
 });
@@ -2758,14 +2292,6 @@ if(sessionInterval){
 clearInterval(sessionInterval);
 
 sessionInterval=null;
-
-}
-
-if(withdrawalUnsubscribe){
-
-withdrawalUnsubscribe();
-
-withdrawalUnsubscribe=null;
 
 }
 
@@ -3111,6 +2637,7 @@ document.getElementById("profilePage")
 
 /* =====================================================
    WITHDRAW
+   FIXED
 ===================================================== */
 
 window.confirmWithdrawal=async function(){
@@ -3138,10 +2665,15 @@ document.getElementById("withdrawAmount")
 const message=
 document.getElementById("withdrawMessage");
 
-message.style.color="#ff5577";
+const button=
+document.querySelector(".confirm-btn");
 
+
+/* VALIDATION */
 
 if(!wallet){
+
+message.style.color="#ff5577";
 
 message.textContent=
 "Please enter your TRC20 wallet address.";
@@ -3150,8 +2682,9 @@ return;
 
 }
 
-
 if(!wallet.startsWith("T")||wallet.length<30){
+
+message.style.color="#ff5577";
 
 message.textContent=
 "Please enter a valid TRC20 address.";
@@ -3160,8 +2693,9 @@ return;
 
 }
 
-
 if(!amount||amount<0.02){
+
+message.style.color="#ff5577";
 
 message.textContent=
 "Minimum withdrawal is 0.02 RND.";
@@ -3170,8 +2704,9 @@ return;
 
 }
 
-
 if(amount>balance){
+
+message.style.color="#ff5577";
 
 message.textContent=
 "Insufficient balance.";
@@ -3181,40 +2716,66 @@ return;
 }
 
 
-const button=
-document.querySelector(".confirm-btn");
+/* LOCK BUTTON */
 
 button.disabled=true;
 
 button.style.opacity=".65";
 
-message.style.color="#ff5b5b";
+message.style.color="#ffb347";
 
 message.textContent=
 "Submitting withdrawal request...";
 
 
+/* WITHDRAWAL DATA */
+
+const withdrawalData={
+
+uid:user.uid,
+
+email:user.email||"",
+
+walletAddress:wallet,
+
+network:"TRC20",
+
+currency:"USDT",
+
+amount:amount,
+
+balanceUnit:"RND",
+
+status:"Pending",
+
+createdAt:serverTimestamp()
+
+};
+
+
+/* SUBMIT */
+
 try{
 
+const withdrawalRef=
 await addDoc(
 collection(db,"withdrawals"),
-{
-uid:user.uid,
-email:user.email||"",
-walletAddress:wallet,
-network:"TRC20",
-currency:"USDT",
-amount:amount,
-balanceUnit:"RND",
-status:"Pending",
-createdAt:serverTimestamp()
-}
+withdrawalData
 );
 
-message.style.color="#ff5b5b";
+console.log(
+"Withdrawal submitted:",
+withdrawalRef.id
+);
+
+
+/* SUCCESS */
+
+message.style.color="#00e676";
 
 message.textContent=
-"✅ Withdrawal submitted successfully. Status: Pending.";
+"✅ Withdrawal submitted successfully. Status: Pending";
+
 
 document.getElementById("walletAddress")
 .value="";
@@ -3222,27 +2783,43 @@ document.getElementById("walletAddress")
 document.getElementById("withdrawAmount")
 .value="";
 
+
 button.disabled=false;
 
 button.style.opacity="1";
 
-/*
-   Listener will automatically receive the new
-   withdrawal and show Pending.
-*/
 
-}catch(e){
+}catch(error){
 
-console.error(e);
+console.error(
+"Withdrawal error:",
+error
+);
+
+button.disabled=false;
+
+button.style.opacity="1";
 
 message.style.color="#ff5577";
 
+
+if(error.code==="permission-denied"){
+
 message.textContent=
-"Failed to submit withdrawal request. Please try again.";
+"❌ Withdrawal rejected by Firebase permissions.";
 
-button.disabled=false;
+}else if(error.code==="unavailable"){
 
-button.style.opacity="1";
+message.textContent=
+"❌ Firebase is temporarily unavailable. Please try again.";
+
+}else{
+
+message.textContent=
+"❌ Withdrawal failed: "+
+(error.message||"Unknown error");
+
+}
 
 }
 
