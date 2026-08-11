@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
 <title>ADAMINNER</title>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<!-- ================= MONETAG ADS ================= -->
+<script
+src="//libtl.com/sdk.js"
+data-zone="11549239"
+data-sdk="show_11549239">
+</script>
 
 <style>
 *{
@@ -80,8 +90,7 @@ width:100%;
 max-width:420px;
 padding:32px 23px 27px;
 border-radius:30px;
-background:
-linear-gradient(145deg,rgba(25,20,48,.97),rgba(5,8,19,.98));
+background:linear-gradient(145deg,rgba(25,20,48,.97),rgba(5,8,19,.98));
 border:1px solid rgba(163,103,255,.30);
 box-shadow:
 0 30px 90px rgba(0,0,0,.72),
@@ -125,8 +134,7 @@ inset 0 -10px 18px rgba(0,0,0,.28)
 .auth-box h1{
 text-align:center;
 margin:0;
-font-size:25px;
-letter-spacing:.3px
+font-size:25px
 }
 
 .auth-sub{
@@ -150,8 +158,7 @@ color:white;
 font-size:14px;
 box-shadow:
 inset 0 2px 8px rgba(0,0,0,.22),
-0 5px 15px rgba(0,0,0,.12);
-transition:.2s
+0 5px 15px rgba(0,0,0,.12)
 }
 
 .auth-input:focus,
@@ -183,16 +190,7 @@ box-shadow:
 0 7px 0 #32157b,
 0 12px 24px rgba(91,45,220,.30),
 inset 0 2px 5px rgba(255,255,255,.22);
-cursor:pointer;
-transition:.15s
-}
-
-.auth-btn:active,
-.confirm-btn:active{
-transform:translateY(4px);
-box-shadow:
-0 3px 0 #32157b,
-0 7px 15px rgba(91,45,220,.25)
+cursor:pointer
 }
 
 .google-btn{
@@ -203,9 +201,6 @@ border:1px solid rgba(255,255,255,.11);
 border-radius:16px;
 color:white;
 background:rgba(255,255,255,.055);
-box-shadow:
-inset 0 1px 0 rgba(255,255,255,.07),
-0 8px 18px rgba(0,0,0,.18);
 cursor:pointer
 }
 
@@ -291,9 +286,6 @@ border-radius:50%;
 background:
 linear-gradient(145deg,rgba(135,75,255,.20),rgba(0,220,255,.07));
 border:1px solid rgba(161,105,255,.28);
-box-shadow:
-0 7px 20px rgba(0,0,0,.35),
-inset 0 1px 0 rgba(255,255,255,.10);
 cursor:pointer;
 font-size:19px
 }
@@ -361,7 +353,7 @@ color:#00e5ff;
 font-size:12px
 }
 
-/* ================= 3D MINING BUTTON ================= */
+/* ================= MINING BUTTON ================= */
 
 .mining-area{
 display:flex;
@@ -378,7 +370,6 @@ border-radius:50%;
 border:3px solid #a678ff;
 cursor:pointer;
 color:white;
-
 background:
 radial-gradient(circle at 31% 20%,
 #ffffff 0%,
@@ -388,7 +379,6 @@ radial-gradient(circle at 31% 20%,
 #3b157f 56%,
 #120722 78%,
 #05030b 100%);
-
 box-shadow:
 0 15px 0 #251047,
 0 21px 25px rgba(0,0,0,.78),
@@ -396,57 +386,17 @@ box-shadow:
 0 0 60px rgba(93,45,255,.22),
 inset 0 8px 13px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.65);
-
-transform:translateY(0) rotateX(0deg);
-transition:
-transform .12s ease,
-box-shadow .12s ease,
-border-color .2s ease,
-filter .2s ease;
-
+transition:.12s;
 touch-action:manipulation;
-user-select:none;
--webkit-user-select:none
-}
-
-.mining-button::before{
-content:"";
-position:absolute;
-inset:9px;
-border-radius:50%;
-border:2px solid rgba(255,255,255,.18);
-box-shadow:
-inset 0 0 22px rgba(255,255,255,.14),
-0 0 12px rgba(157,103,255,.22);
-pointer-events:none
-}
-
-.mining-button::after{
-content:"";
-position:absolute;
-width:72px;
-height:30px;
-left:32px;
-top:22px;
-border-radius:50%;
-background:rgba(255,255,255,.25);
-filter:blur(6px);
-transform:rotate(-25deg);
-pointer-events:none
+user-select:none
 }
 
 .mining-button:active{
-transform:translateY(11px) scale(.965);
-box-shadow:
-0 4px 0 #251047,
-0 9px 15px rgba(0,0,0,.75),
-0 0 35px rgba(140,70,255,.80),
-inset 0 9px 16px rgba(0,0,0,.30)
+transform:translateY(11px) scale(.965)
 }
 
 .mining-button.active{
 border-color:#47edff;
-
 background:
 radial-gradient(circle at 31% 20%,
 #ffffff 0%,
@@ -456,7 +406,6 @@ radial-gradient(circle at 31% 20%,
 #14538b 55%,
 #061525 78%,
 #02070d 100%);
-
 box-shadow:
 0 15px 0 #063d57,
 0 22px 32px rgba(0,0,0,.78),
@@ -464,53 +413,33 @@ box-shadow:
 0 0 75px rgba(0,160,255,.42),
 inset 0 8px 14px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.60);
-
 animation:miningPulse 1.4s infinite
 }
 
 @keyframes miningPulse{
-0%,100%{
-filter:brightness(1)
-}
-50%{
-filter:brightness(1.22)
-}
+0%,100%{filter:brightness(1)}
+50%{filter:brightness(1.22)}
 }
 
 .mine-icon{
-position:relative;
-z-index:2;
-font-size:45px;
-text-shadow:
-0 4px 8px rgba(0,0,0,.75),
-0 0 12px rgba(255,255,255,.20)
+font-size:45px
 }
 
 .mine-title{
-position:relative;
-z-index:2;
 margin-top:8px;
 font-size:17px;
 font-weight:1000;
-letter-spacing:2px;
-text-shadow:0 3px 7px rgba(0,0,0,.8)
+letter-spacing:2px
 }
 
 .mine-small{
-position:relative;
-z-index:2;
 margin-top:6px;
 color:#00e5ff;
 font-size:11px;
-font-weight:1000;
-letter-spacing:1px
+font-weight:1000
 }
 
-.mining-button.active .mine-small{
-color:#fff
-}
-
-/* ================= OTHER UI ================= */
+/* ================= STATUS ================= */
 
 .status{
 text-align:center;
@@ -557,6 +486,8 @@ margin-top:4px;
 text-align:right
 }
 
+/* ================= ACTION BUTTONS ================= */
+
 .actions{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -565,31 +496,68 @@ margin-top:12px
 }
 
 .action{
-min-height:78px;
-border-radius:17px;
-border:1px solid rgba(255,255,255,.08);
+min-height:88px;
+border-radius:18px;
+border:1px solid rgba(151,92,255,.28);
 background:
-linear-gradient(145deg,rgba(30,25,50,.9),rgba(8,11,22,.95));
+linear-gradient(145deg,rgba(38,27,70,.98),rgba(7,12,25,.98));
 color:#fff;
 cursor:pointer;
 box-shadow:
-0 8px 18px rgba(0,0,0,.20),
-inset 0 1px 0 rgba(255,255,255,.06)
+0 9px 22px rgba(0,0,0,.30),
+0 0 20px rgba(111,52,255,.10),
+inset 0 1px 0 rgba(255,255,255,.08);
+transition:.15s;
+font-size:13px;
+font-weight:900
+}
+
+.action:active{
+transform:translateY(3px);
+box-shadow:
+0 4px 12px rgba(0,0,0,.35),
+inset 0 1px 0 rgba(255,255,255,.05)
+}
+
+.action.ad-button{
+border-color:rgba(255,190,60,.45);
+background:
+linear-gradient(145deg,rgba(73,45,19,.98),rgba(20,12,7,.98));
+box-shadow:
+0 9px 22px rgba(0,0,0,.30),
+0 0 24px rgba(255,168,0,.12),
+inset 0 1px 0 rgba(255,255,255,.10)
+}
+
+.action.withdraw-button{
+border-color:rgba(0,229,255,.28);
+background:
+linear-gradient(145deg,rgba(17,45,60,.98),rgba(7,12,25,.98))
 }
 
 .action-icon{
 display:block;
 margin-bottom:7px;
-font-size:23px
+font-size:25px
 }
 
 .ad{
-color:#ffd166
+color:#ffc44d
 }
 
 .offer{
 color:#00e5ff
 }
+
+.ad-status{
+text-align:center;
+font-size:10px;
+color:#777791;
+margin-top:8px;
+min-height:14px
+}
+
+/* ================= DAILY ================= */
 
 .daily{
 margin-top:18px;
@@ -648,9 +616,7 @@ border-radius:30px;
 color:#fff;
 font-weight:800;
 background:linear-gradient(90deg,#723cff,#a64cff,#00c8ff);
-box-shadow:
-0 7px 0 #32157b,
-0 12px 25px rgba(91,45,220,.25)
+box-shadow:0 7px 0 #32157b,0 12px 25px rgba(91,45,220,.25)
 }
 
 .logout{
@@ -818,39 +784,46 @@ font-size:14px
 
 <body>
 
-<!-- ================= AUTH ================= -->
+<!-- ================= LOGIN ================= -->
 
 <div id="authScreen">
+
 <div class="auth-box">
 
 <div class="auth-logo">A</div>
 
-<h1 id="authTitle">Welcome to ADAMINNER</h1>
+<h1 id="authTitle">
+Welcome to ADAMINNER
+</h1>
 
 <div class="auth-sub">
 Login to access your mining dashboard
 </div>
 
-<input id="authEmail"
+<input
+id="authEmail"
 class="auth-input"
 type="email"
 placeholder="Email"
 autocomplete="email">
 
-<input id="authPassword"
+<input
+id="authPassword"
 class="auth-input"
 type="password"
 placeholder="Password"
 autocomplete="current-password">
 
-<button class="auth-btn"
+<button
+class="auth-btn"
 id="authButton"
 onclick="emailAuth()"
 type="button">
 LOGIN
 </button>
 
-<button class="google-btn"
+<button
+class="google-btn"
 onclick="googleLogin()"
 type="button">
 🔵 Continue with Google
@@ -866,6 +839,7 @@ Don't have an account?
 </div>
 </div>
 
+
 <!-- ================= APP ================= -->
 
 <div class="app" id="mainApp" style="display:none;">
@@ -873,17 +847,24 @@ Don't have an account?
 <div class="header">
 
 <div class="brand">
+
 <div class="logo">A</div>
 
 <div>
 <h1>ADAMINNER</h1>
 <small>VIRTUAL REWARD NETWORK</small>
 </div>
-</div>
-
-<div class="profile" onclick="showProfile()">👤</div>
 
 </div>
+
+<div
+class="profile"
+onclick="showProfile()">
+👤
+</div>
+
+</div>
+
 
 <!-- ================= MINING PAGE ================= -->
 
@@ -891,7 +872,9 @@ Don't have an account?
 
 <div class="welcome">
 Welcome back,
-<span id="username" class="username">Miner</span>
+<span id="username" class="username">
+Miner
+</span>
 </div>
 
 <div class="balance-card">
@@ -909,9 +892,11 @@ TOTAL BALANCE
 Mining reward: +0.001 SOL / session
 </div>
 
+
 <div class="mining-area">
 
-<button id="miningButton"
+<button
+id="miningButton"
 class="mining-button"
 type="button"
 onclick="startMining()">
@@ -930,15 +915,28 @@ START MINING
 
 </div>
 
+
 <div class="status">
+
 <span id="dot" class="dot"></span>
-<span id="status">Mining inactive</span>
+
+<span id="status">
+Mining inactive
+</span>
+
 </div>
 
+
 <div class="session-box">
+
 6-HOUR MINING SESSION
-<strong id="sessionTime">Not active</strong>
+
+<strong id="sessionTime">
+Not active
+</strong>
+
 </div>
+
 
 <div class="hashrate">
 
@@ -947,6 +945,7 @@ START MINING
 </div>
 
 <div>
+
 <div id="hashrate" class="hash-right">
 2.85 GH/s
 </div>
@@ -954,33 +953,49 @@ START MINING
 <div id="boostText" class="boost">
 Base hashrate
 </div>
+
 </div>
 
 </div>
+
+
+<!-- ================= AD BUTTONS ================= -->
 
 <div class="actions">
 
-<button class="action"
+<button
+id="watchAdButton"
+class="action ad-button"
 onclick="watchAd()"
 type="button">
 
-<span class="action-icon ad">▶</span>
+<span class="action-icon ad">
+▶️
+</span>
 
-WATCH AD<br>
+WATCH AD
+
+<br>
 
 <span class="ad">
-+BOOST
+🔥 +10 MIN BOOST
 </span>
 
 </button>
 
-<button class="action"
+
+<button
+class="action withdraw-button"
 onclick="showWithdraw()"
 type="button">
 
-<span class="action-icon offer">💰</span>
+<span class="action-icon offer">
+💰
+</span>
 
-WITHDRAW<br>
+WITHDRAW
+
+<br>
 
 <span class="offer">
 TRC20 USDT
@@ -990,9 +1005,18 @@ TRC20 USDT
 
 </div>
 
+<div
+id="adStatus"
+class="ad-status">
+Watch an ad to activate your mining boost
+</div>
+
+
 <div class="daily">
 
-<h2>Daily Rewards</h2>
+<h2>
+Daily Rewards
+</h2>
 
 <p>
 Check in every day to increase your reward.
@@ -1037,24 +1061,33 @@ Day 7
 
 </div>
 
-<button class="claim"
+
+<button
+class="claim"
 onclick="claimReward()"
 type="button">
+
 CLAIM DAILY REWARD
+
 </button>
 
 </div>
 
-<button class="logout"
+
+<button
+class="logout"
 onclick="logout()"
 type="button">
+
 LOGOUT
+
 </button>
 
 </div>
 </div>
 
-<!-- ================= WITHDRAW PAGE ================= -->
+
+<!-- ================= WITHDRAW ================= -->
 
 <div id="withdrawPage" class="page">
 
@@ -1075,7 +1108,10 @@ Available Balance
 </small>
 
 <strong>
-<span id="withdrawBalance">0.00000</span> SOL
+<span id="withdrawBalance">
+0.00000
+</span>
+SOL
 </strong>
 
 </div>
@@ -1098,7 +1134,8 @@ Tron Network
 Wallet Address
 </label>
 
-<input id="walletAddress"
+<input
+id="walletAddress"
 class="withdraw-input"
 type="text"
 placeholder="Enter TRC20 wallet address">
@@ -1107,7 +1144,8 @@ placeholder="Enter TRC20 wallet address">
 Withdrawal Amount
 </label>
 
-<input id="withdrawAmount"
+<input
+id="withdrawAmount"
 class="withdraw-input"
 type="number"
 step="0.00001"
@@ -1121,7 +1159,8 @@ Make sure your TRC20 address is correct. You will receive the payment manually a
 
 </div>
 
-<button class="confirm-btn"
+<button
+class="confirm-btn"
 onclick="confirmWithdrawal()"
 type="button">
 
@@ -1129,11 +1168,13 @@ CONFIRM WITHDRAWAL
 
 </button>
 
-<div id="withdrawMessage"
+<div
+id="withdrawMessage"
 class="withdraw-message">
 </div>
 
-<button class="back-btn"
+<button
+class="back-btn"
 onclick="showMining()"
 type="button">
 
@@ -1144,7 +1185,8 @@ type="button">
 </div>
 </div>
 
-<!-- ================= PROFILE PAGE ================= -->
+
+<!-- ================= PROFILE ================= -->
 
 <div id="profilePage" class="page">
 
@@ -1186,7 +1228,8 @@ Not available
 🟢 Account is active
 </div>
 
-<button class="back-btn"
+<button
+class="back-btn"
 onclick="showMining()"
 type="button">
 
@@ -1194,7 +1237,8 @@ type="button">
 
 </button>
 
-<button class="logout"
+<button
+class="logout"
 onclick="logout()"
 type="button">
 
@@ -1205,17 +1249,23 @@ LOGOUT
 </div>
 </div>
 
+
 <div class="footer">
 ADAMINNER • Virtual Reward Network
 </div>
 
 </div>
 
+
 <script type="module">
+
+/* ================= FIREBASE ================= */
 
 import {
 initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
 getAuth,
@@ -1225,17 +1275,19 @@ signInWithEmailAndPassword,
 GoogleAuthProvider,
 signInWithPopup,
 signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
 getFirestore,
 collection,
 addDoc,
 serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* ================= FIREBASE ================= */
 
 const firebaseConfig={
 apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
@@ -1254,7 +1306,6 @@ const auth=getAuth(app);
 const db=getFirestore(app);
 
 const provider=new GoogleAuthProvider();
-
 
 let signUpMode=false;
 
@@ -1488,7 +1539,7 @@ boostEndKey(currentUserUID)
 }
 
 
-/* ================= REWARD CALC ================= */
+/* ================= REWARD ================= */
 
 function calculateReward(fromTime,toTime){
 
@@ -1720,7 +1771,7 @@ setMiningUI(false,message);
 }
 
 
-/* ================= RESTORE MINING ================= */
+/* ================= RESTORE ================= */
 
 function applyElapsedMining(){
 
@@ -1858,7 +1909,7 @@ saveBalance();
 }
 
 
-/* ================= MINING TIMER ================= */
+/* ================= TIMER ================= */
 
 function startMiningTimer(){
 
@@ -2109,9 +2160,12 @@ saveMiningState();
 }
 
 
-/* ================= AD BOOST 10 MIN ================= */
+/* =====================================================
+   MONETAG REWARDED INTERSTITIAL
+   WATCH AD -> COMPLETE AD -> 10 MIN BOOST
+===================================================== */
 
-window.watchAd=function(){
+window.watchAd=async function(){
 
 const user=auth.currentUser;
 
@@ -2122,6 +2176,61 @@ alert("Please login first.");
 return;
 
 }
+
+
+/* Check Monetag SDK */
+
+if(typeof window.show_11549239!=="function"){
+
+document.getElementById("adStatus").textContent=
+"Ad is still loading. Please try again.";
+
+alert(
+"Ad is not ready yet. Please wait a moment and try again."
+);
+
+return;
+
+}
+
+
+const button=
+document.getElementById("watchAdButton");
+
+const status=
+document.getElementById("adStatus");
+
+
+button.disabled=true;
+
+button.style.opacity="0.65";
+
+status.style.color="#ffc44d";
+
+status.textContent=
+"📺 Loading advertisement...";
+
+
+try{
+
+
+/*
+   REWARDED INTERSTITIAL
+
+   Monetag promise resolves after
+   the rewarded ad flow completes.
+*/
+
+await window.show_11549239();
+
+
+/*
+   ONLY AFTER THE AD PROMISE RESOLVES
+   THE USER GETS THE BOOST.
+*/
+
+currentUserUID=
+user.uid;
 
 const now=Date.now();
 
@@ -2141,17 +2250,184 @@ boostEndKey(user.uid),
 String(newEnd)
 );
 
+updateBoostUI();
+
+status.style.color="#00e5ff";
+
+status.textContent=
+"✅ Ad completed! 10-minute boost activated.";
+
+if(window.Telegram?.WebApp?.HapticFeedback){
+
+try{
+
+window.Telegram.WebApp.HapticFeedback
+.notificationOccurred("success");
+
+}catch(e){}
+
+}
+
+
+}catch(error){
+
+console.error(
+"Monetag rewarded ad error:",
+error
+);
+
+status.style.color="#ff5577";
+
+status.textContent=
+"Ad could not be completed. Please try again.";
+
+alert(
+"Ad could not be completed. Please try again."
+);
+
+}finally{
+
+button.disabled=false;
+
+button.style.opacity="1";
+
+}
+
+};
+
+
+/* =====================================================
+   REWARDED POPUP
+   Optional function
+===================================================== */
+
+window.watchRewardedPopup=async function(){
+
+const user=auth.currentUser;
+
+if(!user){
+
+alert("Please login first.");
+
+return;
+
+}
+
+if(typeof window.show_11549239!=="function"){
+
+alert("Ad is not ready yet.");
+
+return;
+
+}
+
+try{
+
+await window.show_11549239("pop");
+
+
 currentUserUID=
 user.uid;
+
+const now=Date.now();
+
+const oldEnd=
+getBoostEnd();
+
+const startFrom=
+oldEnd>now
+?oldEnd
+:now;
+
+const newEnd=
+startFrom+BOOST_TIME;
+
+localStorage.setItem(
+boostEndKey(user.uid),
+String(newEnd)
+);
 
 updateBoostUI();
 
 alert(
-"📺 Demo ad completed!\n\n"+
-"🔥 Mining boost activated for 10 minutes."
+"🔥 Rewarded Popup completed!\n\n"+
+"10-minute mining boost activated."
 );
 
+}catch(e){
+
+console.error(
+"Rewarded popup error:",
+e
+);
+
+}
+
 };
+
+
+/* =====================================================
+   IN-APP INTERSTITIAL
+   Monetag automatic ads
+===================================================== */
+
+function initializeInAppAds(){
+
+if(typeof window.show_11549239!=="function"){
+
+setTimeout(
+initializeInAppAds,
+2000
+);
+
+return;
+
+}
+
+try{
+
+window.show_11549239({
+
+type:"inApp",
+
+inAppSettings:{
+
+frequency:2,
+
+capping:0.1,
+
+interval:30,
+
+timeout:5,
+
+everyPage:false
+
+}
+
+});
+
+console.log(
+"Monetag In-App Interstitial initialized."
+);
+
+}catch(e){
+
+console.error(
+"Monetag In-App error:",
+e
+);
+
+}
+
+}
+
+
+/* Start automatic In-App ads */
+
+setTimeout(
+initializeInAppAds,
+3000
+);
 
 
 /* ================= DAILY REWARD ================= */
@@ -2269,7 +2545,7 @@ document.getElementById("profilePage")
 };
 
 
-/* ================= WITHDRAWAL ================= */
+/* ================= WITHDRAW ================= */
 
 window.confirmWithdrawal=async function(){
 
@@ -2296,7 +2572,6 @@ document.getElementById("withdrawAmount")
 const message=
 document.getElementById("withdrawMessage");
 
-
 message.style.color="#ff5577";
 
 
@@ -2320,8 +2595,6 @@ return;
 }
 
 
-/* MINIMUM 0.02 SOL */
-
 if(!amount||amount<0.02){
 
 message.textContent=
@@ -2342,10 +2615,6 @@ return;
 }
 
 
-/*
-5 SECOND SUBMITTING SCREEN
-*/
-
 const button=
 document.querySelector(".confirm-btn");
 
@@ -2361,12 +2630,6 @@ message.textContent=
 
 try{
 
-/*
-Firebase request is created first.
-User sees submitting for exactly
-5 seconds before confirmation.
-*/
-
 await addDoc(
 collection(db,"withdrawals"),
 {
@@ -2381,13 +2644,9 @@ createdAt:serverTimestamp()
 }
 );
 
-
-/* EXACT 5 SECOND DELAY */
-
 await new Promise(
 resolve=>setTimeout(resolve,5000)
 );
-
 
 balance-=amount;
 
@@ -2407,7 +2666,6 @@ message.textContent=
 button.disabled=false;
 
 button.style.opacity="1";
-
 
 }catch(e){
 
