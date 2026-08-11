@@ -39,10 +39,10 @@ position:fixed;
 inset:0;
 z-index:-5;
 background:
-radial-gradient(circle at 50% -10%,rgba(0,255,190,.20),transparent 30%),
-radial-gradient(circle at 100% 35%,rgba(0,220,255,.13),transparent 30%),
-radial-gradient(circle at 0 85%,rgba(0,255,170,.10),transparent 32%),
-linear-gradient(145deg,#020507,#06100e 48%,#020811)
+radial-gradient(circle at 50% -10%,rgba(255,20,55,.18),transparent 30%),
+radial-gradient(circle at 100% 35%,rgba(255,0,60,.10),transparent 30%),
+radial-gradient(circle at 0 85%,rgba(255,20,50,.08),transparent 32%),
+linear-gradient(145deg,#020507,#10060a 48%,#020811)
 }
 
 body::after{
@@ -57,212 +57,124 @@ linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
 background-size:35px 35px
 }
 
-/* ================= FLOATING PARTICLES ================= */
 
-.particles{
+/* =====================================================
+   FLOATING 3D RENDER COINS
+===================================================== */
+
+.render-bg{
 position:fixed;
 inset:0;
 overflow:hidden;
 pointer-events:none;
-z-index:-1
+z-index:-2
 }
 
-.particle{
+.render-coin{
 position:absolute;
-width:25px;
-height:25px;
-border-radius:7px;
-border:1px solid rgba(70,255,200,.25);
-background:
-linear-gradient(145deg,rgba(120,255,220,.16),rgba(0,150,120,.04));
-box-shadow:
-0 0 15px rgba(0,255,190,.12),
-inset 1px 1px 3px rgba(255,255,255,.15);
-animation:floatParticle linear infinite;
-opacity:.4
-}
-
-.particle::after{
-content:"R";
-position:absolute;
-inset:0;
-display:grid;
-place-items:center;
-font-size:11px;
-font-weight:1000;
-color:rgba(90,255,210,.55);
-text-shadow:0 0 8px rgba(0,255,190,.5)
-}
-
-@keyframes floatParticle{
-0%{
-transform:translate3d(0,110vh,0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-opacity:0
-}
-10%{opacity:.45}
-50%{
-transform:translate3d(70px,50vh,0) rotateX(180deg) rotateY(180deg) rotateZ(180deg)
-}
-90%{opacity:.25}
-100%{
-transform:translate3d(-50px,-15vh,0) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-opacity:0
-}
-}
-
-/* ================= 3D R COINS ================= */
-
-.floating-rnd-coins{
-position:fixed;
-inset:0;
-overflow:hidden;
-pointer-events:none;
-z-index:-2;
-perspective:1000px
-}
-
-.rnd-coin{
-position:absolute;
-width:78px;
-height:78px;
+width:100px;
+height:100px;
 border-radius:50%;
-display:grid;
-place-items:center;
-font-size:32px;
-font-weight:1000;
-font-style:italic;
-color:#031711;
-
 background:
-radial-gradient(
-circle at 30% 22%,
-#ffffff 0%,
-#d7fff2 7%,
-#6ff4cb 20%,
-#19ae84 43%,
-#075b48 70%,
-#021b16 100%
-);
-
-border:3px solid rgba(140,255,225,.75);
-
+radial-gradient(circle at 30% 20%,
+rgba(255,255,255,.95) 0%,
+rgba(255,150,165,.9) 5%,
+rgba(255,40,70,.95) 22%,
+rgba(185,0,35,.98) 55%,
+rgba(70,0,15,1) 100%);
+border:3px solid rgba(255,180,190,.65);
 box-shadow:
-0 0 18px rgba(70,255,200,.35),
-0 0 55px rgba(0,255,190,.16),
-inset 5px 5px 9px rgba(255,255,255,.45),
-inset -8px -11px 18px rgba(0,0,0,.70);
-
-text-shadow:
-2px 2px 0 rgba(255,255,255,.35),
-4px 5px 0 rgba(0,70,50,.55);
-
-opacity:.22;
-
-animation:rndCoinFloat 8s ease-in-out infinite
+0 0 12px rgba(255,20,60,.8),
+0 0 35px rgba(255,0,45,.35),
+inset 7px 5px 10px rgba(255,255,255,.55),
+inset -12px -10px 20px rgba(40,0,8,.8);
+opacity:.18;
+animation:renderFloat 8s ease-in-out infinite;
+transform-style:preserve-3d
 }
 
-.rnd-coin::before{
+.render-coin::before{
 content:"";
 position:absolute;
-width:55%;
-height:18%;
-top:11%;
-left:22%;
+inset:10px;
 border-radius:50%;
-background:rgba(255,255,255,.50);
-filter:blur(5px)
+border:2px solid rgba(255,255,255,.45);
+box-shadow:
+inset 0 0 8px rgba(255,255,255,.35);
 }
 
-.rnd-coin::after{
-content:"RND";
+.render-coin::after{
+content:"◎";
 position:absolute;
-bottom:11px;
-font-size:7px;
-font-style:normal;
-letter-spacing:2px;
-color:rgba(255,255,255,.55)
+inset:0;
+display:grid;
+place-items:center;
+font-size:48px;
+font-weight:900;
+color:white;
+text-shadow:
+0 2px 3px rgba(0,0,0,.5),
+0 0 10px rgba(255,255,255,.65);
 }
 
-.rnd-coin:nth-child(1){
+.render-coin:nth-child(1){
 left:4%;
 top:20%;
-animation-duration:8s;
-animation-delay:0s
+animation-delay:0s;
+animation-duration:7s
 }
 
-.rnd-coin:nth-child(2){
+.render-coin:nth-child(2){
 right:5%;
-top:32%;
-width:58px;
-height:58px;
-font-size:24px;
-animation-duration:7s;
-animation-delay:1.2s
+top:35%;
+width:75px;
+height:75px;
+animation-delay:2s;
+animation-duration:9s
 }
 
-.rnd-coin:nth-child(3){
-left:8%;
+.render-coin:nth-child(3){
+left:12%;
 bottom:12%;
-width:55px;
-height:55px;
-font-size:23px;
-animation-duration:9s;
-animation-delay:2s
+width:65px;
+height:65px;
+animation-delay:4s;
+animation-duration:8s
 }
 
-.rnd-coin:nth-child(4){
-right:10%;
-bottom:18%;
-width:82px;
-height:82px;
-font-size:34px;
-animation-duration:10s;
-animation-delay:3s
+.render-coin:nth-child(4){
+right:12%;
+bottom:20%;
+width:115px;
+height:115px;
+animation-delay:1s;
+animation-duration:10s
 }
 
-.rnd-coin:nth-child(5){
-left:48%;
-top:12%;
-width:45px;
-height:45px;
-font-size:19px;
-opacity:.12;
-animation-duration:6s;
-animation-delay:1s
-}
-
-@keyframes rndCoinFloat{
+@keyframes renderFloat{
 0%,100%{
 transform:
-translate3d(0,0,0)
-rotateX(0deg)
+translateY(0)
 rotateY(0deg)
-rotateZ(-5deg)
+rotateX(8deg)
+rotateZ(-4deg)
+scale(1)
 }
-25%{
-transform:
-translate3d(20px,-35px,35px)
-rotateX(55deg)
-rotateY(90deg)
-rotateZ(7deg)
-}
+
 50%{
 transform:
-translate3d(-15px,-70px,70px)
-rotateX(110deg)
+translateY(-35px)
 rotateY(180deg)
-rotateZ(-6deg)
-}
-75%{
-transform:
-translate3d(25px,-30px,40px)
-rotateX(170deg)
-rotateY(270deg)
+rotateX(18deg)
 rotateZ(6deg)
+scale(1.08)
 }
 }
 
-/* ================= 3D RENDER LOGO ================= */
+
+/* =====================================================
+   3D RENDER LOGO
+===================================================== */
 
 .logo-box{
 display:grid;
@@ -270,55 +182,94 @@ place-items:center;
 overflow:hidden;
 position:relative;
 background:
-linear-gradient(145deg,#d8fff2 0%,#62f0c8 18%,#16a77f 48%,#075b48 72%,#021b16 100%);
-border:1px solid rgba(255,255,255,.32);
+radial-gradient(circle at 28% 20%,
+#fff 0%,
+#ffb4c0 4%,
+#ff405c 15%,
+#d40035 38%,
+#8b0027 62%,
+#32000d 85%,
+#090003 100%);
+border:2px solid rgba(255,180,190,.65);
 box-shadow:
-0 7px 0 #064735,
-0 12px 28px rgba(0,0,0,.65),
-0 0 30px rgba(70,255,200,.28),
-inset 0 3px 8px rgba(255,255,255,.35),
-inset 0 -8px 14px rgba(0,0,0,.35)
+0 8px 0 #520018,
+0 12px 28px rgba(0,0,0,.7),
+0 0 28px rgba(255,0,50,.35),
+inset 5px 5px 10px rgba(255,255,255,.35),
+inset -8px -10px 16px rgba(30,0,5,.7);
+transform-style:preserve-3d
 }
 
 .logo-box::before{
 content:"";
 position:absolute;
-width:70%;
-height:35%;
+width:72%;
+height:28%;
 top:5%;
-left:15%;
+left:13%;
 border-radius:50%;
-background:rgba(255,255,255,.35);
-filter:blur(7px)
+background:rgba(255,255,255,.45);
+filter:blur(7px);
+transform:rotate(-8deg)
+}
+
+.logo-box::after{
+content:"";
+position:absolute;
+inset:8px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.35);
+box-shadow:
+inset 0 0 8px rgba(255,255,255,.3)
 }
 
 .r-logo{
 position:relative;
-font-size:34px;
+z-index:2;
+font-size:35px;
 font-weight:1000;
-font-style:italic;
-color:#031711;
+font-style:normal;
+color:white;
 text-shadow:
-2px 3px 0 rgba(255,255,255,.35),
-4px 5px 0 rgba(0,70,50,.55),
-0 0 12px rgba(255,255,255,.25);
-transform:perspective(100px) rotateX(8deg) rotateY(-8deg)
+0 2px 2px rgba(0,0,0,.7),
+0 0 8px rgba(255,255,255,.65);
+transform:
+perspective(180px)
+rotateX(10deg)
+rotateY(-12deg);
 }
 
 .auth-logo{
-width:82px;
-height:82px;
+width:92px;
+height:92px;
 margin:0 auto 18px;
-border-radius:24px
+border-radius:50%;
+animation:logoFloat 4s ease-in-out infinite
 }
 
 .logo{
-width:46px;
-height:46px;
-border-radius:15px
+width:48px;
+height:48px;
+border-radius:50%
 }
 
-/* ================= AUTH ================= */
+.profile-avatar{
+animation:logoFloat 4s ease-in-out infinite
+}
+
+@keyframes logoFloat{
+0%,100%{
+transform:translateY(0) rotateY(-8deg)
+}
+50%{
+transform:translateY(-8px) rotateY(18deg)
+}
+}
+
+
+/* =====================================================
+   AUTH
+===================================================== */
 
 #authScreen{
 min-height:100vh;
@@ -334,11 +285,11 @@ max-width:420px;
 padding:32px 23px 27px;
 border-radius:30px;
 background:
-linear-gradient(145deg,rgba(12,30,25,.98),rgba(3,8,15,.98));
-border:1px solid rgba(70,255,200,.22);
+linear-gradient(145deg,rgba(25,7,12,.98),rgba(3,8,15,.98));
+border:1px solid rgba(255,50,80,.25);
 box-shadow:
 0 30px 90px rgba(0,0,0,.75),
-0 0 50px rgba(0,255,190,.08),
+0 0 50px rgba(255,0,50,.08),
 inset 0 1px 0 rgba(255,255,255,.10)
 }
 
@@ -370,8 +321,8 @@ font-size:14px
 
 .auth-input:focus,
 .withdraw-input:focus{
-border-color:#46e3b7;
-box-shadow:0 0 0 2px rgba(70,227,183,.08)
+border-color:#ff405c;
+box-shadow:0 0 0 2px rgba(255,64,92,.08)
 }
 
 .auth-input::placeholder,
@@ -385,13 +336,13 @@ width:100%;
 padding:15px;
 border:0;
 border-radius:16px;
-color:#03130e;
+color:white;
 font-size:14px;
 font-weight:900;
-background:linear-gradient(100deg,#46e3b7,#78f5d6,#00d7ef);
+background:linear-gradient(100deg,#ff3155,#ff526d,#ff003d);
 box-shadow:
-0 7px 0 #075b48,
-0 12px 24px rgba(70,227,183,.20);
+0 7px 0 #72001f,
+0 12px 24px rgba(255,30,70,.20);
 cursor:pointer
 }
 
@@ -413,7 +364,7 @@ margin:14px 0 0;
 padding:5px;
 border:0;
 background:transparent;
-color:#46e3b7;
+color:#ff526d;
 font-size:12px;
 font-weight:700;
 cursor:pointer
@@ -427,7 +378,7 @@ font-size:12px
 }
 
 .auth-switch span{
-color:#46e3b7;
+color:#ff526d;
 cursor:pointer;
 font-weight:bold
 }
@@ -440,7 +391,10 @@ margin-top:12px;
 min-height:16px
 }
 
-/* ================= APP ================= */
+
+/* =====================================================
+   APP
+===================================================== */
 
 .app{
 width:100%;
@@ -481,8 +435,8 @@ height:44px;
 display:grid;
 place-items:center;
 border-radius:50%;
-background:rgba(70,227,183,.10);
-border:1px solid rgba(70,227,183,.25);
+background:rgba(255,30,60,.10);
+border:1px solid rgba(255,50,80,.25);
 cursor:pointer;
 font-size:19px
 }
@@ -506,7 +460,10 @@ color:#fff;
 font-weight:bold
 }
 
-/* ================= CARDS ================= */
+
+/* =====================================================
+   CARDS
+===================================================== */
 
 .balance-card,
 .withdraw-card,
@@ -515,8 +472,8 @@ margin-top:10px;
 padding:22px;
 border-radius:28px;
 background:
-linear-gradient(145deg,rgba(14,31,27,.96),rgba(4,9,17,.97));
-border:1px solid rgba(70,227,183,.20);
+linear-gradient(145deg,rgba(30,10,16,.96),rgba(4,9,17,.97));
+border:1px solid rgba(255,40,70,.20);
 box-shadow:
 0 25px 70px rgba(0,0,0,.52),
 inset 0 1px 0 rgba(255,255,255,.06)
@@ -534,13 +491,13 @@ text-align:center;
 margin-top:6px;
 font-size:40px;
 font-weight:1000;
-background:linear-gradient(90deg,#fff,#b8ffe8,#fff,#6ff3ff);
+background:linear-gradient(90deg,#fff,#ffb4c0,#fff,#ff405c);
 -webkit-background-clip:text;
 color:transparent
 }
 
 .coin{
-color:#46e3b7;
+color:#ff405c;
 font-size:15px;
 margin-left:5px
 }
@@ -548,78 +505,49 @@ margin-left:5px
 .earning{
 text-align:center;
 margin-top:6px;
-color:#46e3b7;
+color:#ff526d;
 font-size:12px
 }
 
-/* ================= MINING ================= */
+
+/* =====================================================
+   MINING
+===================================================== */
 
 .mining-area{
 display:flex;
 justify-content:center;
 margin:34px 0 22px;
-perspective:1000px;
-position:relative
-}
-
-.mining-area::before{
-content:"";
-position:absolute;
-width:225px;
-height:225px;
-border-radius:50%;
-background:radial-gradient(
-circle,
-rgba(70,227,183,.20),
-rgba(0,229,255,.08),
-transparent 70%
-);
-filter:blur(8px);
-animation:miningAura 2.8s ease-in-out infinite;
-pointer-events:none
-}
-
-@keyframes miningAura{
-0%,100%{
-transform:scale(.90);
-opacity:.55
-}
-50%{
-transform:scale(1.15);
-opacity:1
-}
+perspective:1000px
 }
 
 .mining-button{
 position:relative;
-z-index:2;
 width:190px;
 height:190px;
 border-radius:50%;
-border:3px solid #46e3b7;
+border:3px solid #ff405c;
 cursor:pointer;
 color:white;
 background:
 radial-gradient(circle at 31% 20%,
 #fff 0%,
-#c9ffe9 5%,
-#46e3b7 14%,
-#238d72 32%,
-#155443 56%,
-#071711 78%,
-#020705 100%);
+#ffd6dc 5%,
+#ff526d 14%,
+#d00038 32%,
+#76001f 56%,
+#210008 78%,
+#020002 100%);
 box-shadow:
-0 15px 0 #155a49,
+0 15px 0 #65001c,
 0 21px 25px rgba(0,0,0,.78),
-0 0 25px rgba(70,227,183,.45),
-0 0 60px rgba(70,227,183,.16),
+0 0 25px rgba(255,30,70,.45),
+0 0 60px rgba(255,0,45,.16),
 inset 0 8px 13px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.65);
 transition:.12s;
 touch-action:manipulation;
-user-select:none;
--webkit-user-select:none;
-outline:none
+user-select:none
 }
 
 .mining-button:active{
@@ -627,60 +555,38 @@ transform:translateY(11px) scale(.965)
 }
 
 .mining-button.active{
-border-color:#47edff;
-background:
-radial-gradient(circle at 31% 20%,
-#fff 0%,
-#c9ffff 6%,
-#70f4ff 15%,
-#1599e9 32%,
-#14538b 55%,
-#061525 78%,
-#02070d 100%);
+border-color:#ff8b9b;
 box-shadow:
-0 15px 0 #063d57,
+0 15px 0 #72001f,
 0 22px 32px rgba(0,0,0,.78),
-0 0 30px rgba(0,229,255,.90),
-0 0 75px rgba(0,160,255,.42),
+0 0 30px rgba(255,30,70,.90),
+0 0 75px rgba(255,0,70,.42),
 inset 0 8px 14px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.60);
 animation:miningPulse 1.4s infinite
 }
 
 @keyframes miningPulse{
-0%,100%{
-filter:brightness(1)
-}
-50%{
-filter:brightness(1.22)
-}
+0%,100%{filter:brightness(1)}
+50%{filter:brightness(1.25)}
 }
 
 .mine-icon{
-font-size:45px;
-position:relative;
-z-index:3;
-filter:
-drop-shadow(0 3px 5px rgba(0,0,0,.7))
-drop-shadow(0 0 8px rgba(255,255,255,.15))
+font-size:45px
 }
 
 .mine-title{
 margin-top:8px;
 font-size:17px;
 font-weight:1000;
-letter-spacing:2px;
-position:relative;
-z-index:3
+letter-spacing:2px
 }
 
 .mine-small{
 margin-top:6px;
-color:#46e3b7;
+color:#ff526d;
 font-size:11px;
-font-weight:1000;
-position:relative;
-z-index:3
+font-weight:1000
 }
 
 .status{
@@ -706,8 +612,8 @@ justify-content:space-between;
 margin-top:18px;
 padding:17px;
 border-radius:17px;
-background:linear-gradient(90deg,rgba(70,227,183,.10),rgba(0,211,255,.08));
-border:1px solid rgba(70,227,183,.16)
+background:linear-gradient(90deg,rgba(255,40,70,.10),rgba(0,211,255,.08));
+border:1px solid rgba(255,40,70,.16)
 }
 
 .hash-left{
@@ -716,7 +622,7 @@ font-size:12px
 }
 
 .hash-right{
-color:#46e3b7;
+color:#ff526d;
 font-weight:900
 }
 
@@ -727,7 +633,10 @@ margin-top:4px;
 text-align:right
 }
 
-/* ================= ACTIONS ================= */
+
+/* =====================================================
+   ACTIONS
+===================================================== */
 
 .actions{
 display:grid;
@@ -739,8 +648,8 @@ margin-top:12px
 .action{
 min-height:88px;
 border-radius:18px;
-border:1px solid rgba(70,227,183,.24);
-background:linear-gradient(145deg,rgba(25,47,40,.98),rgba(7,12,25,.98));
+border:1px solid rgba(255,40,70,.24);
+background:linear-gradient(145deg,rgba(47,15,25,.98),rgba(7,12,25,.98));
 color:#fff;
 cursor:pointer;
 box-shadow:0 9px 22px rgba(0,0,0,.30);
@@ -784,13 +693,16 @@ margin-top:8px;
 min-height:14px
 }
 
-/* ================= DAILY ================= */
+
+/* =====================================================
+   DAILY
+===================================================== */
 
 .daily{
 margin-top:18px;
 padding:20px;
 border-radius:22px;
-background:linear-gradient(145deg,rgba(19,28,26,.95),rgba(5,8,17,.96));
+background:linear-gradient(145deg,rgba(35,10,18,.95),rgba(5,8,17,.96));
 border:1px solid rgba(255,255,255,.07)
 }
 
@@ -829,8 +741,8 @@ border:1px solid #29293a
 }
 
 .day.active .day-circle{
-background:linear-gradient(135deg,#46e3b7,#00a87d);
-box-shadow:0 0 15px rgba(70,227,183,.25)
+background:linear-gradient(135deg,#ff405c,#a4002b);
+box-shadow:0 0 15px rgba(255,30,70,.25)
 }
 
 .claim{
@@ -839,20 +751,21 @@ margin-top:20px;
 padding:16px;
 border:0;
 border-radius:30px;
-color:#06120f;
+color:white;
 font-weight:800;
-background:linear-gradient(90deg,#46e3b7,#6ff3d0,#00c8ff);
-box-shadow:0 7px 0 #155a49,0 12px 25px rgba(70,227,183,.20)
+background:linear-gradient(90deg,#ff3155,#ff6078,#ff003d);
+box-shadow:0 7px 0 #65001c,0 12px 25px rgba(255,30,70,.20)
 }
 
 .logout{
 width:100%;
 margin-top:12px;
 padding:12px;
-border:1px solid rgba(255,80,120,.15);
+border:1px solid rgba(255,80,120,.25);
 border-radius:14px;
 color:#ff5577;
-background:rgba(255,255,255,.03)
+background:rgba(255,255,255,.03);
+cursor:pointer
 }
 
 .back-btn{
@@ -862,10 +775,14 @@ padding:13px;
 border:1px solid rgba(255,255,255,.1);
 border-radius:15px;
 color:white;
-background:rgba(255,255,255,.05)
+background:rgba(255,255,255,.05);
+cursor:pointer
 }
 
-/* ================= WITHDRAW ================= */
+
+/* =====================================================
+   WITHDRAW
+===================================================== */
 
 .withdraw-title{
 text-align:center;
@@ -885,8 +802,8 @@ padding:16px;
 margin-bottom:18px;
 text-align:center;
 border-radius:16px;
-background:rgba(70,227,183,.08);
-border:1px solid rgba(70,227,183,.15)
+background:rgba(255,40,70,.08);
+border:1px solid rgba(255,40,70,.15)
 }
 
 .withdraw-balance small{
@@ -897,7 +814,7 @@ margin-bottom:5px
 
 .withdraw-balance strong{
 font-size:24px;
-color:#46e3b7
+color:#ff526d
 }
 
 .method{
@@ -926,7 +843,10 @@ margin-top:14px;
 min-height:18px
 }
 
-/* ================= PROFILE ================= */
+
+/* =====================================================
+   PROFILE
+===================================================== */
 
 .profile-card h2{
 text-align:center;
@@ -935,8 +855,8 @@ font-size:24px
 }
 
 .profile-avatar{
-width:75px;
-height:75px;
+width:82px;
+height:82px;
 margin:0 auto 18px;
 border-radius:50%
 }
@@ -966,9 +886,9 @@ margin-top:15px;
 padding:14px;
 border-radius:15px;
 text-align:center;
-color:#46e3b7;
-background:rgba(70,227,183,.06);
-border:1px solid rgba(70,227,183,.12)
+color:#ff526d;
+background:rgba(255,40,70,.06);
+border:1px solid rgba(255,40,70,.12)
 }
 
 .footer{
@@ -999,24 +919,14 @@ font-size:14px
 
 <body>
 
-<div class="particles">
-<div class="particle" style="left:5%;animation-duration:18s;animation-delay:0s"></div>
-<div class="particle" style="left:18%;animation-duration:23s;animation-delay:4s"></div>
-<div class="particle" style="left:32%;animation-duration:20s;animation-delay:8s"></div>
-<div class="particle" style="left:47%;animation-duration:25s;animation-delay:2s"></div>
-<div class="particle" style="left:63%;animation-duration:19s;animation-delay:7s"></div>
-<div class="particle" style="left:78%;animation-duration:24s;animation-delay:1s"></div>
-<div class="particle" style="left:91%;animation-duration:21s;animation-delay:5s"></div>
+<!-- FLOATING 3D RENDER COINS -->
+<div class="render-bg">
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
+<div class="render-coin"></div>
 </div>
 
-<!-- 3D RND COINS -->
-<div class="floating-rnd-coins">
-<div class="rnd-coin">R</div>
-<div class="rnd-coin">R</div>
-<div class="rnd-coin">R</div>
-<div class="rnd-coin">R</div>
-<div class="rnd-coin">R</div>
-</div>
 
 <!-- LOGIN -->
 
@@ -1025,7 +935,7 @@ font-size:14px
 <div class="auth-box">
 
 <div class="auth-logo logo-box">
-<span class="r-logo">R</span>
+<span class="r-logo">◎</span>
 </div>
 
 <h1 id="authTitle">Welcome to RND Mining</h1>
@@ -1091,7 +1001,7 @@ Don't have an account?
 <div class="brand">
 
 <div class="logo logo-box">
-<span class="r-logo">R</span>
+<span class="r-logo">◎</span>
 </div>
 
 <div>
@@ -1135,7 +1045,8 @@ Mining reward: +0.000001 RND / second
 <button
 id="miningButton"
 class="mining-button"
-type="button">
+type="button"
+onclick="startMining()">
 
 <div class="mine-icon">⛏️</div>
 
@@ -1400,7 +1311,7 @@ type="button">
 <div class="profile-card">
 
 <div class="profile-avatar logo-box">
-<span class="r-logo">R</span>
+<span class="r-logo">◎</span>
 </div>
 
 <h2>My Profile</h2>
@@ -1449,10 +1360,6 @@ RND Mining • Render Mining Network
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE
-===================================================== */
-
 import {
 initializeApp
 }
@@ -1467,7 +1374,9 @@ signInWithEmailAndPassword,
 GoogleAuthProvider,
 signInWithPopup,
 sendPasswordResetEmail,
-signOut
+signOut,
+setPersistence,
+inMemoryPersistence
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -1486,7 +1395,7 @@ from
 
 
 /* =====================================================
-   FIREBASE CONFIG
+   FIREBASE CONFIG — SAME
 ===================================================== */
 
 const firebaseConfig={
@@ -1509,11 +1418,6 @@ const provider=new GoogleAuthProvider();
 
 let signUpMode=false;
 
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
 let balance=0;
 let mining=false;
 let miningTimer=null;
@@ -1534,7 +1438,18 @@ const BOOST_TIME=10*60*1000;
 
 
 /* =====================================================
-   FIRESTORE
+   IMPORTANT:
+   NO AUTO LOGIN AFTER PAGE RELOAD
+===================================================== */
+
+await setPersistence(
+auth,
+inMemoryPersistence
+);
+
+
+/* =====================================================
+   USER REF
 ===================================================== */
 
 function userRef(uid){
@@ -1543,36 +1458,7 @@ return doc(db,"users",uid);
 
 
 /* =====================================================
-   LOCAL STORAGE
-===================================================== */
-
-function oldBalanceKey(uid){
-return "rnd_mining_balance_"+uid;
-}
-
-function oldMiningStartKey(uid){
-return "rnd_mining_start_"+uid;
-}
-
-function oldMiningLastKey(uid){
-return "rnd_mining_last_"+uid;
-}
-
-function oldMiningActiveKey(uid){
-return "rnd_mining_active_"+uid;
-}
-
-function oldBoostKey(uid){
-return "rnd_mining_boost_end_"+uid;
-}
-
-function oldDailyKey(uid){
-return "rnd_mining_last_claim_"+uid;
-}
-
-
-/* =====================================================
-   FORMAT BALANCE
+   FORMAT
 ===================================================== */
 
 function formatBalance(value){
@@ -1588,7 +1474,7 @@ return n.toFixed(5);
 
 
 /* =====================================================
-   SAVE USER
+   SAVE
 ===================================================== */
 
 async function saveUserData(){
@@ -1633,7 +1519,7 @@ error
 
 
 /* =====================================================
-   LOAD USER
+   LOAD
 ===================================================== */
 
 async function loadUserData(user){
@@ -1685,87 +1571,27 @@ cloudData.dailyClaimDate||"";
 
 }else{
 
-const oldBalance=
-Number(
-localStorage.getItem(
-oldBalanceKey(user.uid)
-)
-);
-
-balance=
-Number.isFinite(oldBalance)
-?oldBalance
-:0;
-
-const oldStart=
-Number(
-localStorage.getItem(
-oldMiningStartKey(user.uid)
-)
-);
-
-const oldLast=
-Number(
-localStorage.getItem(
-oldMiningLastKey(user.uid)
-)
-);
-
-const oldActive=
-localStorage.getItem(
-oldMiningActiveKey(user.uid)
-);
-
-const oldBoost=
-Number(
-localStorage.getItem(
-oldBoostKey(user.uid)
-)
-);
-
-const oldDaily=
-localStorage.getItem(
-oldDailyKey(user.uid)
-);
-
-mining=
-oldActive==="1";
-
-miningStartTime=
-Number.isFinite(oldStart)&&oldStart>0
-?oldStart
-:null;
-
-lastRewardTime=
-Number.isFinite(oldLast)&&oldLast>0
-?oldLast
-:null;
-
-boostEnd=
-Number.isFinite(oldBoost)
-?oldBoost
-:0;
-
-dailyClaimDate=
-oldDaily||"";
+balance=0;
+mining=false;
+miningStartTime=null;
+lastRewardTime=null;
+boostEnd=0;
+dailyClaimDate="";
 
 await saveUserData();
 
 }
 
 updateBalance();
-
 updateProfile(user);
-
 updateBoostUI();
-
 restoreMining();
 
 }
 
 
 /* =====================================================
-   UPDATE BALANCE
+   BALANCE
 ===================================================== */
 
 function updateBalance(){
@@ -1900,7 +1726,7 @@ firebaseError(e.code);
 
 
 /* =====================================================
-   PASSWORD RESET
+   RESET
 ===================================================== */
 
 window.forgotPassword=async function(){
@@ -1913,8 +1739,6 @@ const error=
 document.getElementById("authError");
 
 if(!email){
-
-error.style.color="#ff5577";
 
 error.textContent=
 "Enter your email first.";
@@ -1930,10 +1754,10 @@ auth,
 email
 );
 
-error.style.color="#46e3b7";
+error.style.color="#ff5577";
 
 error.textContent=
-"Password reset email sent. Check your inbox.";
+"Password reset email sent.";
 
 }catch(e){
 
@@ -1948,7 +1772,7 @@ firebaseError(e.code);
 
 
 /* =====================================================
-   GOOGLE LOGIN
+   GOOGLE
 ===================================================== */
 
 window.googleLogin=async function(){
@@ -1976,13 +1800,17 @@ firebaseError(e.code);
 ===================================================== */
 
 function isBoostActive(time=Date.now()){
+
 return Number(boostEnd)>time;
+
 }
 
 function getHashrateAt(time){
+
 return isBoostActive(time)
 ?5.70
 :baseHashrate;
+
 }
 
 function formatBoostTime(ms){
@@ -2038,7 +1866,7 @@ document.getElementById("boostText")
 
 
 /* =====================================================
-   REWARD CALCULATION
+   REWARD
 ===================================================== */
 
 function calculateReward(fromTime,toTime){
@@ -2048,13 +1876,10 @@ return 0;
 
 let reward=0;
 
-const boostedUntil=
-Math.min(
-toTime,
-Math.max(fromTime,boostEnd)
-);
-
 if(boostEnd>fromTime){
+
+const boostedUntil=
+Math.min(toTime,boostEnd);
 
 if(boostedUntil>fromTime){
 
@@ -2096,16 +1921,14 @@ return reward;
 
 
 /* =====================================================
-   RESTORE MINING
+   RESTORE
 ===================================================== */
 
 function restoreMining(){
 
 if(!mining||!miningStartTime){
 
-stopMiningUI(
-"Mining inactive"
-);
+stopMiningUI("Mining inactive");
 
 return;
 
@@ -2129,9 +1952,7 @@ sessionEnd
 }
 
 mining=false;
-
 miningStartTime=null;
-
 lastRewardTime=null;
 
 updateBalance();
@@ -2176,8 +1997,6 @@ true,
 
 startMiningTimer();
 
-saveUserData();
-
 }
 
 
@@ -2199,9 +2018,6 @@ document.getElementById("mineText");
 const dot=
 document.getElementById("dot");
 
-if(!button)
-return;
-
 if(active){
 
 button.classList.add("active");
@@ -2212,7 +2028,7 @@ message||"Mining active";
 mineText.textContent=
 "MINING ACTIVE";
 
-dot.style.background="#00e5ff";
+dot.style.background="#ff526d";
 
 }else{
 
@@ -2229,14 +2045,13 @@ dot.style.background="#ff3dbd";
 }
 
 updateSessionUI();
-
 updateBoostUI();
 
 }
 
 
 /* =====================================================
-   STOP MINING UI
+   STOP
 ===================================================== */
 
 function stopMiningUI(message){
@@ -2265,7 +2080,7 @@ setMiningUI(false,message);
 
 
 /* =====================================================
-   SESSION UI
+   SESSION
 ===================================================== */
 
 function updateSessionUI(){
@@ -2319,8 +2134,8 @@ function startMiningTimer(){
 if(miningTimer)
 clearInterval(miningTimer);
 
-if(sessionInterval)
-clearInterval(sessionInterval);
+if(cloudSaveTimer)
+clearInterval(cloudSaveTimer);
 
 miningTimer=
 setInterval(async()=>{
@@ -2346,9 +2161,7 @@ sessionEnd
 }
 
 mining=false;
-
 lastRewardTime=null;
-
 miningStartTime=null;
 
 updateBalance();
@@ -2380,8 +2193,7 @@ lastRewardTime,
 rewardTo
 );
 
-lastRewardTime=
-rewardTo;
+lastRewardTime=rewardTo;
 
 updateBalance();
 
@@ -2390,11 +2202,10 @@ updateBalance();
 }
 
 updateSessionUI();
-
 updateBoostUI();
 
-},
-1000);
+},1000);
+
 
 cloudSaveTimer=
 setInterval(async()=>{
@@ -2411,7 +2222,7 @@ await saveUserData();
 
 
 /* =====================================================
-   START MINING — FIXED
+   START MINING
 ===================================================== */
 
 window.startMining=async function(){
@@ -2431,39 +2242,22 @@ return;
 
 currentUserUID=user.uid;
 
+currentUserEmail=user.email||"";
+
 mining=true;
 
-const now=Date.now();
+miningStartTime=Date.now();
 
-miningStartTime=now;
-
-lastRewardTime=now;
+lastRewardTime=miningStartTime;
 
 setMiningUI(
 true,
 "Mining active"
 );
 
-updateBalance();
-
-updateSessionUI();
-
-updateBoostUI();
-
-try{
+startMiningTimer();
 
 await saveUserData();
-
-}catch(error){
-
-console.error(
-"Mining start save error:",
-error
-);
-
-}
-
-startMiningTimer();
 
 if(window.Telegram?.WebApp?.HapticFeedback){
 
@@ -2480,42 +2274,7 @@ window.Telegram.WebApp.HapticFeedback
 
 
 /* =====================================================
-   MINING BUTTON EVENT FIX
-===================================================== */
-
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-const miningButton=
-document.getElementById("miningButton");
-
-if(miningButton){
-
-miningButton.addEventListener(
-"click",
-function(e){
-
-e.preventDefault();
-
-if(typeof window.startMining==="function"){
-
-window.startMining();
-
-}
-
-},
-false
-);
-
-}
-
-}
-);
-
-
-/* =====================================================
-   MONETAG
+   WATCH AD
 ===================================================== */
 
 window.watchAd=async function(){
@@ -2549,8 +2308,6 @@ button.disabled=true;
 
 button.style.opacity=".65";
 
-status.style.color="#ffc44d";
-
 status.textContent=
 "📺 Loading advertisement...";
 
@@ -2561,39 +2318,18 @@ await window.show_11549239();
 const now=Date.now();
 
 boostEnd=
-Math.max(
-boostEnd,
-now
-)+BOOST_TIME;
+Math.max(boostEnd,now)+BOOST_TIME;
 
 await saveUserData();
 
 updateBoostUI();
 
-status.style.color="#46e3b7";
-
 status.textContent=
 "✅ Ad completed! +10 minute mining boost.";
 
-if(window.Telegram?.WebApp?.HapticFeedback){
-
-try{
-
-window.Telegram.WebApp.HapticFeedback
-.notificationOccurred("success");
-
-}catch(e){}
-
-}
-
 }catch(error){
 
-console.error(
-"Monetag error:",
-error
-);
-
-status.style.color="#ff5577";
+console.error(error);
 
 status.textContent=
 "Ad could not be completed. Please try again.";
@@ -2610,7 +2346,7 @@ button.style.opacity="1";
 
 
 /* =====================================================
-   DAILY REWARD
+   DAILY
 ===================================================== */
 
 window.claimReward=async function(){
@@ -2680,7 +2416,6 @@ document.getElementById("miningPage")
 .classList.add("active");
 
 updateBalance();
-
 updateBoostUI();
 
 };
@@ -2784,7 +2519,6 @@ const button=
 document.querySelector(".confirm-btn");
 
 button.disabled=true;
-
 button.style.opacity=".65";
 
 message.style.color="#00e5ff";
@@ -2814,13 +2548,8 @@ await saveUserData();
 
 updateBalance();
 
-document.getElementById("walletAddress")
-.value="";
-
-document.getElementById("withdrawAmount")
-.value="";
-
-message.style.color="#00e5ff";
+document.getElementById("walletAddress").value="";
+document.getElementById("withdrawAmount").value="";
 
 message.textContent=
 "✅ Withdrawal request submitted successfully.";
@@ -2837,7 +2566,6 @@ message.textContent=
 }finally{
 
 button.disabled=false;
-
 button.style.opacity="1";
 
 }
@@ -2846,17 +2574,18 @@ button.style.opacity="1";
 
 
 /* =====================================================
-   LOGOUT
+   FIXED LOGOUT
 ===================================================== */
 
 window.logout=async function(){
 
-await saveUserData();
+try{
+
+/* Stop timers immediately */
 
 if(miningTimer){
 
 clearInterval(miningTimer);
-
 miningTimer=null;
 
 }
@@ -2864,7 +2593,6 @@ miningTimer=null;
 if(sessionInterval){
 
 clearInterval(sessionInterval);
-
 sessionInterval=null;
 
 }
@@ -2872,12 +2600,60 @@ sessionInterval=null;
 if(cloudSaveTimer){
 
 clearInterval(cloudSaveTimer);
-
 cloudSaveTimer=null;
 
 }
 
+
+/* Save current data without blocking logout */
+
+try{
+await saveUserData();
+}catch(e){
+console.error("Logout save:",e);
+}
+
+
+/* Clear current state */
+
+mining=false;
+miningStartTime=null;
+lastRewardTime=null;
+currentUserUID=null;
+currentUserEmail=null;
+
+
+/* IMPORTANT:
+   Firebase signOut immediately */
+
 await signOut(auth);
+
+
+/* Force login screen */
+
+document.getElementById("mainApp")
+.style.display="none";
+
+document.getElementById("authScreen")
+.style.display="flex";
+
+document.getElementById("authEmail").value="";
+document.getElementById("authPassword").value="";
+
+document.getElementById("authError").textContent="";
+
+}catch(error){
+
+console.error(
+"Logout failed:",
+error
+);
+
+alert(
+"Logout failed. Please try again."
+);
+
+}
 
 };
 
@@ -2909,7 +2685,6 @@ document.getElementById("mainApp")
 .style.display="none";
 
 currentUserUID=null;
-
 currentUserEmail=null;
 
 }
@@ -2973,7 +2748,6 @@ window.Telegram?.WebApp;
 if(tg){
 
 tg.ready();
-
 tg.expand();
 
 }
