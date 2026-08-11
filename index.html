@@ -11,9 +11,8 @@
 html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:#fff;background:#020202}
 body{overflow-x:hidden}
 body:before{content:"";position:fixed;inset:0;z-index:-10;background:radial-gradient(circle at 50% 35%,rgba(255,35,35,.10),transparent 28%),radial-gradient(circle at 10% 20%,rgba(255,0,0,.08),transparent 28%),radial-gradient(circle at 90% 75%,rgba(180,0,0,.07),transparent 30%),linear-gradient(145deg,#010101,#090101 35%,#160202 55%,#030303)}
-.bg-coin{position:fixed;z-index:-5;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;font-weight:1000;color:#fff;background:radial-gradient(circle at 30% 20%,#ffb0b0,#ff5b5b 8%,#e60000 25%,#a00000 48%,#610000 68%,#220000 86%,#090000);border:2px solid #a90000;box-shadow:0 7px 0 #280000,0 12px 20px rgba(0,0,0,.8),0 0 25px rgba(255,0,0,.22),inset 0 4px 7px rgba(255,255,255,.35),inset 0 -8px 12px rgba(0,0,0,.75);opacity:.17;pointer-events:none;animation:floatCoin 8s ease-in-out infinite}
-.bg-coin.c1{left:7%;top:14%}.bg-coin.c2{left:82%;top:12%;width:48px;height:48px}.bg-coin.c3{left:14%;top:47%;width:44px;height:44px}.bg-coin.c4{right:8%;top:42%;width:65px;height:65px}.bg-coin.c5{left:6%;bottom:12%;width:52px;height:52px}.bg-coin.c6{right:15%;bottom:10%;width:43px;height:43px}.bg-coin.c7{left:47%;top:8%;width:38px;height:38px;opacity:.12}.bg-coin.c8{right:43%;bottom:13%;width:47px;height:47px;opacity:.12}
-@keyframes floatCoin{0%,100%{transform:translateY(0) rotateY(0)}50%{transform:translateY(-8px) rotateY(18deg)}}
+.bg-coin{position:fixed;z-index:-5;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;font-weight:1000;color:#fff;background:radial-gradient(circle at 30% 20%,#ffb0b0,#ff5b5b 8%,#e60000 25%,#a00000 48%,#610000 68%,#220000 86%,#090000);border:2px solid #a90000;box-shadow:0 7px 0 #280000,0 12px 20px rgba(0,0,0,.8),0 0 25px rgba(255,0,0,.22),inset 0 4px 7px rgba(255,255,255,.35),inset 0 -8px 12px rgba(0,0,0,.75);opacity:.17;pointer-events:none}
+.c1{left:7%;top:14%}.c2{left:82%;top:12%;width:48px;height:48px}.c3{left:14%;top:47%;width:44px;height:44px}.c4{right:8%;top:42%;width:65px;height:65px}.c5{left:6%;bottom:12%;width:52px;height:52px}.c6{right:15%;bottom:10%;width:43px;height:43px}
 #authScreen:after,.app:after{content:"";position:fixed;inset:0;z-index:-2;opacity:.055;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:35px 35px;pointer-events:none}
 #authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
 .auth-box,.balance-card,.withdraw-card,.profile-card,.daily{background:linear-gradient(145deg,rgba(35,8,8,.96),rgba(5,5,7,.98));border:1px solid rgba(255,60,60,.25);box-shadow:0 25px 70px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.06)}
@@ -38,9 +37,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-10;background:radial-grad
 </style>
 </head>
 <body>
-
-<div class="bg-coin c1">R</div><div class="bg-coin c2">R</div><div class="bg-coin c3">R</div><div class="bg-coin c4">R</div>
-<div class="bg-coin c5">R</div><div class="bg-coin c6">R</div><div class="bg-coin c7">R</div><div class="bg-coin c8">R</div>
+<div class="bg-coin c1">R</div><div class="bg-coin c2">R</div><div class="bg-coin c3">R</div><div class="bg-coin c4">R</div><div class="bg-coin c5">R</div><div class="bg-coin c6">R</div>
 
 <div id="authScreen"><div class="auth-box">
 <div class="auth-logo">R</div><h1 id="authTitle">Welcome to RND Miner</h1>
@@ -102,7 +99,8 @@ body:before{content:"";position:fixed;inset:0;z-index:-10;background:radial-grad
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,signOut}
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import {initializeFirestore} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const {initializeFirestore}=await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js");
 
 const firebaseConfig={
 apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
@@ -113,17 +111,34 @@ messagingSenderId:"147581693986",
 appId:"1:147581693986:web:7887fdda627af87af9da7b",
 measurementId:"G-SS5Z4WPCT1"
 };
+
 const app=initializeApp(firebaseConfig),auth=getAuth(app);
 initializeFirestore(app,{experimentalForceLongPolling:true});
 const provider=new GoogleAuthProvider();
-let signUpMode=false, balance=0,mining=false,miningTimer=null,sessionInterval=null,miningStartTime=null,lastRewardTime=null,currentUserUID=null;
+
+/* Cloudflare Worker used only for the admin Telegram notification. */
+const TELEGRAM_WORKER_URL="https://gentle-fog-02a5.afridiallahdad3.workers.dev/";
+
+let signUpMode=false,balance=0,mining=false,miningTimer=null,sessionInterval=null,miningStartTime=null,lastRewardTime=null,currentUserUID=null;
 const SESSION_TIME=6*60*60*1000,REWARD_PER_SECOND=.000001,BOOST_TIME=10*60*1000;
 
-window.toggleAuth=()=>{signUpMode=!signUpMode;authTitle.textContent=signUpMode?"Create RND Miner Account":"Welcome to RND Miner";authButton.textContent=signUpMode?"SIGN UP":"LOGIN";authSwitch.innerHTML=signUpMode?'Already have an account? <span onclick="toggleAuth()">Login</span>':'Don\\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';authError.textContent=""};
-window.emailAuth=async()=>{const e=authEmail.value.trim(),p=authPassword.value;if(!e||!p){authError.textContent="Please enter email and password.";return}try{if(signUpMode)await createUserWithEmailAndPassword(auth,e,p);else await signInWithEmailAndPassword(auth,e,p)}catch(x){authError.textContent=firebaseError(x.code)}};
+window.toggleAuth=()=>{signUpMode=!signUpMode;authTitle.textContent=signUpMode?"Create RND Miner Account":"Welcome to RND Miner";authButton.textContent=signUpMode?"SIGN UP":"LOGIN";authSwitch.innerHTML=signUpMode?'Already have an account? <span onclick="toggleAuth()">Login</span>':"Don't have an account? <span onclick=\"toggleAuth()\">Sign Up</span>";authError.textContent=""};
+
+window.emailAuth=async()=>{
+const e=authEmail.value.trim(),p=authPassword.value;
+if(!e||!p){authError.textContent="Please enter email and password.";return}
+try{if(signUpMode)await createUserWithEmailAndPassword(auth,e,p);else await signInWithEmailAndPassword(auth,e,p)}
+catch(x){authError.textContent=firebaseError(x.code)}
+};
+
 window.googleLogin=async()=>{try{await signInWithPopup(auth,provider)}catch(x){authError.textContent=firebaseError(x.code)}};
 
-function balanceKey(u){return"rndminer_balance_"+u} function miningStartKey(u){return"rndminer_mining_start_"+u} function miningLastKey(u){return"rndminer_mining_last_"+u} function miningActiveKey(u){return"rndminer_mining_active_"+u} function boostEndKey(u){return"rndminer_boost_end_"+u}
+function balanceKey(u){return"rndminer_balance_"+u}
+function miningStartKey(u){return"rndminer_mining_start_"+u}
+function miningLastKey(u){return"rndminer_mining_last_"+u}
+function miningActiveKey(u){return"rndminer_mining_active_"+u}
+function boostEndKey(u){return"rndminer_boost_end_"+u}
+
 function getBoostEnd(){return currentUserUID?Number(localStorage.getItem(boostEndKey(currentUserUID)))||0:0}
 function isBoostActive(t=Date.now()){return getBoostEnd()>t}
 function formatBoostTime(ms){let n=Math.max(0,Math.floor(ms/1000)),m=Math.floor(n/60),s=n%60;return`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
@@ -137,21 +152,46 @@ function stopMining(msg="Mining inactive",clear=true){mining=false;clearInterval
 function startMiningTimer(){clearInterval(miningTimer);clearInterval(sessionInterval);miningTimer=setInterval(()=>{if(!mining)return;let n=Date.now();if(n-miningStartTime>=SESSION_TIME){stopMining("6-hour session ended");return}if(lastRewardTime){let q=Math.min(n,miningStartTime+SESSION_TIME);if(q>lastRewardTime){balance+=calculateReward(lastRewardTime,q);lastRewardTime=q;updateBalance();saveMiningState()}}updateSessionUI();updateBoostUI()},1000);sessionInterval=setInterval(()=>{updateSessionUI();updateBoostUI()},1000)}
 function applyElapsedMining(){if(!currentUserUID)return;let active=localStorage.getItem(miningActiveKey(currentUserUID)),st=Number(localStorage.getItem(miningStartKey(currentUserUID))),last=Number(localStorage.getItem(miningLastKey(currentUserUID)))||st;if(active!=="1"||!st)return;let n=Date.now(),q=Math.min(n,st+SESSION_TIME);if(q>last){balance+=calculateReward(last,q);updateBalance()}if(n>=st+SESSION_TIME){stopMining("6-hour session ended");return}mining=true;miningStartTime=st;lastRewardTime=n;localStorage.setItem(miningLastKey(currentUserUID),n);setMiningUI(true,"Mining active");startMiningTimer()}
 function loadUserData(u){currentUserUID=u.uid;balance=Number(localStorage.getItem(balanceKey(u.uid)))||0;updateBalance();applyElapsedMining();updateBoostUI()}
-onAuthStateChanged(auth,u=>{if(u){authScreen.style.display="none";mainApp.style.display="block";let n=u.displayName||u.email?.split("@")[0]||"Miner";username.textContent=n;profileUsername.textContent=n;profileEmail.textContent=u.email||"Not available";loadUserData(u)}else{authScreen.style.display="flex";mainApp.style.display="none";currentUserUID=null}});
+
+onAuthStateChanged(auth,u=>{
+if(u){authScreen.style.display="none";mainApp.style.display="block";let n=u.displayName||u.email?.split("@")[0]||"Miner";username.textContent=n;profileUsername.textContent=n;profileEmail.textContent=u.email||"Not available";loadUserData(u)}
+else{authScreen.style.display="flex";mainApp.style.display="none";currentUserUID=null}
+});
+
 window.logout=async()=>{if(mining)saveMiningState();clearInterval(miningTimer);clearInterval(sessionInterval);await signOut(auth)};
-window.startMining=()=>{let u=auth.currentUser;if(!u){alert("Please login first.");return}if(mining)return;currentUserUID=u.uid;mining=true;miningStartTime=lastRewardTime=Date.now();saveMiningState();setMiningUI(true,"Mining active");balance+=REWARD_PER_SECOND;updateBalance();startMiningTimer()};
-window.watchAd=async()=>{let u=auth.currentUser;if(!u){alert("Please login first.");return}if(typeof window.show_11549239!=="function"){adStatus.textContent="Advertisement is not ready yet.";return}watchAdButton.disabled=true;adStatus.textContent="📺 Loading advertisement...";try{await window.show_11549239();let n=Date.now(),e=getBoostEnd(),end=(e>n?e:n)+BOOST_TIME;localStorage.setItem(boostEndKey(u.uid),end);updateBoostUI();adStatus.textContent="✅ Ad completed! 10-minute boost activated."}catch(x){adStatus.textContent="Ad was not completed."}finally{watchAdButton.disabled=false}};
-window.claimReward=()=>{let u=auth.currentUser;if(!u)return alert("Please login first.");let k="rndminer_last_claim_"+u.uid,t=new Date().toISOString().slice(0,10);if(localStorage.getItem(k)===t)return alert("You already claimed today's reward.");balance+=.001;updateBalance();localStorage.setItem(k,t);alert("🎉 Daily reward claimed!\n\n+0.001 RND")};
+
+window.startMining=()=>{
+let u=auth.currentUser;if(!u){alert("Please login first.");return}
+if(mining)return;currentUserUID=u.uid;mining=true;miningStartTime=lastRewardTime=Date.now();saveMiningState();setMiningUI(true,"Mining active");balance+=REWARD_PER_SECOND;updateBalance();startMiningTimer()
+};
+
+window.watchAd=async()=>{
+let u=auth.currentUser;if(!u){alert("Please login first.");return}
+if(typeof window.show_11549239!=="function"){adStatus.textContent="Advertisement is not ready yet.";return}
+watchAdButton.disabled=true;adStatus.textContent="📺 Loading advertisement...";
+try{await window.show_11549239();let n=Date.now(),e=getBoostEnd(),end=(e>n?e:n)+BOOST_TIME;localStorage.setItem(boostEndKey(u.uid),end);updateBoostUI();adStatus.textContent="✅ Ad completed! 10-minute boost activated."}
+catch(x){adStatus.textContent="Ad was not completed."}
+finally{watchAdButton.disabled=false}
+};
+
+window.claimReward=()=>{
+let u=auth.currentUser;if(!u)return alert("Please login first.");
+let k="rndminer_last_claim_"+u.uid,t=new Date().toISOString().slice(0,10);
+if(localStorage.getItem(k)===t)return alert("You already claimed today's reward.");
+balance+=.001;updateBalance();localStorage.setItem(k,t);alert("🎉 Daily reward claimed!\n\n+0.001 RND")
+};
+
 function hideAllPages(){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"))}
 window.showMining=()=>{hideAllPages();miningPage.classList.add("active");updateBalance();updateBoostUI()};
 window.showWithdraw=()=>{hideAllPages();withdrawPage.classList.add("active");updateBalance();withdrawMessage.textContent=""};
 window.showProfile=()=>{let u=auth.currentUser;if(!u)return;profileUsername.textContent=u.displayName||u.email?.split("@")[0]||"Miner";profileEmail.textContent=u.email||"Not available";hideAllPages();profilePage.classList.add("active")};
 
-/* =========================
-   WITHDRAWAL FIX
-   Uses Firebase Auth token + Firestore REST API.
-   This avoids the Telegram WebView Firestore addDoc hang.
-   ========================= */
+/*
+  Withdrawal:
+  1) Save request to Firestore.
+  2) ONLY after Firebase confirms success, notify Cloudflare Worker.
+  3) Worker sends the Telegram message using its secret BOT_TOKEN.
+*/
 window.confirmWithdrawal=async()=>{
 const user=auth.currentUser;
 if(!user){alert("Please login first.");return}
@@ -189,26 +229,42 @@ createdAt:{timestampValue:new Date().toISOString()}
 
 const controller=new AbortController();
 const timeout=setTimeout(()=>controller.abort(),15000);
-
 let response;
 try{
 response=await fetch(url,{
 method:"POST",
-headers:{
-"Content-Type":"application/json",
-"Authorization":"Bearer "+token
-},
+headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
 body:JSON.stringify({fields}),
 signal:controller.signal
 });
 }finally{clearTimeout(timeout)}
 
 const data=await response.json().catch(()=>({}));
-
 if(!response.ok){
 const code=data?.error?.status||"UNKNOWN";
 const detail=data?.error?.message||"Firebase rejected the request.";
 throw new Error(code+": "+detail);
+}
+
+/* Firebase succeeded. Now send the admin notification. */
+let telegramSent=false;
+try{
+const notifyResponse=await fetch(TELEGRAM_WORKER_URL,{
+method:"POST",
+headers:{"Content-Type":"text/plain;charset=UTF-8"},
+body:JSON.stringify({
+email:user.email||"",
+uid:user.uid,
+amount:amount,
+wallet:wallet,
+network:"TRC20",
+currency:"USDT",
+status:"Pending"
+})
+});
+telegramSent=notifyResponse.ok;
+}catch(telegramError){
+console.error("Telegram notification error:",telegramError);
 }
 
 /* Only remove balance after Firebase confirms the document was created. */
@@ -219,27 +275,37 @@ walletAddress.value="";
 withdrawAmount.value="";
 
 msg.style.color="#00e676";
-msg.textContent="✅ Withdrawal submitted successfully. Status: Pending";
+msg.textContent=telegramSent
+?"✅ Withdrawal submitted successfully. Status: Pending"
+:"✅ Withdrawal submitted. Admin notification is pending.";
 
 }catch(error){
 console.error("Withdrawal error:",error);
 msg.style.color="#ff5577";
-if(error.name==="AbortError"){
-msg.textContent="❌ Request timed out. Please try again.";
-}else if(String(error.message).includes("PERMISSION_DENIED")){
-msg.textContent="❌ Firebase permission denied. Check Firestore Rules.";
-}else if(String(error.message).includes("UNAUTHENTICATED")){
-msg.textContent="❌ Login session expired. Please login again.";
-}else{
-msg.textContent="❌ Withdrawal failed: "+(error.message||"Unknown error");
-}
+if(error.name==="AbortError")msg.textContent="❌ Request timed out. Please try again.";
+else if(String(error.message).includes("PERMISSION_DENIED"))msg.textContent="❌ Firebase permission denied. Check Firestore Rules.";
+else if(String(error.message).includes("UNAUTHENTICATED"))msg.textContent="❌ Login session expired. Please login again.";
+else msg.textContent="❌ Withdrawal failed: "+(error.message||"Unknown error");
 }finally{
 button.disabled=false;
 }
 };
 
-function firebaseError(c){switch(c){case"auth/email-already-in-use":return"This email is already registered.";case"auth/invalid-email":return"Invalid email address.";case"auth/weak-password":return"Password must be at least 6 characters.";case"auth/invalid-credential":return"Wrong email or password.";case"auth/popup-closed-by-user":return"Google login was cancelled.";case"auth/popup-blocked":return"Google login popup was blocked.";case"auth/network-request-failed":return"Network error. Please check your internet.";default:return"Authentication failed. Please try again."}}
-const tg=window.Telegram?.WebApp;if(tg){tg.ready();tg.expand()}
+function firebaseError(c){
+switch(c){
+case"auth/email-already-in-use":return"This email is already registered.";
+case"auth/invalid-email":return"Invalid email address.";
+case"auth/weak-password":return"Password must be at least 6 characters.";
+case"auth/invalid-credential":return"Wrong email or password.";
+case"auth/popup-closed-by-user":return"Google login was cancelled.";
+case"auth/popup-blocked":return"Google login popup was blocked.";
+case"auth/network-request-failed":return"Network error. Please check your internet.";
+default:return"Authentication failed. Please try again."
+}
+}
+
+const tg=window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand()}
 </script>
 </body>
 </html>
