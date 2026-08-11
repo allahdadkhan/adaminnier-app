@@ -6,11 +6,13 @@
 <title>RND Miner</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="//libtl.com/sdk.js" data-zone="11549239" data-sdk="show_11549239"></script>
+
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:#fff;background:#020202}
 body{overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;z-index:-10;background:radial-gradient(circle at 50% 35%,rgba(255,35,35,.10),transparent 28%),radial-gradient(circle at 10% 20%,rgba(255,0,0,.08),transparent 28%),radial-gradient(circle at 90% 75%,rgba(180,0,0,.07),transparent 30%),linear-gradient(145deg,#010101 0%,#090101 35%,#160202 55%,#030303 100%)}
+
 .bg-coin{position:fixed;z-index:-5;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;font-weight:1000;font-family:Arial,Helvetica,sans-serif;color:#fff;background:radial-gradient(circle at 30% 20%,#ffb0b0 0%,#ff5b5b 8%,#e60000 25%,#a00000 48%,#610000 68%,#220000 86%,#090000 100%);border:2px solid #a90000;box-shadow:0 7px 0 #280000,0 12px 20px rgba(0,0,0,.80),0 0 25px rgba(255,0,0,.22),inset 0 4px 7px rgba(255,255,255,.35),inset 0 -8px 12px rgba(0,0,0,.75);text-shadow:0 2px 4px rgba(0,0,0,.8),0 0 8px rgba(255,255,255,.18);opacity:.17;pointer-events:none;animation:floatCoin 8s ease-in-out infinite}
 .bg-coin::after{content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(255,255,255,.15);pointer-events:none}
 .bg-coin.c1{left:7%;top:14%;animation-delay:-1s}
@@ -46,9 +48,7 @@ background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),line
 background-size:35px 35px;pointer-events:none
 }
 
-#authScreen{
-min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative
-}
+#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative}
 
 .auth-box,.balance-card,.withdraw-card,.profile-card{
 background:linear-gradient(145deg,rgba(35,8,8,.97),rgba(5,5,7,.98));
@@ -56,10 +56,7 @@ border:1px solid rgba(255,60,60,.30);
 box-shadow:0 30px 90px rgba(0,0,0,.85),0 0 50px rgba(255,0,0,.13),inset 0 1px 0 rgba(255,255,255,.10)
 }
 
-.auth-box{
-position:relative;width:100%;max-width:420px;padding:34px 23px 28px;border-radius:30px;overflow:hidden
-}
-
+.auth-box{position:relative;width:100%;max-width:420px;padding:34px 23px 28px;border-radius:30px;overflow:hidden}
 .auth-logo,.logo,.profile-avatar{
 display:grid;place-items:center;
 background:radial-gradient(circle at 30% 20%,#ff8888,#ed1717 35%,#a00000 70%,#350000);
@@ -67,10 +64,7 @@ border:1px solid rgba(255,255,255,.25);
 box-shadow:0 8px 0 #390000,0 15px 30px rgba(0,0,0,.6),0 0 30px rgba(255,0,0,.3),inset 0 3px 7px rgba(255,255,255,.3)
 }
 
-.auth-logo{
-width:76px;height:76px;margin:0 auto 18px;border-radius:23px;font-size:34px;font-weight:1000
-}
-
+.auth-logo{width:76px;height:76px;margin:0 auto 18px;border-radius:23px;font-size:34px;font-weight:1000}
 .auth-box h1{text-align:center;margin:0;font-size:25px}
 .auth-sub,.welcome{color:#777791}
 .auth-sub{text-align:center;font-size:12px;margin:9px 0 27px}
@@ -80,7 +74,6 @@ width:100%;padding:15px;margin-bottom:11px;border-radius:15px;
 border:1px solid rgba(255,255,255,.10);outline:none;
 background:rgba(255,255,255,.04);color:white;font-size:14px
 }
-
 .auth-input::placeholder,.withdraw-input::placeholder{color:#66667f}
 
 .auth-btn,.confirm-btn,.claim{
@@ -89,8 +82,6 @@ font-size:14px;font-weight:900;
 background:linear-gradient(100deg,#9d0000,#ed1717 48%,#ff5252);
 box-shadow:0 7px 0 #4b0000,0 12px 24px rgba(170,0,0,.30);cursor:pointer
 }
-
-.auth-btn:disabled,.confirm-btn:disabled{opacity:.65;cursor:not-allowed}
 
 .google-btn,.back-btn,.logout{
 width:100%;padding:14px;margin-top:13px;border:1px solid rgba(255,255,255,.11);
@@ -107,29 +98,20 @@ border-radius:16px;color:white;background:rgba(255,255,255,.055);cursor:pointer
 .logo{width:46px;height:46px;border-radius:15px;font-size:20px;font-weight:1000}
 .brand h1{margin:0;font-size:19px}
 .brand small{display:block;margin-top:3px;color:#777791;font-size:9px;letter-spacing:2px}
-
-.profile{
-width:44px;height:44px;display:grid;place-items:center;border-radius:50%;
-background:rgba(255,40,40,.12);border:1px solid rgba(255,70,70,.28);
-cursor:pointer;font-size:19px
-}
+.profile{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(255,40,40,.12);border:1px solid rgba(255,70,70,.28);cursor:pointer;font-size:19px}
 
 .page{display:none}
 .page.active{display:block}
 .welcome{margin-top:25px;font-size:13px}
 .username{color:#fff;font-weight:bold}
 
-.balance-card,.withdraw-card,.profile-card{
-margin-top:10px;padding:22px;border-radius:28px
-}
-
+.balance-card,.withdraw-card,.profile-card{margin-top:10px;padding:22px;border-radius:28px}
 .balance-label{text-align:center;color:#777791;font-size:11px;letter-spacing:1.5px}
 .balance{text-align:center;margin-top:6px;font-size:40px;font-weight:1000}
 .coin{color:#ff4b4b;font-size:14px}
 .earning{text-align:center;margin-top:6px;color:#ff4d4d;font-size:12px}
 
 .mining-area{display:flex;justify-content:center;margin:34px 0 22px}
-
 .mining-button{
 position:relative;width:190px;height:190px;border-radius:50%;border:3px solid #ff3d3d;
 cursor:pointer;color:white;
@@ -139,43 +121,28 @@ touch-action:manipulation
 }
 
 .mining-button.active{animation:miningPulse 1.4s infinite}
-
-@keyframes miningPulse{
-0%,100%{filter:brightness(1)}
-50%{filter:brightness(1.22)}
-}
-
+@keyframes miningPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.22)}}
 .mine-icon{font-size:45px}
 .mine-title{margin-top:8px;font-size:17px;font-weight:1000;letter-spacing:2px}
 .mine-small{margin-top:6px;color:#ff5b5b;font-size:11px;font-weight:1000}
 .status{text-align:center;color:#777791;font-size:12px}
-
-.dot{
-display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;
-background:#ff3dbd;box-shadow:0 0 8px currentColor
-}
+.dot{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:#ff3dbd;box-shadow:0 0 8px currentColor}
 
 .hashrate{
-display:flex;align-items:center;justify-content:space-between;margin-top:18px;
-padding:17px;border-radius:17px;background:rgba(255,0,0,.10);
-border:1px solid rgba(255,70,70,.18)
+display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:17px;
+border-radius:17px;background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.18)
 }
-
 .hash-left{color:#85859b;font-size:12px}
 .hash-right{color:#ff5b5b;font-weight:900}
 .boost{color:#ffb347;font-size:10px;margin-top:4px;text-align:right}
 
-.actions{
-display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px
-}
-
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
 .action{
 min-height:92px;border-radius:18px;border:1px solid rgba(255,70,70,.28);
 background:linear-gradient(145deg,rgba(55,15,15,.98),rgba(7,8,12,.98));
 color:#fff;cursor:pointer;box-shadow:0 9px 22px rgba(0,0,0,.3);
 font-size:13px;font-weight:900
 }
-
 .action:disabled{cursor:not-allowed}
 .action-icon{display:block;margin-bottom:7px;font-size:25px}
 .ad{color:#ffc44d}
@@ -187,72 +154,32 @@ margin-top:18px;padding:20px;border-radius:22px;
 background:linear-gradient(145deg,rgba(30,8,8,.95),rgba(5,8,17,.96));
 border:1px solid rgba(255,255,255,.07)
 }
-
 .daily h2{margin:0;font-size:20px}
 .daily p{margin:7px 0 18px;color:#777791;font-size:12px}
-
 .days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
 .day{text-align:center;color:#66667a;font-size:9px}
-
-.day-circle{
-width:36px;height:36px;margin:0 auto 6px;display:grid;place-items:center;
-border-radius:50%;background:#181824;border:1px solid #29293a
-}
-
+.day-circle{width:36px;height:36px;margin:0 auto 6px;display:grid;place-items:center;border-radius:50%;background:#181824;border:1px solid #29293a}
 .day.active .day-circle{background:linear-gradient(135deg,#ff4b4b,#b00000)}
 .claim{margin-top:20px}
 
 .withdraw-title{text-align:center;font-size:24px;margin-bottom:7px}
 .withdraw-sub{text-align:center;color:#777791;font-size:12px;margin-bottom:25px}
-
-.withdraw-balance{
-padding:16px;margin-bottom:18px;text-align:center;border-radius:16px;
-background:rgba(255,0,0,.1)
-}
-
+.withdraw-balance{padding:16px;margin-bottom:18px;text-align:center;border-radius:16px;background:rgba(255,0,0,.1)}
 .withdraw-balance small{display:block;color:#777791;margin-bottom:5px}
 .withdraw-balance strong{font-size:24px;color:#ff5b5b}
-
-.method{
-padding:15px;margin-bottom:15px;border-radius:15px;
-border:1px solid rgba(255,60,60,.25);background:rgba(255,0,0,.05)
-}
-
+.method{padding:15px;margin-bottom:15px;border-radius:15px;border:1px solid rgba(255,60,60,.25);background:rgba(255,0,0,.05)}
 .method strong{color:#ff5b5b}
-
-.note{
-color:#777791;font-size:10px;line-height:1.5;margin:12px 0 18px
-}
-
-.withdraw-message{
-text-align:center;font-size:12px;margin-top:14px;min-height:18px;line-height:1.5
-}
+.note{color:#777791;font-size:10px;line-height:1.5;margin:12px 0 18px}
+.withdraw-message{text-align:center;font-size:12px;margin-top:14px;min-height:18px}
 
 .profile-card h2{text-align:center;margin:0 0 22px;font-size:24px}
-
-.profile-avatar{
-width:75px;height:75px;margin:0 auto 18px;border-radius:50%;font-size:30px
-}
-
-.profile-row{
-padding:16px;margin-bottom:11px;border-radius:16px;background:rgba(255,255,255,.04)
-}
-
+.profile-avatar{width:75px;height:75px;margin:0 auto 18px;border-radius:50%;font-size:30px}
+.profile-row{padding:16px;margin-bottom:11px;border-radius:16px;background:rgba(255,255,255,.04)}
 .profile-row small{display:block;color:#777791;font-size:10px;margin-bottom:5px}
 .profile-row strong{font-size:14px;word-break:break-word}
-
-.profile-status{
-margin-top:15px;padding:14px;border-radius:15px;text-align:center;
-color:#ff5b5b;background:rgba(255,0,0,.06)
-}
-
+.profile-status{margin-top:15px;padding:14px;border-radius:15px;text-align:center;color:#ff5b5b;background:rgba(255,0,0,.06)}
 .footer{text-align:center;margin-top:25px;color:#424255;font-size:9px}
-
-.session-box{
-margin-top:12px;padding:12px;border-radius:15px;background:rgba(255,0,0,.06);
-text-align:center;color:#777791;font-size:11px
-}
-
+.session-box{margin-top:12px;padding:12px;border-radius:15px;background:rgba(255,0,0,.06);text-align:center;color:#777791;font-size:11px}
 .session-box strong{display:block;color:#ff5b5b;font-size:14px}
 </style>
 </head>
@@ -381,17 +308,13 @@ Watch an ad to activate your mining boost
 <button class="claim" onclick="claimReward()" type="button">
 CLAIM DAILY REWARD
 </button>
-
 </div>
 
-<button class="logout" onclick="logout()" type="button">
-LOGOUT
-</button>
+<button class="logout" onclick="logout()" type="button">LOGOUT</button>
 
 </div>
 </div>
 
-<!-- WITHDRAW PAGE -->
 <div id="withdrawPage" class="page">
 
 <div class="withdraw-card">
@@ -415,18 +338,17 @@ Minimum withdrawal: 0.02 RND
 <small>Tron Network</small>
 </div>
 
-<label for="walletAddress">Wallet Address</label>
+<label>Wallet Address</label>
 
 <input
 id="walletAddress"
 class="withdraw-input"
 type="text"
-inputmode="text"
-autocomplete="off"
 placeholder="Enter TRC20 wallet address"
+autocomplete="off"
 >
 
-<label for="withdrawAmount">Withdrawal Amount</label>
+<label>Withdrawal Amount</label>
 
 <input
 id="withdrawAmount"
@@ -438,8 +360,7 @@ placeholder="Minimum 0.02 RND"
 >
 
 <div class="note">
-⚠️ Minimum withdrawal amount is 0.02 RND.
-<br>
+⚠️ Minimum withdrawal amount is 0.02 RND.<br>
 Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.
 </div>
 
@@ -523,6 +444,7 @@ addDoc,
 serverTimestamp
 }from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
 const firebaseConfig={
 apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
 authDomain:"adaminning-app.firebaseapp.com",
@@ -538,38 +460,67 @@ const auth=getAuth(app);
 const db=getFirestore(app);
 const provider=new GoogleAuthProvider();
 
-let signUpMode=false,
-balance=0,
-mining=false,
-miningTimer=null,
-sessionInterval=null,
-miningStartTime=null,
-lastRewardTime=null,
-baseHashrate=2.85,
-currentHashrate=2.85,
-currentUserUID=null;
 
-const SESSION_TIME=6*60*60*1000,
-REWARD_PER_SECOND=.000001,
-BOOST_TIME=10*60*1000;
+/* SAFE ELEMENT REFERENCES
+   Ye login stuck hone wala issue prevent karte hain.
+*/
+const authScreenEl=document.getElementById("authScreen");
+const mainAppEl=document.getElementById("mainApp");
+const miningPageEl=document.getElementById("miningPage");
+const withdrawPageEl=document.getElementById("withdrawPage");
+const profilePageEl=document.getElementById("profilePage");
+
+const usernameEl=document.getElementById("username");
+const profileUsernameEl=document.getElementById("profileUsername");
+const profileEmailEl=document.getElementById("profileEmail");
+
+const balanceEl=document.getElementById("balance");
+const withdrawBalanceEl=document.getElementById("withdrawBalance");
+
+const walletAddressEl=document.getElementById("walletAddress");
+const withdrawAmountEl=document.getElementById("withdrawAmount");
+const withdrawMessageEl=document.getElementById("withdrawMessage");
+const confirmWithdrawalButtonEl=document.getElementById("confirmWithdrawalButton");
+
+
+let signUpMode=false;
+let balance=0;
+let mining=false;
+let miningTimer=null;
+let sessionInterval=null;
+let miningStartTime=null;
+let lastRewardTime=null;
+let baseHashrate=2.85;
+let currentHashrate=2.85;
+let currentUserUID=null;
+
+
+const SESSION_TIME=6*60*60*1000;
+const REWARD_PER_SECOND=.000001;
+const BOOST_TIME=10*60*1000;
+
 
 const key=(p,u)=>"rndminer_"+p+"_"+u;
+
 
 function boostEnd(){
 return currentUserUID
 ?Number(localStorage.getItem(key("boost_end",currentUserUID)))||0
-:0
+:0;
 }
 
+
 function boostActive(t=Date.now()){
-return boostEnd()>t
+return boostEnd()>t;
 }
+
 
 function reward(a,b){
 
 if(b<=a)return 0;
 
-let e=boostEnd(),r=0;
+let e=boostEnd();
+let r=0;
 
 if(e>a){
 
@@ -577,8 +528,9 @@ let x=Math.min(b,e);
 
 r+=(x-a)/1000*REWARD_PER_SECOND*(5.7/baseHashrate);
 
-if(b>e)
+if(b>e){
 r+=(b-e)/1000*REWARD_PER_SECOND;
+}
 
 }else{
 
@@ -589,12 +541,13 @@ r+=(b-a)/1000*REWARD_PER_SECOND;
 return r;
 }
 
+
 function updateBoostUI(){
 
 if(!currentUserUID)return;
 
-let e=boostEnd(),
-n=Date.now();
+let e=boostEnd();
+let n=Date.now();
 
 if(e>n){
 
@@ -613,21 +566,26 @@ document.getElementById("hashrate").textContent="2.85 GH/s";
 
 document.getElementById("boostText").textContent="Base hashrate";
 
-localStorage.removeItem(key("boost_end",currentUserUID));
+localStorage.removeItem(
+key("boost_end",currentUserUID)
+);
 
 }
 
 }
+
 
 function fmt(ms){
 
-let t=Math.max(0,Math.floor(ms/1000)),
-m=Math.floor(t/60),
-s=t%60;
+let t=Math.max(0,Math.floor(ms/1000));
+let m=Math.floor(t/60);
+let s=t%60;
 
-return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+return String(m).padStart(2,"0")+":"+
+String(s).padStart(2,"0");
 
 }
+
 
 window.toggleAuth=()=>{
 
@@ -639,7 +597,9 @@ signUpMode
 :"Welcome to RND Miner";
 
 document.getElementById("authButton").textContent=
-signUpMode?"SIGN UP":"LOGIN";
+signUpMode
+?"SIGN UP"
+:"LOGIN";
 
 document.getElementById("authSwitch").innerHTML=
 signUpMode
@@ -650,11 +610,14 @@ document.getElementById("authError").textContent="";
 
 };
 
+
 window.emailAuth=async()=>{
 
-let e=document.getElementById("authEmail").value.trim(),
-p=document.getElementById("authPassword").value,
-er=document.getElementById("authError");
+let e=document.getElementById("authEmail").value.trim();
+
+let p=document.getElementById("authPassword").value;
+
+let er=document.getElementById("authError");
 
 if(!e||!p){
 
@@ -666,13 +629,15 @@ return;
 
 try{
 
-if(signUpMode)
+if(signUpMode){
 
 await createUserWithEmailAndPassword(auth,e,p);
 
-else
+}else{
 
 await signInWithEmailAndPassword(auth,e,p);
+
+}
 
 }catch(x){
 
@@ -681,6 +646,7 @@ er.textContent=firebaseError(x.code);
 }
 
 };
+
 
 window.googleLogin=async()=>{
 
@@ -697,15 +663,14 @@ firebaseError(e.code);
 
 };
 
+
 function updateBalance(){
 
-document.getElementById("balance").textContent=
-balance.toFixed(5);
+balanceEl.textContent=balance.toFixed(5);
 
-document.getElementById("withdrawBalance").textContent=
-balance.toFixed(5);
+withdrawBalanceEl.textContent=balance.toFixed(5);
 
-if(currentUserUID)
+if(currentUserUID){
 
 localStorage.setItem(
 key("balance",currentUserUID),
@@ -713,6 +678,9 @@ String(balance)
 );
 
 }
+
+}
+
 
 function updateSessionUI(){
 
@@ -733,10 +701,11 @@ let r=Math.max(
 SESSION_TIME-(Date.now()-miningStartTime)
 );
 
-let t=Math.floor(r/1000),
-h=Math.floor(t/3600),
-m=Math.floor(t%3600/60),
-s=t%60;
+let t=Math.floor(r/1000);
+
+let h=Math.floor(t/3600);
+let m=Math.floor(t%3600/60);
+let s=t%60;
 
 el.textContent=
 String(h).padStart(2,"0")+":"+
@@ -744,6 +713,7 @@ String(m).padStart(2,"0")+":"+
 String(s).padStart(2,"0");
 
 }
+
 
 function setUI(a,msg){
 
@@ -761,9 +731,11 @@ document.getElementById("dot").style.background=
 a?"#00e5ff":"#ff3dbd";
 
 updateSessionUI();
+
 updateBoostUI();
 
 }
+
 
 function saveMining(){
 
@@ -788,17 +760,16 @@ key("mining_active",currentUserUID),
 
 }else{
 
-[
-"mining_start",
-"mining_last",
-"mining_active"
-].forEach(p=>
-localStorage.removeItem(key(p,currentUserUID))
-);
+["mining_start","mining_last","mining_active"]
+.forEach(p=>
+localStorage.removeItem(
+key(p,currentUserUID)
+));
 
 }
 
 }
+
 
 function stopMining(msg="Mining inactive",clear=true){
 
@@ -812,13 +783,11 @@ sessionInterval=null;
 
 if(clear&&currentUserUID){
 
-[
-"mining_start",
-"mining_last",
-"mining_active"
-].forEach(p=>
-localStorage.removeItem(key(p,currentUserUID))
-);
+["mining_start","mining_last","mining_active"]
+.forEach(p=>
+localStorage.removeItem(
+key(p,currentUserUID)
+));
 
 }
 
@@ -829,6 +798,7 @@ setUI(false,msg);
 
 }
 
+
 function startTimer(){
 
 clearInterval(miningTimer);
@@ -838,8 +808,9 @@ miningTimer=setInterval(()=>{
 
 if(!mining||!currentUserUID)return;
 
-let n=Date.now(),
-end=miningStartTime+SESSION_TIME;
+let n=Date.now();
+
+let end=miningStartTime+SESSION_TIME;
 
 if(n>=end){
 
@@ -867,18 +838,22 @@ lastRewardTime
 }
 
 updateSessionUI();
+
 updateBoostUI();
 
 },1000);
 
+
 sessionInterval=setInterval(()=>{
 
 updateSessionUI();
+
 updateBoostUI();
 
 },1000);
 
 }
+
 
 function restore(){
 
@@ -889,17 +864,23 @@ key("mining_active",currentUserUID)
 );
 
 let s=Number(
-localStorage.getItem(key("mining_start",currentUserUID))
+localStorage.getItem(
+key("mining_start",currentUserUID)
+)
 );
 
-let l=Number(
-localStorage.getItem(key("mining_last",currentUserUID))
+let l=
+Number(
+localStorage.getItem(
+key("mining_last",currentUserUID)
+)
 )||s;
 
 if(a!=="1"||!s)return;
 
-let n=Date.now(),
-end=s+SESSION_TIME;
+let n=Date.now();
+
+let end=s+SESSION_TIME;
 
 if(n>=end){
 
@@ -918,7 +899,9 @@ updateBalance();
 }
 
 mining=true;
+
 miningStartTime=s;
+
 lastRewardTime=n;
 
 setUI(true,"Mining active");
@@ -926,6 +909,7 @@ setUI(true,"Mining active");
 startTimer();
 
 }
+
 
 function loadUser(u){
 
@@ -939,39 +923,49 @@ key("balance",u.uid)
 )||0;
 
 updateBalance();
+
 restore();
+
 updateBoostUI();
 
 }
 
+
+/* LOGIN / AUTH FIX */
 onAuthStateChanged(auth,u=>{
 
 if(u){
 
-authScreen.style.display="none";
-mainApp.style.display="block";
+authScreenEl.style.display="none";
+
+mainAppEl.style.display="block";
 
 let n=
 u.displayName||
 u.email?.split("@")[0]||
 "Miner";
 
-username.textContent=n;
-profileUsername.textContent=n;
-profileEmail.textContent=u.email||"Not available";
+usernameEl.textContent=n;
+
+profileUsernameEl.textContent=n;
+
+profileEmailEl.textContent=
+u.email||"Not available";
 
 loadUser(u);
 
 }else{
 
-authScreen.style.display="flex";
-mainApp.style.display="none";
+authScreenEl.style.display="flex";
+
+mainAppEl.style.display="none";
 
 currentUserUID=null;
 
 }
 
 });
+
 
 window.logout=async()=>{
 
@@ -984,6 +978,7 @@ saveMining();
 }
 
 clearInterval(miningTimer);
+
 clearInterval(sessionInterval);
 
 mining=false;
@@ -991,6 +986,7 @@ mining=false;
 await signOut(auth);
 
 };
+
 
 window.startMining=()=>{
 
@@ -1010,9 +1006,7 @@ currentUserUID=u.uid;
 
 mining=true;
 
-miningStartTime=
-lastRewardTime=
-Date.now();
+miningStartTime=lastRewardTime=Date.now();
 
 saveMining();
 
@@ -1021,6 +1015,7 @@ setUI(true,"Mining active");
 startTimer();
 
 };
+
 
 window.watchAd=async()=>{
 
@@ -1034,8 +1029,9 @@ return;
 
 }
 
-let b=document.getElementById("watchAdButton"),
-s=document.getElementById("adStatus");
+let b=document.getElementById("watchAdButton");
+
+let s=document.getElementById("adStatus");
 
 if(typeof window.show_11549239!=="function"){
 
@@ -1055,9 +1051,11 @@ await window.show_11549239();
 
 currentUserUID=u.uid;
 
-let n=Date.now(),
-old=boostEnd(),
-end=(old>n?old:n)+BOOST_TIME;
+let n=Date.now();
+
+let old=boostEnd();
+
+let end=(old>n?old:n)+BOOST_TIME;
 
 localStorage.setItem(
 key("boost_end",u.uid),
@@ -1081,6 +1079,7 @@ b.disabled=false;
 
 };
 
+
 window.claimReward=()=>{
 
 let u=auth.currentUser;
@@ -1093,8 +1092,10 @@ return;
 
 }
 
-let k=key("last_claim",u.uid),
-today=new Date().toISOString().slice(0,10);
+let k=key("last_claim",u.uid);
+
+let today=
+new Date().toISOString().slice(0,10);
 
 if(localStorage.getItem(k)===today){
 
@@ -1114,36 +1115,44 @@ alert("🎉 Daily reward claimed!\n\n+0.001 RND");
 
 };
 
+
 function hide(){
 
-miningPage.classList.remove("active");
-withdrawPage.classList.remove("active");
-profilePage.classList.remove("active");
+miningPageEl.classList.remove("active");
+
+withdrawPageEl.classList.remove("active");
+
+profilePageEl.classList.remove("active");
 
 }
+
 
 window.showMining=()=>{
 
 hide();
 
-miningPage.classList.add("active");
+miningPageEl.classList.add("active");
 
 updateBalance();
+
 updateBoostUI();
 
 };
+
 
 window.showWithdraw=()=>{
 
 hide();
 
-withdrawPage.classList.add("active");
+withdrawPageEl.classList.add("active");
 
 updateBalance();
 
-document.getElementById("withdrawMessage").textContent="";
+/* Clear old message when opening withdrawal page */
+withdrawMessageEl.textContent="";
 
 };
+
 
 window.showProfile=()=>{
 
@@ -1151,185 +1160,152 @@ let u=auth.currentUser;
 
 if(!u)return;
 
-profileUsername.textContent=
+profileUsernameEl.textContent=
 u.displayName||
 u.email?.split("@")[0]||
 "Miner";
 
-profileEmail.textContent=
+profileEmailEl.textContent=
 u.email||
 "Not available";
 
 hide();
 
-profilePage.classList.add("active");
+profilePageEl.classList.add("active");
 
 };
 
-/* =========================
-   FIXED WITHDRAWAL FUNCTION
-   ========================= */
 
+/* FIXED WITHDRAWAL FUNCTION */
 window.confirmWithdrawal=async()=>{
 
-const u=auth.currentUser;
-
-const message=document.getElementById("withdrawMessage");
-const button=document.getElementById("confirmWithdrawalButton");
-const walletInput=document.getElementById("walletAddress");
-const amountInput=document.getElementById("withdrawAmount");
+let u=auth.currentUser;
 
 if(!u){
 
-message.style.color="#ff5577";
-message.textContent="Please login first.";
+alert("Please login first.");
 
 return;
 
 }
 
-const wallet=walletInput.value.trim();
-const amount=Number(amountInput.value);
+let w=walletAddressEl.value.trim();
 
-message.style.color="#ff5577";
-message.textContent="";
+let a=Number(withdrawAmountEl.value);
 
-if(!wallet){
+let m=withdrawMessageEl;
 
-message.textContent=
+m.style.color="#ff5577";
+
+m.textContent="";
+
+
+if(!w){
+
+m.textContent=
 "Please enter your TRC20 wallet address.";
 
-walletInput.focus();
+return;
+
+}
+
+
+/* TRC20 address validation */
+if(!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(w)){
+
+m.textContent=
+"Please enter a valid TRC20 address.";
 
 return;
 
 }
 
-/* TRC20 addresses normally start with T and are 34 characters */
-if(!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(wallet)){
 
-message.textContent=
-"Please enter a valid TRC20 wallet address.";
+if(!a||a<0.02){
 
-walletInput.focus();
-
-return;
-
-}
-
-if(!Number.isFinite(amount)||amount<0.02){
-
-message.textContent=
+m.textContent=
 "Minimum withdrawal is 0.02 RND.";
 
-amountInput.focus();
-
 return;
 
 }
 
-if(amount>balance){
 
-message.textContent=
+if(a>balance){
+
+m.textContent=
 "Insufficient balance.";
 
 return;
 
 }
 
-/* Prevent double-click submissions */
-if(button.disabled)return;
 
-button.disabled=true;
-button.textContent="SUBMITTING...";
+confirmWithdrawalButtonEl.disabled=true;
 
-message.style.color="#ffb347";
-message.textContent="Submitting withdrawal request...";
+m.style.color="#777791";
+
+m.textContent=
+"Submitting withdrawal request...";
+
 
 try{
 
-const withdrawalData={
+/*
+  Withdrawal request Firestore mein save hogi.
+  Collection: withdrawals
+*/
 
-uid:u.uid,
-
-email:u.email||"",
-
-walletAddress:wallet,
-
-network:"TRC20",
-
-currency:"USDT",
-
-amount:Number(amount.toFixed(5)),
-
-balanceUnit:"RND",
-
-status:"Pending",
-
-createdAt:serverTimestamp()
-
-};
-
-/* Send request to Firestore */
-const docRef=await addDoc(
+await addDoc(
 collection(db,"withdrawals"),
-withdrawalData
+{
+uid:u.uid,
+email:u.email||"",
+walletAddress:w,
+network:"TRC20",
+currency:"USDT",
+amount:a,
+balanceUnit:"RND",
+status:"Pending",
+createdAt:serverTimestamp()
+}
 );
 
-/* Deduct balance only after successful Firestore submission */
-balance=Number(
-(balance-amount).toFixed(5)
-);
+
+/*
+  Request successfully submit hone ke baad
+  balance se amount minus kar diya jata hai.
+*/
+balance-=a;
 
 updateBalance();
 
-walletInput.value="";
-amountInput.value="";
+walletAddressEl.value="";
 
-message.style.color="#39e58c";
+withdrawAmountEl.value="";
 
-message.textContent=
-"✅ Withdrawal submitted successfully. Request ID: "+
-docRef.id;
+m.style.color="#00e676";
 
-}catch(error){
+m.textContent=
+"✅ Withdrawal submitted successfully. Your request is pending review.";
 
-console.error("Withdrawal error:",error);
+}catch(e){
 
-message.style.color="#ff5577";
+console.error("Withdrawal error:",e);
 
-/* Show useful Firebase error */
-if(error.code==="permission-denied"){
+m.style.color="#ff5577";
 
-message.textContent=
-"❌ Withdrawal blocked by Firebase permissions. Firestore Rules need write permission.";
-
-}else if(error.code==="failed-precondition"){
-
-message.textContent=
-"❌ Firebase is not ready. Please check Firestore setup.";
-
-}else if(error.code==="unavailable"){
-
-message.textContent=
-"❌ Internet/Firebase connection problem. Please try again.";
-
-}else{
-
-message.textContent=
-"❌ Withdrawal failed: "+
-(error.message||"Please try again.");
-
-}
+m.textContent=
+"Failed to submit withdrawal request. Please try again.";
 
 }finally{
 
-button.disabled=false;
-button.textContent="CONFIRM WITHDRAWAL";
+confirmWithdrawalButtonEl.disabled=false;
 
 }
 
 };
+
 
 function firebaseError(c){
 
@@ -1354,17 +1330,19 @@ return({
 "Google login popup was blocked.",
 
 "auth/network-request-failed":
-"Network error. Please check your internet."
+"Network error. Please check the internet."
 
 }[c]||"Authentication failed. Please try again.");
 
 }
+
 
 const tg=window.Telegram?.WebApp;
 
 if(tg){
 
 tg.ready();
+
 tg.expand();
 
 }
