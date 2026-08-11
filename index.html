@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-<title>ADAMINNER</title>
+<title>RND Miner</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
@@ -844,14 +844,14 @@ box-shadow:
 
 <div class="auth-box">
 
-<div class="auth-logo">A</div>
+<div class="auth-logo">R</div>
 
 <h1 id="authTitle">
-Welcome to ADAMINNER
+Welcome to RND Miner
 </h1>
 
 <div class="auth-sub">
-Login to access your mining dashboard
+Render Mining • Login to access your mining dashboard
 </div>
 
 <input
@@ -899,11 +899,11 @@ Don't have an account?
 
 <div class="brand">
 
-<div class="logo">A</div>
+<div class="logo">R</div>
 
 <div>
-<h1>ADAMINNER</h1>
-<small>VIRTUAL REWARD NETWORK</small>
+<h1>RND Miner</h1>
+<small>RENDER MINING</small>
 </div>
 
 </div>
@@ -933,11 +933,11 @@ TOTAL BALANCE
 
 <div class="balance">
 <span id="balance">0.00000</span>
-<span class="coin">SOL</span>
+<span class="coin">RND</span>
 </div>
 
 <div class="earning">
-Mining reward: +0.001 SOL / session
+Mining reward: +0.001 RND / session
 </div>
 
 <div class="mining-area">
@@ -1129,7 +1129,7 @@ Withdraw
 </h2>
 
 <div class="withdraw-sub">
-Minimum withdrawal: 0.02 SOL
+Minimum withdrawal: 0.02 RND
 </div>
 
 <div class="withdraw-balance">
@@ -1142,7 +1142,7 @@ Available Balance
 <span id="withdrawBalance">
 0.00000
 </span>
-SOL
+RND
 </strong>
 
 </div>
@@ -1181,10 +1181,10 @@ class="withdraw-input"
 type="number"
 step="0.00001"
 min="0.02"
-placeholder="Minimum 0.02 SOL">
+placeholder="Minimum 0.02 RND">
 
 <div class="note">
-⚠️ Minimum withdrawal amount is 0.02 SOL.
+⚠️ Minimum withdrawal amount is 0.02 RND.
 <br>
 Make sure your TRC20 address is correct.
 You will receive the payment manually after your withdrawal request is reviewed.
@@ -1253,7 +1253,7 @@ Not available
 </div>
 
 <div class="profile-status">
-🟢 Account is active
+🟢 RND Miner account is active
 </div>
 
 <button
@@ -1278,7 +1278,7 @@ LOGOUT
 </div>
 
 <div class="footer">
-ADAMINNER • Virtual Reward Network
+RND Miner • Render Mining
 </div>
 
 </div>
@@ -1344,8 +1344,8 @@ signUpMode=!signUpMode;
 
 document.getElementById("authTitle").textContent=
 signUpMode
-?"Create Account"
-:"Welcome to ADAMINNER";
+?"Create RND Miner Account"
+:"Welcome to RND Miner";
 
 document.getElementById("authButton").textContent=
 signUpMode
@@ -1460,23 +1460,23 @@ const BOOST_TIME=10*60*1000;
 ===================================================== */
 
 function balanceKey(uid){
-return "adaminner_balance_"+uid;
+return "rndminer_balance_"+uid;
 }
 
 function miningStartKey(uid){
-return "adaminner_mining_start_"+uid;
+return "rndminer_mining_start_"+uid;
 }
 
 function miningLastKey(uid){
-return "adaminner_mining_last_"+uid;
+return "rndminer_mining_last_"+uid;
 }
 
 function miningActiveKey(uid){
-return "adaminner_mining_active_"+uid;
+return "rndminer_mining_active_"+uid;
 }
 
 function boostEndKey(uid){
-return "adaminner_boost_end_"+uid;
+return "rndminer_boost_end_"+uid;
 }
 
 
@@ -2346,7 +2346,7 @@ const today=
 new Date().toISOString().slice(0,10);
 
 const key=
-"adaminner_last_claim_"+
+"rndminer_last_claim_"+
 auth.currentUser.uid;
 
 const lastClaim=
@@ -2372,7 +2372,7 @@ today
 );
 
 alert(
-"🎉 Daily reward claimed!\n\n+0.001 SOL"
+"🎉 Daily reward claimed!\n\n+0.001 RND"
 );
 
 };
@@ -2449,7 +2449,6 @@ document.getElementById("profilePage")
 
 /* =====================================================
    WITHDRAW
-   ONLY THIS SECTION WAS CHANGED
 ===================================================== */
 
 window.confirmWithdrawal=async function(){
@@ -2503,7 +2502,7 @@ return;
 if(!amount||amount<0.02){
 
 message.textContent=
-"Minimum withdrawal is 0.02 SOL.";
+"Minimum withdrawal is 0.02 RND.";
 
 return;
 
@@ -2544,21 +2543,16 @@ walletAddress:wallet,
 network:"TRC20",
 currency:"USDT",
 amount:amount,
+balanceUnit:"RND",
 status:"Pending",
 createdAt:serverTimestamp()
 }
 );
 
-
-/* Withdrawal submitted successfully */
-
 message.style.color="#00e5ff";
 
 message.textContent=
 "✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";
-
-
-/* Clear ONLY withdrawal inputs */
 
 document.getElementById("walletAddress")
 .value="";
@@ -2566,11 +2560,9 @@ document.getElementById("walletAddress")
 document.getElementById("withdrawAmount")
 .value="";
 
-
 button.disabled=false;
 
 button.style.opacity="1";
-
 
 }catch(e){
 
