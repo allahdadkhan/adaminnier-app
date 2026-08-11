@@ -27,12 +27,16 @@ padding:0;
 min-height:100%;
 font-family:Arial,Helvetica,sans-serif;
 color:#fff;
-background:#02030a;
+background:#020202;
 }
 
 body{
 overflow-x:hidden;
 }
+
+/* =====================================================
+   RENDER RED COIN FUTURISTIC BACKGROUND
+===================================================== */
 
 body::before{
 content:"";
@@ -40,23 +44,151 @@ position:fixed;
 inset:0;
 z-index:-5;
 background:
-radial-gradient(circle at 50% -10%,rgba(137,68,255,.45),transparent 32%),
-radial-gradient(circle at 100% 25%,rgba(0,229,255,.18),transparent 30%),
-radial-gradient(circle at 0 75%,rgba(255,0,179,.12),transparent 28%),
-linear-gradient(145deg,#02030a,#080313 48%,#020b12);
+radial-gradient(
+circle at 50% 38%,
+rgba(255,35,35,.18),
+transparent 24%
+),
+radial-gradient(
+circle at 10% 20%,
+rgba(255,0,0,.12),
+transparent 28%
+),
+radial-gradient(
+circle at 90% 75%,
+rgba(180,0,0,.10),
+transparent 30%
+),
+linear-gradient(
+145deg,
+#010101 0%,
+#090101 35%,
+#160202 55%,
+#030303 100%
+);
 }
 
+/* Large metallic red RENDER coin behind entire application */
+
 body::after{
+content:"R";
+position:fixed;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%) perspective(900px) rotateX(8deg);
+z-index:-4;
+
+width:430px;
+height:430px;
+
+display:grid;
+place-items:center;
+
+border-radius:50%;
+
+font-family:Arial,Helvetica,sans-serif;
+font-size:210px;
+font-weight:1000;
+letter-spacing:-18px;
+
+color:#fff;
+
+background:
+radial-gradient(
+circle at 32% 20%,
+#ffb0b0 0%,
+#ff5b5b 5%,
+#e60000 18%,
+#a00000 38%,
+#610000 62%,
+#220000 82%,
+#090000 100%
+);
+
+border:7px solid #a90000;
+
+box-shadow:
+0 35px 0 #280000,
+0 55px 90px rgba(0,0,0,.95),
+0 0 100px rgba(255,0,0,.24),
+0 0 180px rgba(180,0,0,.13),
+inset 0 15px 25px rgba(255,255,255,.35),
+inset 0 -30px 45px rgba(0,0,0,.85);
+
+opacity:.17;
+
+text-shadow:
+0 4px 8px rgba(0,0,0,.8),
+0 0 25px rgba(255,255,255,.18);
+}
+
+/* Metallic coin rings */
+
+#authScreen::before,
+.app::before{
+content:"";
+position:fixed;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:455px;
+height:455px;
+border-radius:50%;
+border:2px solid rgba(255,40,40,.09);
+box-shadow:
+0 0 0 12px rgba(255,0,0,.025),
+0 0 0 24px rgba(255,0,0,.018),
+0 0 90px rgba(255,0,0,.08);
+z-index:-3;
+pointer-events:none;
+}
+
+/* futuristic grid */
+
+#authScreen::after,
+.app::after{
 content:"";
 position:fixed;
 inset:0;
-z-index:-4;
-opacity:.10;
+z-index:-2;
+opacity:.075;
 background-image:
-linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+linear-gradient(
+rgba(255,255,255,.08) 1px,
+transparent 1px
+),
+linear-gradient(
+90deg,
+rgba(255,255,255,.08) 1px,
+transparent 1px
+);
 background-size:35px 35px;
+pointer-events:none;
 }
+
+/* Mobile coin */
+
+@media(max-width:600px){
+
+body::after{
+width:330px;
+height:330px;
+font-size:155px;
+border-width:5px;
+opacity:.13;
+}
+
+#authScreen::before,
+.app::before{
+width:350px;
+height:350px;
+}
+
+}
+
+/* =====================================================
+   SIDE ADS
+===================================================== */
 
 .side-ad{
 position:fixed;
@@ -81,7 +213,7 @@ right:8px;
 .side-ad-box{
 width:160px;
 min-height:300px;
-border:1px dashed rgba(145,90,255,.22);
+border:1px dashed rgba(255,40,40,.22);
 border-radius:14px;
 background:rgba(255,255,255,.015);
 display:flex;
@@ -108,6 +240,10 @@ max-width:540px;
 
 }
 
+/* =====================================================
+   AUTH
+===================================================== */
+
 #authScreen{
 min-height:100vh;
 display:flex;
@@ -123,13 +259,21 @@ width:100%;
 max-width:420px;
 padding:34px 23px 28px;
 border-radius:30px;
+
 background:
-linear-gradient(145deg,rgba(27,18,52,.98),rgba(4,7,17,.99));
-border:1px solid rgba(163,103,255,.32);
+linear-gradient(
+145deg,
+rgba(35,8,8,.97),
+rgba(5,5,7,.98)
+);
+
+border:1px solid rgba(255,60,60,.30);
+
 box-shadow:
-0 30px 90px rgba(0,0,0,.75),
-0 0 50px rgba(112,55,255,.15),
+0 30px 90px rgba(0,0,0,.85),
+0 0 50px rgba(255,0,0,.13),
 inset 0 1px 0 rgba(255,255,255,.10);
+
 overflow:hidden;
 }
 
@@ -141,7 +285,7 @@ height:220px;
 right:-100px;
 top:-120px;
 border-radius:50%;
-background:rgba(0,220,255,.13);
+background:rgba(255,0,0,.16);
 filter:blur(45px);
 }
 
@@ -152,15 +296,27 @@ margin:0 auto 18px;
 display:grid;
 place-items:center;
 border-radius:23px;
+
 font-size:34px;
 font-weight:1000;
+
+color:white;
+
 background:
-linear-gradient(145deg,#d2b3ff,#793cff 45%,#00d9ff);
+radial-gradient(
+circle at 30% 20%,
+#ff8585,
+#ed1717 30%,
+#a00000 65%,
+#320000
+);
+
 border:1px solid rgba(255,255,255,.30);
+
 box-shadow:
-0 10px 0 #29105e,
+0 10px 0 #390000,
 0 18px 40px rgba(0,0,0,.65),
-0 0 38px rgba(127,63,255,.65),
+0 0 38px rgba(255,0,0,.38),
 inset 0 4px 9px rgba(255,255,255,.35);
 }
 
@@ -172,7 +328,7 @@ font-size:25px;
 
 .auth-sub{
 text-align:center;
-color:#8888a5;
+color:#999090;
 font-size:12px;
 margin:9px 0 27px;
 }
@@ -185,20 +341,28 @@ margin-bottom:11px;
 border-radius:15px;
 border:1px solid rgba(255,255,255,.10);
 outline:none;
+
 background:
-linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
+linear-gradient(
+145deg,
+rgba(255,255,255,.065),
+rgba(255,255,255,.025)
+);
+
 color:white;
 font-size:14px;
+
 box-shadow:
 inset 0 2px 8px rgba(0,0,0,.22);
 }
 
 .auth-input:focus,
 .withdraw-input:focus{
-border-color:#8d5cff;
+border-color:#ff3d3d;
+
 box-shadow:
-0 0 0 2px rgba(141,92,255,.10),
-0 0 18px rgba(104,58,255,.18),
+0 0 0 2px rgba(255,40,40,.10),
+0 0 18px rgba(255,30,30,.18),
 inset 0 2px 8px rgba(0,0,0,.22);
 }
 
@@ -216,12 +380,20 @@ border-radius:16px;
 color:white;
 font-size:14px;
 font-weight:900;
+
 background:
-linear-gradient(100deg,#6834ed,#a04dff 48%,#00d7ee);
+linear-gradient(
+100deg,
+#9d0000,
+#ed1717 48%,
+#ff5252
+);
+
 box-shadow:
-0 7px 0 #32157b,
-0 12px 24px rgba(91,45,220,.30),
+0 7px 0 #4b0000,
+0 12px 24px rgba(170,0,0,.30),
 inset 0 2px 5px rgba(255,255,255,.22);
+
 cursor:pointer;
 }
 
@@ -244,7 +416,7 @@ font-size:12px;
 }
 
 .auth-switch span{
-color:#00e5ff;
+color:#ff4d4d;
 cursor:pointer;
 font-weight:bold;
 }
@@ -255,6 +427,10 @@ font-size:12px;
 text-align:center;
 margin-top:12px;
 }
+
+/* =====================================================
+   APP
+===================================================== */
 
 .app{
 width:100%;
@@ -283,13 +459,22 @@ display:grid;
 place-items:center;
 font-size:20px;
 font-weight:1000;
+
 background:
-linear-gradient(145deg,#bd91ff,#6d35ef 50%,#00d9ff);
+radial-gradient(
+circle at 30% 20%,
+#ff8888,
+#ed1717 35%,
+#a00000 70%,
+#350000
+);
+
 border:1px solid rgba(255,255,255,.20);
+
 box-shadow:
-0 6px 0 #29105c,
+0 6px 0 #3b0000,
 0 10px 22px rgba(0,0,0,.55),
-0 0 25px rgba(125,70,255,.42),
+0 0 25px rgba(255,0,0,.30),
 inset 0 3px 6px rgba(255,255,255,.25);
 }
 
@@ -313,9 +498,15 @@ height:44px;
 display:grid;
 place-items:center;
 border-radius:50%;
+
 background:
-linear-gradient(145deg,rgba(135,75,255,.20),rgba(0,220,255,.07));
-border:1px solid rgba(161,105,255,.28);
+linear-gradient(
+145deg,
+rgba(255,40,40,.20),
+rgba(120,0,0,.07)
+);
+
+border:1px solid rgba(255,70,70,.28);
 cursor:pointer;
 font-size:19px;
 transition:.15s;
@@ -350,11 +541,18 @@ font-weight:bold;
 margin-top:10px;
 padding:22px;
 border-radius:28px;
+
 background:
-linear-gradient(145deg,rgba(24,19,47,.96),rgba(6,9,19,.97));
-border:1px solid rgba(156,91,255,.23);
+linear-gradient(
+145deg,
+rgba(35,8,8,.94),
+rgba(6,8,12,.97)
+);
+
+border:1px solid rgba(255,60,60,.23);
+
 box-shadow:
-0 25px 70px rgba(0,0,0,.52),
+0 25px 70px rgba(0,0,0,.62),
 inset 0 1px 0 rgba(255,255,255,.06);
 }
 
@@ -370,14 +568,22 @@ text-align:center;
 margin-top:6px;
 font-size:40px;
 font-weight:1000;
+
 background:
-linear-gradient(90deg,#fff,#c7a8ff,#fff,#6ff3ff);
+linear-gradient(
+90deg,
+#fff,
+#ff8b8b,
+#fff,
+#ff3b3b
+);
+
 -webkit-background-clip:text;
 color:transparent;
 }
 
 .coin{
-color:#9d6cff;
+color:#ff4b4b;
 font-size:14px;
 margin-left:5px;
 }
@@ -385,9 +591,13 @@ margin-left:5px;
 .earning{
 text-align:center;
 margin-top:6px;
-color:#00e5ff;
+color:#ff4d4d;
 font-size:12px;
 }
+
+/* =====================================================
+   MINING BUTTON
+===================================================== */
 
 .mining-area{
 display:flex;
@@ -401,25 +611,32 @@ position:relative;
 width:190px;
 height:190px;
 border-radius:50%;
-border:3px solid #a678ff;
+
+border:3px solid #ff3d3d;
+
 cursor:pointer;
 color:white;
+
 background:
-radial-gradient(circle at 31% 20%,
+radial-gradient(
+circle at 31% 20%,
 #ffffff 0%,
-#d8c3ff 5%,
-#a978ff 14%,
-#7335e9 32%,
-#3b157f 56%,
-#120722 78%,
-#05030b 100%);
+#ffb5b5 5%,
+#ff4d4d 14%,
+#d40000 32%,
+#760000 56%,
+#270000 78%,
+#050000 100%
+);
+
 box-shadow:
-0 15px 0 #251047,
-0 21px 25px rgba(0,0,0,.78),
-0 0 25px rgba(133,69,255,.62),
-0 0 60px rgba(93,45,255,.22),
+0 15px 0 #420000,
+0 21px 25px rgba(0,0,0,.85),
+0 0 25px rgba(255,0,0,.62),
+0 0 60px rgba(220,0,0,.22),
 inset 0 8px 13px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.65);
+
 transition:.12s;
 touch-action:manipulation;
 user-select:none;
@@ -430,23 +647,28 @@ transform:translateY(11px) scale(.965);
 }
 
 .mining-button.active{
-border-color:#47edff;
+border-color:#ff7474;
+
 background:
-radial-gradient(circle at 31% 20%,
+radial-gradient(
+circle at 31% 20%,
 #ffffff 0%,
-#c9ffff 6%,
-#70f4ff 15%,
-#1599e9 32%,
-#14538b 55%,
-#061525 78%,
-#02070d 100%);
+#ffd0d0 6%,
+#ff6b6b 15%,
+#e90000 32%,
+#a00000 55%,
+#390000 78%,
+#080000 100%
+);
+
 box-shadow:
-0 15px 0 #063d57,
-0 22px 32px rgba(0,0,0,.78),
-0 0 30px rgba(0,229,255,.90),
-0 0 75px rgba(0,160,255,.42),
+0 15px 0 #570000,
+0 22px 32px rgba(0,0,0,.85),
+0 0 30px rgba(255,30,30,.90),
+0 0 75px rgba(255,0,0,.42),
 inset 0 8px 14px rgba(255,255,255,.35),
 inset 0 -18px 30px rgba(0,0,0,.60);
+
 animation:miningPulse 1.4s infinite;
 }
 
@@ -468,7 +690,7 @@ letter-spacing:2px;
 
 .mine-small{
 margin-top:6px;
-color:#00e5ff;
+color:#ff5b5b;
 font-size:11px;
 font-weight:1000;
 }
@@ -496,9 +718,15 @@ justify-content:space-between;
 margin-top:18px;
 padding:17px;
 border-radius:17px;
+
 background:
-linear-gradient(90deg,rgba(121,61,255,.13),rgba(0,211,255,.08));
-border:1px solid rgba(124,82,255,.18);
+linear-gradient(
+90deg,
+rgba(255,0,0,.13),
+rgba(255,70,70,.08)
+);
+
+border:1px solid rgba(255,70,70,.18);
 }
 
 .hash-left{
@@ -507,7 +735,7 @@ font-size:12px;
 }
 
 .hash-right{
-color:#00e5ff;
+color:#ff5b5b;
 font-weight:900;
 }
 
@@ -517,6 +745,10 @@ font-size:10px;
 margin-top:4px;
 text-align:right;
 }
+
+/* =====================================================
+   ACTIONS
+===================================================== */
 
 .actions{
 display:grid;
@@ -528,15 +760,24 @@ margin-top:12px;
 .action{
 min-height:92px;
 border-radius:18px;
-border:1px solid rgba(151,92,255,.28);
+
+border:1px solid rgba(255,70,70,.28);
+
 background:
-linear-gradient(145deg,rgba(38,27,70,.98),rgba(7,12,25,.98));
+linear-gradient(
+145deg,
+rgba(55,15,15,.98),
+rgba(7,8,12,.98)
+);
+
 color:#fff;
 cursor:pointer;
+
 box-shadow:
 0 9px 22px rgba(0,0,0,.30),
-0 0 20px rgba(111,52,255,.10),
+0 0 20px rgba(255,0,0,.10),
 inset 0 1px 0 rgba(255,255,255,.08);
+
 transition:.15s;
 font-size:13px;
 font-weight:900;
@@ -552,8 +793,14 @@ cursor:not-allowed;
 
 .action.ad-button{
 border-color:rgba(255,190,60,.55);
+
 background:
-linear-gradient(145deg,rgba(77,48,18,.98),rgba(20,12,7,.98));
+linear-gradient(
+145deg,
+rgba(77,48,18,.98),
+rgba(20,12,7,.98)
+);
+
 box-shadow:
 0 9px 22px rgba(0,0,0,.30),
 0 0 28px rgba(255,168,0,.15),
@@ -561,9 +808,14 @@ inset 0 1px 0 rgba(255,255,255,.10);
 }
 
 .action.withdraw-button{
-border-color:rgba(0,229,255,.28);
+border-color:rgba(255,60,60,.28);
+
 background:
-linear-gradient(145deg,rgba(17,45,60,.98),rgba(7,12,25,.98));
+linear-gradient(
+145deg,
+rgba(60,15,15,.98),
+rgba(7,12,25,.98)
+);
 }
 
 .action-icon{
@@ -577,7 +829,7 @@ color:#ffc44d;
 }
 
 .offer{
-color:#00e5ff;
+color:#ff6565;
 }
 
 .ad-status{
@@ -588,12 +840,22 @@ margin-top:8px;
 min-height:14px;
 }
 
+/* =====================================================
+   DAILY
+===================================================== */
+
 .daily{
 margin-top:18px;
 padding:20px;
 border-radius:22px;
+
 background:
-linear-gradient(145deg,rgba(19,18,35,.95),rgba(5,8,17,.96));
+linear-gradient(
+145deg,
+rgba(30,8,8,.95),
+rgba(5,8,17,.96)
+);
+
 border:1px solid rgba(255,255,255,.07);
 }
 
@@ -632,8 +894,14 @@ border:1px solid #29293a;
 }
 
 .day.active .day-circle{
-background:linear-gradient(135deg,#ffb347,#ff6b00);
-box-shadow:0 0 15px rgba(255,143,35,.25);
+background:
+linear-gradient(
+135deg,
+#ff4b4b,
+#b00000
+);
+
+box-shadow:0 0 15px rgba(255,0,0,.25);
 }
 
 .claim{
@@ -644,11 +912,18 @@ border:0;
 border-radius:30px;
 color:#fff;
 font-weight:800;
+
 background:
-linear-gradient(90deg,#723cff,#a64cff,#00c8ff);
+linear-gradient(
+90deg,
+#9d0000,
+#ed1717,
+#ff5555
+);
+
 box-shadow:
-0 7px 0 #32157b,
-0 12px 25px rgba(91,45,220,.25);
+0 7px 0 #4b0000,
+0 12px 25px rgba(170,0,0,.25);
 }
 
 .logout{
@@ -671,6 +946,10 @@ color:white;
 background:rgba(255,255,255,.05);
 }
 
+/* =====================================================
+   WITHDRAW
+===================================================== */
+
 .withdraw-title{
 text-align:center;
 font-size:24px;
@@ -689,8 +968,8 @@ padding:16px;
 margin-bottom:18px;
 text-align:center;
 border-radius:16px;
-background:rgba(124,82,255,.10);
-border:1px solid rgba(124,82,255,.15);
+background:rgba(255,0,0,.10);
+border:1px solid rgba(255,60,60,.15);
 }
 
 .withdraw-balance small{
@@ -701,19 +980,19 @@ margin-bottom:5px;
 
 .withdraw-balance strong{
 font-size:24px;
-color:#00e5ff;
+color:#ff5b5b;
 }
 
 .method{
 padding:15px;
 margin-bottom:15px;
 border-radius:15px;
-border:1px solid rgba(0,229,255,.25);
-background:rgba(0,229,255,.05);
+border:1px solid rgba(255,60,60,.25);
+background:rgba(255,0,0,.05);
 }
 
 .method strong{
-color:#00e5ff;
+color:#ff5b5b;
 }
 
 .note{
@@ -730,6 +1009,10 @@ margin-top:14px;
 min-height:18px;
 }
 
+/* =====================================================
+   PROFILE
+===================================================== */
+
 .profile-card h2{
 text-align:center;
 margin:0 0 22px;
@@ -745,13 +1028,22 @@ place-items:center;
 border-radius:50%;
 font-size:30px;
 font-weight:900;
+
 background:
-linear-gradient(145deg,#b78aff,#6d35ef 50%,#00d9ff);
+radial-gradient(
+circle at 30% 20%,
+#ff8888,
+#ed1717 35%,
+#a00000 70%,
+#350000
+);
+
 border:1px solid rgba(255,255,255,.20);
+
 box-shadow:
-0 9px 0 #29105c,
+0 9px 0 #3b0000,
 0 14px 30px rgba(0,0,0,.55),
-0 0 30px rgba(125,70,255,.4);
+0 0 30px rgba(255,0,0,.4);
 }
 
 .profile-row{
@@ -779,9 +1071,9 @@ margin-top:15px;
 padding:14px;
 border-radius:15px;
 text-align:center;
-color:#00e5ff;
-background:rgba(0,229,255,.06);
-border:1px solid rgba(0,229,255,.12);
+color:#ff5b5b;
+background:rgba(255,0,0,.06);
+border:1px solid rgba(255,60,60,.12);
 }
 
 .footer{
@@ -795,8 +1087,8 @@ font-size:9px;
 margin-top:12px;
 padding:12px;
 border-radius:15px;
-background:rgba(0,229,255,.06);
-border:1px solid rgba(0,229,255,.12);
+background:rgba(255,0,0,.06);
+border:1px solid rgba(255,60,60,.12);
 text-align:center;
 color:#777791;
 font-size:11px;
@@ -804,7 +1096,7 @@ font-size:11px;
 
 .session-box strong{
 display:block;
-color:#00e5ff;
+color:#ff5b5b;
 font-size:14px;
 }
 
@@ -2283,7 +2575,7 @@ String(newEnd)
 
 updateBoostUI();
 
-status.style.color="#00e5ff";
+status.style.color="#ff5b5b";
 
 status.textContent=
 "✅ Ad completed! 10-minute boost activated.";
@@ -2526,7 +2818,7 @@ button.disabled=true;
 
 button.style.opacity=".65";
 
-message.style.color="#00e5ff";
+message.style.color="#ff5b5b";
 
 message.textContent=
 "Submitting withdrawal request...";
@@ -2549,7 +2841,7 @@ createdAt:serverTimestamp()
 }
 );
 
-message.style.color="#00e5ff";
+message.style.color="#ff5b5b";
 
 message.textContent=
 "✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";
