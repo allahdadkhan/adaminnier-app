@@ -59,7 +59,7 @@ background-size:35px 35px
 
 
 /* =====================================================
-   FLOATING 3D RENDER COINS
+   3D RENDER BACKGROUND
 ===================================================== */
 
 .render-bg{
@@ -99,8 +99,7 @@ position:absolute;
 inset:10px;
 border-radius:50%;
 border:2px solid rgba(255,255,255,.45);
-box-shadow:
-inset 0 0 8px rgba(255,255,255,.35);
+box-shadow:inset 0 0 8px rgba(255,255,255,.35)
 }
 
 .render-coin::after{
@@ -114,7 +113,7 @@ font-weight:900;
 color:white;
 text-shadow:
 0 2px 3px rgba(0,0,0,.5),
-0 0 10px rgba(255,255,255,.65);
+0 0 10px rgba(255,255,255,.65)
 }
 
 .render-coin:nth-child(1){
@@ -173,7 +172,7 @@ scale(1.08)
 
 
 /* =====================================================
-   3D RENDER LOGO
+   3D LOGO
 ===================================================== */
 
 .logo-box{
@@ -219,8 +218,7 @@ position:absolute;
 inset:8px;
 border-radius:50%;
 border:1px solid rgba(255,255,255,.35);
-box-shadow:
-inset 0 0 8px rgba(255,255,255,.3)
+box-shadow:inset 0 0 8px rgba(255,255,255,.3)
 }
 
 .r-logo{
@@ -228,7 +226,6 @@ position:relative;
 z-index:2;
 font-size:35px;
 font-weight:1000;
-font-style:normal;
 color:white;
 text-shadow:
 0 2px 2px rgba(0,0,0,.7),
@@ -236,7 +233,7 @@ text-shadow:
 transform:
 perspective(180px)
 rotateX(10deg)
-rotateY(-12deg);
+rotateY(-12deg)
 }
 
 .auth-logo{
@@ -919,7 +916,6 @@ font-size:14px
 
 <body>
 
-<!-- FLOATING 3D RENDER COINS -->
 <div class="render-bg">
 <div class="render-coin"></div>
 <div class="render-coin"></div>
@@ -928,7 +924,9 @@ font-size:14px
 </div>
 
 
-<!-- LOGIN -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
 <div id="authScreen">
 
@@ -992,7 +990,9 @@ Don't have an account?
 </div>
 
 
-<!-- APP -->
+<!-- =====================================================
+     APP
+===================================================== -->
 
 <div class="app" id="mainApp" style="display:none;">
 
@@ -1016,7 +1016,7 @@ Don't have an account?
 </div>
 
 
-<!-- MINING PAGE -->
+<!-- MINING -->
 
 <div id="miningPage" class="page active">
 
@@ -1133,8 +1133,6 @@ TRC20 USDT
 Watch an ad to activate your mining boost
 </div>
 
-
-<!-- DAILY -->
 
 <div class="daily">
 
@@ -1376,7 +1374,7 @@ signInWithPopup,
 sendPasswordResetEmail,
 signOut,
 setPersistence,
-inMemoryPersistence
+browserLocalPersistence
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -1395,7 +1393,7 @@ from
 
 
 /* =====================================================
-   FIREBASE CONFIG — SAME
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig={
@@ -1438,13 +1436,13 @@ const BOOST_TIME=10*60*1000;
 
 
 /* =====================================================
-   IMPORTANT:
-   NO AUTO LOGIN AFTER PAGE RELOAD
+   PERSISTENCE
+   USER STAYS LOGGED IN UNTIL LOGOUT
 ===================================================== */
 
 await setPersistence(
 auth,
-inMemoryPersistence
+browserLocalPersistence
 );
 
 
@@ -1670,7 +1668,7 @@ document.getElementById("authError").textContent="";
 
 
 /* =====================================================
-   EMAIL AUTH
+   EMAIL LOGIN / SIGNUP
 ===================================================== */
 
 window.emailAuth=async function(){
@@ -1686,6 +1684,8 @@ document.getElementById("authPassword")
 const error=
 document.getElementById("authError");
 
+error.textContent="";
+
 if(!email||!password){
 
 error.textContent=
@@ -1694,6 +1694,12 @@ error.textContent=
 return;
 
 }
+
+const button=
+document.getElementById("authButton");
+
+button.disabled=true;
+button.style.opacity=".65";
 
 try{
 
@@ -1717,8 +1723,15 @@ password
 
 }catch(e){
 
+console.error(e);
+
 error.textContent=
 firebaseError(e.code);
+
+}finally{
+
+button.disabled=false;
+button.style.opacity="1";
 
 }
 
@@ -1726,7 +1739,7 @@ firebaseError(e.code);
 
 
 /* =====================================================
-   RESET
+   PASSWORD RESET
 ===================================================== */
 
 window.forgotPassword=async function(){
@@ -1754,14 +1767,10 @@ auth,
 email
 );
 
-error.style.color="#ff5577";
-
 error.textContent=
 "Password reset email sent.";
 
 }catch(e){
-
-error.style.color="#ff5577";
 
 error.textContent=
 firebaseError(e.code);
@@ -1772,12 +1781,17 @@ firebaseError(e.code);
 
 
 /* =====================================================
-   GOOGLE
+   GOOGLE LOGIN
 ===================================================== */
 
 window.googleLogin=async function(){
 
+const error=
+document.getElementById("authError");
+
 try{
+
+error.textContent="";
 
 await signInWithPopup(
 auth,
@@ -1786,8 +1800,9 @@ provider
 
 }catch(e){
 
-document.getElementById("authError")
-.textContent=
+console.error(e);
+
+error.textContent=
 firebaseError(e.code);
 
 }
@@ -1921,7 +1936,7 @@ return reward;
 
 
 /* =====================================================
-   RESTORE
+   RESTORE MINING
 ===================================================== */
 
 function restoreMining(){
@@ -2051,7 +2066,7 @@ updateBoostUI();
 
 
 /* =====================================================
-   STOP
+   STOP MINING UI
 ===================================================== */
 
 function stopMiningUI(message){
@@ -2061,7 +2076,6 @@ mining=false;
 if(miningTimer){
 
 clearInterval(miningTimer);
-
 miningTimer=null;
 
 }
@@ -2069,7 +2083,6 @@ miningTimer=null;
 if(sessionInterval){
 
 clearInterval(sessionInterval);
-
 sessionInterval=null;
 
 }
@@ -2241,7 +2254,6 @@ if(mining)
 return;
 
 currentUserUID=user.uid;
-
 currentUserEmail=user.email||"";
 
 mining=true;
@@ -2305,7 +2317,6 @@ return;
 }
 
 button.disabled=true;
-
 button.style.opacity=".65";
 
 status.textContent=
@@ -2337,7 +2348,6 @@ status.textContent=
 }finally{
 
 button.disabled=false;
-
 button.style.opacity="1";
 
 }
@@ -2579,81 +2589,101 @@ button.style.opacity="1";
 
 window.logout=async function(){
 
-try{
+const logoutButtons=
+document.querySelectorAll(".logout");
 
-/* Stop timers immediately */
+logoutButtons.forEach(btn=>{
+btn.disabled=true;
+btn.textContent="LOGGING OUT...";
+});
+
+
+/* STOP ALL TIMERS FIRST */
 
 if(miningTimer){
-
 clearInterval(miningTimer);
 miningTimer=null;
-
 }
 
 if(sessionInterval){
-
 clearInterval(sessionInterval);
 sessionInterval=null;
-
 }
 
 if(cloudSaveTimer){
-
 clearInterval(cloudSaveTimer);
 cloudSaveTimer=null;
-
 }
 
 
-/* Save current data without blocking logout */
+/* SIGN OUT FIRST
+   This prevents auth state from keeping
+   the application open.
+*/
 
 try{
-await saveUserData();
-}catch(e){
-console.error("Logout save:",e);
+
+await signOut(auth);
+
+}catch(error){
+
+console.error("Firebase logout error:",error);
+
+logoutButtons.forEach(btn=>{
+btn.disabled=false;
+btn.textContent="LOGOUT";
+});
+
+alert("Logout failed. Please try again.");
+
+return;
+
 }
 
 
-/* Clear current state */
+/* CLEAR LOCAL APPLICATION STATE */
 
+balance=0;
 mining=false;
 miningStartTime=null;
 lastRewardTime=null;
+boostEnd=0;
+dailyClaimDate="";
 currentUserUID=null;
 currentUserEmail=null;
 
 
-/* IMPORTANT:
-   Firebase signOut immediately */
+/* CLEAR LOGIN INPUTS */
 
-await signOut(auth);
+document.getElementById("authEmail").value="";
+document.getElementById("authPassword").value="";
+document.getElementById("authError").textContent="";
 
 
-/* Force login screen */
+/* RESET AUTH UI */
+
+signUpMode=false;
+
+document.getElementById("authTitle").textContent=
+"Welcome to RND Mining";
+
+document.getElementById("authButton").textContent=
+"LOGIN";
+
+document.getElementById("forgotButton").style.display=
+"block";
+
+document.getElementById("authSwitch").innerHTML=
+'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
+
+
+/* FORCE LOGIN SCREEN */
 
 document.getElementById("mainApp")
 .style.display="none";
 
 document.getElementById("authScreen")
 .style.display="flex";
-
-document.getElementById("authEmail").value="";
-document.getElementById("authPassword").value="";
-
-document.getElementById("authError").textContent="";
-
-}catch(error){
-
-console.error(
-"Logout failed:",
-error
-);
-
-alert(
-"Logout failed. Please try again."
-);
-
-}
 
 };
 
@@ -2665,6 +2695,8 @@ alert(
 onAuthStateChanged(auth,async(user)=>{
 
 if(user){
+
+/* USER IS LOGGED IN */
 
 document.getElementById("authScreen")
 .style.display="none";
@@ -2678,14 +2710,31 @@ await loadUserData(user);
 
 }else{
 
-document.getElementById("authScreen")
-.style.display="flex";
+/* USER IS LOGGED OUT */
+
+if(miningTimer){
+clearInterval(miningTimer);
+miningTimer=null;
+}
+
+if(cloudSaveTimer){
+clearInterval(cloudSaveTimer);
+cloudSaveTimer=null;
+}
+
+if(sessionInterval){
+clearInterval(sessionInterval);
+sessionInterval=null;
+}
+
+currentUserUID=null;
+currentUserEmail=null;
 
 document.getElementById("mainApp")
 .style.display="none";
 
-currentUserUID=null;
-currentUserEmail=null;
+document.getElementById("authScreen")
+.style.display="flex";
 
 }
 
