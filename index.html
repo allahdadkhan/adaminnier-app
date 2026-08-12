@@ -1244,13 +1244,6 @@ localStorage.setItem(key,"0");
 localStorage.removeItem(resetKey);
 }
 
-if(count>=10){
-status.style.color="#ff5577";
-status.textContent="🚫 Daily boost limit reached. Try again after 24 hours.";
-button.disabled=true;
-return
-}
-
 button.disabled=true;
 status.style.color="#ffc44d";
 status.textContent="📺 Loading advertisement...";
@@ -1258,6 +1251,7 @@ status.textContent="📺 Loading advertisement...";
 try{
 await window.show_11549239();
 
+if(count<10){
 count++;
 localStorage.setItem(key,String(count));
 
@@ -1267,25 +1261,26 @@ const newEnd=startFrom+BOOST_TIME;
 
 localStorage.setItem(boostEndKey(user.uid),String(newEnd));
 
-if(count>=10){
+if(count===10){
 localStorage.setItem(resetKey,String(now+24*60*60*1000));
-button.disabled=true;
-status.textContent="✅ 10 boosts completed. Boost button locked for 24 hours.";
+status.textContent="✅ 10/10 boosts completed. Ads can still be watched, but no more boosts today.";
 }else{
-status.textContent="✅ Boost activated! "+count+"/10 used today.";
+status.textContent="✅ Boost activated! "+count+"/10";
 }
 
 updateBoostUI();
+
+}else{
+status.textContent="✅ Ad completed. Daily boost limit reached — no extra boost.";
+}
 
 }catch(error){
 console.error("Ad error:",error);
 status.style.color="#ff5577";
 status.textContent="Ad was not completed.";
-}finally{
-if(count<10){
+}
+
 button.disabled=false;
-}
-}
 }
 ;
 window.claimReward=function(){
