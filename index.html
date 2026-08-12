@@ -1222,37 +1222,69 @@ if(!user){
 alert("Please login first.");
 return
 }
-const button=document.getElementById("watchAdButton"),status=document.getElementById("adStatus");
+
+const button=document.getElementById("watchAdButton");
+const status=document.getElementById("adStatus");
+
 if(typeof window.show_11549239!=="function"){
-status.style.color="#ff5577";
 status.textContent="Advertisement is not ready yet.";
-alert("Ad is not ready yet. Please wait a few seconds and try again.");
 return
 }
+
+const key="rndminer_ad_count_"+user.uid;
+const resetKey="rndminer_ad_reset_"+user.uid;
+
+let count=Number(localStorage.getItem(key)||0);
+let resetTime=Number(localStorage.getItem(resetKey)||0);
+const now=Date.now();
+
+if(resetTime&&now>=resetTime){
+count=0;
+localStorage.setItem(key,"0");
+localStorage.removeItem(resetKey);
+}
+
+if(count>=10){
+status.style.color="#ff5577";
+status.textContent="🚫 Daily boost limit reached. Try again after 24 hours.";
 button.disabled=true;
-button.classList.add("ad-loading");
-button.style.opacity="0.65";
+return
+}
+
+button.disabled=true;
 status.style.color="#ffc44d";
 status.textContent="📺 Loading advertisement...";
+
 try{
 await window.show_11549239();
-currentUserUID=user.uid;
-const now=Date.now(),oldEnd=getBoostEnd(),startFrom=oldEnd>now?oldEnd:now,newEnd=startFrom+BOOST_TIME;
+
+count++;
+localStorage.setItem(key,String(count));
+
+const oldEnd=getBoostEnd();
+const startFrom=oldEnd>now?oldEnd:now;
+const newEnd=startFrom+BOOST_TIME;
+
 localStorage.setItem(boostEndKey(user.uid),String(newEnd));
-updateBoostUI();
-status.style.color="#ff5b5b";
-status.textContent="✅ Ad completed! 10-minute boost activated."
+
+if(count>=10){
+localStorage.setItem(resetKey,String(now+24*60*60*1000));
+button.disabled=true;
+status.textContent="✅ 10 boosts completed. Boost button locked for 24 hours.";
+}else{
+status.textContent="✅ Boost activated! "+count+"/10 used today.";
 }
-catch(error){
-console.error("Monetag rewarded ad error:",error);
+
+updateBoostUI();
+
+}catch(error){
+console.error("Ad error:",error);
 status.style.color="#ff5577";
 status.textContent="Ad was not completed.";
-alert("Ad could not be completed. Please try again.")
-}
-finally{
+}finally{
+if(count<10){
 button.disabled=false;
-button.classList.remove("ad-loading");
-button.style.opacity="1"
+}
 }
 }
 ;
