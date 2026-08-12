@@ -851,28 +851,44 @@ opacity:.13
 <div class="withdraw-card">
 <h2 class="withdraw-title">Withdraw</h2>
 <div class="withdraw-sub">Minimum withdrawal: 0.02 RND</div>
+
 <div class="withdraw-balance">
 <small>Available Balance</small>
-<strong>
-<span id="withdrawBalance">0.00000</span> RND</strong>
+<strong><span id="withdrawBalance">0.00000</span> RND</strong>
 </div>
+
 <div class="method">
 <strong>🟢 USDT — TRC20</strong>
 <br>
 <small>Tron Network</small>
 </div>
+
 <label>Wallet Address</label>
 <input id="walletAddress" class="withdraw-input" type="text" placeholder="Enter TRC20 wallet address">
+
 <label>Withdrawal Amount</label>
 <input id="withdrawAmount" class="withdraw-input" type="number" step="0.00001" min="0.02" placeholder="Minimum 0.02 RND">
-<div class="note">⚠️ Minimum withdrawal amount is 0.02 RND.<br>Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.</div>
-<button class="confirm-btn" onclick="confirmWithdrawal()" type="button">CONFIRM WITHDRAWAL</button>
-<div id="withdrawMessage" class="withdraw-message">
-</div><div class="withdraw-history">
+
+<div class="note">
+⚠️ Minimum withdrawal amount is 0.02 RND.<br>
+Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.
+</div>
+
+<button class="confirm-btn" onclick="confirmWithdrawal()" type="button">
+CONFIRM WITHDRAWAL
+</button>
+
+<div id="withdrawMessage" class="withdraw-message"></div>
+
+<div class="withdraw-history">
 <h3>Withdrawal History</h3>
 <div id="withdrawHistoryList">No withdrawals yet.</div>
 </div>
-<button class="back-btn" onclick="showMining()" type="button">← BACK TO MINING</button>
+
+<button class="back-btn" onclick="showMining()" type="button">
+← BACK TO MINING
+</button>
+
 </div>
 </div>
 <div id="profilePage" class="page">
