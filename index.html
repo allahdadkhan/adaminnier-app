@@ -868,6 +868,9 @@ opacity:.13
 <div class="note">⚠️ Minimum withdrawal amount is 0.02 RND.<br>Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.</div>
 <button class="confirm-btn" onclick="confirmWithdrawal()" type="button">CONFIRM WITHDRAWAL</button>
 <div id="withdrawMessage" class="withdraw-message">
+</div><div class="withdraw-history">
+<h3>Withdrawal History</h3>
+<div id="withdrawHistoryList">No withdrawals yet.</div>
 </div>
 <button class="back-btn" onclick="showMining()" type="button">← BACK TO MINING</button>
 </div>
@@ -901,7 +904,7 @@ getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPass
 }
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import{
-getFirestore,collection,addDoc,serverTimestamp
+getFirestore,collection,addDoc,serverTimestamp,getDocs,query,where
 }
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 const firebaseConfig={
@@ -1267,7 +1270,8 @@ updateBoostUI()
 window.showWithdraw=function(){
 hideAllPages();
 document.getElementById("withdrawPage").classList.add("active");
-updateBalance()
+updateBalance();
+loadWithdrawalHistory();
 }
 ;
 window.showProfile=function(){
@@ -1279,7 +1283,36 @@ document.getElementById("profileEmail").textContent=user.email||"Not available";
 hideAllPages();
 document.getElementById("profilePage").classList.add("active")
 }
-;
+;async function loadWithdrawalHistory(){
+const user=auth.currentUser;
+if(!user)return;
+
+const box=document.getElementById("withdrawHistoryList");
+if(!box)return;
+
+box.innerHTML="Loading...";
+
+const q=query(collection(db,"withdrawals"),where("uid","==",user.uid));
+const snap=await getDocs(q);
+
+if(snap.empty){
+box.innerHTML="No withdrawals yet.";
+return;
+}
+
+box.innerHTML="";
+
+snap.forEach(doc=>{
+const w=doc.data();
+
+box.innerHTML+=`
+<div style="padding:12px;margin-top:10px;border-radius:15px;background:rgba(255,255,255,.05)">
+💰 ${w.amount} RND<br>
+🌐 ${w.network}<br>
+Status: <b>${w.status}</b>
+</div>`;
+});
+}
 window.confirmWithdrawal=async function(){
 const user=auth.currentUser;
 if(!user){
