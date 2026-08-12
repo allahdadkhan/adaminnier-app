@@ -962,7 +962,7 @@ document.getElementById("authError").textContent=firebaseError(e.code)
 }
 ;
 let balance=0,mining=false,miningTimer=null,sessionInterval=null,miningStartTime=null,lastRewardTime=null,baseHashrate=2.85,currentHashrate=2.85,currentUserUID=null;
-const SESSION_TIME=24*60*60*1000,REWARD_PER_SECOND=0.0000000463,BOOST_TIME=10*60*1000;
+const SESSION_TIME=6*60*60*1000,REWARD_PER_SECOND=0.0000000463,BOOST_TIME=10*60*1000;
 const balanceKey=uid=>"rndminer_balance_"+uid, miningStartKey=uid=>"rndminer_mining_start_"+uid, miningLastKey=uid=>"rndminer_mining_last_"+uid, miningActiveKey=uid=>"rndminer_mining_active_"+uid, boostEndKey=uid=>"rndminer_boost_end_"+uid;
 function getBoostEnd(){
 if(!currentUserUID)return 0;
