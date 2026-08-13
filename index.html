@@ -859,6 +859,7 @@ opacity:.13
 </div>
 <div id="withdrawPage" class="page">
 <div class="withdraw-card">
+
 <h2 class="withdraw-title">Withdraw</h2>
 <div class="withdraw-sub">Minimum withdrawal: 0.02 RND</div>
 
@@ -867,26 +868,78 @@ opacity:.13
 <strong><span id="withdrawBalance">0.00000</span> RND</strong>
 </div>
 
+<!-- BINANCE -->
 <div class="method">
-<strong>🟢 USDT — TRC20</strong>
+<strong>🟡 Binance — RENDER</strong>
 <br>
-<small>Tron Network</small>
+<small>Receive RENDER using your Binance UID</small>
 </div>
 
-<label>Wallet Address</label>
-<input id="walletAddress" class="withdraw-input" type="text" placeholder="Enter TRC20 wallet address">
+<label>Binance UID</label>
+<input id="binanceUID"
+class="withdraw-input"
+type="text"
+placeholder="Enter your Binance UID">
 
 <label>Withdrawal Amount</label>
-<input id="withdrawAmount" class="withdraw-input" type="number" step="0.00001" min="0.02" placeholder="Minimum 0.02 RND">
+<input id="binanceAmount"
+class="withdraw-input"
+type="number"
+step="0.00001"
+min="0.02"
+placeholder="Minimum 0.02 RND">
 
 <div class="note">
-⚠️ Minimum withdrawal amount is 0.02 RND.<br>
-Make sure your TRC20 address is correct. You will receive the payment manually after your withdrawal request is reviewed.
+⚠️ Minimum withdrawal is 0.02 RND.<br>
+Your Binance UID must be correct. RENDER will be sent manually after your request is reviewed.
 </div>
 
-<button class="confirm-btn" onclick="confirmWithdrawal()" type="button">
-CONFIRM WITHDRAWAL
+<button class="confirm-btn"
+onclick="confirmBinanceWithdrawal()"
+type="button">
+WITHDRAW VIA BINANCE
 </button>
+
+
+<!-- EASYPAISA -->
+<div class="method" style="margin-top:25px;">
+<strong>🟢 EasyPaisa</strong>
+<br>
+<small>Receive your withdrawal through EasyPaisa</small>
+</div>
+
+<label>EasyPaisa Account Name</label>
+<input id="easypaisaName"
+class="withdraw-input"
+type="text"
+placeholder="Enter EasyPaisa account name">
+
+<label>EasyPaisa Number</label>
+<input id="easypaisaNumber"
+class="withdraw-input"
+type="tel"
+inputmode="numeric"
+placeholder="03XXXXXXXXX">
+
+<label>Withdrawal Amount</label>
+<input id="easypaisaAmount"
+class="withdraw-input"
+type="number"
+step="0.00001"
+min="0.02"
+placeholder="Minimum 0.02 RND">
+
+<div class="note">
+⚠️ Minimum withdrawal is 0.02 RND.<br>
+Make sure your EasyPaisa name and number are correct. Payment will be processed manually after your request is reviewed.
+</div>
+
+<button class="confirm-btn"
+onclick="confirmEasyPaisaWithdrawal()"
+type="button">
+WITHDRAW VIA EASYPAISA
+</button>
+
 
 <div id="withdrawMessage" class="withdraw-message"></div>
 
@@ -895,7 +948,9 @@ CONFIRM WITHDRAWAL
 <div id="withdrawHistoryList">No withdrawals yet.</div>
 </div>
 
-<button class="back-btn" onclick="showMining()" type="button">
+<button class="back-btn"
+onclick="showMining()"
+type="button">
 ← BACK TO MINING
 </button>
 
