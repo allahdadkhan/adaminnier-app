@@ -1422,55 +1422,171 @@ Status: <b>${w.status}</b>
 </div>`;
 });
 }
-window.confirmWithdrawal=async function(){
+window.confirmBinanceWithdrawal=async function(){
 const user=auth.currentUser;
 if(!user){
 alert("Please login first.");
 return
 }
-const wallet=document.getElementById("walletAddress").value.trim(),amount=Number(document.getElementById("withdrawAmount").value),message=document.getElementById("withdrawMessage");
+
+const uid=document.getElementById("binanceUID").value.trim();
+const amount=Number(document.getElementById("binanceAmount").value);
+const message=document.getElementById("withdrawMessage");
+
 message.style.color="#ff5577";
-if(!wallet){
-message.textContent="Please enter your TRC20 wallet address.";
+
+if(!uid){
+message.textContent="Please enter your Binance UID.";
 return
 }
-if(!wallet.startsWith("T")||wallet.length<30){
-message.textContent="Please enter a valid TRC20 address.";
+
+if(!/^\d{5,20}$/.test(uid)){
+message.textContent="Please enter a valid Binance UID.";
 return
 }
+
 if(!amount||amount<0.02){
 message.textContent="Minimum withdrawal is 0.02 RND.";
 return
 }
+
 if(amount>balance){
 message.textContent="Insufficient balance.";
 return
 }
+
 const button=document.querySelector(".confirm-btn");
 button.disabled=true;
 button.style.opacity=".65";
+
 message.style.color="#ff5b5b";
-message.textContent="Submitting withdrawal request...";
+message.textContent="Submitting Binance withdrawal request...";
+
 try{
+
 await addDoc(collection(db,"withdrawals"),{
-uid:user.uid,email:user.email||"",walletAddress:wallet,network:"TRC20",currency:"USDT",amount:amount,balanceUnit:"RND",status:"Pending",createdAt:serverTimestamp()
-}
-);
+uid:user.uid,
+email:user.email||"",
+method:"Binance",
+binanceUID:uid,
+network:"Binance",
+currency:"RENDER",
+token:"RENDER",
+amount:amount,
+balanceUnit:"RND",
+status:"Pending",
+createdAt:serverTimestamp()
+});
+
 balance-=amount;
 updateBalance();
-message.textContent="✅ Withdrawal is pending. Your request has been submitted and is waiting for review.";
-document.getElementById("walletAddress").value="";
-document.getElementById("withdrawAmount").value="";
-}
-catch(e){
+
+message.textContent="✅ Binance withdrawal submitted. RENDER payment is pending review.";
+
+document.getElementById("binanceUID").value="";
+document.getElementById("binanceAmount").value="";
+
+await loadWithdrawalHistory();
+
+}catch(e){
+
 console.error(e);
 message.style.color="#ff5577";
-message.textContent="Failed to submit withdrawal request. Please try again."
+message.textContent="Failed to submit withdrawal request. Please try again.";
+
 }
+
 button.disabled=false;
 button.style.opacity="1";
+};
+
+
+window.confirmEasyPaisaWithdrawal=async function(){
+const user=auth.currentUser;
+if(!user){
+alert("Please login first.");
+return
 }
-;
+
+const name=document.getElementById("easypaisaName").value.trim();
+const number=document.getElementById("easypaisaNumber").value.trim();
+const amount=Number(document.getElementById("easypaisaAmount").value);
+const message=document.getElementById("withdrawMessage");
+
+message.style.color="#ff5577";
+
+if(!name){
+message.textContent="Please enter EasyPaisa account name.";
+return
+}
+
+if(!number){
+message.textContent="Please enter EasyPaisa number.";
+return
+}
+
+const cleanNumber=number.replace(/\s+/g,"");
+
+if(!/^03\d{9}$/.test(cleanNumber)){
+message.textContent="Please enter a valid EasyPaisa number.";
+return
+}
+
+if(!amount||amount<0.02){
+message.textContent="Minimum withdrawal is 0.02 RND.";
+return
+}
+
+if(amount>balance){
+message.textContent="Insufficient balance.";
+return
+}
+
+const button=document.querySelector(".confirm-btn");
+button.disabled=true;
+button.style.opacity=".65";
+
+message.style.color="#ff5b5b";
+message.textContent="Submitting EasyPaisa withdrawal request...";
+
+try{
+
+await addDoc(collection(db,"withdrawals"),{
+uid:user.uid,
+email:user.email||"",
+method:"EasyPaisa",
+accountName:name,
+accountNumber:cleanNumber,
+network:"EasyPaisa",
+currency:"PKR",
+amount:amount,
+balanceUnit:"RND",
+status:"Pending",
+createdAt:serverTimestamp()
+});
+
+balance-=amount;
+updateBalance();
+
+message.textContent="✅ EasyPaisa withdrawal submitted. Your request is pending review.";
+
+document.getElementById("easypaisaName").value="";
+document.getElementById("easypaisaNumber").value="";
+document.getElementById("easypaisaAmount").value="";
+
+await loadWithdrawalHistory();
+
+}catch(e){
+
+console.error(e);
+message.style.color="#ff5577";
+message.textContent="Failed to submit withdrawal request. Please try again.";
+
+}
+
+button.disabled=false;
+button.style.opacity="1";
+};
 function firebaseError(code){
 switch(code){
 case"auth/email-already-in-use":return"This email is already registered.";
