@@ -733,6 +733,7 @@ opacity:.13
 </style>
 </head>
 <body>
+
 <div class="bg-coin c1">R</div>
 <div class="bg-coin c2">R</div>
 <div class="bg-coin c3">R</div>
@@ -741,11 +742,13 @@ opacity:.13
 <div class="bg-coin c6">R</div>
 <div class="bg-coin c7">R</div>
 <div class="bg-coin c8">R</div>
+
 <div class="side-ad left">
 <div class="side-ad-box">
 <div class="side-ad-label">ADVERTISEMENT</div>
 </div>
 </div>
+
 <div class="side-ad right">
 <div class="side-ad-box">
 <div class="side-ad-label">ADVERTISEMENT</div>
@@ -761,13 +764,15 @@ opacity:.13
 <input id="authPassword" class="auth-input" type="password" placeholder="Password" autocomplete="current-password">
 <button class="auth-btn" id="authButton" onclick="emailAuth()" type="button">LOGIN</button>
 <button class="google-btn" onclick="googleLogin()" type="button">🔵 Continue with Google</button>
-<div class="auth-switch" id="authSwitch">Don't have an account? <span onclick="toggleAuth()">Sign Up</span>
+<div class="auth-switch" id="authSwitch">
+Don't have an account? <span onclick="toggleAuth()">Sign Up</span>
 </div>
 <div id="authError" class="auth-error"></div>
 </div>
 </div>
 
 <div class="app" id="mainApp" style="display:none;">
+
 <div class="header">
 <div class="brand">
 <div class="logo">R</div>
@@ -780,14 +785,22 @@ opacity:.13
 </div>
 
 <div id="miningPage" class="page active">
-<div class="welcome">Welcome back, <span id="username" class="username">Miner</span></div>
+
+<div class="welcome">
+Welcome back, <span id="username" class="username">Miner</span>
+</div>
+
 <div class="balance-card">
+
 <div class="balance-label">TOTAL BALANCE</div>
+
 <div class="balance">
 <span id="balance">0.00000</span>
 <span class="coin">RND</span>
 </div>
+
 <div class="earning">Mining reward: +0.001 RND / session</div>
+
 <div class="mining-area">
 <button id="miningButton" class="mining-button" type="button" onclick="startMining()">
 <div class="mine-icon">⛏️</div>
@@ -795,11 +808,17 @@ opacity:.13
 <div id="mineText" class="mine-small">START MINING</div>
 </button>
 </div>
+
 <div class="status">
 <span id="dot" class="dot"></span>
 <span id="status">Mining inactive</span>
 </div>
-<div class="session-box">1-HOUR MINING SESSION<strong id="sessionTime">Not active</strong></div>
+
+<div class="session-box">
+1-HOUR MINING SESSION
+<strong id="sessionTime">Not active</strong>
+</div>
+
 <div class="hashrate">
 <div class="hash-left">⚡ CURRENT HASHRATE</div>
 <div>
@@ -807,20 +826,29 @@ opacity:.13
 <div id="boostText" class="boost">Base hashrate</div>
 </div>
 </div>
+
 <div class="actions">
+
 <button id="watchAdButton" class="action ad-button" onclick="watchAd()" type="button">
 <span class="action-icon ad">▶️</span>WATCH AD<br>
 <span class="ad">🔥 +10 MIN BOOST</span>
 </button>
+
 <button class="action withdraw-button" onclick="showWithdraw()" type="button">
 <span class="action-icon offer">💰</span>WITHDRAW<br>
 <span class="offer">BINANCE / EASYPAISA</span>
 </button>
+
 </div>
-<div id="adStatus" class="ad-status">Watch an ad to activate your mining boost</div>
+
+<div id="adStatus" class="ad-status">
+Watch an ad to activate your mining boost
+</div>
+
 <div class="daily">
 <h2>Daily Rewards</h2>
 <p>Check in every day to increase your reward.</p>
+
 <div class="days">
 <div class="day active"><div class="day-circle">◎</div>Day 1</div>
 <div class="day"><div class="day-circle">◎</div>Day 2</div>
@@ -830,14 +858,23 @@ opacity:.13
 <div class="day"><div class="day-circle">◎</div>Day 6</div>
 <div class="day"><div class="day-circle">🎁</div>Day 7</div>
 </div>
-<button class="claim" onclick="claimReward()" type="button">CLAIM DAILY REWARD</button>
+
+<button class="claim" onclick="claimReward()" type="button">
+CLAIM DAILY REWARD
+</button>
 </div>
-<button class="logout" onclick="logout()" type="button">LOGOUT</button>
+
+<button class="logout" onclick="logout()" type="button">
+LOGOUT
+</button>
+
 </div>
 </div>
 
 <div id="withdrawPage" class="page">
+
 <div class="withdraw-card">
+
 <h2 class="withdraw-title">Withdraw</h2>
 <div class="withdraw-sub">Minimum withdrawal: 0.02 RND</div>
 
@@ -846,37 +883,48 @@ opacity:.13
 <strong><span id="withdrawBalance">0.00000</span> RND</strong>
 </div>
 
-<!-- BINANCE -->
 <div class="method">
 <strong>🟡 Binance — RENDER</strong><br>
 <small>Receive RENDER using your Binance UID</small>
 </div>
+
 <label>Binance UID</label>
 <input id="binanceUID" class="withdraw-input" type="text" placeholder="Enter your Binance UID">
+
 <label>Withdrawal Amount</label>
 <input id="binanceAmount" class="withdraw-input" type="number" step="0.00001" min="0.02" placeholder="Minimum 0.02 RND">
+
 <div class="note">
 ⚠️ Minimum withdrawal is 0.02 RND.<br>
 Your Binance UID must be correct. RENDER will be sent manually after your request is reviewed.
 </div>
-<button class="confirm-btn" onclick="confirmBinanceWithdrawal()" type="button">WITHDRAW VIA BINANCE</button>
 
-<!-- EASYPAISA -->
+<button id="binanceWithdrawButton" class="confirm-btn" onclick="confirmBinanceWithdrawal()" type="button">
+WITHDRAW VIA BINANCE
+</button>
+
 <div class="method" style="margin-top:25px;">
 <strong>🟢 EasyPaisa</strong><br>
 <small>Receive your withdrawal through EasyPaisa</small>
 </div>
+
 <label>EasyPaisa Account Name</label>
 <input id="easypaisaName" class="withdraw-input" type="text" placeholder="Enter EasyPaisa account name">
+
 <label>EasyPaisa Number</label>
 <input id="easypaisaNumber" class="withdraw-input" type="tel" inputmode="numeric" placeholder="03XXXXXXXXX">
+
 <label>Withdrawal Amount</label>
 <input id="easypaisaAmount" class="withdraw-input" type="number" step="0.00001" min="0.02" placeholder="Minimum 0.02 RND">
+
 <div class="note">
 ⚠️ Minimum withdrawal is 0.02 RND.<br>
 Make sure your EasyPaisa name and number are correct. Payment will be processed manually after your request is reviewed.
 </div>
-<button class="confirm-btn" onclick="confirmEasyPaisaWithdrawal()" type="button">WITHDRAW VIA EASYPAISA</button>
+
+<button id="easypaisaWithdrawButton" class="confirm-btn" onclick="confirmEasyPaisaWithdrawal()" type="button">
+WITHDRAW VIA EASYPAISA
+</button>
 
 <div id="withdrawMessage" class="withdraw-message"></div>
 
@@ -885,634 +933,2268 @@ Make sure your EasyPaisa name and number are correct. Payment will be processed 
 <div id="withdrawHistoryList">No withdrawals yet.</div>
 </div>
 
-<button class="back-btn" onclick="showMining()" type="button">← BACK TO MINING</button>
+<button class="back-btn" onclick="showMining()" type="button">
+← BACK TO MINING
+</button>
+
 </div>
 </div>
 
 <div id="profilePage" class="page">
+
 <div class="profile-card">
+
 <div class="profile-avatar">👤</div>
+
 <h2>My Profile</h2>
+
 <div class="profile-row">
 <small>USERNAME</small>
 <strong id="profileUsername">Miner</strong>
 </div>
+
 <div class="profile-row">
 <small>EMAIL</small>
 <strong id="profileEmail">Not available</strong>
 </div>
-<div class="profile-status">🟢 RND Miner account is active</div>
-<button class="back-btn" onclick="showMining()" type="button">← BACK TO MINING</button>
-<button class="logout" onclick="logout()" type="button">LOGOUT</button>
+
+<div class="profile-status">
+🟢 RND Miner account is active
+</div>
+
+<button class="back-btn" onclick="showMining()" type="button">
+← BACK TO MINING
+</button>
+
+<button class="logout" onclick="logout()" type="button">
+LOGOUT
+</button>
+
 </div>
 </div>
 
 <div class="footer">RND Miner • Render Mining</div>
+
 </div>
 
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { 
-    getAuth, onAuthStateChanged, createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut 
+
+import {
+getAuth,
+onAuthStateChanged,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+GoogleAuthProvider,
+signInWithPopup,
+signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { 
-    getFirestore, collection, addDoc, serverTimestamp, getDocs, query, where, 
-    doc, setDoc, getDoc, updateDoc, onSnapshot 
+
+import {
+getFirestore,
+collection,
+addDoc,
+serverTimestamp,
+getDocs,
+query,
+where,
+doc,
+setDoc,
+getDoc,
+updateDoc,
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
-  authDomain: "adaminning-app.firebaseapp.com",
-  projectId: "adaminning-app",
-  storageBucket: "adaminning-app.firebasestorage.app",
-  messagingSenderId: "147581693986",
-  appId: "1:147581693986:web:7887fdda627af87af9da7b",
-  measurementId: "G-SS5Z4WPCT1"
+apiKey: "AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",
+authDomain: "adaminning-app.firebaseapp.com",
+projectId: "adaminning-app",
+storageBucket: "adaminning-app.firebasestorage.app",
+messagingSenderId: "147581693986",
+appId: "1:147581693986:web:7887fdda627af87af9da7b",
+measurementId: "G-SS5Z4WPCT1"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
+
 let signUpMode = false;
 let userDocUnsubscribe = null;
 
-// User Data Object inside Firestore Memory
+
+/*
+=========================================
+USER DATA
+=========================================
+*/
+
 let userData = {
-  balance: 0,
-  miningActive: false,
-  miningStartTime: 0,
-  lastRewardTime: 0,
-  boostEnd: 0,
-  adCount: 0,
-  adResetTime: 0,
-  lastClaimDate: ""
+balance: 0,
+miningActive: false,
+miningStartTime: 0,
+lastRewardTime: 0,
+boostEnd: 0,
+adCount: 0,
+adResetTime: 0,
+lastClaimDate: ""
 };
+
 
 let miningTimer = null;
 let sessionInterval = null;
 let saveInterval = null;
+
 let baseHashrate = 2.85;
 let currentHashrate = 2.85;
+
 let currentUserUID = null;
 
-const SESSION_TIME = 1 * 60 * 60 * 1000; // 1-Hour Mining
+
+/*
+=========================================
+CONSTANTS
+=========================================
+*/
+
+const SESSION_TIME = 1 * 60 * 60 * 1000;
+
 const REWARD_PER_SECOND = 0.0000000463;
+
 const BOOST_TIME = 10 * 60 * 1000;
 
+
+/*
+=========================================
+FIRESTORE SAVE LOCK
+=========================================
+*/
+
+let saveInProgress = false;
+let saveQueued = false;
+
+
+/*
+=========================================
+AUTH UI
+=========================================
+*/
+
 window.toggleAuth = function() {
-  signUpMode = !signUpMode;
-  document.getElementById("authTitle").textContent = signUpMode ? "Create RND Miner Account" : "Welcome to RND Miner";
-  document.getElementById("authButton").textContent = signUpMode ? "SIGN UP" : "LOGIN";
-  document.getElementById("authSwitch").innerHTML = signUpMode ? 
-    'Already have an account? <span onclick="toggleAuth()">Login</span>' : 
-    'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
-  document.getElementById("authError").textContent = "";
+
+signUpMode = !signUpMode;
+
+document.getElementById("authTitle").textContent =
+signUpMode
+? "Create RND Miner Account"
+: "Welcome to RND Miner";
+
+document.getElementById("authButton").textContent =
+signUpMode
+? "SIGN UP"
+: "LOGIN";
+
+document.getElementById("authSwitch").innerHTML =
+signUpMode
+?
+'Already have an account? <span onclick="toggleAuth()">Login</span>'
+:
+'Don\'t have an account? <span onclick="toggleAuth()">Sign Up</span>';
+
+document.getElementById("authError").textContent = "";
+
 };
+
+
+/*
+=========================================
+EMAIL LOGIN / SIGNUP
+=========================================
+*/
 
 window.emailAuth = async function() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const error = document.getElementById("authError");
-  if (!email || !password) {
-    error.textContent = "Please enter email and password.";
-    return;
-  }
-  try {
-    if (signUpMode) await createUserWithEmailAndPassword(auth, email, password);
-    else await signInWithEmailAndPassword(auth, email, password);
-  } catch (e) {
-    error.textContent = firebaseError(e.code);
-  }
+
+const email =
+document.getElementById("authEmail").value.trim();
+
+const password =
+document.getElementById("authPassword").value;
+
+const error =
+document.getElementById("authError");
+
+
+if (!email || !password) {
+
+error.textContent =
+"Please enter email and password.";
+
+return;
+
+}
+
+
+try {
+
+if (signUpMode) {
+
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+} else {
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+}
+
+} catch (e) {
+
+console.error("Authentication error:", e);
+
+error.textContent =
+firebaseError(e.code);
+
+}
+
 };
+
+
+/*
+=========================================
+GOOGLE LOGIN
+=========================================
+*/
 
 window.googleLogin = async function() {
-  try {
-    await signInWithPopup(auth, provider);
-  } catch (e) {
-    document.getElementById("authError").textContent = firebaseError(e.code);
-  }
+
+try {
+
+await signInWithPopup(
+auth,
+provider
+);
+
+} catch (e) {
+
+console.error("Google login error:", e);
+
+document.getElementById("authError").textContent =
+firebaseError(e.code);
+
+}
+
 };
+
+
+/*
+=========================================
+BOOST
+=========================================
+*/
 
 function isBoostActive(time = Date.now()) {
-  return userData.boostEnd > time;
+
+return userData.boostEnd > time;
+
 }
+
 
 function updateBoostUI() {
-  const now = Date.now();
-  if (userData.boostEnd > now) {
-    currentHashrate = 5.70;
-    document.getElementById("hashrate").textContent = "5.70 GH/s";
-    document.getElementById("boostText").textContent = "🔥 AD BOOST ACTIVE • " + formatBoostTime(userData.boostEnd - now);
-  } else {
-    currentHashrate = baseHashrate;
-    document.getElementById("hashrate").textContent = "2.85 GH/s";
-    document.getElementById("boostText").textContent = "Base hashrate";
-  }
+
+const now = Date.now();
+
+if (userData.boostEnd > now) {
+
+currentHashrate = 5.70;
+
+document.getElementById("hashrate").textContent =
+"5.70 GH/s";
+
+document.getElementById("boostText").textContent =
+"🔥 AD BOOST ACTIVE • " +
+formatBoostTime(userData.boostEnd - now);
+
+} else {
+
+currentHashrate = baseHashrate;
+
+document.getElementById("hashrate").textContent =
+"2.85 GH/s";
+
+document.getElementById("boostText").textContent =
+"Base hashrate";
+
 }
+
+}
+
 
 function formatBoostTime(ms) {
-  const total = Math.max(0, Math.floor(ms / 1000)), m = Math.floor(total / 60), s = total % 60;
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+
+const total =
+Math.max(0, Math.floor(ms / 1000));
+
+const m =
+Math.floor(total / 60);
+
+const s =
+total % 60;
+
+return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
 }
+
+
+/*
+=========================================
+REWARD CALCULATION
+=========================================
+*/
 
 function calculateReward(fromTime, toTime) {
-  if (toTime <= fromTime) return 0;
-  let reward = 0;
-  if (userData.boostEnd > fromTime) {
-    let boostedUntil = Math.min(toTime, userData.boostEnd);
-    if (boostedUntil > fromTime) reward += (boostedUntil - fromTime) / 1000 * REWARD_PER_SECOND * (5.70 / baseHashrate);
-    if (toTime > userData.boostEnd) reward += (toTime - userData.boostEnd) / 1000 * REWARD_PER_SECOND;
-  } else {
-    reward += (toTime - fromTime) / 1000 * REWARD_PER_SECOND;
-  }
-  return reward;
+
+if (!fromTime || !toTime || toTime <= fromTime) {
+return 0;
 }
 
-async function syncUserToFirestore() {
-  if (!currentUserUID) return;
-  try {
-    const userRef = doc(db, "users", currentUserUID);
-    await setDoc(userRef, { ...userData, updatedAt: serverTimestamp() }, { merge: true });
-  } catch (e) {
-    console.error("Firestore sync error:", e);
-  }
+let reward = 0;
+
+if (userData.boostEnd > fromTime) {
+
+const boostedUntil =
+Math.min(toTime, userData.boostEnd);
+
+if (boostedUntil > fromTime) {
+
+reward +=
+(boostedUntil - fromTime) / 1000 *
+REWARD_PER_SECOND *
+(5.70 / baseHashrate);
+
 }
+
+if (toTime > userData.boostEnd) {
+
+reward +=
+(toTime - userData.boostEnd) / 1000 *
+REWARD_PER_SECOND;
+
+}
+
+} else {
+
+reward +=
+(toTime - fromTime) / 1000 *
+REWARD_PER_SECOND;
+
+}
+
+return reward;
+
+}
+
+
+/*
+=========================================
+FIRESTORE SAVE
+FIXED:
+- SAVE ALWAYS COMPLETES
+- PREVENTS OVERWRITING NEWER LOCAL DATA
+- CALCULATES PENDING MINING REWARD BEFORE SAVE
+=========================================
+*/
+
+async function syncUserToFirestore(options = {}) {
+
+if (!currentUserUID) {
+return;
+}
+
+
+/*
+Do not save while another save is running.
+Instead queue another save.
+*/
+
+if (saveInProgress) {
+
+saveQueued = true;
+
+return;
+
+}
+
+
+saveInProgress = true;
+
+
+try {
+
+if (
+userData.miningActive &&
+userData.miningStartTime &&
+userData.lastRewardTime
+) {
+
+const now = Date.now();
+
+const sessionEnd =
+userData.miningStartTime + SESSION_TIME;
+
+const rewardTo =
+Math.min(now, sessionEnd);
+
+if (
+rewardTo > userData.lastRewardTime &&
+rewardTo > userData.miningStartTime
+) {
+
+const reward =
+calculateReward(
+userData.lastRewardTime,
+rewardTo
+);
+
+if (reward > 0) {
+
+userData.balance += reward;
+
+}
+
+userData.lastRewardTime = rewardTo;
+
+}
+
+}
+
+
+/*
+Create a clean copy.
+*/
+
+const dataToSave = {
+
+balance: Number(userData.balance) || 0,
+
+miningActive:
+!!userData.miningActive,
+
+miningStartTime:
+Number(userData.miningStartTime) || 0,
+
+lastRewardTime:
+Number(userData.lastRewardTime) || 0,
+
+boostEnd:
+Number(userData.boostEnd) || 0,
+
+adCount:
+Number(userData.adCount) || 0,
+
+adResetTime:
+Number(userData.adResetTime) || 0,
+
+lastClaimDate:
+userData.lastClaimDate || "",
+
+updatedAt:
+serverTimestamp()
+
+};
+
+
+if (auth.currentUser) {
+
+dataToSave.email =
+auth.currentUser.email || "";
+
+dataToSave.displayName =
+auth.currentUser.displayName || "";
+
+}
+
+
+/*
+IMPORTANT:
+merge:true keeps existing fields.
+*/
+
+const userRef =
+doc(db, "users", currentUserUID);
+
+await setDoc(
+userRef,
+dataToSave,
+{ merge: true }
+);
+
+updateBalanceDisplay();
+
+
+} catch (e) {
+
+console.error(
+"Firestore sync error:",
+e
+);
+
+} finally {
+
+saveInProgress = false;
+
+
+if (saveQueued) {
+
+saveQueued = false;
+
+/*
+Run queued save.
+*/
+
+setTimeout(() => {
+
+syncUserToFirestore();
+
+}, 100);
+
+}
+
+}
+
+}
+
+
+/*
+=========================================
+SESSION UI
+=========================================
+*/
 
 function updateSessionUI() {
-  const el = document.getElementById("sessionTime");
-  if (!el) return;
-  if (!userData.miningActive || !userData.miningStartTime) {
-    el.textContent = "Not active";
-    return;
-  }
-  const remaining = Math.max(0, SESSION_TIME - (Date.now() - userData.miningStartTime));
-  const total = Math.floor(remaining / 1000);
-  const h = Math.floor(total / 3600), m = Math.floor((total % 3600) / 60), s = total % 60;
-  el.textContent = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+
+const el =
+document.getElementById("sessionTime");
+
+if (!el) return;
+
+
+if (
+!userData.miningActive ||
+!userData.miningStartTime
+) {
+
+el.textContent =
+"Not active";
+
+return;
+
 }
+
+
+const remaining =
+Math.max(
+0,
+SESSION_TIME -
+(Date.now() - userData.miningStartTime)
+);
+
+
+const total =
+Math.floor(remaining / 1000);
+
+const h =
+Math.floor(total / 3600);
+
+const m =
+Math.floor((total % 3600) / 60);
+
+const s =
+total % 60;
+
+
+el.textContent =
+`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+}
+
+
+/*
+=========================================
+MINING UI
+=========================================
+*/
 
 function setMiningUI(active, message) {
-  const button = document.getElementById("miningButton");
-  const status = document.getElementById("status");
-  const mineText = document.getElementById("mineText");
-  const dot = document.getElementById("dot");
 
-  if (active) {
-    button.classList.add("active");
-    status.textContent = message || "Mining active";
-    mineText.textContent = "MINING ACTIVE";
-    dot.style.background = "#00e5ff";
-  } else {
-    button.classList.remove("active");
-    status.textContent = message || "Mining inactive";
-    mineText.textContent = "START MINING";
-    dot.style.background = "#ff3dbd";
-  }
-  updateSessionUI();
-  updateBoostUI();
+const button =
+document.getElementById("miningButton");
+
+const status =
+document.getElementById("status");
+
+const mineText =
+document.getElementById("mineText");
+
+const dot =
+document.getElementById("dot");
+
+
+if (active) {
+
+button.classList.add("active");
+
+status.textContent =
+message || "Mining active";
+
+mineText.textContent =
+"MINING ACTIVE";
+
+dot.style.background =
+"#00e5ff";
+
+} else {
+
+button.classList.remove("active");
+
+status.textContent =
+message || "Mining inactive";
+
+mineText.textContent =
+"START MINING";
+
+dot.style.background =
+"#ff3dbd";
+
 }
 
-function stopMining(message = "Mining inactive") {
-  userData.miningActive = false;
-  userData.miningStartTime = 0;
-  userData.lastRewardTime = 0;
 
-  if (miningTimer) { clearInterval(miningTimer); miningTimer = null; }
-  if (sessionInterval) { clearInterval(sessionInterval); sessionInterval = null; }
+updateSessionUI();
+updateBoostUI();
 
-  setMiningUI(false, message);
-  syncUserToFirestore();
 }
+
+
+/*
+=========================================
+STOP MINING
+=========================================
+*/
+
+async function stopMining(
+message = "Mining inactive"
+) {
+
+/*
+First save pending reward.
+*/
+
+if (
+userData.miningActive &&
+userData.lastRewardTime
+) {
+
+const now =
+Date.now();
+
+const sessionEnd =
+userData.miningStartTime +
+SESSION_TIME;
+
+const rewardTo =
+Math.min(now, sessionEnd);
+
+if (rewardTo > userData.lastRewardTime) {
+
+const reward =
+calculateReward(
+userData.lastRewardTime,
+rewardTo
+);
+
+userData.balance += reward;
+
+userData.lastRewardTime =
+rewardTo;
+
+}
+
+}
+
+
+userData.miningActive = false;
+userData.miningStartTime = 0;
+userData.lastRewardTime = 0;
+
+
+if (miningTimer) {
+
+clearInterval(miningTimer);
+
+miningTimer = null;
+
+}
+
+
+if (sessionInterval) {
+
+clearInterval(sessionInterval);
+
+sessionInterval = null;
+
+}
+
+
+setMiningUI(
+false,
+message
+);
+
+updateBalanceDisplay();
+
+
+await syncUserToFirestore();
+
+}
+
+
+/*
+=========================================
+BALANCE UI
+=========================================
+*/
 
 function updateBalanceDisplay() {
-  document.getElementById("balance").textContent = userData.balance.toFixed(5);
-  document.getElementById("withdrawBalance").textContent = userData.balance.toFixed(5);
+
+const balance =
+Number(userData.balance) || 0;
+
+document.getElementById("balance").textContent =
+balance.toFixed(5);
+
+document.getElementById("withdrawBalance").textContent =
+balance.toFixed(5);
+
 }
+
+
+/*
+=========================================
+MINING TIMER
+=========================================
+*/
 
 function startMiningTimer() {
-  if (miningTimer) clearInterval(miningTimer);
-  if (sessionInterval) clearInterval(sessionInterval);
 
-  miningTimer = setInterval(() => {
-    if (!userData.miningActive || !currentUserUID) return;
-    const now = Date.now();
-    
-    if (userData.miningStartTime && now - userData.miningStartTime >= SESSION_TIME) {
-      stopMining("Session ended");
-      return;
-    }
-
-    if (userData.lastRewardTime) {
-      const rewardTo = Math.min(now, userData.miningStartTime + SESSION_TIME);
-      if (rewardTo > userData.lastRewardTime) {
-        userData.balance += calculateReward(userData.lastRewardTime, rewardTo);
-        userData.lastRewardTime = rewardTo;
-        updateBalanceDisplay();
-      }
-    }
-    updateSessionUI();
-    updateBoostUI();
-  }, 1000);
-
-  sessionInterval = setInterval(() => {
-    updateSessionUI();
-    updateBoostUI();
-  }, 1000);
+if (miningTimer) {
+clearInterval(miningTimer);
 }
 
-function initUserData(user) {
-  currentUserUID = user.uid;
-  const userRef = doc(db, "users", currentUserUID);
-
-  if (userDocUnsubscribe) userDocUnsubscribe();
-
-  userDocUnsubscribe = onSnapshot(userRef, (snapshot) => {
-    if (snapshot.exists()) {
-      const data = snapshot.data();
-      userData.balance = Number(data.balance) || 0;
-      userData.miningActive = !!data.miningActive;
-      userData.miningStartTime = Number(data.miningStartTime) || 0;
-      userData.lastRewardTime = Number(data.lastRewardTime) || 0;
-      userData.boostEnd = Number(data.boostEnd) || 0;
-      userData.adCount = Number(data.adCount) || 0;
-      userData.adResetTime = Number(data.adResetTime) || 0;
-      userData.lastClaimDate = data.lastClaimDate || "";
-
-      updateBalanceDisplay();
-      
-      const now = Date.now();
-      if (userData.miningActive && userData.miningStartTime) {
-        const sessionEnd = userData.miningStartTime + SESSION_TIME;
-        if (now < sessionEnd) {
-          if (userData.lastRewardTime < now) {
-            userData.balance += calculateReward(userData.lastRewardTime, now);
-            userData.lastRewardTime = now;
-          }
-          setMiningUI(true, "Mining active");
-          startMiningTimer();
-        } else {
-          stopMining("Session ended");
-        }
-      } else {
-        setMiningUI(false, "Mining inactive");
-      }
-    } else {
-      // First time user registration in Firestore
-      setDoc(userRef, {
-        email: user.email || "",
-        balance: 0,
-        miningActive: false,
-        miningStartTime: 0,
-        lastRewardTime: 0,
-        boostEnd: 0,
-        adCount: 0,
-        adResetTime: 0,
-        lastClaimDate: "",
-        createdAt: serverTimestamp()
-      });
-    }
-  });
-
-  // Background Persistence Pulse
-  if (saveInterval) clearInterval(saveInterval);
-  saveInterval = setInterval(() => {
-    if (currentUserUID && userData.miningActive) {
-      syncUserToFirestore();
-    }
-  }, 10000);
+if (sessionInterval) {
+clearInterval(sessionInterval);
 }
 
-onAuthStateChanged(auth, user => {
-  if (user) {
-    document.getElementById("authScreen").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
-    const name = user.displayName || user.email?.split("@")[0] || "Miner";
-    document.getElementById("username").textContent = name;
-    document.getElementById("profileUsername").textContent = name;
-    document.getElementById("profileEmail").textContent = user.email || "Not available";
-    initUserData(user);
-  } else {
-    if (userDocUnsubscribe) userDocUnsubscribe();
-    if (saveInterval) clearInterval(saveInterval);
-    document.getElementById("authScreen").style.display = "flex";
-    document.getElementById("mainApp").style.display = "none";
-    currentUserUID = null;
-  }
+
+miningTimer =
+setInterval(async () => {
+
+if (
+!userData.miningActive ||
+!currentUserUID
+) {
+return;
+}
+
+
+const now =
+Date.now();
+
+
+/*
+SESSION END
+*/
+
+if (
+userData.miningStartTime &&
+now -
+userData.miningStartTime >=
+SESSION_TIME
+) {
+
+await stopMining(
+"Session ended"
+);
+
+return;
+
+}
+
+
+/*
+LIVE REWARD
+*/
+
+if (userData.lastRewardTime) {
+
+const rewardTo =
+Math.min(
+now,
+userData.miningStartTime +
+SESSION_TIME
+);
+
+
+if (
+rewardTo >
+userData.lastRewardTime
+) {
+
+const reward =
+calculateReward(
+userData.lastRewardTime,
+rewardTo
+);
+
+if (reward > 0) {
+
+userData.balance +=
+reward;
+
+}
+
+userData.lastRewardTime =
+rewardTo;
+
+updateBalanceDisplay();
+
+}
+
+}
+
+
+updateSessionUI();
+updateBoostUI();
+
+
+}, 1000);
+
+
+sessionInterval =
+setInterval(() => {
+
+updateSessionUI();
+updateBoostUI();
+
+}, 1000);
+
+}
+
+
+/*
+=========================================
+LOAD USER FROM FIRESTORE
+FIXED:
+- FIRST USER CREATES DOCUMENT
+- EXISTING DATA IS LOADED
+- EMAIL / DISPLAY NAME SAVED
+=========================================
+*/
+
+async function initUserData(user) {
+
+currentUserUID =
+user.uid;
+
+const userRef =
+doc(db, "users", currentUserUID);
+
+
+if (userDocUnsubscribe) {
+
+userDocUnsubscribe();
+
+}
+
+
+/*
+Check/create user document first.
+*/
+
+try {
+
+const existing =
+await getDoc(userRef);
+
+if (!existing.exists()) {
+
+await setDoc(
+userRef,
+{
+
+uid: user.uid,
+
+email:
+user.email || "",
+
+displayName:
+user.displayName || "",
+
+balance: 0,
+
+miningActive: false,
+
+miningStartTime: 0,
+
+lastRewardTime: 0,
+
+boostEnd: 0,
+
+adCount: 0,
+
+adResetTime: 0,
+
+lastClaimDate: "",
+
+createdAt:
+serverTimestamp(),
+
+updatedAt:
+serverTimestamp()
+
+},
+{ merge: true }
+);
+
+}
+
+} catch (e) {
+
+console.error(
+"User document creation error:",
+e
+);
+
+}
+
+
+/*
+Realtime listener.
+*/
+
+userDocUnsubscribe =
+onSnapshot(
+userRef,
+(snapshot) => {
+
+if (!snapshot.exists()) {
+return;
+}
+
+
+const data =
+snapshot.data();
+
+
+/*
+Only update local data from Firestore
+when a snapshot is received.
+
+The server is the persistent source.
+*/
+
+userData.balance =
+Number(data.balance) || 0;
+
+userData.miningActive =
+!!data.miningActive;
+
+userData.miningStartTime =
+Number(data.miningStartTime) || 0;
+
+userData.lastRewardTime =
+Number(data.lastRewardTime) || 0;
+
+userData.boostEnd =
+Number(data.boostEnd) || 0;
+
+userData.adCount =
+Number(data.adCount) || 0;
+
+userData.adResetTime =
+Number(data.adResetTime) || 0;
+
+userData.lastClaimDate =
+data.lastClaimDate || "";
+
+
+updateBalanceDisplay();
+
+
+const now =
+Date.now();
+
+
+/*
+Check active session.
+*/
+
+if (
+userData.miningActive &&
+userData.miningStartTime
+) {
+
+const sessionEnd =
+userData.miningStartTime +
+SESSION_TIME;
+
+
+if (now < sessionEnd) {
+
+
+/*
+Catch up reward while user was
+away / page was closed.
+*/
+
+if (
+userData.lastRewardTime <
+now
+) {
+
+const rewardTo =
+Math.min(
+now,
+sessionEnd
+);
+
+
+if (
+rewardTo >
+userData.lastRewardTime
+) {
+
+const reward =
+calculateReward(
+userData.lastRewardTime,
+rewardTo
+);
+
+if (reward > 0) {
+
+userData.balance +=
+reward;
+
+}
+
+userData.lastRewardTime =
+rewardTo;
+
+}
+
+}
+
+
+updateBalanceDisplay();
+
+setMiningUI(
+true,
+"Mining active"
+);
+
+startMiningTimer();
+
+
+/*
+Immediately persist catch-up reward.
+*/
+
+syncUserToFirestore();
+
+
+} else {
+
+/*
+Session already expired.
+*/
+
+stopMining(
+"Session ended"
+);
+
+}
+
+} else {
+
+setMiningUI(
+false,
+"Mining inactive"
+);
+
+}
+
+},
+(error) => {
+
+console.error(
+"Firestore listener error:",
+error
+);
+
+}
+);
+
+
+/*
+=========================================
+BACKGROUND SAVE
+Every 5 seconds instead of 10.
+=========================================
+*/
+
+if (saveInterval) {
+clearInterval(saveInterval);
+}
+
+
+saveInterval =
+setInterval(() => {
+
+if (
+currentUserUID &&
+userData.miningActive
+) {
+
+syncUserToFirestore();
+
+}
+
+}, 5000);
+
+}
+
+
+/*
+=========================================
+AUTH STATE
+=========================================
+*/
+
+onAuthStateChanged(
+auth,
+user => {
+
+if (user) {
+
+document.getElementById(
+"authScreen"
+).style.display = "none";
+
+document.getElementById(
+"mainApp"
+).style.display = "block";
+
+
+const name =
+user.displayName ||
+user.email?.split("@")[0] ||
+"Miner";
+
+
+document.getElementById(
+"username"
+).textContent =
+name;
+
+document.getElementById(
+"profileUsername"
+).textContent =
+name;
+
+document.getElementById(
+"profileEmail"
+).textContent =
+user.email ||
+"Not available";
+
+
+initUserData(user);
+
+
+} else {
+
+
+if (userDocUnsubscribe) {
+
+userDocUnsubscribe();
+
+userDocUnsubscribe = null;
+
+}
+
+
+if (saveInterval) {
+
+clearInterval(saveInterval);
+
+saveInterval = null;
+
+}
+
+
+if (miningTimer) {
+
+clearInterval(miningTimer);
+
+miningTimer = null;
+
+}
+
+
+if (sessionInterval) {
+
+clearInterval(sessionInterval);
+
+sessionInterval = null;
+
+}
+
+
+currentUserUID =
+null;
+
+
+document.getElementById(
+"authScreen"
+).style.display =
+"flex";
+
+document.getElementById(
+"mainApp"
+).style.display =
+"none";
+
+}
+
 });
 
+
+/*
+=========================================
+LOGOUT
+FIXED:
+SAVE REWARD BEFORE LOGOUT
+=========================================
+*/
+
 window.logout = async function() {
-  if (userData.miningActive && currentUserUID) {
-    userData.lastRewardTime = Date.now();
-    await syncUserToFirestore();
-  }
-  if (miningTimer) clearInterval(miningTimer);
-  if (sessionInterval) clearInterval(sessionInterval);
-  if (saveInterval) clearInterval(saveInterval);
-  await signOut(auth);
+
+try {
+
+if (
+userData.miningActive &&
+currentUserUID
+) {
+
+await syncUserToFirestore();
+
+}
+
+
+if (miningTimer) {
+
+clearInterval(miningTimer);
+miningTimer = null;
+
+}
+
+
+if (sessionInterval) {
+
+clearInterval(sessionInterval);
+sessionInterval = null;
+
+}
+
+
+if (saveInterval) {
+
+clearInterval(saveInterval);
+saveInterval = null;
+
+}
+
+
+await signOut(auth);
+
+
+} catch (e) {
+
+console.error(
+"Logout error:",
+e
+);
+
+}
+
 };
 
-window.startMining = function() {
-  if (!auth.currentUser) return alert("Please login first.");
-  if (userData.miningActive) return;
 
-  const now = Date.now();
-  userData.miningActive = true;
-  userData.miningStartTime = now;
-  userData.lastRewardTime = now;
+/*
+=========================================
+START MINING
+=========================================
+*/
 
-  setMiningUI(true, "Mining active");
+window.startMining = async function() {
 
-  const tg = window.Telegram?.WebApp;
-  if (tg?.HapticFeedback) {
-    try { tg.HapticFeedback.impactOccurred("medium"); } catch(e){}
-  }
+if (!auth.currentUser) {
 
-  syncUserToFirestore();
-  startMiningTimer();
+alert("Please login first.");
+
+return;
+
+}
+
+
+if (userData.miningActive) {
+return;
+}
+
+
+const now =
+Date.now();
+
+
+userData.miningActive =
+true;
+
+userData.miningStartTime =
+now;
+
+userData.lastRewardTime =
+now;
+
+
+setMiningUI(
+true,
+"Mining active"
+);
+
+
+const tg =
+window.Telegram?.WebApp;
+
+
+if (tg?.HapticFeedback) {
+
+try {
+
+tg.HapticFeedback
+.impactOccurred("medium");
+
+} catch(e){}
+
+}
+
+
+/*
+SAVE IMMEDIATELY
+*/
+
+await syncUserToFirestore();
+
+
+startMiningTimer();
+
 };
+
+
+/*
+=========================================
+WATCH AD
+=========================================
+*/
 
 window.watchAd = async function() {
-  if (!auth.currentUser) return alert("Please login first.");
 
-  const button = document.getElementById("watchAdButton");
-  const status = document.getElementById("adStatus");
+if (!auth.currentUser) {
 
-  if (typeof window.show_11549239 !== "function") {
-    status.textContent = "Advertisement is not ready yet.";
-    return;
-  }
+alert("Please login first.");
 
-  const now = Date.now();
-  if (userData.adResetTime && now >= userData.adResetTime) {
-    userData.adCount = 0;
-    userData.adResetTime = 0;
-  }
+return;
 
-  button.disabled = true;
-  status.style.color = "#ffc44d";
-  status.textContent = "📺 Loading advertisement...";
+}
 
-  try {
-    await window.show_11549239();
 
-    if (userData.adCount < 10) {
-      userData.adCount++;
-      const startFrom = userData.boostEnd > now ? userData.boostEnd : now;
-      userData.boostEnd = startFrom + BOOST_TIME;
+const button =
+document.getElementById(
+"watchAdButton"
+);
 
-      if (userData.adCount === 10) {
-        userData.adResetTime = now + (24 * 60 * 60 * 1000);
-        status.textContent = "✅ 10/10 boosts completed. Daily limit reached.";
-      } else {
-        status.textContent = "✅ Boost activated! " + userData.adCount + "/10";
-      }
-      updateBoostUI();
-      await syncUserToFirestore();
-    } else {
-      status.textContent = "✅ Ad completed. Daily boost limit reached.";
-    }
-  } catch (error) {
-    console.error("Ad error:", error);
-    status.style.color = "#ff5577";
-    status.textContent = "Ad was not completed.";
-  }
+const status =
+document.getElementById(
+"adStatus"
+);
 
-  button.disabled = false;
+
+if (
+typeof window.show_11549239 !==
+"function"
+) {
+
+status.textContent =
+"Advertisement is not ready yet.";
+
+return;
+
+}
+
+
+const now =
+Date.now();
+
+
+if (
+userData.adResetTime &&
+now >= userData.adResetTime
+) {
+
+userData.adCount = 0;
+
+userData.adResetTime = 0;
+
+}
+
+
+button.disabled = true;
+
+status.style.color =
+"#ffc44d";
+
+status.textContent =
+"📺 Loading advertisement...";
+
+
+try {
+
+await window.show_11549239();
+
+
+/*
+Only count the ad AFTER
+successful completion.
+*/
+
+if (userData.adCount < 10) {
+
+userData.adCount++;
+
+
+const startFrom =
+userData.boostEnd > now
+? userData.boostEnd
+: now;
+
+
+userData.boostEnd =
+startFrom +
+BOOST_TIME;
+
+
+if (
+userData.adCount === 10
+) {
+
+userData.adResetTime =
+now +
+(24 * 60 * 60 * 1000);
+
+status.textContent =
+"✅ 10/10 boosts completed. Daily limit reached.";
+
+} else {
+
+status.textContent =
+"✅ Boost activated! " +
+userData.adCount +
+"/10";
+
+}
+
+
+updateBoostUI();
+
+
+/*
+SAVE BOOST + AD COUNT
+IMMEDIATELY
+*/
+
+await syncUserToFirestore();
+
+
+} else {
+
+status.textContent =
+"✅ Ad completed. Daily boost limit reached.";
+
+}
+
+
+} catch (error) {
+
+console.error(
+"Ad error:",
+error
+);
+
+status.style.color =
+"#ff5577";
+
+status.textContent =
+"Ad was not completed.";
+
+}
+
+
+button.disabled = false;
+
 };
+
+
+/*
+=========================================
+DAILY REWARD
+=========================================
+*/
 
 window.claimReward = async function() {
-  if (!auth.currentUser) return alert("Please login first.");
-  const today = new Date().toISOString().slice(0, 10);
 
-  if (userData.lastClaimDate === today) {
-    alert("You already claimed today's reward.");
-    return;
-  }
+if (!auth.currentUser) {
 
-  userData.balance += 0.001;
-  userData.lastClaimDate = today;
-  updateBalanceDisplay();
-  await syncUserToFirestore();
-  alert("🎉 Daily reward claimed!\n\n+0.001 RND");
+alert("Please login first.");
+
+return;
+
+}
+
+
+const today =
+new Date()
+.toISOString()
+.slice(0,10);
+
+
+if (
+userData.lastClaimDate ===
+today
+) {
+
+alert(
+"You already claimed today's reward."
+);
+
+return;
+
+}
+
+
+/*
+Update locally.
+*/
+
+userData.balance +=
+0.001;
+
+userData.lastClaimDate =
+today;
+
+
+updateBalanceDisplay();
+
+
+/*
+SAVE IMMEDIATELY.
+*/
+
+await syncUserToFirestore();
+
+
+alert(
+"🎉 Daily reward claimed!\n\n+0.001 RND"
+);
+
 };
+
+
+/*
+=========================================
+PAGES
+=========================================
+*/
 
 function hideAllPages() {
-  document.getElementById("miningPage").classList.remove("active");
-  document.getElementById("withdrawPage").classList.remove("active");
-  document.getElementById("profilePage").classList.remove("active");
+
+document.getElementById(
+"miningPage"
+).classList.remove("active");
+
+document.getElementById(
+"withdrawPage"
+).classList.remove("active");
+
+document.getElementById(
+"profilePage"
+).classList.remove("active");
+
 }
+
 
 window.showMining = function() {
-  hideAllPages();
-  document.getElementById("miningPage").classList.add("active");
-  updateBalanceDisplay();
-  updateBoostUI();
+
+hideAllPages();
+
+document.getElementById(
+"miningPage"
+).classList.add("active");
+
+updateBalanceDisplay();
+
+updateBoostUI();
+
 };
+
 
 window.showWithdraw = function() {
-  hideAllPages();
-  document.getElementById("withdrawPage").classList.add("active");
-  updateBalanceDisplay();
-  loadWithdrawalHistory();
+
+hideAllPages();
+
+document.getElementById(
+"withdrawPage"
+).classList.add("active");
+
+updateBalanceDisplay();
+
+loadWithdrawalHistory();
+
 };
+
 
 window.showProfile = function() {
-  const user = auth.currentUser;
-  if (!user) return;
-  hideAllPages();
-  document.getElementById("profilePage").classList.add("active");
+
+const user =
+auth.currentUser;
+
+if (!user) return;
+
+hideAllPages();
+
+document.getElementById(
+"profilePage"
+).classList.add("active");
+
 };
+
+
+/*
+=========================================
+WITHDRAWAL HISTORY
+=========================================
+*/
 
 async function loadWithdrawalHistory() {
-  const user = auth.currentUser;
-  if (!user) return;
 
-  const box = document.getElementById("withdrawHistoryList");
-  if (!box) return;
+const user =
+auth.currentUser;
 
-  box.innerHTML = "Loading...";
+if (!user) return;
 
-  try {
-    const q = query(collection(db, "withdrawals"), where("uid", "==", user.uid));
-    const snap = await getDocs(q);
 
-    if (snap.empty) {
-      box.innerHTML = "No withdrawals yet.";
-      return;
-    }
+const box =
+document.getElementById(
+"withdrawHistoryList"
+);
 
-    box.innerHTML = "";
-    snap.forEach(docSnap => {
-      const w = docSnap.data();
-      box.innerHTML += `
-      <div style="padding:12px;margin-top:10px;border-radius:15px;background:rgba(255,255,255,.05)">
-      💰 ${w.amount} RND<br>
-      🌐 ${w.network}<br>
-      Status: <b>${w.status}</b>
-      </div>`;
-    });
-  } catch (e) {
-    box.innerHTML = "Failed to load withdrawal history.";
-  }
+if (!box) return;
+
+
+box.innerHTML =
+"Loading...";
+
+
+try {
+
+const q =
+query(
+collection(db, "withdrawals"),
+where("uid", "==", user.uid)
+);
+
+
+const snap =
+await getDocs(q);
+
+
+if (snap.empty) {
+
+box.innerHTML =
+"No withdrawals yet.";
+
+return;
+
 }
 
-window.confirmBinanceWithdrawal = async function() {
-  const user = auth.currentUser;
-  if (!user) return alert("Please login first.");
 
-  const uid = document.getElementById("binanceUID").value.trim();
-  const amount = Number(document.getElementById("binanceAmount").value);
-  const message = document.getElementById("withdrawMessage");
+box.innerHTML = "";
 
-  message.style.color = "#ff5577";
 
-  if (!uid || !/^\d{5,20}$/.test(uid)) {
-    message.textContent = "Please enter a valid Binance UID.";
-    return;
-  }
+snap.forEach(
+docSnap => {
 
-  if (!amount || amount < 0.02) {
-    message.textContent = "Minimum withdrawal is 0.02 RND.";
-    return;
-  }
+const w =
+docSnap.data();
 
-  if (amount > userData.balance) {
-    message.textContent = "Insufficient balance.";
-    return;
-  }
 
-  const button = document.querySelector(".confirm-btn");
-  button.disabled = true;
-  button.style.opacity = ".65";
-  message.style.color = "#ff5b5b";
-  message.textContent = "Submitting Binance withdrawal request...";
+const wrapper =
+document.createElement("div");
 
-  try {
-    await addDoc(collection(db, "withdrawals"), {
-      uid: user.uid,
-      email: user.email || "",
-      method: "Binance",
-      binanceUID: uid,
-      network: "Binance",
-      currency: "RENDER",
-      token: "RENDER",
-      amount: amount,
-      balanceUnit: "RND",
-      status: "Pending",
-      createdAt: serverTimestamp()
-    });
+wrapper.style.cssText =
+"padding:12px;margin-top:10px;border-radius:15px;background:rgba(255,255,255,.05)";
 
-    userData.balance -= amount;
-    updateBalanceDisplay();
-    await syncUserToFirestore();
 
-    message.textContent = "✅ Binance withdrawal submitted. Request pending review.";
-    document.getElementById("binanceUID").value = "";
-    document.getElementById("binanceAmount").value = "";
-    await loadWithdrawalHistory();
-  } catch (e) {
-    console.error(e);
-    message.style.color = "#ff5577";
-    message.textContent = "Failed to submit withdrawal. Try again.";
-  }
+wrapper.innerHTML =
+`
+💰 ${Number(w.amount || 0).toFixed(5)} RND<br>
+🌐 ${w.network || w.method || ""}<br>
+Status: <b>${w.status || "Pending"}</b>
+`;
 
-  button.disabled = false;
-  button.style.opacity = "1";
+
+box.appendChild(wrapper);
+
+});
+
+} catch (e) {
+
+console.error(
+"Withdrawal history error:",
+e
+);
+
+box.innerHTML =
+"Failed to load withdrawal history.";
+
+}
+
+}
+
+
+/*
+=========================================
+BINANCE WITHDRAWAL
+=========================================
+*/
+
+window.confirmBinanceWithdrawal =
+async function() {
+
+const user =
+auth.currentUser;
+
+if (!user) {
+
+alert("Please login first.");
+
+return;
+
+}
+
+
+const uid =
+document.getElementById(
+"binanceUID"
+).value.trim();
+
+
+const amount =
+Number(
+document.getElementById(
+"binanceAmount"
+).value
+);
+
+
+const message =
+document.getElementById(
+"withdrawMessage"
+);
+
+
+message.style.color =
+"#ff5577";
+
+
+if (
+!uid ||
+!/^\d{5,20}$/.test(uid)
+) {
+
+message.textContent =
+"Please enter a valid Binance UID.";
+
+return;
+
+}
+
+
+if (
+!amount ||
+amount < 0.02
+) {
+
+message.textContent =
+"Minimum withdrawal is 0.02 RND.";
+
+return;
+
+}
+
+
+if (
+amount >
+Number(userData.balance)
+) {
+
+message.textContent =
+"Insufficient balance.";
+
+return;
+
+}
+
+
+const button =
+document.getElementById(
+"binanceWithdrawButton"
+);
+
+
+button.disabled = true;
+
+button.style.opacity = ".65";
+
+message.style.color =
+"#ff5b5b";
+
+message.textContent =
+"Submitting Binance withdrawal request...";
+
+
+try {
+
+
+/*
+Create withdrawal request first.
+*/
+
+await addDoc(
+collection(db, "withdrawals"),
+{
+
+uid: user.uid,
+
+email:
+user.email || "",
+
+method:
+"Binance",
+
+binanceUID:
+uid,
+
+network:
+"Binance",
+
+currency:
+"RENDER",
+
+token:
+"RENDER",
+
+amount:
+amount,
+
+balanceUnit:
+"RND",
+
+status:
+"Pending",
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+
+/*
+Only remove balance AFTER
+withdrawal document was created.
+*/
+
+userData.balance -=
+amount;
+
+
+updateBalanceDisplay();
+
+
+/*
+SAVE NEW BALANCE.
+*/
+
+await syncUserToFirestore();
+
+
+message.textContent =
+"✅ Binance withdrawal submitted. Request pending review.";
+
+
+document.getElementById(
+"binanceUID"
+).value = "";
+
+document.getElementById(
+"binanceAmount"
+).value = "";
+
+
+await loadWithdrawalHistory();
+
+
+} catch (e) {
+
+console.error(
+"Binance withdrawal error:",
+e
+);
+
+message.style.color =
+"#ff5577";
+
+message.textContent =
+"Failed to submit withdrawal. Try again.";
+
+}
+
+
+button.disabled = false;
+
+button.style.opacity = "1";
+
 };
 
-window.confirmEasyPaisaWithdrawal = async function() {
-  const user = auth.currentUser;
-  if (!user) return alert("Please login first.");
 
-  const name = document.getElementById("easypaisaName").value.trim();
-  const number = document.getElementById("easypaisaNumber").value.trim();
-  const amount = Number(document.getElementById("easypaisaAmount").value);
-  const message = document.getElementById("withdrawMessage");
+/*
+=========================================
+EASYPAISA WITHDRAWAL
+=========================================
+*/
 
-  message.style.color = "#ff5577";
+window.confirmEasyPaisaWithdrawal =
+async function() {
 
-  if (!name) {
-    message.textContent = "Please enter EasyPaisa account name.";
-    return;
-  }
+const user =
+auth.currentUser;
 
-  const cleanNumber = number.replace(/\s+/g, "");
-  if (!/^03\d{9}$/.test(cleanNumber)) {
-    message.textContent = "Please enter a valid EasyPaisa number.";
-    return;
-  }
+if (!user) {
 
-  if (!amount || amount < 0.02) {
-    message.textContent = "Minimum withdrawal is 0.02 RND.";
-    return;
-  }
+alert("Please login first.");
 
-  if (amount > userData.balance) {
-    message.textContent = "Insufficient balance.";
-    return;
-  }
+return;
 
-  const button = document.querySelectorAll(".confirm-btn")[1];
-  button.disabled = true;
-  button.style.opacity = ".65";
-  message.style.color = "#ff5b5b";
-  message.textContent = "Submitting EasyPaisa withdrawal request...";
+}
 
-  try {
-    await addDoc(collection(db, "withdrawals"), {
-      uid: user.uid,
-      email: user.email || "",
-      method: "EasyPaisa",
-      accountName: name,
-      accountNumber: cleanNumber,
-      network: "EasyPaisa",
-      currency: "PKR",
-      amount: amount,
-      balanceUnit: "RND",
-      status: "Pending",
-      createdAt: serverTimestamp()
-    });
 
-    userData.balance -= amount;
-    updateBalanceDisplay();
-    await syncUserToFirestore();
+const name =
+document.getElementById(
+"easypaisaName"
+).value.trim();
 
-    message.textContent = "✅ EasyPaisa withdrawal submitted. Request pending review.";
-    document.getElementById("easypaisaName").value = "";
-    document.getElementById("easypaisaNumber").value = "";
-    document.getElementById("easypaisaAmount").value = "";
-    await loadWithdrawalHistory();
-  } catch (e) {
-    console.error(e);
-    message.style.color = "#ff5577";
-    message.textContent = "Failed to submit withdrawal. Try again.";
-  }
 
-  button.disabled = false;
-  button.style.opacity = "1";
+const number =
+document.getElementById(
+"easypaisaNumber"
+).value.trim();
+
+
+const amount =
+Number(
+document.getElementById(
+"easypaisaAmount"
+).value
+);
+
+
+const message =
+document.getElementById(
+"withdrawMessage"
+);
+
+
+message.style.color =
+"#ff5577";
+
+
+if (!name) {
+
+message.textContent =
+"Please enter EasyPaisa account name.";
+
+return;
+
+}
+
+
+const cleanNumber =
+number.replace(/\s+/g,"");
+
+
+if (
+!/^03\d{9}$/.test(cleanNumber)
+) {
+
+message.textContent =
+"Please enter a valid EasyPaisa number.";
+
+return;
+
+}
+
+
+if (
+!amount ||
+amount < 0.02
+) {
+
+message.textContent =
+"Minimum withdrawal is 0.02 RND.";
+
+return;
+
+}
+
+
+if (
+amount >
+Number(userData.balance)
+) {
+
+message.textContent =
+"Insufficient balance.";
+
+return;
+
+}
+
+
+const button =
+document.getElementById(
+"easypaisaWithdrawButton"
+);
+
+
+button.disabled = true;
+
+button.style.opacity = ".65";
+
+message.style.color =
+"#ff5b5b";
+
+message.textContent =
+"Submitting EasyPaisa withdrawal request...";
+
+
+try {
+
+
+/*
+Create withdrawal request first.
+*/
+
+await addDoc(
+collection(db, "withdrawals"),
+{
+
+uid: user.uid,
+
+email:
+user.email || "",
+
+method:
+"EasyPaisa",
+
+accountName:
+name,
+
+accountNumber:
+cleanNumber,
+
+network:
+"EasyPaisa",
+
+currency:
+"PKR",
+
+amount:
+amount,
+
+balanceUnit:
+"RND",
+
+status:
+"Pending",
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+
+/*
+Only remove balance AFTER
+withdrawal document succeeds.
+*/
+
+userData.balance -=
+amount;
+
+
+updateBalanceDisplay();
+
+
+/*
+SAVE BALANCE.
+*/
+
+await syncUserToFirestore();
+
+
+message.textContent =
+"✅ EasyPaisa withdrawal submitted. Request pending review.";
+
+
+document.getElementById(
+"easypaisaName"
+).value = "";
+
+document.getElementById(
+"easypaisaNumber"
+).value = "";
+
+document.getElementById(
+"easypaisaAmount"
+).value = "";
+
+
+await loadWithdrawalHistory();
+
+
+} catch (e) {
+
+console.error(
+"EasyPaisa withdrawal error:",
+e
+);
+
+message.style.color =
+"#ff5577";
+
+message.textContent =
+"Failed to submit withdrawal. Try again.";
+
+}
+
+
+button.disabled = false;
+
+button.style.opacity = "1";
+
 };
+
+
+/*
+=========================================
+FIREBASE ERRORS
+=========================================
+*/
 
 function firebaseError(code) {
-  switch (code) {
-    case "auth/email-already-in-use": return "This email is already registered.";
-    case "auth/invalid-email": return "Invalid email address.";
-    case "auth/weak-password": return "Password must be at least 6 characters.";
-    case "auth/invalid-credential": return "Wrong email or password.";
-    case "auth/popup-closed-by-user": return "Google login was cancelled.";
-    case "auth/popup-blocked": return "Google login popup was blocked.";
-    case "auth/network-request-failed": return "Network error. Please check your internet.";
-    default: return "Authentication failed. Please try again.";
-  }
+
+switch (code) {
+
+case "auth/email-already-in-use":
+return "This email is already registered.";
+
+case "auth/invalid-email":
+return "Invalid email address.";
+
+case "auth/weak-password":
+return "Password must be at least 6 characters.";
+
+case "auth/invalid-credential":
+return "Wrong email or password.";
+
+case "auth/popup-closed-by-user":
+return "Google login was cancelled.";
+
+case "auth/popup-blocked":
+return "Google login popup was blocked.";
+
+case "auth/network-request-failed":
+return "Network error. Please check your internet.";
+
+case "permission-denied":
+return "Firebase permission denied. Check Firestore Rules.";
+
+default:
+return "Authentication failed. Please try again.";
+
 }
 
-const tg = window.Telegram?.WebApp;
-if (tg) {
-  tg.ready();
-  tg.expand();
 }
+
+
+/*
+=========================================
+TELEGRAM
+=========================================
+*/
+
+const tg =
+window.Telegram?.WebApp;
+
+if (tg) {
+
+tg.ready();
+
+tg.expand();
+
+}
+
 </script>
+
 </body>
 </html>
