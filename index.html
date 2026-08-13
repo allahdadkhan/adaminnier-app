@@ -1173,22 +1173,59 @@ localStorage.setItem(miningLastKey(currentUserUID),String(now));
 setMiningUI(true,"Mining active");
 startMiningTimer()
 }
-function loadUserData(user){
+function userDoc(uid){
+return doc(db,"users",uid);
+}
+
+async function loadUserData(user){
 currentUserUID=user.uid;
-const saved=localStorage.getItem(balanceKey(user.uid));
-balance=saved!==null?Number(saved):0;
-if(!Number.isFinite(balance))balance=0;
+
+try{
+const ref=userDoc(user.uid);
+const snap=await getDoc(ref);
+
+if(snap.exists()){
+const data=snap.data();
+balance=typeof data.balance==="number"?data.balance:0;
+}else{
+balance=0;
+
+await setDoc(ref,{
+uid:user.uid,
+email:user.email||"",
+balance:0,
+createdAt:serverTimestamp()
+},{merge:true});
+}
+
 updateBalance();
 applyElapsedMining();
-updateBoostUI()
+updateBoostUI();
+
+}catch(e){
+console.error("Firebase load error:",e);
+balance=0;
+updateBalance();
 }
-function saveBalance(){
-if(currentUserUID)localStorage.setItem(balanceKey(currentUserUID),String(balance))
+}
+
+async function saveBalance(){
+if(!currentUserUID)return;
+
+try{
+await setDoc(userDoc(currentUserUID),{
+balance:balance,
+updatedAt:serverTimestamp()
+},{merge:true});
+}catch(e){
+console.error("Firebase balance save error:",e);
+}
 }
 function updateBalance(){
 document.getElementById("balance").textContent=balance.toFixed(5);
 document.getElementById("withdrawBalance").textContent=balance.toFixed(5);
-saveBalance()
+saveBalance();
+}
 }
 function startMiningTimer(){
 if(miningTimer)clearInterval(miningTimer);
