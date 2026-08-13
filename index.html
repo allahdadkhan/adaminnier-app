@@ -981,24 +981,29 @@ initializeApp
 }
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{
-getFirestore,
-collection,
-addDoc,
-serverTimestamp,
-getDocs,
-query,
-where,
-doc,
-getDoc,
-setDoc,
-updateDoc
-}
-from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{
-getFirestore,collection,addDoc,serverTimestamp,getDocs,getDoc,query,where,doc,setDoc
-}
-from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDocs,
+  query,
+  where,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 const firebaseConfig={
 apiKey:"AIzaSyBcewvURUe6hBR2-1Y6oF3eBJArLo-Al64",authDomain:"adaminning-app.firebaseapp.com",projectId:"adaminning-app",storageBucket:"adaminning-app.firebasestorage.app",messagingSenderId:"147581693986",appId:"1:147581693986:web:7887fdda627af87af9da7b",measurementId:"G-SS5Z4WPCT1"
 }
