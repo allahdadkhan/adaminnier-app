@@ -996,7 +996,7 @@ updateDoc
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import{
-getFirestore,collection,addDoc,serverTimestamp,getDocs,query,where
+getFirestore,collection,addDoc,serverTimestamp,getDocs,query,where,doc,setDoc
 }
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 const firebaseConfig={
@@ -1179,18 +1179,58 @@ localStorage.setItem(miningLastKey(currentUserUID),String(now));
 setMiningUI(true,"Mining active");
 startMiningTimer()
 }
-function loadUserData(user){
+async function loadUserData(user){
 currentUserUID=user.uid;
-const saved=localStorage.getItem(balanceKey(user.uid));
-balance=saved!==null?Number(saved):0;
-if(!Number.isFinite(balance))balance=0;
+
+try{
+const userRef=doc(db,"users",user.uid);
+const userSnap=await getDoc(userRef);
+
+if(userSnap.exists() && typeof userSnap.data().balance==="number"){
+balance=Number(userSnap.data().balance);
+}else{
+const oldBalance=Number(localStorage.getItem(balanceKey(user.uid))||0);
+balance=Number.isFinite(oldBalance)?oldBalance:0;
+
+await setDoc(userRef,{
+email:user.email||"",
+balance:balance
+},{merge:true});
+}
+
+if(!Number.isFinite(balance)) balance=0;
+
+localStorage.setItem(balanceKey(user.uid),String(balance));
+
 updateBalance();
 applyElapsedMining();
-updateBoostUI()
+updateBoostUI();
+
+}catch(error){
+console.error("Balance load error:",error);
+balance=Number(localStorage.getItem(balanceKey(user.uid))||0);
+updateBalance();
 }
-function saveBalance(){
-if(currentUserUID)localStorage.setItem(balanceKey(currentUserUID),String(balance))
+async function saveBalance(){
+if(!currentUserUID)return;
+
+try{
+const userRef=doc(db,"users",currentUserUID);
+
+await setDoc(userRef,{
+email:auth.currentUser?.email||"",
+balance:Number(balance)
+},{merge:true});
+
+localStorage.setItem(
+balanceKey(currentUserUID),
+String(balance)
+);
+
+}catch(error){
+console.error("Balance save error:",error);
 }
+}    
 function updateBalance(){
 document.getElementById("balance").textContent=balance.toFixed(5);
 document.getElementById("withdrawBalance").textContent=balance.toFixed(5);
