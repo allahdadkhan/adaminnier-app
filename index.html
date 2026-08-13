@@ -985,7 +985,7 @@ getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPass
 }
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import{
-getFirestore,collection,addDoc,serverTimestamp,getDocs,query,where,doc,getDoc,setDoc,updateDoc
+getFirestore,collection,addDoc,serverTimestamp,getDocs,query,where
 }
 from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 const firebaseConfig={
@@ -1029,12 +1029,7 @@ document.getElementById("authError").textContent=firebaseError(e.code)
 let balance=0,mining=false,miningTimer=null,sessionInterval=null,miningStartTime=null,lastRewardTime=null,baseHashrate=2.85,currentHashrate=2.85,currentUserUID=null;
 const SESSION_TIME=1*60*60*1000,REWARD_PER_SECOND=0.0000000463,BOOST_TIME=10*60*1000;
 const MAX_AD_BOOSTS=10; 
-const userDoc=uid=>doc(db,"users",uid);
-
-const miningStartKey=uid=>"rndminer_mining_start_"+uid,
-miningLastKey=uid=>"rndminer_mining_last_"+uid,
-miningActiveKey=uid=>"rndminer_mining_active_"+uid,
-boostEndKey=uid=>"rndminer_boost_end_"+uid;
+const balanceKey=uid=>"rndminer_balance_"+uid, miningStartKey=uid=>"rndminer_mining_start_"+uid, miningLastKey=uid=>"rndminer_mining_last_"+uid, miningActiveKey=uid=>"rndminer_mining_active_"+uid, boostEndKey=uid=>"rndminer_boost_end_"+uid;
 function getBoostEnd(){
 if(!currentUserUID)return 0;
 const end=Number(localStorage.getItem(boostEndKey(currentUserUID)));
@@ -1173,59 +1168,22 @@ localStorage.setItem(miningLastKey(currentUserUID),String(now));
 setMiningUI(true,"Mining active");
 startMiningTimer()
 }
-function userDoc(uid){
-return doc(db,"users",uid);
-}
-
-async function loadUserData(user){
+function loadUserData(user){
 currentUserUID=user.uid;
-
-try{
-const ref=userDoc(user.uid);
-const snap=await getDoc(ref);
-
-if(snap.exists()){
-const data=snap.data();
-balance=typeof data.balance==="number"?data.balance:0;
-}else{
-balance=0;
-
-await setDoc(ref,{
-uid:user.uid,
-email:user.email||"",
-balance:0,
-createdAt:serverTimestamp()
-},{merge:true});
-}
-
+const saved=localStorage.getItem(balanceKey(user.uid));
+balance=saved!==null?Number(saved):0;
+if(!Number.isFinite(balance))balance=0;
 updateBalance();
 applyElapsedMining();
-updateBoostUI();
-
-}catch(e){
-console.error("Firebase load error:",e);
-balance=0;
-updateBalance();
+updateBoostUI()
 }
-}
-
-async function saveBalance(){
-if(!currentUserUID)return;
-
-try{
-await setDoc(userDoc(currentUserUID),{
-balance:balance,
-updatedAt:serverTimestamp()
-},{merge:true});
-}catch(e){
-console.error("Firebase balance save error:",e);
-}
+function saveBalance(){
+if(currentUserUID)localStorage.setItem(balanceKey(currentUserUID),String(balance))
 }
 function updateBalance(){
 document.getElementById("balance").textContent=balance.toFixed(5);
 document.getElementById("withdrawBalance").textContent=balance.toFixed(5);
-saveBalance();
-}
+saveBalance()
 }
 function startMiningTimer(){
 if(miningTimer)clearInterval(miningTimer);
